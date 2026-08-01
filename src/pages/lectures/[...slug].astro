@@ -95,8 +95,11 @@ const lessonSchema = {
 <Base title={`Lecture ${numberLabel}: ${title} | linearly`} description={description}>
   <script is:inline type="application/ld+json" slot="head" set:html={JSON.stringify(lessonSchema)} />
   <div class="xl:grid xl:grid-cols-[290px_minmax(0,1fr)]">
-  <aside class="hidden border-r-2 border-rule bg-wash xl:block">
-    <div class="sticky top-0 max-h-screen overflow-y-auto px-6 pt-10 pb-16">
+  <aside
+    class="hidden bg-wash xl:block"
+    style="border-right: 1px solid color-mix(in oklab, var(--color-rule) 18%, transparent)"
+  >
+    <div class="sticky top-0 max-h-screen overflow-y-auto px-4 pt-10 pb-16">
       <LectureToc groups={tocGroups} currentId={lecture.id} headings={tocHeadings} />
     </div>
   </aside>
@@ -165,7 +168,8 @@ const lessonSchema = {
   </div>
   <div
     id="toc-drawer"
-    class="fixed inset-y-0 left-0 z-50 w-[310px] max-w-[86vw] -translate-x-full overflow-y-auto border-r-2 border-rule bg-paper px-6 pt-8 pb-16 transition-transform duration-200 xl:hidden"
+    class="fixed inset-y-0 left-0 z-50 w-[310px] max-w-[86vw] -translate-x-full overflow-y-auto bg-paper px-4 pt-8 pb-16 transition-transform duration-200 xl:hidden"
+    style="box-shadow: 0 0 48px rgba(0, 0, 0, 0.22)"
     role="dialog"
     aria-modal="true"
     aria-label="Course contents"
