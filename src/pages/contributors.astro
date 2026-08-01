@@ -1,0 +1,140 @@
+---
+import Base from '../layouts/Base.astro';
+
+/**
+ * Contributors — read from the GitHub API at build time. Netlify rebuilds on
+ * every push, so this page refreshes itself with each merged contribution.
+ * Avatars are inlined as data URIs: the site makes no runtime requests to any
+ * external host, and the CSP enforces that.
+ */
+const REPO = 'alikhalilli/linearly';
+
+type Contributor = {
+  login: string;
+  url: string;
+  contributions: number;
+  avatar: string | null;
+};
+
+let contributors: Contributor[] = [];
+try {
+  const res = await fetch(`https://api.github.com/repos/${REPO}/contributors?per_page=100`, {
+    headers: { Accept: 'application/vnd.github+json' },
+  });
+  if (res.ok) {
+    const list = (await res.json()) as {
+      login: string;
+      html_url: string;
+      avatar_url: string;
+      contributions: number;
+      type: string;
+    }[];
+    contributors = await Promise.all(
+      list
+        .filter((u) => u.type !== 'Bot')
+        .map(async (u) => {
+          let avatar: string | null = null;
+          try {
+            const a = await fetch(`${u.avatar_url}&s=160`);
+            if (a.ok) {
+              const type = a.headers.get('content-type') ?? 'image/png';
+              const buf = Buffer.from(await a.arrayBuffer());
+              avatar = `data:${type};base64,${buf.toString('base64')}`;
+            }
+          } catch {
+            /* a missing avatar never breaks the build */
+          }
+          return {
+            login: u.login,
+            url: u.html_url,
+            contributions: u.contributions,
+            avatar,
+          };
+        }),
+    );
+  }
+} catch {
+  /* an offline build never fails on this page */
+}
+
+if (contributors.length === 0) {
+  contributors = [
+    {
+      login: 'alikhalilli',
+      url: 'https://github.com/alikhalilli',
+      contributions: 1,
+      avatar: null,
+    },
+  ];
+}
+
+const commits = (n: number) => (n === 1 ? '1 commit' : `${n} commits`);
+---
+
+<Base
+  title="Contributors | linearly"
+  description="The people who grew this course. linearly is free to learn from and built to be extended; every merged improvement puts a name on this page."
+>
+  <section class="container-prose py-16">
+    <p class="label">The people</p>
+    <h1 class="display mt-3 text-[2.6rem]">Contributors</h1>
+    <p class="mt-5 max-w-[52ch] text-[1.02rem] leading-[1.7] text-ink-soft">
+      linearly started as one person's lecture series and is built to be grown. Everyone who has
+      improved it is here, drawn from the repository's history and refreshed on every deploy. A
+      fixed sentence counts. A whole lecture counts more.
+    </p>
+
+    <ul class="mt-10 grid list-none grid-cols-2 gap-4 p-0 sm:grid-cols-3 md:grid-cols-4">
+      {
+        contributors.map((c) => (
+          <li>
+            <a
+              href={c.url}
+              class="card-brutal card-hover block p-4 text-center no-underline"
+              rel="noopener"
+            >
+              {c.avatar ? (
+                <img
+                  src={c.avatar}
+                  alt=""
+                  width="80"
+                  height="80"
+                  class="mx-auto block h-20 w-20 border-2 border-rule object-cover"
+                  loading="lazy"
+                />
+              ) : (
+                <span
+                  class="display mx-auto grid h-20 w-20 place-items-center border-2 border-rule bg-part4 text-[1.8rem] !text-[#141414]"
+                  aria-hidden="true"
+                >
+                  {c.login.slice(0, 1).toUpperCase()}
+                </span>
+              )}
+              <span class="display mt-3 block truncate text-[0.98rem] text-ink">{c.login}</span>
+              <span class="label mt-1 block !text-ink-muted">{commits(c.contributions)}</span>
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          href="https://github.com/alikhalilli/linearly/blob/main/CONTRIBUTING.md"
+          class="flex h-full min-h-[10rem] flex-col items-center justify-center border-2 border-dashed border-rule p-4 text-center no-underline hover:border-rule-strong"
+          rel="noopener"
+        >
+          <span class="display grid h-20 w-20 place-items-center border-2 border-dashed border-rule text-[1.8rem] text-ink-muted" aria-hidden="true">?</span>
+          <span class="display mt-3 block text-[0.98rem] text-ink">You</span>
+          <span class="label mt-1 block !text-ink-muted">How to join</span>
+        </a>
+      </li>
+    </ul>
+
+    <p class="mt-10 max-w-[52ch] text-[0.9375rem] leading-[1.7] text-ink-muted">
+      Contributions are welcome from anyone, anywhere: a clearer sentence, a better drawing, a
+      sharper exercise, a whole new lecture. Start with{' '}
+      <a href="https://github.com/alikhalilli/linearly/blob/main/CONTRIBUTING.md">the
+      contributing guide</a>, which covers the writing rules, the drawing rules, and the full
+      technical workflow.
+    </p>
+  </section>
+</Base>

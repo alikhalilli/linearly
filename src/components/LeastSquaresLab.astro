@@ -1,0 +1,202 @@
+---
+/**
+ * LeastSquaresLab: drag the five data points, watch the best fitting line
+ * recompute, see every residual drawn as a dashed spring, and try to beat the
+ * total squared error by steering a line of your own with two sliders.
+ * Zero dependencies, ~2KB of JS on the page.
+ */
+---
+
+<div class="least-squares-lab card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Move the data, then try to beat the fit</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 340 300"
+      class="lab-svg mx-auto w-full max-w-[24rem] touch-none select-none"
+      aria-label="Interactive picture: five draggable data points, the least squares line through them with residual segments, and a second line you steer yourself"
+    >
+      <g stroke="var(--color-ink-faint)" stroke-width="1" opacity="0.3">
+        {Array.from({ length: 7 }, (_, i) => <line x1={44 + i * 46} y1="30" x2={44 + i * 46} y2="262" />)}
+        {Array.from({ length: 6 }, (_, i) => <line x1="44" y1={262 - i * 42.2} x2="320" y2={262 - i * 42.2} />)}
+      </g>
+      <g stroke="var(--color-ink)" stroke-width="1.3" opacity="0.6">
+        <line x1="44" y1="262" x2="320" y2="262" />
+        <line x1="44" y1="262" x2="44" y2="30" />
+      </g>
+      <g class="resid-g" stroke="var(--color-accent)" stroke-width="1.8" stroke-dasharray="4 3"></g>
+      <line class="mine" x1="44" y1="100" x2="320" y2="200" stroke="var(--color-stroke-warm)" stroke-width="2.2" stroke-dasharray="8 5" />
+      <line class="best" x1="44" y1="100" x2="320" y2="200" stroke="var(--color-stroke-green)" stroke-width="3" />
+      <g class="pts-g"></g>
+      <text x="312" y="282" fill="var(--color-ink-muted)" font-size="13" font-style="italic" font-family="var(--font-serif)" text-anchor="end">w</text>
+      <text x="30" y="26" fill="var(--color-ink-muted)" font-size="13" font-style="italic" font-family="var(--font-serif)">target</text>
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Presets">
+        <button class="reset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]">Reset data</button>
+        <button class="snap chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]">Copy the best line</button>
+      </div>
+      <label class="block">
+        <span class="label" style="text-transform:none">your intercept C = <output class="c-out !text-ink">8.0</output></span>
+        <input class="c-in mt-1 h-6 w-full sm:h-4  accent-[var(--color-stroke-warm)]" type="range" min="0" max="14" step="0.1" value="8" />
+      </label>
+      <label class="block">
+        <span class="label" style="text-transform:none">your slope D = <output class="d-out !text-ink">-0.5</output></span>
+        <input class="d-in mt-1 h-6 w-full sm:h-4  accent-[var(--color-stroke-warm)]" type="range" min="-4" max="2" step="0.1" value="-0.5" />
+      </label>
+      <p class="font-mono text-[0.82rem] leading-6 text-ink-soft">
+        best line: <span class="bc-out">10.9</span> <span class="bs-out">&#8722;</span>
+        <span class="bd-out">1.7</span>w<br />
+        its error: <span class="be-out">9.90</span><br />
+        your error: <span class="me-out">21.30</span>
+      </p>
+      <p class="verdict text-[0.82rem] text-ink-muted">
+        Drag any dot to change the data. Green is the line the normal equations name, warm is
+        yours, and the blue springs are the residuals it has to live with.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.least-squares-lab')) {
+    const X0 = 44;
+    const Y0 = 262;
+    const SX = 46; // pixels per unit of w
+    const SY = 21.1; // pixels per unit of target
+    const svg = root.querySelector<SVGSVGElement>('.lab-svg')!;
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const start = [
+      [5, 3],
+      [3, 8],
+      [2, 7],
+      [1, 9],
+      [4, 2],
+    ];
+    let pts = start.map((p) => [...p]);
+    const cIn = root.querySelector<HTMLInputElement>('.c-in')!;
+    const dIn = root.querySelector<HTMLInputElement>('.d-in')!;
+    const ptsG = root.querySelector<SVGGElement>('.pts-g')!;
+    const residG = root.querySelector<SVGGElement>('.resid-g')!;
+    const dots: SVGCircleElement[] = [];
+    const bars: SVGLineElement[] = [];
+    for (let i = 0; i < 5; i++) {
+      const c = document.createElementNS(svgNS, 'circle');
+      c.setAttribute('r', '7');
+      c.setAttribute('fill', 'var(--color-stroke-warm)');
+      ptsG.appendChild(c);
+      dots.push(c);
+      const l = document.createElementNS(svgNS, 'line');
+      residG.appendChild(l);
+      bars.push(l);
+    }
+    const px = (w: number) => X0 + w * SX;
+    const py = (t: number) => Y0 - t * SY;
+    const put = (sel: string, v: string) => (root.querySelector(sel)!.textContent = v);
+    const line = (sel: string, C: number, D: number) => {
+      const el = root.querySelector<SVGLineElement>(sel)!;
+      el.setAttribute('x1', String(px(0)));
+      el.setAttribute('y1', String(py(C)));
+      el.setAttribute('x2', String(px(6)));
+      el.setAttribute('y2', String(py(C + 6 * D)));
+    };
+    const sse = (C: number, D: number) =>
+      pts.reduce((s, [w, t]) => s + (t - (C + D * w)) ** 2, 0);
+
+    function fit() {
+      const n = pts.length;
+      let sw = 0,
+        st = 0,
+        sww = 0,
+        swt = 0;
+      for (const [w, t] of pts) {
+        sw += w;
+        st += t;
+        sww += w * w;
+        swt += w * t;
+      }
+      const det = n * sww - sw * sw;
+      if (Math.abs(det) < 1e-9) return [st / n, 0];
+      return [(st * sww - sw * swt) / det, (n * swt - sw * st) / det];
+    }
+
+    function update() {
+      const [C, D] = fit();
+      const mc = Number(cIn.value);
+      const md = Number(dIn.value);
+      line('.best', C, D);
+      line('.mine', mc, md);
+      pts.forEach(([w, t], i) => {
+        dots[i].setAttribute('cx', String(px(w)));
+        dots[i].setAttribute('cy', String(py(t)));
+        bars[i].setAttribute('x1', String(px(w)));
+        bars[i].setAttribute('y1', String(py(t)));
+        bars[i].setAttribute('x2', String(px(w)));
+        bars[i].setAttribute('y2', String(py(C + D * w)));
+      });
+      const be = sse(C, D);
+      const me = sse(mc, md);
+      put('.bc-out', C.toFixed(1));
+      put('.bs-out', D < 0 ? '−' : '+');
+      put('.bd-out', Math.abs(D).toFixed(1));
+      put('.be-out', be.toFixed(2));
+      put('.me-out', me.toFixed(2));
+      put('.c-out', mc.toFixed(1));
+      put('.d-out', md.toFixed(1));
+      put(
+        '.verdict',
+        me - be < 0.005
+          ? 'You matched it. No line does better, and that is what least squares means.'
+          : `Your line is ${(me - be).toFixed(2)} worse. Keep trying, or read on.`,
+      );
+    }
+
+    let held = -1;
+    function locate(ev: PointerEvent) {
+      const r = svg.getBoundingClientRect();
+      const x = ((ev.clientX - r.left) * 340) / r.width;
+      const y = ((ev.clientY - r.top) * 300) / r.height;
+      return [(x - X0) / SX, (Y0 - y) / SY];
+    }
+    svg.addEventListener('pointerdown', (ev) => {
+      const [w, t] = locate(ev);
+      let best = 1e9;
+      pts.forEach(([pw, pt], i) => {
+        const d = (pw - w) ** 2 + ((pt - t) * (SY / SX)) ** 2;
+        if (d < best) {
+          best = d;
+          held = i;
+        }
+      });
+      if (best > 0.6) held = -1;
+      else svg.setPointerCapture(ev.pointerId);
+    });
+    svg.addEventListener('pointermove', (ev) => {
+      if (held < 0) return;
+      const [w, t] = locate(ev);
+      pts[held] = [
+        Math.max(0.2, Math.min(5.8, Math.round(w * 10) / 10)),
+        Math.max(0.3, Math.min(10.6, Math.round(t * 10) / 10)),
+      ];
+      update();
+    });
+    svg.addEventListener('pointerup', () => (held = -1));
+    svg.addEventListener('pointercancel', () => (held = -1));
+    cIn.addEventListener('input', update);
+    dIn.addEventListener('input', update);
+    root.querySelector('.reset')!.addEventListener('click', () => {
+      pts = start.map((p) => [...p]);
+      update();
+    });
+    root.querySelector('.snap')!.addEventListener('click', () => {
+      const [C, D] = fit();
+      cIn.value = C.toFixed(1);
+      dIn.value = D.toFixed(1);
+      update();
+    });
+    update();
+  }
+</script>

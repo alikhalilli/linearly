@@ -1,0 +1,155 @@
+---
+/**
+ * OrthogonalityLab: move the four coordinates of x and watch it split into a
+ * row-space part and a null-space part. The two parts always meet at a right
+ * angle, so the picture is always a right triangle and the dot product never
+ * budges off zero. Ax and Ax_r stay equal no matter what you do.
+ * Zero dependencies, ~2KB of JS on the page.
+ */
+---
+
+<div class="orthogonality-lab card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Move x and watch the right angle hold</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 340 300"
+      class="mx-auto w-full max-w-[24rem]"
+      aria-label="Interactive picture: the vector x drawn as the hypotenuse of a right triangle whose legs are its row space part and its null space part."
+    >
+      <line x1="18" y1="276" x2="322" y2="276" stroke="var(--color-ink-faint)" stroke-width="1" opacity="0.45" />
+      <path class="ra-mark" d="M40,262 L54,262 L54,276" fill="none" stroke="var(--color-ink-faint)" stroke-width="1.3" />
+      <line class="leg-r" x1="40" y1="276" x2="40" y2="276" stroke="var(--color-stroke-green)" stroke-width="3.6" stroke-linecap="round" />
+      <line class="leg-n" x1="40" y1="276" x2="40" y2="276" stroke="var(--color-stroke-warm)" stroke-width="3.6" stroke-linecap="round" />
+      <line class="hyp" x1="40" y1="276" x2="40" y2="276" stroke="var(--color-accent)" stroke-width="2.8" stroke-linecap="round" />
+      <line class="dash-a" x1="40" y1="276" x2="40" y2="276" stroke="var(--color-ink-faint)" stroke-width="1.2" stroke-dasharray="4 4" />
+      <line class="dash-b" x1="40" y1="276" x2="40" y2="276" stroke="var(--color-ink-faint)" stroke-width="1.2" stroke-dasharray="4 4" />
+      <circle class="tip" cx="40" cy="276" r="4.5" fill="var(--color-ink)" />
+      <text class="lab-r" x="40" y="294" fill="var(--color-ink)" font-size="13" font-style="italic" font-family="var(--font-serif)">xᵣ</text>
+      <text class="lab-n" x="18" y="276" fill="var(--color-ink)" font-size="13" font-style="italic" font-family="var(--font-serif)">xₙ</text>
+      <text class="lab-x" x="48" y="270" fill="var(--color-ink)" font-size="13" font-style="italic" font-family="var(--font-serif)">x</text>
+    </svg>
+
+    <div class="flex flex-col justify-center gap-2.5">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Preset vectors">
+        <button class="preset chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center" data-v="1,1,1,1">Generic</button>
+        <button class="preset chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center" data-v="1,0,2,0">In the row space</button>
+        <button class="preset chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center" data-v="-2,0,1,0">In the null space</button>
+      </div>
+      <label class="block">
+        <span class="label" style="text-transform:none">x₁ = <output class="o0 !text-ink">1.00</output></span>
+        <input class="i0 mt-1 w-full accent-[var(--color-accent)]" type="range" min="-2" max="2" step="0.25" value="1" />
+      </label>
+      <label class="block">
+        <span class="label" style="text-transform:none">x₂ = <output class="o1 !text-ink">1.00</output></span>
+        <input class="i1 mt-1 w-full accent-[var(--color-accent)]" type="range" min="-2" max="2" step="0.25" value="1" />
+      </label>
+      <label class="block">
+        <span class="label" style="text-transform:none">x₃ = <output class="o2 !text-ink">1.00</output></span>
+        <input class="i2 mt-1 w-full accent-[var(--color-accent)]" type="range" min="-2" max="2" step="0.25" value="1" />
+      </label>
+      <label class="block">
+        <span class="label" style="text-transform:none">x₄ = <output class="o3 !text-ink">1.00</output></span>
+        <input class="i3 mt-1 w-full accent-[var(--color-accent)]" type="range" min="-2" max="2" step="0.25" value="1" />
+      </label>
+      <p class="font-mono text-[0.72rem] leading-[1.75] text-ink-soft">
+        <span class="sw" style="background:var(--color-stroke-green)"></span>xᵣ = (<span class="xr-out">0.60, 0.60, 1.20, 1.20</span>)<br />
+        <span class="sw" style="background:var(--color-stroke-warm)"></span>xₙ = (<span class="xn-out">0.40, 0.40, −0.20, −0.20</span>)<br />
+        xᵣ dot xₙ = <span class="dp-out">0.00</span><br />
+        Ax = (<span class="ax-out">9, 33, 42</span>)<br />
+        Axᵣ = (<span class="axr-out">9, 33, 42</span>)
+      </p>
+      <p class="text-[0.8rem] text-ink-muted">
+        The drawing rescales to fit, so watch the shape and not the size. The corner at the
+        origin never opens, and the last two lines never disagree.
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .orthogonality-lab .sw {
+    width: 0.6rem;
+    height: 0.6rem;
+    display: inline-block;
+    border: 1px solid var(--color-ink);
+    vertical-align: 0;
+    margin-inline-end: 0.35rem;
+  }
+</style>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.orthogonality-lab')) {
+    const r1 = [1, 0, 2, 0];
+    const r2 = [0, 1, 0, 2];
+    const A = [
+      [1, 2, 2, 4],
+      [3, 8, 6, 16],
+      [4, 10, 8, 20],
+    ];
+    const OX = 40;
+    const OY = 276;
+    const ins = [0, 1, 2, 3].map((i) => root.querySelector<HTMLInputElement>(`.i${i}`)!);
+    const set = (c: string, a: string, v: number) =>
+      root.querySelector(c)!.setAttribute(a, String(v));
+    const dot = (a: number[], b: number[]) => a.reduce((s, v, i) => s + v * b[i], 0);
+    const fmt = (v: number) => (Math.abs(v) < 5e-3 ? '0.00' : v.toFixed(2)).replace('-', '−');
+
+    function update() {
+      const x = ins.map((i) => Number(i.value));
+      const c1 = dot(x, r1) / 5;
+      const c2 = dot(x, r2) / 5;
+      const xr = r1.map((v, i) => c1 * v + c2 * r2[i]);
+      const xn = x.map((v, i) => v - xr[i]);
+      // Scale so the hypotenuse fills the frame without ever leaving it.
+      const len = Math.hypot(...x);
+      const S = len > 0.05 ? Math.min(232 / len, 96) : 96;
+      const lr = Math.hypot(...xr) * S;
+      const ln = Math.hypot(...xn) * S;
+
+      const rx = OX + lr;
+      const ny = OY - ln;
+      set('.leg-r', 'x2', rx);
+      set('.leg-r', 'y2', OY);
+      set('.leg-n', 'x2', OX);
+      set('.leg-n', 'y2', ny);
+      set('.hyp', 'x2', rx);
+      set('.hyp', 'y2', ny);
+      set('.dash-a', 'x1', rx);
+      set('.dash-a', 'y1', OY);
+      set('.dash-a', 'x2', rx);
+      set('.dash-a', 'y2', ny);
+      set('.dash-b', 'x1', OX);
+      set('.dash-b', 'y1', ny);
+      set('.dash-b', 'x2', rx);
+      set('.dash-b', 'y2', ny);
+      set('.tip', 'cx', rx);
+      set('.tip', 'cy', ny);
+      set('.lab-r', 'x', OX + lr / 2 - 6);
+      set('.lab-n', 'y', OY - ln / 2 + 4);
+      set('.lab-x', 'x', rx + 7);
+      set('.lab-x', 'y', ny - 5);
+
+      for (let i = 0; i < 4; i++)
+        root.querySelector(`.o${i}`)!.textContent = fmt(x[i]);
+      root.querySelector('.xr-out')!.textContent = xr.map(fmt).join(', ');
+      root.querySelector('.xn-out')!.textContent = xn.map(fmt).join(', ');
+      root.querySelector('.dp-out')!.textContent = fmt(dot(xr, xn));
+      const ax = A.map((row) => dot(row, x));
+      const axr = A.map((row) => dot(row, xr));
+      root.querySelector('.ax-out')!.textContent = ax.map(fmt).join(', ');
+      root.querySelector('.axr-out')!.textContent = axr.map(fmt).join(', ');
+    }
+
+    for (const i of ins) i.addEventListener('input', update);
+    for (const btn of root.querySelectorAll<HTMLButtonElement>('.preset')) {
+      btn.addEventListener('click', () => {
+        btn.dataset.v!.split(',').forEach((v, i) => (ins[i].value = v));
+        update();
+      });
+    }
+    update();
+  }
+</script>

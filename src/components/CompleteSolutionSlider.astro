@@ -1,0 +1,148 @@
+---
+/**
+ * CompleteSolutionSlider: the system [[1,2],[2,4]] x = b. Pick a right-hand
+ * side, then drag t and watch the point x_p + t*x_n sweep the whole solution
+ * line while the residual stays at zero. Switch to a b that does not fit and
+ * the residual refuses to budge, for any t.
+ * Zero dependencies, ~2KB of JS on the page.
+ */
+const OX = 170;
+const OY = 170;
+const U = 22;
+const vlines = [-6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7];
+const hlines = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
+---
+
+<div class="complete-solution card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Slide along the solution line</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 340 300"
+      class="mx-auto w-full max-w-[24rem]"
+      aria-label="Interactive picture: the null space line through the origin, the solution line through the particular solution, and a point that slides along it"
+    >
+      <g stroke="var(--color-ink-faint)" stroke-width="0.9" opacity="0.35">
+        {vlines.map((k) => <line x1={OX + k * U} y1="46" x2={OX + k * U} y2="294" />)}
+        {hlines.map((k) => <line x1="26" y1={OY - k * U} x2="330" y2={OY - k * U} />)}
+      </g>
+      <g stroke="var(--color-ink)" stroke-width="1.4" opacity="0.6">
+        <line x1="26" y1={OY} x2="330" y2={OY} />
+        <line x1={OX} y1="46" x2={OX} y2="294" />
+      </g>
+      <line
+        x1="236"
+        y1="203"
+        x2="38"
+        y2="104"
+        stroke="var(--color-ink)"
+        stroke-width="1.8"
+        stroke-dasharray="6 5"
+        opacity="0.75"
+      />
+      <line
+        class="sol-line"
+        x1="332.8"
+        y1="218.4"
+        x2="117.2"
+        y2="110.6"
+        stroke="var(--color-accent)"
+        stroke-width="3"
+        stroke-linecap="round"
+      />
+      <line
+        class="xp-arrow"
+        x1={OX}
+        y1={OY}
+        x2="236"
+        y2={OY}
+        stroke="var(--color-stroke-warm)"
+        stroke-width="3"
+        stroke-linecap="round"
+      />
+      <circle class="x-dot" cx="184.2" cy="143.6" r="6" fill="var(--color-accent)" />
+      <circle cx={OX} cy={OY} r="3.5" fill="var(--color-ink)" />
+      <circle cx="236" cy={OY} r="3.5" fill="var(--color-stroke-warm)" />
+      <text x="60" y="92" fill="var(--color-ink-muted)" font-size="13" font-style="italic" font-family="var(--font-serif)">N(A)</text>
+      <text x="246" y="197" fill="var(--color-ink)" font-size="13" font-style="italic" font-family="var(--font-serif)">xₚ</text>
+      <text class="line-tag" x="150" y="100" fill="var(--color-accent)" font-size="13" font-style="italic" font-family="var(--font-serif)">xₚ + N(A)</text>
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Right-hand side">
+        <button class="preset chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center" data-b="3,6">b = (3, 6)</button>
+        <button class="preset chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center" data-b="3,7">b = (3, 7)</button>
+      </div>
+      <label class="block">
+        <span class="label" style="text-transform:none">t = <output class="t-out !text-ink">1.2</output></span>
+        <input class="t-in mt-1 w-full accent-[var(--color-accent)]" type="range" min="-2" max="2.5" step="0.1" value="1.2" />
+      </label>
+      <p class="font-mono text-[0.82rem] text-ink-soft">
+        x = xₚ + t xₙ = (<span class="x-out">0.6, 1.2</span>)
+      </p>
+      <p class="font-mono text-[0.82rem] text-ink-soft">
+        Ax = (<span class="ax-out">3.0, 6.0</span>)<br />b = (<span class="b-out">3.0, 6.0</span>)
+      </p>
+      <p class="font-mono text-[0.82rem]">
+        ‖Ax − b‖ = <span class="r-out" style="color:var(--color-stroke-green)">0.00</span>
+      </p>
+      <p class="text-[0.82rem] text-ink-muted">
+        <span class="verdict">Every t on the blue line solves the system.</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.complete-solution')) {
+    const OX = 170;
+    const OY = 170;
+    const U = 22;
+    const A = [
+      [1, 2],
+      [2, 4],
+    ];
+    const xp = [3, 0];
+    const xn = [-2, 1];
+    const tIn = root.querySelector<HTMLInputElement>('.t-in')!;
+    const dot = root.querySelector<SVGCircleElement>('.x-dot')!;
+    const line = root.querySelector<SVGLineElement>('.sol-line')!;
+    const tag = root.querySelector<SVGTextElement>('.line-tag')!;
+    const verdict = root.querySelector<HTMLElement>('.verdict')!;
+    const rOut = root.querySelector<HTMLElement>('.r-out')!;
+    let b = [3, 6];
+
+    function update() {
+      const t = Number(tIn.value);
+      const x = [xp[0] + t * xn[0], xp[1] + t * xn[1]];
+      const ax = A.map((row) => row[0] * x[0] + row[1] * x[1]);
+      const res = Math.hypot(ax[0] - b[0], ax[1] - b[1]);
+      const solvable = res < 1e-9;
+      dot.setAttribute('cx', (OX + x[0] * U).toFixed(1));
+      dot.setAttribute('cy', (OY - x[1] * U).toFixed(1));
+      line.setAttribute('stroke-dasharray', solvable ? 'none' : '2 6');
+      line.setAttribute('opacity', solvable ? '1' : '0.45');
+      tag.textContent = solvable ? 'xₚ + N(A)' : 'none of these solve it';
+      root.querySelector('.t-out')!.textContent = t.toFixed(1);
+      root.querySelector('.x-out')!.textContent = x.map((v) => v.toFixed(1)).join(', ');
+      root.querySelector('.ax-out')!.textContent = ax.map((v) => v.toFixed(1)).join(', ');
+      root.querySelector('.b-out')!.textContent = b.map((v) => v.toFixed(1)).join(', ');
+      rOut.textContent = res.toFixed(2);
+      rOut.style.color = solvable ? 'var(--color-stroke-green)' : 'var(--color-stroke-warm)';
+      verdict.textContent = solvable
+        ? 'Every t on the line solves the system. The residual never leaves zero.'
+        : 'The second equation asks for 7 where the first forces 6. Drag t as far as you like: the residual stays at 1.';
+    }
+
+    tIn.addEventListener('input', update);
+    for (const btn of root.querySelectorAll<HTMLButtonElement>('.preset')) {
+      btn.addEventListener('click', () => {
+        b = btn.dataset.b!.split(',').map(Number);
+        update();
+      });
+    }
+    update();
+  }
+</script>

@@ -1,0 +1,228 @@
+---
+/**
+ * LUReceipt: step through elimination on the running 3x3 matrix and watch the
+ * multipliers drop into L, one slot at a time. Then replay A = L U row by row
+ * and see the same three numbers rebuild the matrix. Zero dependencies, ~2KB.
+ */
+---
+
+<div class="lu-receipt card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Eliminate, and watch the receipt fill in</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 340 210"
+      class="mx-auto w-full max-w-[24rem]"
+      aria-label="Interactive picture: the working matrix on the left turns into U while the matrix L on the right fills with the elimination multipliers"
+      style="font:italic 15px var(--font-serif)"
+    >
+      <rect class="hl-work" x="24" y="42" width="132" height="34" fill="var(--color-accent)" opacity="0" rx="3"></rect>
+      <rect class="hl-src" x="24" y="42" width="132" height="34" fill="var(--color-part1)" opacity="0" rx="3"></rect>
+      <g stroke="var(--color-ink)" fill="none" stroke-width="1.6" stroke-linecap="round">
+        <path d="M32,38 L24,38 L24,148 L32,148"></path>
+        <path d="M148,38 L156,38 L156,148 L148,148"></path>
+        <path d="M212,38 L204,38 L204,148 L212,148"></path>
+        <path d="M328,38 L336,38 L336,148 L328,148"></path>
+      </g>
+      <g class="pivot-marks" stroke="var(--color-stroke-green)" fill="none" stroke-width="1.9" opacity="0"></g>
+      <g class="l-fills" stroke="none" fill="var(--color-part4)"></g>
+      <g class="l-marks" stroke="var(--color-stroke-warm)" fill="none" stroke-width="2"></g>
+      <g fill="var(--color-ink)" text-anchor="middle">
+        <text class="lbl-left" x="90" y="26" font-size="14">A</text>
+        <text x="270" y="26" font-size="14">L</text>
+        <g class="work-cells"></g>
+        <g class="l-cells"></g>
+      </g>
+      <text class="caption" x="170" y="188" text-anchor="middle" fill="var(--color-ink-muted)" font-size="13.5"
+        >start: nothing has happened yet</text
+      >
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5">
+        <button class="go-back chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center">← Back</button>
+        <button class="go-next chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center">Next step →</button>
+        <button class="go-reset chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center">Reset</button>
+      </div>
+      <p class="font-mono text-[0.82rem] text-ink-soft">
+        step <span class="step-out">0</span> of 6
+      </p>
+      <p class="explain text-[0.86rem] leading-[1.55] text-ink-soft">
+        Press Next. Three steps clear the matrix into U, and each one files its multiplier in L.
+        Three more steps replay L times U and rebuild A.
+      </p>
+      <p class="text-[0.82rem] text-ink-muted">
+        Blue is the row being changed, yellow is the multiplier just filed, green rings the pivots.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.lu-receipt')) {
+    const NS = 'http://www.w3.org/2000/svg';
+    const A = [
+      [2, 4, -2],
+      [4, 9, -3],
+      [-2, -3, 7],
+    ];
+    const U = [
+      [2, 4, -2],
+      [0, 1, 1],
+      [0, 0, 4],
+    ];
+    const L = [
+      [1, 0, 0],
+      [2, 1, 0],
+      [-1, 1, 1],
+    ];
+    // working matrix after each elimination step
+    const stages = [
+      A,
+      [
+        [2, 4, -2],
+        [0, 1, 1],
+        [-2, -3, 7],
+      ],
+      [
+        [2, 4, -2],
+        [0, 1, 1],
+        [0, 1, 5],
+      ],
+      U,
+    ];
+    const filled: [number, number][][] = [[], [[1, 0]], [[1, 0], [2, 0]], [[1, 0], [2, 0], [2, 1]]];
+    const steps = [
+      { work: 0, L: 0, hit: -1, src: -1, rebuild: -1, txt: 'start: nothing has happened yet' },
+      { work: 1, L: 1, hit: 1, src: 0, rebuild: -1, txt: 'row 2 ← row 2 − 2 × row 1' },
+      { work: 2, L: 2, hit: 2, src: 0, rebuild: -1, txt: 'row 3 ← row 3 − (−1) × row 1' },
+      { work: 3, L: 3, hit: 2, src: 1, rebuild: -1, txt: 'row 3 ← row 3 − 1 × row 2' },
+      { work: 3, L: 3, hit: -1, src: -1, rebuild: 0, txt: 'row 1 of A = 1 (2, 4, −2)' },
+      { work: 3, L: 3, hit: -1, src: -1, rebuild: 1, txt: 'row 2 of A = 2 (2, 4, −2) + 1 (0, 1, 1)' },
+      {
+        work: 3,
+        L: 3,
+        hit: -1,
+        src: -1,
+        rebuild: 2,
+        txt: 'row 3 of A = −1 (2, 4, −2) + 1 (0, 1, 1) + 1 (0, 0, 4)',
+      },
+    ];
+    const notes = [
+      'Press Next. Three steps clear the matrix into U, and each one files its multiplier in L.',
+      'The multiplier 2 is filed at position (2, 1), the entry it just cleared.',
+      'Subtracting −1 times row 1 is adding row 1. The multiplier is still −1.',
+      'Three multipliers, three slots. The left matrix is now U, pivots 2, 1 and 4.',
+      'Now run it backwards. Row 1 of L is (1, 0, 0), so row 1 of A is row 1 of U.',
+      'Row 2 of L is (2, 1, 0): two rows of U added up give (4, 9, −3), row 2 of A.',
+      'Row 3 of L is (−1, 1, 1). All three rows of U combine to (−2, −3, 7). A = LU.',
+    ];
+
+    const cx = [46, 90, 134];
+    const cxL = [226, 270, 314];
+    const cy = [60, 94, 128];
+    const workG = root.querySelector<SVGGElement>('.work-cells')!;
+    const lG = root.querySelector<SVGGElement>('.l-cells')!;
+    const lMarks = root.querySelector<SVGGElement>('.l-marks')!;
+    const pivots = root.querySelector<SVGGElement>('.pivot-marks')!;
+    const workT: SVGTextElement[] = [];
+    const lT: SVGTextElement[] = [];
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        const a = document.createElementNS(NS, 'text');
+        a.setAttribute('x', String(cx[j]));
+        a.setAttribute('y', String(cy[i] + 5));
+        workG.appendChild(a);
+        workT.push(a);
+        const b = document.createElementNS(NS, 'text');
+        b.setAttribute('x', String(cxL[j]));
+        b.setAttribute('y', String(cy[i] + 5));
+        lG.appendChild(b);
+        lT.push(b);
+      }
+    }
+    for (let i = 0; i < 3; i++) {
+      const c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', String(cx[i]));
+      c.setAttribute('cy', String(cy[i]));
+      c.setAttribute('r', '14');
+      pivots.appendChild(c);
+    }
+    const lFills = root.querySelector<SVGGElement>('.l-fills')!;
+    const mk = (parent: SVGGElement, r: string) => {
+      const c = document.createElementNS(NS, 'circle');
+      c.setAttribute('r', r);
+      parent.appendChild(c);
+      return c;
+    };
+    const rings = [mk(lMarks, '14'), mk(lMarks, '14'), mk(lMarks, '14')];
+    const discs = [mk(lFills, '14'), mk(lFills, '14'), mk(lFills, '14')];
+
+    const hlWork = root.querySelector<SVGRectElement>('.hl-work')!;
+    const hlSrc = root.querySelector<SVGRectElement>('.hl-src')!;
+    const cap = root.querySelector<SVGTextElement>('.caption')!;
+    const lbl = root.querySelector<SVGTextElement>('.lbl-left')!;
+    let s = 0;
+
+    const fmt = (v: number) => (v < 0 ? '−' + String(-v) : String(v));
+
+    function draw() {
+      const st = steps[s];
+      const w = stages[st.work];
+      for (let i = 0; i < 3; i++)
+        for (let j = 0; j < 3; j++) workT[i * 3 + j].textContent = fmt(w[i][j]);
+      const shown = filled[st.L];
+      for (let i = 0; i < 3; i++)
+        for (let j = 0; j < 3; j++) {
+          const k = i * 3 + j;
+          const isDiag = i === j;
+          const isSet = shown.some(([a, b]) => a === i && b === j);
+          lT[k].textContent = isDiag || isSet ? fmt(L[i][j]) : j < i ? '?' : '0';
+          lT[k].setAttribute('opacity', isDiag || isSet || j > i ? '1' : '0.3');
+        }
+      rings.forEach((c, k) => {
+        const p = shown[k];
+        const on = p && k === shown.length - 1 && st.rebuild < 0;
+        for (const el of [c, discs[k]]) {
+          el.setAttribute('opacity', on ? '1' : '0');
+          if (p) {
+            el.setAttribute('cx', String(cxL[p[1]]));
+            el.setAttribute('cy', String(cy[p[0]]));
+          }
+        }
+      });
+      hlWork.setAttribute('opacity', st.hit >= 0 ? '0.16' : '0');
+      hlWork.setAttribute('y', String(cy[Math.max(st.hit, 0)] - 17));
+      hlSrc.setAttribute('opacity', st.src >= 0 ? '0.16' : '0');
+      hlSrc.setAttribute('y', String(cy[Math.max(st.src, 0)] - 17));
+      if (st.rebuild >= 0) {
+        hlSrc.setAttribute('opacity', '0.16');
+        hlSrc.setAttribute('x', '204');
+        hlSrc.setAttribute('y', String(cy[st.rebuild] - 17));
+      } else {
+        hlSrc.setAttribute('x', '24');
+      }
+      pivots.setAttribute('opacity', st.work === 3 ? '0.9' : '0');
+      lbl.textContent = st.work === 3 ? 'U' : 'A';
+      cap.textContent = st.txt;
+      root.querySelector('.step-out')!.textContent = String(s);
+      root.querySelector('.explain')!.textContent = notes[s];
+    }
+
+    root.querySelector('.go-next')!.addEventListener('click', () => {
+      s = Math.min(s + 1, steps.length - 1);
+      draw();
+    });
+    root.querySelector('.go-back')!.addEventListener('click', () => {
+      s = Math.max(s - 1, 0);
+      draw();
+    });
+    root.querySelector('.go-reset')!.addEventListener('click', () => {
+      s = 0;
+      draw();
+    });
+    draw();
+  }
+</script>

@@ -1,0 +1,114 @@
+---
+/**
+ * The course contents, Notion-style: every part and lecture, with the current
+ * lecture held in a yellow chip and its own sections nested beneath it. Used
+ * twice per lecture page: in the desktop sidebar and in the mobile drawer.
+ * The .toc-link scrollspy classes are driven by the script in
+ * pages/lectures/[...slug].astro.
+ */
+import { numberLabel } from '../lib/course';
+
+interface Item {
+  id: string;
+  number: number;
+  title: string;
+  planned: boolean;
+}
+interface Group {
+  part: string;
+  roman: string;
+  swatch: string;
+  items: Item[];
+}
+interface Props {
+  groups: Group[];
+  currentId: string;
+  headings: { slug: string; text: string }[];
+}
+const { groups, currentId, headings } = Astro.props;
+---
+
+<nav aria-label="Course contents">
+  <p class="label !text-ink">Contents</p>
+  {
+    groups.map((g) => (
+      <div class="mt-6">
+        <p class="flex items-center gap-2">
+          <span
+            class:list={['h-2.5 w-2.5 shrink-0 rounded-[3px] border-2 border-rule', g.swatch]}
+            aria-hidden="true"
+          />
+          <span class="label text-[0.68rem]">
+            {g.roman}. {g.part}
+          </span>
+        </p>
+        <ul class="mt-2 list-none space-y-0.5 p-0">
+          {g.items.map((it) =>
+            it.planned ? (
+              <li class="flex items-baseline gap-2.5 px-2 py-1 opacity-45">
+                <span class="w-[2ch] shrink-0 text-right font-mono text-[0.72rem]">
+                  {numberLabel(it.number)}
+                </span>
+                <span class="font-display text-[0.85rem] leading-snug">{it.title}</span>
+              </li>
+            ) : it.id === currentId ? (
+              <li>
+                <span
+                  aria-current="page"
+                  class="flex items-baseline gap-2.5 border-2 border-rule bg-part4 px-2 py-1 font-[650] !text-[#141414]"
+                >
+                  <span class="w-[2ch] shrink-0 text-right font-mono text-[0.72rem]">
+                    {numberLabel(it.number)}
+                  </span>
+                  <span class="font-display text-[0.85rem] leading-snug">{it.title}</span>
+                </span>
+                {headings.length > 0 && (
+                  <ul class="mt-1.5 mb-2 ml-[0.95rem] list-none space-y-0 border-l-2 border-rule p-0 pl-3">
+                    {headings.map((h) => (
+                      <li>
+                        <a
+                          href={`#${h.slug}`}
+                          data-target={h.slug}
+                          class="toc-link block py-[0.22rem] text-[0.8rem] leading-snug no-underline"
+                        >
+                          {h.text}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ) : (
+              <li>
+                <a
+                  href={`/lectures/${it.id}`}
+                  class="flex items-baseline gap-2.5 rounded-[3px] px-2 py-1 !text-ink-muted no-underline hover:bg-card hover:!text-ink"
+                >
+                  <span class="w-[2ch] shrink-0 text-right font-mono text-[0.72rem]">
+                    {numberLabel(it.number)}
+                  </span>
+                  <span class="font-display text-[0.85rem] leading-snug">{it.title}</span>
+                </a>
+              </li>
+            ),
+          )}
+        </ul>
+      </div>
+    ))
+  }
+</nav>
+
+<style>
+  /* Colors live here, unlayered, so they win over both the global link
+     styles and Tailwind's layered utilities without any !important. */
+  .toc-link {
+    color: var(--color-ink-muted);
+  }
+  .toc-link:hover {
+    color: var(--color-ink);
+  }
+  .toc-link.active {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+</style>

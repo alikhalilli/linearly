@@ -1,0 +1,200 @@
+---
+/**
+ * MoodMachine: a four-state finite state machine you can drive by hand.
+ * Click an input and the machine moves; the arrows drawn are exactly the four
+ * exits available from wherever it is standing right now. The point the reader
+ * should feel: the whole memory of this machine is the name of one state.
+ * Zero dependencies, ~2KB of JS on the page.
+ */
+---
+
+<div class="mood-machine card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Four states, and no other memory</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 380 350"
+      class="mx-auto w-full max-w-[24rem]"
+      aria-label="Interactive picture: four mood states joined by labeled arrows, with the current state highlighted and its four exits drawn"
+    >
+      <g class="nodes">
+        <circle cx="105" cy="105" r="40" fill="none" stroke="var(--color-ink)" stroke-width="1.8" data-node="0" />
+        <circle cx="275" cy="105" r="40" fill="none" stroke="var(--color-ink)" stroke-width="1.8" data-node="1" />
+        <circle cx="275" cy="245" r="40" fill="none" stroke="var(--color-ink)" stroke-width="1.8" data-node="2" />
+        <circle cx="105" cy="245" r="40" fill="none" stroke="var(--color-ink)" stroke-width="1.8" data-node="3" />
+      </g>
+      <g class="edges" stroke="var(--color-accent)" fill="none" stroke-width="1.8" stroke-linecap="round"></g>
+      <g class="edge-labels" fill="var(--color-ink-soft)" font-size="12" font-family="var(--font-serif)" text-anchor="middle"></g>
+      <g class="node-labels" fill="var(--color-ink)" font-size="14" font-family="var(--font-serif)" text-anchor="middle">
+        <text x="105" y="110" data-label="0">Asleep</text>
+        <text x="275" y="110" data-label="1">Alert</text>
+        <text x="275" y="250" data-label="2">Hunting</text>
+        <text x="105" y="250" data-label="3">Smug</text>
+      </g>
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Inputs to the machine">
+        <button class="mm-in chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-i="0">nap</button>
+        <button class="mm-in chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-i="1">noise</button>
+        <button class="mm-in chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-i="2">string</button>
+        <button class="mm-in chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-i="3">food</button>
+        <button class="mm-reset chip chip-ghost !px-2 !py-2 !text-[0.72rem]">reset</button>
+      </div>
+      <p class="font-mono text-[0.82rem] text-ink-soft">
+        state = <span class="mm-state">Asleep</span>
+      </p>
+      <p class="font-mono text-[0.78rem] leading-[1.6] text-ink-muted">
+        <span class="mm-trail">Asleep</span>
+      </p>
+      <p class="text-[0.82rem] text-ink-muted">
+        The orange ring is where Gauss is standing; the blue arrows are the four exits from
+        there. Find two different histories that end in the same state, then ask what the
+        machine could possibly know about the difference.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.mood-machine')) {
+    const NAMES = ['Asleep', 'Alert', 'Hunting', 'Smug'];
+    const INPUTS = ['nap', 'noise', 'string', 'food'];
+    // rows are states, columns are inputs, entries are the next state
+    const T = [
+      [0, 1, 1, 1],
+      [0, 1, 2, 3],
+      [0, 2, 3, 3],
+      [0, 1, 1, 3],
+    ];
+    const P = [
+      [105, 105],
+      [275, 105],
+      [275, 245],
+      [105, 245],
+    ];
+    const CX = 190;
+    const CY = 175;
+    const R = 40;
+    const NS = 'http://www.w3.org/2000/svg';
+    const edges = root.querySelector<SVGGElement>('.edges')!;
+    const elabels = root.querySelector<SVGGElement>('.edge-labels')!;
+    const circles = Array.from(root.querySelectorAll<SVGCircleElement>('[data-node]'));
+    const labels = Array.from(root.querySelectorAll<SVGTextElement>('[data-label]'));
+    let cur = 0;
+    let trail = [0];
+
+    const path = (d: string, w: number) => {
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', d);
+      p.setAttribute('stroke-width', String(w));
+      edges.appendChild(p);
+    };
+    // one line per input name, so a three-way exit never grows a wide label
+    const text = (x: number, y: number, names: string[]) => {
+      const t = document.createElementNS(NS, 'text');
+      t.setAttribute('x', String(x));
+      t.setAttribute('y', String(y - 6 * (names.length - 1)));
+      for (const [i, n] of names.entries()) {
+        const s = document.createElementNS(NS, 'tspan');
+        s.setAttribute('x', String(x));
+        if (i) s.setAttribute('dy', '13');
+        s.textContent = n;
+        t.appendChild(s);
+      }
+      elabels.appendChild(t);
+    };
+    const head = (x: number, y: number, ux: number, uy: number) => {
+      const a = 0.42;
+      const L = 11;
+      const c = Math.cos(a);
+      const s = Math.sin(a);
+      path(
+        `M${x},${y} l${-L * (ux * c - uy * s)},${-L * (uy * c + ux * s)}` +
+          ` M${x},${y} l${-L * (ux * c + uy * s)},${-L * (uy * c - ux * s)}`,
+        1.6,
+      );
+    };
+
+    function draw() {
+      edges.textContent = '';
+      elabels.textContent = '';
+      // group the four inputs by where they land
+      const byTarget = new Map<number, string[]>();
+      T[cur].forEach((t, i) => {
+        if (!byTarget.has(t)) byTarget.set(t, []);
+        byTarget.get(t)!.push(INPUTS[i]);
+      });
+      const [nx, ny] = P[cur];
+      for (const [t, names] of byTarget) {
+        if (t === cur) {
+          const dx = nx - CX;
+          const dy = ny - CY;
+          const th = Math.atan2(dy, dx);
+          const at = (r: number, a: number): [number, number] => [
+            nx + r * Math.cos(a),
+            ny + r * Math.sin(a),
+          ];
+          // a loop that leaves the node, bulges outward, and comes back in
+          const A = 0.35;
+          const B = 0.9;
+          const L = 55;
+          const p1 = at(R, th - A);
+          const p2 = at(R, th + A);
+          const c1: [number, number] = [p1[0] + L * Math.cos(th - B), p1[1] + L * Math.sin(th - B)];
+          const c2: [number, number] = [p2[0] + L * Math.cos(th + B), p2[1] + L * Math.sin(th + B)];
+          path(`M${p1[0]},${p1[1]} C${c1[0]},${c1[1]} ${c2[0]},${c2[1]} ${p2[0]},${p2[1]}`, 1.8);
+          const hx = p2[0] - c2[0];
+          const hy = p2[1] - c2[1];
+          const hl = Math.hypot(hx, hy);
+          head(p2[0], p2[1], hx / hl, hy / hl);
+          const lp = at(90, th);
+          text(lp[0], lp[1] + 4, names);
+        } else {
+          const [tx, ty] = P[t];
+          const dx = tx - nx;
+          const dy = ty - ny;
+          const L = Math.hypot(dx, dy);
+          const ux = dx / L;
+          const uy = dy / L;
+          const sx = nx + (R + 3) * ux;
+          const sy = ny + (R + 3) * uy;
+          const ex = tx - (R + 6) * ux;
+          const ey = ty - (R + 6) * uy;
+          path(`M${sx},${sy} L${ex},${ey}`, 1.7);
+          head(ex, ey, ux, uy);
+          text((sx + ex) / 2 - 17 * uy, (sy + ey) / 2 + 17 * ux + 4, names);
+        }
+      }
+      circles.forEach((c, i) => {
+        // chip mode: the filled node carries its name, so the fill is full
+        // strength and the name on it is fixed dark ink
+        c.setAttribute('stroke', i === cur ? 'var(--color-stroke-warm)' : 'var(--color-ink)');
+        c.setAttribute('stroke-width', i === cur ? '3.4' : '1.8');
+        c.setAttribute('fill', i === cur ? 'var(--color-part4)' : 'none');
+        c.setAttribute('fill-opacity', i === cur ? '1' : '0');
+      });
+      labels.forEach((t, i) => {
+        t.setAttribute('fill', i === cur ? '#141414' : 'var(--color-ink)');
+      });
+      root.querySelector('.mm-state')!.textContent = NAMES[cur];
+      root.querySelector('.mm-trail')!.textContent = trail.slice(-6).map((s) => NAMES[s]).join(' → ');
+    }
+
+    for (const btn of root.querySelectorAll<HTMLButtonElement>('.mm-in')) {
+      btn.addEventListener('click', () => {
+        cur = T[cur][Number(btn.dataset.i)];
+        trail.push(cur);
+        draw();
+      });
+    }
+    root.querySelector<HTMLButtonElement>('.mm-reset')!.addEventListener('click', () => {
+      cur = 0;
+      trail = [0];
+      draw();
+    });
+    draw();
+  }
+</script>

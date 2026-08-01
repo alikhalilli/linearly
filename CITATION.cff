@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: 'If you use or reference this course, please cite it as below.'
+title: 'linearly: the math of AI, drawn and coded'
+authors:
+  - family-names: Khalilli
+    given-names: Ali
+  - name: 'The linearly contributors'
+type: software
+version: 1.0.0
+date-released: '2026-08-01'
+abstract: >-
+  A free linear algebra course for people building AI, taught picture first:
+  every lecture pairs a plain-language article with hand-drawn diagrams,
+  interactive components, and the same worked examples in NumPy, PyTorch, JAX,
+  and TensorFlow. A reading companion to MIT 18.06.
+url: 'https://linearly.space'
+repository-code: 'https://github.com/alikhalilli/linearly'
+license:
+  - PolyForm-Noncommercial-1.0.0
+  - CC-BY-NC-SA-4.0
+keywords:
+  - linear algebra
+  - machine learning
+  - mathematics education
+  - MIT 18.06

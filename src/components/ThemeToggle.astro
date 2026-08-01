@@ -1,0 +1,30 @@
+<button class="theme-toggle icon-btn" aria-label="Toggle color theme" title="Toggle light / dark">
+  <svg class="to-dark" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+  </svg>
+  <svg class="to-light" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="4.4"></circle>
+    <path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M5 19l1.7-1.7M17.3 6.7 19 5"></path>
+  </svg>
+</button>
+
+<style>
+  /* Show the mode you'd switch to. Light is the default state. */
+  .to-light { display: none; }
+  :global(:root[data-theme='dark']) .to-light { display: block; }
+  :global(:root[data-theme='dark']) .to-dark { display: none; }
+</style>
+
+<script>
+  const button = document.querySelector('.theme-toggle');
+  button?.addEventListener('click', () => {
+    const isDark = document.documentElement.dataset.theme === 'dark';
+    if (isDark) {
+      delete document.documentElement.dataset.theme;
+      localStorage.removeItem('theme');
+    } else {
+      document.documentElement.dataset.theme = 'dark';
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+</script>

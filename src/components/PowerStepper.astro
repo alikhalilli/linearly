@@ -1,0 +1,152 @@
+---
+/**
+ * PowerStepper: press multiply and watch any starting vector swing toward the
+ * eigenvector with the largest eigenvalue. The arrows are drawn at unit length
+ * so the direction is all you see, and the printed ratio of consecutive lengths
+ * converges to that eigenvalue. This is power iteration.
+ * Zero dependencies, ~2KB of JS on the page.
+ */
+---
+
+<div class="power-stepper card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Multiply over and over</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 340 300"
+      class="mx-auto w-full max-w-[24rem]"
+      aria-label="Interactive picture: each press multiplies the vector by the matrix. The arrows are drawn at the same length so you watch the direction settle onto the top eigenvector."
+    >
+      <g stroke="var(--color-ink-faint)" stroke-width="1" opacity="0.35">
+        <line x1="20" y1="150" x2="320" y2="150" />
+        <line x1="160" y1="15" x2="160" y2="285" />
+      </g>
+      <circle
+        cx="160"
+        cy="150"
+        r="105"
+        fill="none"
+        stroke="var(--color-ink-faint)"
+        stroke-width="1.2"
+        stroke-dasharray="4 4"
+      />
+      <g class="ps-trail" stroke="var(--color-stroke-warm)" stroke-width="2" stroke-linecap="round"></g>
+      <line class="ps-now" x1="160" y1="150" x2="265" y2="150" stroke="var(--color-accent)" stroke-width="4" stroke-linecap="round" />
+      <circle class="ps-dot" cx="265" cy="150" r="5" fill="var(--color-accent)" />
+      <text class="ps-step-lab" x="160" y="285" text-anchor="middle" fill="currentColor" font-size="13" font-family="var(--font-serif)" font-style="italic">u₀</text>
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Preset matrices">
+        <button class="ps-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="1,1,1,0">Fibonacci</button>
+        <button class="ps-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="4,1,2,3">4 1 / 2 3</button>
+        <button class="ps-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="0.8,0.3,0.2,0.7">Markov</button>
+        <button class="ps-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="0,-1,1,0">Rotate</button>
+      </div>
+      <div class="flex gap-2">
+        <button class="ps-go chip !px-3 !py-2 sm:!py-1.5 !text-[0.78rem]">multiply by A</button>
+        <button class="ps-reset chip chip-ghost !px-3 !py-2 sm:!py-1.5 !text-[0.78rem]">reset</button>
+      </div>
+      <p class="font-mono text-[0.82rem] leading-5 text-ink-soft">
+        A&nbsp; = [<span class="ps-a">1.0</span> <span class="ps-b">1.0</span>; <span class="ps-c">1.0</span> <span class="ps-d">0.0</span>]<br />
+        k&nbsp; = <span class="ps-k">0</span><br />
+        u&nbsp; = (<span class="ps-u1">1.00</span>, <span class="ps-u2">0.00</span>)<br />
+        ‖uₖ‖/‖uₖ₋₁‖ = <span class="ps-ratio">-</span>
+      </p>
+      <p class="ps-state card-brutal !border-2 px-2 py-1 text-[0.82rem]">still swinging</p>
+      <p class="text-[0.82rem] text-ink-muted">
+        The blue arrow is redrawn at a fixed length, so only its direction moves; the orange trail
+        is where it has been. Press a few times and it stops moving. That settled direction is the
+        top eigenvector, and the printed ratio is its eigenvalue. Rotate never settles.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.power-stepper')) {
+    const OX = 160;
+    const OY = 150;
+    const R = 105;
+    const svgNS = 'http://www.w3.org/2000/svg';
+    let M = [1, 1, 1, 0];
+    let u = [1, 0];
+    let k = 0;
+    let lastAngle: number | null = null;
+
+    const q = <T extends Element>(s: string) => root.querySelector<T>(s)!;
+    const trail = q<SVGGElement>('.ps-trail');
+    const set = (sel: string, v: string) => (q(sel).textContent = v);
+
+    function draw(ratio: string) {
+      const n = Math.hypot(u[0], u[1]) || 1;
+      const px = OX + (R * u[0]) / n;
+      const py = OY - (R * u[1]) / n;
+      // once the direction stops moving it has found the top eigenvector
+      const ang = Math.atan2(u[1], u[0]);
+      const moved = lastAngle === null ? Math.PI : Math.abs(Math.atan2(Math.sin(ang - lastAngle), Math.cos(ang - lastAngle)));
+      const settled = k > 0 && moved < 0.01;
+      lastAngle = ang;
+      const voice = settled ? 'var(--color-stroke-green)' : 'var(--color-accent)';
+      q('.ps-now').setAttribute('stroke', voice);
+      q('.ps-dot').setAttribute('fill', voice);
+      q('.ps-now').setAttribute('x2', String(px));
+      q('.ps-now').setAttribute('y2', String(py));
+      q('.ps-dot').setAttribute('cx', String(px));
+      q('.ps-dot').setAttribute('cy', String(py));
+      q('.ps-step-lab').textContent = 'u' + String(k).replace(/\d/g, (c) => '₀₁₂₃₄₅₆₇₈₉'[+c]);
+      set('.ps-k', String(k));
+      set('.ps-u1', u[0].toFixed(2));
+      set('.ps-u2', u[1].toFixed(2));
+      set('.ps-ratio', ratio);
+      q('.ps-state').textContent = settled ? 'settled on the top eigenvector' : 'still swinging';
+      q<HTMLElement>('.ps-state').style.background = settled ? 'var(--color-part1)' : 'var(--color-wash)';
+      q<HTMLElement>('.ps-state').style.color = settled ? '#141414' : '';
+    }
+
+    function ghost() {
+      const n = Math.hypot(u[0], u[1]) || 1;
+      const l = document.createElementNS(svgNS, 'line');
+      l.setAttribute('x1', String(OX));
+      l.setAttribute('y1', String(OY));
+      l.setAttribute('x2', String(OX + (R * u[0]) / n));
+      l.setAttribute('y2', String(OY - (R * u[1]) / n));
+      l.setAttribute('opacity', '0.45');
+      trail.appendChild(l);
+      while (trail.childElementCount > 9) trail.removeChild(trail.firstChild!);
+    }
+
+    function reset() {
+      u = [1, 0];
+      k = 0;
+      lastAngle = null;
+      trail.replaceChildren();
+      draw('-');
+    }
+
+    q('.ps-go').addEventListener('click', () => {
+      ghost();
+      const v = [M[0] * u[0] + M[1] * u[1], M[2] * u[0] + M[3] * u[1]];
+      const before = Math.hypot(u[0], u[1]);
+      const after = Math.hypot(v[0], v[1]);
+      u = v;
+      k += 1;
+      draw(before > 1e-12 ? (after / before).toFixed(4) : '-');
+      // keep the numbers readable without changing any direction
+      if (after > 1e4 || (after < 1e-4 && after > 0)) {
+        u = [u[0] / after, u[1] / after];
+      }
+    });
+    q('.ps-reset').addEventListener('click', reset);
+    for (const btn of root.querySelectorAll<HTMLButtonElement>('.ps-preset')) {
+      btn.addEventListener('click', () => {
+        M = btn.dataset.m!.split(',').map(Number);
+        ['.ps-a', '.ps-b', '.ps-c', '.ps-d'].forEach((s, i) => set(s, M[i].toFixed(1)));
+        reset();
+      });
+    }
+    reset();
+  }
+</script>

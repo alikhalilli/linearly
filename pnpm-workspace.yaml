@@ -1,0 +1,6 @@
+# Marks this repository as its own pnpm workspace root, so installs never
+# escape to ancestor directories that happen to contain a package.json.
+packages: []
+# esbuild works from its prebuilt platform package; its install script is not needed.
+allowBuilds:
+  esbuild: false

@@ -1,0 +1,199 @@
+---
+/**
+ * AreaMachine: drag the two columns of a 2x2 matrix and watch the unit square
+ * land on a parallelogram. The signed area is the determinant. The patch is
+ * one colour while the orientation is kept and another once it flips, and it
+ * dies to a line the moment the determinant reaches zero.
+ * Zero dependencies, ~2KB of JS on the page.
+ */
+---
+
+<div class="area-machine card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Drag the two columns and watch the area</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 340 300"
+      class="am-svg mx-auto w-full max-w-[24rem] touch-none"
+      aria-label="Interactive picture: the unit square lands on a parallelogram whose signed area is the determinant"
+    >
+      <g class="am-grid" stroke="var(--color-ink-faint)" stroke-width="1" opacity="0.3"></g>
+      <g stroke="var(--color-ink)" stroke-width="1.3" opacity="0.55">
+        <line x1="12" y1="176" x2="328" y2="176"></line>
+        <line x1="128" y1="12" x2="128" y2="288"></line>
+      </g>
+      <polygon class="am-patch" stroke="none"></polygon>
+      <polygon class="am-unit" fill="var(--color-part4)" stroke="var(--color-ink)" stroke-width="1.4" stroke-dasharray="5 4"></polygon>
+      <polygon class="am-edge" fill="none" stroke="var(--color-ink)" stroke-width="2.2"></polygon>
+      <path class="am-turn" fill="none" stroke="var(--color-ink-muted)" stroke-width="1.6"></path>
+      <line class="am-c1" stroke="var(--color-accent)" stroke-width="3.4" stroke-linecap="round"></line>
+      <line class="am-c2" stroke="var(--color-stroke-warm)" stroke-width="3.4" stroke-linecap="round"></line>
+      <circle class="am-h1" r="6" fill="var(--color-accent)"></circle>
+      <circle class="am-h2" r="6" fill="var(--color-stroke-warm)"></circle>
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Preset matrices">
+        <button class="am-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="1,0,0,1">Identity</button>
+        <button class="am-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="0,-1,1,0">Turn</button>
+        <button class="am-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="1,1,0,1">Shear</button>
+        <button class="am-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="0,1,1,0">Swap</button>
+        <button class="am-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="2,1,2,1">Flatten</button>
+      </div>
+      <p class="font-mono text-[0.8rem] text-ink-soft">
+        column 1 = (<span class="am-a">2.0</span>, <span class="am-c">0.0</span>)<br />column 2 =
+        (<span class="am-b">1.0</span>, <span class="am-d">1.0</span>)
+      </p>
+      <p class="font-mono text-[0.9rem] text-ink">
+        det A = <span class="am-det">2.00</span>
+      </p>
+      <p class="am-say text-[0.84rem] text-ink-soft">
+        Area 2.00, orientation kept. The corner order still runs counterclockwise.
+      </p>
+      <p class="text-[0.82rem] text-ink-muted">
+        Drag one column onto the other. The patch thins, the number falls to zero, and the
+        square has been crushed onto a line.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.area-machine')) {
+    const U = 44,
+      OX = 128,
+      OY = 176,
+      K = 5;
+    const svg = root.querySelector<SVGSVGElement>('.am-svg')!;
+    const one = <T extends Element>(s: string) => root.querySelector<T>(s)!;
+    let c1: [number, number] = [2, 0];
+    let c2: [number, number] = [1, 1];
+    const px = (x: number) => OX + x * U;
+    const py = (y: number) => OY - y * U;
+
+    const gridG = one<SVGGElement>('.am-grid');
+    for (let k = -K; k <= K; k++) {
+      for (const horiz of [true, false]) {
+        const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        if (horiz) {
+          l.setAttribute('x1', '12');
+          l.setAttribute('x2', '328');
+          l.setAttribute('y1', String(py(k)));
+          l.setAttribute('y2', String(py(k)));
+        } else {
+          l.setAttribute('y1', '12');
+          l.setAttribute('y2', '288');
+          l.setAttribute('x1', String(px(k)));
+          l.setAttribute('x2', String(px(k)));
+        }
+        gridG.appendChild(l);
+      }
+    }
+
+    function poly(sel: string, pts: [number, number][]) {
+      one(sel).setAttribute('points', pts.map(([x, y]) => `${px(x)},${py(y)}`).join(' '));
+    }
+    function seg(sel: string, x: number, y: number) {
+      const el = one<SVGLineElement>(sel);
+      el.setAttribute('x1', String(px(0)));
+      el.setAttribute('y1', String(py(0)));
+      el.setAttribute('x2', String(px(x)));
+      el.setAttribute('y2', String(py(y)));
+    }
+
+    function update() {
+      const [a, c] = c1;
+      const [b, d] = c2;
+      const det = a * d - b * c;
+      const corners: [number, number][] = [
+        [0, 0],
+        [a, c],
+        [a + b, c + d],
+        [b, d],
+      ];
+      poly('.am-patch', corners);
+      poly('.am-edge', corners);
+      poly('.am-unit', [
+        [0, 0],
+        [1, 0],
+        [1, 1],
+        [0, 1],
+      ]);
+      seg('.am-c1', a, c);
+      seg('.am-c2', b, d);
+      one('.am-h1').setAttribute('cx', String(px(a)));
+      one('.am-h1').setAttribute('cy', String(py(c)));
+      one('.am-h2').setAttribute('cx', String(px(b)));
+      one('.am-h2').setAttribute('cy', String(py(d)));
+
+      const r = 0.55;
+      const n1 = Math.hypot(a, c) || 1e-9;
+      const n2 = Math.hypot(b, d) || 1e-9;
+      one('.am-turn').setAttribute(
+        'd',
+        `M ${px((a / n1) * r)},${py((c / n1) * r)} A ${r * U},${r * U} 0 0 ${det > 0 ? 0 : 1} ${px((b / n2) * r)},${py((d / n2) * r)}`,
+      );
+
+      const flat = Math.abs(det) < 0.06;
+      const patch = one('.am-patch');
+      // part1 keeps orientation, part6 reverses it, part3 is the collapsed case
+      patch.setAttribute('fill', flat ? 'var(--color-part3)' : det > 0 ? 'var(--color-part1)' : 'var(--color-part6)');
+      patch.setAttribute('opacity', '1');
+      one('.am-turn').setAttribute('opacity', flat ? '0' : '1');
+
+      one('.am-a').textContent = a.toFixed(1);
+      one('.am-b').textContent = b.toFixed(1);
+      one('.am-c').textContent = c.toFixed(1);
+      one('.am-d').textContent = d.toFixed(1);
+      one('.am-det').textContent = det.toFixed(2);
+      one('.am-say').textContent = flat
+        ? 'Area zero. The two columns line up, the square is crushed onto a line, and the matrix is singular.'
+        : det > 0
+          ? `Area ${Math.abs(det).toFixed(2)}, orientation kept. The corner order still runs counterclockwise.`
+          : `Area ${Math.abs(det).toFixed(2)}, orientation reversed. The corner order now runs clockwise.`;
+    }
+
+    function at(e: PointerEvent): [number, number] {
+      const r = svg.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 340;
+      const y = ((e.clientY - r.top) / r.height) * 300;
+      return [(x - OX) / U, (OY - y) / U];
+    }
+    let drag: 1 | 2 | null = null;
+    svg.addEventListener('pointerdown', (e) => {
+      const v = at(e);
+      const d1 = Math.hypot(v[0] - c1[0], v[1] - c1[1]);
+      const d2 = Math.hypot(v[0] - c2[0], v[1] - c2[1]);
+      if (Math.min(d1, d2) > 0.75) return;
+      drag = d1 < d2 ? 1 : 2;
+      svg.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+    svg.addEventListener('pointermove', (e) => {
+      if (!drag) return;
+      const v = at(e);
+      v[0] = Math.round(Math.max(-2.6, Math.min(4.4, v[0])) * 10) / 10;
+      v[1] = Math.round(Math.max(-2.4, Math.min(2.6, v[1])) * 10) / 10;
+      if (drag === 1) c1 = v;
+      else c2 = v;
+      update();
+    });
+    const stop = () => {
+      drag = null;
+    };
+    svg.addEventListener('pointerup', stop);
+    svg.addEventListener('pointercancel', stop);
+
+    for (const btn of root.querySelectorAll<HTMLButtonElement>('.am-preset')) {
+      btn.addEventListener('click', () => {
+        const [a, b, c, d] = btn.dataset.m!.split(',').map(Number);
+        c1 = [a, c];
+        c2 = [b, d];
+        update();
+      });
+    }
+    update();
+  }
+</script>

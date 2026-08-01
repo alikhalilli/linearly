@@ -1,0 +1,149 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import TocRow from '../components/TocRow.astro';
+import heroArt from '../assets/hero-art.svg?raw';
+
+const PARTS = [
+  'Foundations',
+  'Solving Ax = b',
+  'Vector Spaces',
+  'Orthogonality',
+  'Determinants & Eigenvalues',
+  'The Missing Third',
+] as const;
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+const PART_COLORS = ['bg-part1', 'bg-part2', 'bg-part3', 'bg-part4', 'bg-part5', 'bg-part6'];
+
+const lectures = (await getCollection('lectures')).sort((a, b) => a.data.number - b.data.number);
+const byPart = PARTS.map((part) => ({
+  part,
+  items: lectures.filter((l) => l.data.part === part),
+})).filter((g) => g.items.length > 0);
+
+const courseSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Course',
+  name: 'linearly: the math of AI, drawn and coded',
+  description:
+    'A free linear algebra course for people building AI, taught with pictures, plain language, and running code. A reading companion to MIT 18.06.',
+  url: 'https://linearly.space',
+  isAccessibleForFree: true,
+  inLanguage: 'en',
+  teaches: 'Linear algebra',
+  educationalLevel: 'Beginner to intermediate',
+  license: 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
+  provider: {
+    '@type': 'Organization',
+    name: 'linearly',
+    url: 'https://linearly.space',
+    sameAs: ['https://github.com/alikhalilli/linearly'],
+  },
+  hasCourseInstance: {
+    '@type': 'CourseInstance',
+    courseMode: 'online',
+    courseWorkload: 'PT150H',
+  },
+};
+---
+
+<Base
+  title="linearly. Linear algebra for people building AI"
+  description="A free course that teaches linear algebra with pictures, plain language, and running code in NumPy, PyTorch, JAX, and TensorFlow. It follows MIT 18.06 lecture by lecture."
+>
+  <script is:inline type="application/ld+json" slot="head" set:html={JSON.stringify(courseSchema)} />
+  <section class="border-b border-rule" aria-label="Introduction">
+    <div class="container-wide grid items-center gap-10 py-16 lg:grid-cols-[1fr_1.15fr] lg:py-20">
+      <div>
+        <p class="label">A free course. Built on MIT 18.06.</p>
+        <h1 class="display mt-5 text-[clamp(2.6rem,6.5vw,4.3rem)]">
+          Linear algebra,<br />
+          <span class="text-ink-muted">drawn until</span><br />
+          it's obvious.
+        </h1>
+        <p class="mt-6 max-w-[46ch] text-[1.02rem] leading-[1.7] text-ink-soft">
+          This is the math inside AI. Each lecture teaches one idea three times: first as a
+          picture, then in plain words, then as code you can run in NumPy, PyTorch, JAX, and
+          TensorFlow. The notation comes at the end, once you already understand the thing it
+          stands for.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a class="chip" href="/lectures">Start the course</a>
+          <a class="chip chip-ghost" href="/roadmap">Read the roadmap</a>
+        </div>
+      </div>
+
+      <div class="hero-art hidden text-ink lg:block" aria-hidden="true">
+        <Fragment set:html={heroArt} />
+      </div>
+    </div>
+  </section>
+
+  <section class="container-wide grid gap-5 border-b border-rule py-12 sm:grid-cols-3" aria-label="How linearly teaches">
+    <div class="card-brutal p-5">
+      <span class="badge-num bg-part1">1</span>
+      <p class="display mt-3 text-[1.05rem]">See it</p>
+      <p class="mt-2 text-[0.9rem] leading-[1.6] text-ink-muted">
+        Drawings come first. When you can hold the picture in your head, the formulas stop being
+        something to memorize.
+      </p>
+    </div>
+    <div class="card-brutal p-5">
+      <span class="badge-num bg-part2">2</span>
+      <p class="display mt-3 text-[1.05rem]">Read it</p>
+      <p class="mt-2 text-[0.9rem] leading-[1.6] text-ink-muted">
+        The articles use ordinary words and short sentences. Every symbol is introduced before it
+        appears in a formula.
+      </p>
+    </div>
+    <div class="card-brutal p-5">
+      <span class="badge-num bg-part3">3</span>
+      <p class="display mt-3 text-[1.05rem]">Run it</p>
+      <p class="mt-2 text-[0.9rem] leading-[1.6] text-ink-muted">
+        Each idea comes with code in four frameworks. Change the numbers, break things, and watch
+        what the math does.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-prose pt-16" aria-label="Table of contents">
+    <h2 class="display text-[1.9rem]">Contents</h2>
+    <p class="mt-2 text-[0.9995rem] text-ink-muted">
+      Six parts, in order. Every lecture leans on the ones before it.
+    </p>
+
+    {
+      byPart.map(({ part, items }, i) => (
+        <section class="mt-10">
+          <h3 class="part-head display text-[1.15rem]">
+            <span class:list={['swatch', PART_COLORS[i]]} aria-hidden="true" />
+            <span class="label !text-ink-muted">Part {ROMAN[i]}</span>
+            {part}
+          </h3>
+          <ul class="mt-4 list-none space-y-3 p-0">
+            {items.map((lecture) => (
+              <TocRow lecture={lecture} color={PART_COLORS[i]} />
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </section>
+
+  <section class="container-prose mt-16">
+    <h2 class="label !text-ink border-b border-rule-strong pb-2">Where to start</h2>
+    <p class="mt-4">
+      New to the subject? Read the <a href="/roadmap">roadmap</a> first. It explains how to study
+      each lecture, how fast to go, and how to know when you are ready to move on. The{' '}
+      <a href="/resources">library</a> collects the best books, videos, and practice sites, with a
+      short note on each so you know which ones are for you.
+    </p>
+  </section>
+</Base>
+
+<style>
+  .hero-art :global(svg) {
+    width: 100%;
+    height: auto;
+  }
+</style>

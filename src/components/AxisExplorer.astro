@@ -1,0 +1,148 @@
+---
+/**
+ * AxisExplorer: the block np.arange(24).reshape(2, 3, 4), a choice of axis and
+ * a choice of reduction. The shaded cells upstairs are the ones that become the
+ * shaded cell downstairs, so the reader watches one axis get eaten and sees the
+ * shape lose exactly that entry.
+ * Zero dependencies, ~2KB of JS on the page.
+ */
+---
+
+<div class="axis-explorer card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Name an axis and watch it go</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 340 280"
+      class="mx-auto w-full max-w-[24rem]"
+      aria-label="Interactive picture: a two by three by four block of numbers above, the reduced result below, and the contributing cells shaded in both"
+    >
+      <g class="ax-in"></g>
+      <g class="ax-out"></g>
+      <g fill="var(--color-ink-soft)" font-size="11" font-family="var(--font-serif)" text-anchor="middle">
+        <text x="84" y="34">axis 0 = 0</text>
+        <text x="232" y="34">axis 0 = 1</text>
+      </g>
+      <text class="ax-op" x="170" y="132" fill="var(--color-ink)" font-size="12" font-family="var(--font-mono)" text-anchor="middle">sum(axis=2)</text>
+      <g stroke="var(--color-accent)" stroke-width="1.8" fill="none" stroke-linecap="round">
+        <path d="M170,140 L170,162" />
+        <path d="M170,162 l-4,-9 M170,162 l4,-9" />
+      </g>
+      <text class="ax-shape" x="170" y="262" fill="var(--color-ink-soft)" font-size="12" font-family="var(--font-serif)" text-anchor="middle">shape (2, 3)</text>
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Choose an axis">
+        <button class="ax-axis chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-a="0">axis 0</button>
+        <button class="ax-axis chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-a="1">axis 1</button>
+        <button class="ax-axis chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-a="2">axis 2</button>
+      </div>
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Choose a reduction">
+        <button class="ax-op-btn chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-o="sum">sum</button>
+        <button class="ax-op-btn chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-o="min">min</button>
+        <button class="ax-op-btn chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-o="max">max</button>
+      </div>
+      <p class="font-mono text-[0.8rem] leading-[1.7] text-ink-soft">
+        (2, 3, 4) → <span class="ax-res">(2, 3)</span>
+      </p>
+      <p class="text-[0.82rem] text-ink-muted">
+        The yellow cells are the ones being bundled; the green cell is the single value they
+        become. Count the yellow ones: there are always exactly as many as the length of the
+        axis you named.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.axis-explorer')) {
+    const NS = 'http://www.w3.org/2000/svg';
+    const W = 26;
+    const H = 22;
+    const gIn = root.querySelector<SVGGElement>('.ax-in')!;
+    const gOut = root.querySelector<SVGGElement>('.ax-out')!;
+    const T = (b: number, i: number, j: number) => 12 * b + 4 * i + j;
+    let axis = 2;
+    let op: 'sum' | 'min' | 'max' = 'sum';
+
+    function cell(g: SVGGElement, x: number, y: number, v: number, hot: boolean, out = false) {
+      const r = document.createElementNS(NS, 'rect');
+      r.setAttribute('x', String(x));
+      r.setAttribute('y', String(y));
+      r.setAttribute('width', String(W));
+      r.setAttribute('height', String(H));
+      r.setAttribute('stroke', 'var(--color-ink)');
+      r.setAttribute('stroke-width', '1');
+      // chip mode: a fill that carries text is full strength, and the text on it
+      // is fixed dark ink so it stays readable in both themes
+      r.setAttribute('fill', hot ? (out ? 'var(--color-part1)' : 'var(--color-part4)') : 'none');
+      r.setAttribute('fill-opacity', hot ? '1' : '0');
+      g.appendChild(r);
+      const t = document.createElementNS(NS, 'text');
+      t.setAttribute('x', String(x + W / 2));
+      t.setAttribute('y', String(y + 15));
+      t.setAttribute('fill', hot ? '#141414' : 'var(--color-ink)');
+      t.setAttribute('font-size', '12');
+      t.setAttribute('font-family', 'var(--font-serif)');
+      t.setAttribute('text-anchor', 'middle');
+      t.textContent = String(v);
+      g.appendChild(t);
+    }
+
+    const reduce = (vals: number[]) =>
+      op === 'sum' ? vals.reduce((a, b) => a + b, 0) : op === 'min' ? Math.min(...vals) : Math.max(...vals);
+
+    function draw() {
+      gIn.textContent = '';
+      gOut.textContent = '';
+      // which source cells feed output entry number zero
+      const hot = (b: number, i: number, j: number) =>
+        axis === 0 ? i === 0 && j === 0 : axis === 1 ? b === 0 && j === 0 : b === 0 && i === 0;
+      for (let b = 0; b < 2; b++)
+        for (let i = 0; i < 3; i++)
+          for (let j = 0; j < 4; j++)
+            cell(gIn, (b === 0 ? 32 : 180) + j * W, 44 + i * H, T(b, i, j), hot(b, i, j));
+
+      let rows: number[][];
+      if (axis === 0) {
+        rows = [0, 1, 2].map((i) => [0, 1, 2, 3].map((j) => reduce([T(0, i, j), T(1, i, j)])));
+      } else if (axis === 1) {
+        rows = [0, 1].map((b) => [0, 1, 2, 3].map((j) => reduce([T(b, 0, j), T(b, 1, j), T(b, 2, j)])));
+      } else {
+        rows = [0, 1].map((b) => [0, 1, 2].map((i) => reduce([0, 1, 2, 3].map((j) => T(b, i, j)))));
+      }
+      const cols = rows[0].length;
+      const x0 = 170 - (cols * W) / 2;
+      rows.forEach((r, i) =>
+        r.forEach((v, j) => cell(gOut, x0 + j * W, 172 + i * H, v, i === 0 && j === 0, true)),
+      );
+
+      const shape = `(${rows.length}, ${cols})`;
+      root.querySelector('.ax-op')!.textContent = `${op}(axis=${axis})`;
+      root.querySelector('.ax-shape')!.textContent = `shape ${shape}`;
+      root.querySelector('.ax-res')!.textContent = shape;
+      const mark = (b: HTMLButtonElement, on: boolean) => {
+        b.classList.toggle('chip-lime', on);
+        b.classList.toggle('chip-ghost', !on);
+      };
+      for (const b of root.querySelectorAll<HTMLButtonElement>('.ax-axis'))
+        mark(b, Number(b.dataset.a) === axis);
+      for (const b of root.querySelectorAll<HTMLButtonElement>('.ax-op-btn'))
+        mark(b, b.dataset.o === op);
+    }
+
+    for (const b of root.querySelectorAll<HTMLButtonElement>('.ax-axis'))
+      b.addEventListener('click', () => {
+        axis = Number(b.dataset.a);
+        draw();
+      });
+    for (const b of root.querySelectorAll<HTMLButtonElement>('.ax-op-btn'))
+      b.addEventListener('click', () => {
+        op = b.dataset.o as 'sum' | 'min' | 'max';
+        draw();
+      });
+    draw();
+  }
+</script>

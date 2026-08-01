@@ -1,0 +1,159 @@
+---
+/**
+ * EigenExplorer: sweep an input direction around the unit circle and watch
+ * where the matrix sends it. Almost every angle produces an output that points
+ * somewhere else. At the eigendirections the two arrows land on one line, the
+ * picture locks, and the length ratio is the eigenvalue.
+ * Zero dependencies, ~2KB of JS on the page.
+ */
+---
+
+<div class="eigen-explorer card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Hunt for the directions that survive</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 340 300"
+      class="mx-auto w-full max-w-[24rem]"
+      aria-label="Interactive picture: an input arrow of length one turns around the circle while the output arrow follows. When the two line up, the input direction is an eigenvector."
+    >
+      <g stroke="var(--color-ink-faint)" stroke-width="1" opacity="0.35">
+        <line x1="20" y1="150" x2="320" y2="150" />
+        <line x1="160" y1="15" x2="160" y2="285" />
+      </g>
+      <circle
+        cx="160"
+        cy="150"
+        r="55"
+        fill="none"
+        stroke="var(--color-ink-faint)"
+        stroke-width="1.2"
+        stroke-dasharray="4 4"
+      />
+      <line
+        class="ee-line"
+        x1="160"
+        y1="150"
+        x2="160"
+        y2="150"
+        stroke="var(--color-stroke-green)"
+        stroke-width="1.6"
+        stroke-dasharray="3 5"
+        opacity="0"
+      />
+      <line class="ee-out" x1="160" y1="150" x2="215" y2="150" stroke="var(--color-accent)" stroke-width="5" stroke-linecap="round" />
+      <line class="ee-in" x1="160" y1="150" x2="215" y2="150" stroke="var(--color-stroke-warm)" stroke-width="3" stroke-linecap="round" />
+      <circle class="ee-in-dot" cx="215" cy="150" r="4.5" fill="var(--color-stroke-warm)" />
+      <circle class="ee-out-dot" cx="215" cy="150" r="4.5" fill="var(--color-accent)" />
+      <text class="ee-in-lab" x="222" y="146" fill="currentColor" font-size="13" font-style="italic" font-family="var(--font-serif)">x</text>
+      <text class="ee-out-lab" x="222" y="168" fill="currentColor" font-size="13" font-style="italic" font-family="var(--font-serif)">Ax</text>
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Preset matrices">
+        <button class="ee-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="2,0,0,0.5">Stretch</button>
+        <button class="ee-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="0.8,0.3,0.2,0.7">Markov</button>
+        <button class="ee-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="0,1,1,0">Reflect</button>
+        <button class="ee-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="0,-1,1,0">Rotate</button>
+        <button class="ee-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="1,1,1,0">Fibonacci</button>
+        <button class="ee-preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-m="1,1,0,1">Shear</button>
+      </div>
+      <label class="block">
+        <span class="label" style="text-transform:none">angle = <output class="ee-ang !text-ink">30.0</output>°</span>
+        <input class="ee-in-range mt-1 h-6 w-full sm:h-4  accent-[var(--color-accent)]" type="range" min="0" max="360" step="0.5" value="30" />
+      </label>
+      <p class="font-mono text-[0.82rem] leading-5 text-ink-soft">
+        A = [<span class="ee-a">2.0</span> <span class="ee-b">0.0</span>; <span class="ee-c">0.0</span> <span class="ee-d">0.5</span>]<br />
+        x&nbsp; = (<span class="ee-x1">1.00</span>, <span class="ee-x2">0.00</span>)<br />
+        Ax = (<span class="ee-y1">2.00</span>, <span class="ee-y2">0.00</span>)
+      </p>
+      <p class="ee-status card-brutal !border-2 px-2 py-1 text-[0.82rem]">
+        <span class="ee-msg">turned by 0.0°</span>
+      </p>
+      <p class="text-[0.82rem] text-ink-muted">
+        Orange is the input, blue is where A sends it. Sweep slowly. Catch the two angles where
+        the two arrows lie on one line: the picture turns green and the ratio of lengths is the
+        eigenvalue. Rotate has none.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.eigen-explorer')) {
+    const OX = 160;
+    const OY = 150;
+    const U = 55; // pixels per unit
+    let M = [2, 0, 0, 0.5]; // a, b, c, d reading across the rows
+
+    const q = <T extends Element>(s: string) => root.querySelector<T>(s)!;
+    const range = q<HTMLInputElement>('.ee-in-range');
+    const inLine = q<SVGLineElement>('.ee-in');
+    const outLine = q<SVGLineElement>('.ee-out');
+    const ray = q<SVGLineElement>('.ee-line');
+    const set = (sel: string, v: string) => (q(sel).textContent = v);
+
+    function update() {
+      const t = (Number(range.value) * Math.PI) / 180;
+      const x = [Math.cos(t), Math.sin(t)];
+      const y = [M[0] * x[0] + M[1] * x[1], M[2] * x[0] + M[3] * x[1]];
+      const len = Math.hypot(y[0], y[1]);
+      // sine of the angle between input and output, signed
+      const cross = x[0] * y[1] - x[1] * y[0];
+      const lam = x[0] * y[0] + x[1] * y[1]; // = lambda when the two are parallel
+      const aligned = len > 1e-9 && Math.abs(cross) / len < 0.02;
+
+      inLine.setAttribute('x2', String(OX + U * x[0]));
+      inLine.setAttribute('y2', String(OY - U * x[1]));
+      outLine.setAttribute('x2', String(OX + U * y[0]));
+      outLine.setAttribute('y2', String(OY - U * y[1]));
+      q('.ee-in-dot').setAttribute('cx', String(OX + U * x[0]));
+      q('.ee-in-dot').setAttribute('cy', String(OY - U * x[1]));
+      q('.ee-out-dot').setAttribute('cx', String(OX + U * y[0]));
+      q('.ee-out-dot').setAttribute('cy', String(OY - U * y[1]));
+      q('.ee-in-lab').setAttribute('x', String(OX + U * x[0] + 7));
+      q('.ee-in-lab').setAttribute('y', String(OY - U * x[1] - 6));
+      q('.ee-out-lab').setAttribute('x', String(OX + U * y[0] + 7));
+      q('.ee-out-lab').setAttribute('y', String(OY - U * y[1] + 16));
+
+      // the surviving line, drawn only once the arrows agree
+      ray.setAttribute('x1', String(OX - 130 * x[0]));
+      ray.setAttribute('y1', String(OY + 130 * x[1]));
+      ray.setAttribute('x2', String(OX + 130 * x[0]));
+      ray.setAttribute('y2', String(OY - 130 * x[1]));
+      ray.setAttribute('opacity', aligned ? '1' : '0');
+      const voice = aligned ? 'var(--color-stroke-green)' : 'var(--color-accent)';
+      outLine.setAttribute('stroke', voice);
+      q('.ee-out-dot').setAttribute('fill', voice);
+
+      set('.ee-ang', Number(range.value).toFixed(1));
+      set('.ee-x1', x[0].toFixed(2));
+      set('.ee-x2', x[1].toFixed(2));
+      set('.ee-y1', y[0].toFixed(2));
+      set('.ee-y2', y[1].toFixed(2));
+      const deg = (Math.atan2(cross, lam) * 180) / Math.PI;
+      set(
+        '.ee-msg',
+        aligned
+          ? `eigenvector found. lambda = ${lam.toFixed(2)}`
+          : `turned by ${Math.abs(deg).toFixed(1)}°, not an eigenvector`,
+      );
+      q<HTMLElement>('.ee-status').style.background = aligned
+        ? 'var(--color-part1)'
+        : 'var(--color-wash)';
+      q<HTMLElement>('.ee-status').style.color = aligned ? '#141414' : '';
+    }
+
+    range.addEventListener('input', update);
+    for (const btn of root.querySelectorAll<HTMLButtonElement>('.ee-preset')) {
+      btn.addEventListener('click', () => {
+        M = btn.dataset.m!.split(',').map(Number);
+        ['.ee-a', '.ee-b', '.ee-c', '.ee-d'].forEach((s, i) => set(s, M[i].toFixed(1)));
+        update();
+      });
+    }
+    update();
+  }
+</script>

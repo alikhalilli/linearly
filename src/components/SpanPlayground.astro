@@ -1,0 +1,94 @@
+---
+/**
+ * SpanPlayground: drag c and d and watch the walk. The first leg is c steps of
+ * v (orange), the second is d steps of w (green), and the blue arrow is where
+ * you end up. The reader's first interactive proof that two vectors reach the
+ * whole plane. Zero dependencies, ~1KB of JS on the page.
+ */
+---
+
+<div class="span-playground card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Move c and d</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg viewBox="0 0 340 300" class="mx-auto w-full max-w-[24rem]" aria-label="Interactive picture: a walk of c steps along v then d steps along w, and the arrow from the origin to where it ends">
+      <g stroke="var(--color-ink-faint)" stroke-width="1" opacity="0.35">
+        {Array.from({ length: 19 }, (_, i) => <line x1={17 + i * 17} y1="10" x2={17 + i * 17} y2="290" />)}
+        {Array.from({ length: 17 }, (_, i) => <line x1="14" y1={14 + i * 17} x2="326" y2={14 + i * 17} />)}
+      </g>
+      <g stroke="var(--color-ink)" stroke-width="1.4" opacity="0.7">
+        <line x1="14" y1="150" x2="326" y2="150" />
+        <line x1="170" y1="10" x2="170" y2="290" />
+      </g>
+      <line class="cv-leg" x1="170" y1="150" x2="187" y2="133" stroke="var(--color-stroke-warm)" stroke-width="3.2" stroke-linecap="round" />
+      <line class="dw-leg" x1="187" y1="133" x2="221" y2="82" stroke="var(--color-stroke-green)" stroke-width="3.2" stroke-linecap="round" />
+      <line class="r-arrow" x1="170" y1="150" x2="221" y2="82" stroke="var(--color-accent)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="5 5" />
+      <circle class="r-dot" cx="221" cy="82" r="5" fill="var(--color-accent)" />
+    </svg>
+
+    <div class="flex flex-col justify-center gap-4">
+      <label class="block">
+        <span class="label" style="text-transform:none">c = <output class="c-out !text-ink">1.0</output></span>
+        <input class="c-in mt-1 h-10 w-full accent-[var(--color-stroke-warm)]" type="range" min="-2" max="2" step="0.1" value="1" />
+      </label>
+      <label class="block">
+        <span class="label" style="text-transform:none">d = <output class="d-out !text-ink">1.0</output></span>
+        <input class="d-in mt-1 h-10 w-full accent-[var(--color-stroke-green)]" type="range" min="-2" max="2" step="0.1" value="1" />
+      </label>
+      <p class="font-mono text-[0.82rem] text-ink-soft">
+        v = (1, 1), w = (2, 3)<br />cv + dw = (<span class="x-out">3.0</span>, <span class="y-out">4.0</span>)
+      </p>
+      <p class="text-[0.82rem] text-ink-muted">
+        Orange walks c steps of v, green walks d steps of w, blue is where you land. Every point
+        the blue dot can reach is the span. Try to find a point it cannot reach.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.span-playground')) {
+    const U = 17; // pixels per unit
+    const OX = 170;
+    const OY = 150;
+    const v = [1, 1];
+    const w = [2, 3];
+    const cIn = root.querySelector<HTMLInputElement>('.c-in')!;
+    const dIn = root.querySelector<HTMLInputElement>('.d-in')!;
+    const cvLeg = root.querySelector<SVGLineElement>('.cv-leg')!;
+    const dwLeg = root.querySelector<SVGLineElement>('.dw-leg')!;
+    const arrow = root.querySelector<SVGLineElement>('.r-arrow')!;
+    const dot = root.querySelector<SVGCircleElement>('.r-dot')!;
+
+    function update() {
+      const c = Number(cIn.value);
+      const d = Number(dIn.value);
+      const mx = OX + c * v[0] * U;
+      const my = OY - c * v[1] * U;
+      const x = c * v[0] + d * w[0];
+      const y = c * v[1] + d * w[1];
+      const px = OX + x * U;
+      const py = OY - y * U;
+      cvLeg.setAttribute('x2', String(mx));
+      cvLeg.setAttribute('y2', String(my));
+      dwLeg.setAttribute('x1', String(mx));
+      dwLeg.setAttribute('y1', String(my));
+      dwLeg.setAttribute('x2', String(px));
+      dwLeg.setAttribute('y2', String(py));
+      arrow.setAttribute('x2', String(px));
+      arrow.setAttribute('y2', String(py));
+      dot.setAttribute('cx', String(px));
+      dot.setAttribute('cy', String(py));
+      root.querySelector('.c-out')!.textContent = c.toFixed(1);
+      root.querySelector('.d-out')!.textContent = d.toFixed(1);
+      root.querySelector('.x-out')!.textContent = x.toFixed(1);
+      root.querySelector('.y-out')!.textContent = y.toFixed(1);
+    }
+
+    cIn.addEventListener('input', update);
+    dIn.addEventListener('input', update);
+    update();
+  }
+</script>

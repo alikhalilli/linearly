@@ -1,0 +1,29 @@
+---
+/**
+ * Figure — a numbered diagram with caption. Drawings are committed as SVG
+ * (sources in drawings/), monochrome, and inherit the page's ink color via
+ * currentColor so they render correctly in both themes.
+ */
+interface Props {
+  src?: string;
+  alt?: string;
+  n?: string | number;
+}
+const { src, alt, n } = Astro.props;
+---
+
+<figure class="my-12">
+  {
+    src ? (
+      <img src={src} alt={alt ?? ''} class="mx-auto" loading="lazy" decoding="async" />
+    ) : (
+      <div class="figure-inline mx-auto flex overflow-x-auto text-ink [&>svg]:mx-auto">
+        <slot name="drawing" />
+      </div>
+    )
+  }
+  <figcaption class="mt-3 text-center text-[0.9375rem] text-ink-muted">
+    {n !== undefined && <span class="label !tracking-[0.1em]">Fig. {n}&ensp;</span>}
+    <slot />
+  </figcaption>
+</figure>

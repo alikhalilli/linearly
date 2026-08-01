@@ -1,0 +1,40 @@
+---
+/**
+ * CodeFigure wraps every fenced code block from MDX (mapped via
+ * components={{ pre: CodeFigure }}). The caption bar lives outside the
+ * scrollable pre, so the language label and copy button never drift when
+ * long lines scroll. Line numbers come from CSS counters and are not
+ * selectable or copyable.
+ */
+const props = Astro.props;
+const language = (props['data-language'] as string | undefined) ?? 'code';
+---
+
+<figure class="code-figure">
+  <figcaption class="code-caption">
+    <span class="code-lang">{language}</span>
+    <button class="code-copy" type="button" aria-label={`Copy ${language} code`}>Copy</button>
+  </figcaption>
+  <pre {...props}><slot /></pre>
+</figure>
+
+<script>
+  function wire(scope: ParentNode) {
+    for (const figure of scope.querySelectorAll<HTMLElement>('.code-figure')) {
+      const btn = figure.querySelector<HTMLButtonElement>('.code-copy');
+      const pre = figure.querySelector('pre');
+      if (!btn || !pre || btn.dataset.wired) continue;
+      btn.dataset.wired = '1';
+      btn.addEventListener('click', async () => {
+        await navigator.clipboard.writeText((pre.textContent ?? '').trimEnd());
+        btn.textContent = 'Copied';
+        btn.classList.add('done');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('done');
+        }, 1600);
+      });
+    }
+  }
+  wire(document);
+</script>

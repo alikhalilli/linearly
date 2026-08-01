@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec astro check
+      - run: pnpm build
+      - name: House checks
+        run: |
+          if grep -rn "’" src/content/ src/components/ src/pages/; then
+            echo "Curly quotes found in source; use straight apostrophes." && exit 1
+          fi
+          if grep -rn "<<<" src/content/; then
+            echo "Literal <<< placeholder found; MDX reads a bare < as JSX and the build halts." && exit 1
+          fi
+          if grep -rhoE "[a-zA-Z.,;:)]<(a href|em>|strong>)" dist/ | head -1 | grep -q .; then
+            echo "Glued text before an inline element; add {' '} before the line-leading tag." && exit 1
+          fi

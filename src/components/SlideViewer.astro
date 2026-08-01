@@ -1,0 +1,117 @@
+---
+/**
+ * SlideViewer — a fast, dependency-free deck player over pre-optimized slide images.
+ * Keyboard (←/→/Home/End), buttons, fullscreen, deep links (#slide-12), lazy
+ * loading with neighbor preload. Ships ~1.5KB of JS only on pages that use it.
+ */
+interface Props {
+  /** Folder under /public/slides containing 1.webp … count.webp */
+  deck: string;
+  count: number;
+  /** CSS aspect-ratio of the slides. */
+  aspect?: string;
+  title?: string;
+}
+
+const { deck, count, aspect = '16 / 9', title = 'Lecture slides' } = Astro.props;
+const src = (n: number) => `/slides/${deck}/${n}.webp`;
+---
+
+<figure class="slide-viewer card-brutal my-12 overflow-hidden" data-deck={deck} data-count={count} aria-label={title}>
+  <div class="stage relative bg-wash" style={`aspect-ratio: ${aspect}`}>
+    <img
+      class="slide absolute inset-0 h-full w-full object-contain"
+      src={src(1)}
+      alt={`Slide 1 of ${count}`}
+      width="1600"
+      height="900"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </div>
+
+  <figcaption
+    class="flex items-center gap-4 border-t-2 border-rule px-4 py-2 font-mono text-[0.8125rem] text-ink-muted"
+  >
+    <button class="prev cursor-pointer border-0 bg-transparent p-1 min-h-10 min-w-10 hover:text-ink" aria-label="Previous slide">←</button>
+    <span class="min-w-[5ch] text-center tabular-nums" aria-live="polite">
+      <span class="current">1</span> / {count}
+    </span>
+    <button class="next cursor-pointer border-0 bg-transparent p-1 min-h-10 min-w-10 hover:text-ink" aria-label="Next slide">→</button>
+    <input
+      class="scrub h-10 min-w-0 flex-1 accent-ink sm:h-auto"
+      type="range"
+      min="1"
+      max={count}
+      value="1"
+      aria-label="Go to slide"
+    />
+    <button class="full cursor-pointer border-0 bg-transparent p-1 min-h-10 min-w-10 hover:text-ink" aria-label="Toggle fullscreen">
+      Full
+    </button>
+  </figcaption>
+</figure>
+
+<style>
+  .slide-viewer:fullscreen {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    background: var(--color-paper);
+  }
+  .slide-viewer:fullscreen .stage {
+    flex: 1;
+    aspect-ratio: auto !important;
+  }
+</style>
+
+<script>
+  function setupViewer(root: HTMLElement) {
+    const deck = root.dataset.deck!;
+    const count = Number(root.dataset.count);
+    const img = root.querySelector<HTMLImageElement>('.slide')!;
+    const current = root.querySelector<HTMLElement>('.current')!;
+    const scrub = root.querySelector<HTMLInputElement>('.scrub')!;
+    let n = 1;
+
+    const src = (k: number) => `/slides/${deck}/${k}.webp`;
+    const preload = (k: number) => {
+      if (k < 1 || k > count) return;
+      new Image().src = src(k);
+    };
+
+    function go(k: number, updateHash = true) {
+      n = Math.min(count, Math.max(1, k));
+      img.src = src(n);
+      img.alt = `Slide ${n} of ${count}`;
+      current.textContent = String(n);
+      scrub.value = String(n);
+      preload(n + 1);
+      preload(n - 1);
+      if (updateHash) history.replaceState(null, '', `#slide-${n}`);
+    }
+
+    root.querySelector('.prev')!.addEventListener('click', () => go(n - 1));
+    root.querySelector('.next')!.addEventListener('click', () => go(n + 1));
+    scrub.addEventListener('input', () => go(Number(scrub.value)));
+
+    root.querySelector('.full')!.addEventListener('click', () => {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else root.requestFullscreen?.();
+    });
+
+    root.tabIndex = 0;
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(n + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); go(n - 1); }
+      else if (e.key === 'Home') { e.preventDefault(); go(1); }
+      else if (e.key === 'End') { e.preventDefault(); go(count); }
+    });
+
+    const fromHash = location.hash.match(/^#slide-(\d+)$/);
+    if (fromHash) go(Number(fromHash[1]), false);
+    else preload(2);
+  }
+
+  document.querySelectorAll<HTMLElement>('.slide-viewer').forEach(setupViewer);
+</script>

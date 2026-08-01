@@ -1,0 +1,126 @@
+---
+/**
+ * NewtonStepper: pick a starting point on 5x^3 - 7x^2 - 40x + 100, then step.
+ * Each step draws the tangent at the current guess and the place it meets the
+ * axis. Starting near a flat part of the curve throws the guess a long way,
+ * which is the honest half of Newton's method that a table of numbers hides.
+ * Zero dependencies, ~2KB of JS on the page.
+ */
+---
+
+<div class="newton-stepper card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Where you start decides what you find</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 380 280"
+      class="mx-auto w-full max-w-[24rem]"
+      aria-label="Interactive picture: the cubic curve, the tangent at the current guess, and the point where that tangent meets the horizontal axis"
+    >
+      <defs>
+        <clipPath id="ns-clip"><rect x="20" y="14" width="342" height="242" /></clipPath>
+      </defs>
+      <g clip-path="url(#ns-clip)">
+        <path class="ns-curve" fill="none" stroke="var(--color-ink)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" />
+        <line class="ns-tangent" stroke="var(--color-accent)" stroke-width="2.2" stroke-linecap="round" />
+        <line class="ns-drop" stroke="var(--color-stroke-green)" stroke-width="1.4" stroke-dasharray="4 4" />
+        <circle class="ns-here" r="5" fill="var(--color-stroke-warm)" />
+        <circle class="ns-next" r="5" fill="var(--color-stroke-green)" />
+      </g>
+      <line x1="20" y1="135" x2="362" y2="135" stroke="var(--color-ink-faint)" stroke-width="1.2" />
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <label class="block">
+        <span class="label" style="text-transform:none">start x₀ = <output class="ns-x0 !text-ink">-4.0</output></span>
+        <input class="ns-in mt-1 h-10 w-full accent-[var(--color-accent)]" type="range" min="-5.5" max="6.5" step="0.1" value="-4" />
+      </label>
+      <div class="flex flex-wrap gap-1.5">
+        <button class="ns-step chip chip-ghost !px-2 !py-2 !text-[0.72rem]">step</button>
+        <button class="ns-reset chip chip-ghost !px-2 !py-2 !text-[0.72rem]">reset</button>
+      </div>
+      <p class="font-mono text-[0.82rem] leading-[1.7] text-ink-soft">
+        after <span class="ns-k">0</span> steps<br />
+        x = <span class="ns-x">-4.000000</span><br />
+        f(x) = <span class="ns-f">-172.0000</span>
+      </p>
+      <p class="text-[0.82rem] text-ink-muted">
+        Orange is where you stand, blue is the tangent, green is where that tangent lands. Start
+        at −5 and it locks on in four steps. Start at 4 and watch it wander: two steps in, the
+        guess reaches a stretch where the tangent is nearly flat, and a flat line meets the axis
+        a long way off.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.newton-stepper')) {
+    const f = (x: number) => 5 * x ** 3 - 7 * x ** 2 - 40 * x + 100;
+    const fp = (x: number) => 15 * x ** 2 - 14 * x - 40;
+    const X0 = -5.5;
+    const X1 = 6.5;
+    const YR = 300; // half the visible height in function units
+    const px = (x: number) => 26 + ((x - X0) * 330) / (X1 - X0);
+    const py = (y: number) => 135 - (y * 115) / YR;
+
+    const pts: string[] = [];
+    for (let i = 0; i <= 240; i++) {
+      const x = X0 + ((X1 - X0) * i) / 240;
+      pts.push(`${px(x).toFixed(1)},${py(f(x)).toFixed(1)}`);
+    }
+    root.querySelector<SVGPathElement>('.ns-curve')!.setAttribute('d', 'M' + pts.join(' L'));
+
+    const input = root.querySelector<HTMLInputElement>('.ns-in')!;
+    const tangent = root.querySelector<SVGLineElement>('.ns-tangent')!;
+    const drop = root.querySelector<SVGLineElement>('.ns-drop')!;
+    const here = root.querySelector<SVGCircleElement>('.ns-here')!;
+    const next = root.querySelector<SVGCircleElement>('.ns-next')!;
+    let x = -4;
+    let k = 0;
+
+    // keep the drawn tangent from running off to infinity when the slope is tiny
+    const clamp = (v: number) => Math.max(-40, Math.min(40, v));
+
+    function draw() {
+      const y = f(x);
+      const nx = x - y / fp(x);
+      here.setAttribute('cx', String(px(x)));
+      here.setAttribute('cy', String(py(y)));
+      const dx = clamp(nx);
+      tangent.setAttribute('x1', String(px(x)));
+      tangent.setAttribute('y1', String(py(y)));
+      tangent.setAttribute('x2', String(px(dx)));
+      tangent.setAttribute('y2', String(py(0)));
+      drop.setAttribute('x1', String(px(dx)));
+      drop.setAttribute('y1', String(py(0)));
+      drop.setAttribute('x2', String(px(dx)));
+      drop.setAttribute('y2', String(py(f(dx))));
+      next.setAttribute('cx', String(px(dx)));
+      next.setAttribute('cy', String(py(0)));
+      root.querySelector('.ns-k')!.textContent = String(k);
+      root.querySelector('.ns-x')!.textContent = x.toFixed(6);
+      root.querySelector('.ns-f')!.textContent = y.toFixed(4);
+      root.querySelector('.ns-x0')!.textContent = Number(input.value).toFixed(1);
+    }
+
+    input.addEventListener('input', () => {
+      x = Number(input.value);
+      k = 0;
+      draw();
+    });
+    root.querySelector<HTMLButtonElement>('.ns-step')!.addEventListener('click', () => {
+      x = x - f(x) / fp(x);
+      k += 1;
+      draw();
+    });
+    root.querySelector<HTMLButtonElement>('.ns-reset')!.addEventListener('click', () => {
+      x = Number(input.value);
+      k = 0;
+      draw();
+    });
+    draw();
+  }
+</script>

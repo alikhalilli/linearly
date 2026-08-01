@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import TocRow from '../../components/TocRow.astro';
+
+import { PARTS, ROMAN, PART_COLORS } from '../../lib/course';
+
+const lectures = (await getCollection('lectures')).sort((a, b) => a.data.number - b.data.number);
+const byPart = PARTS.map((part) => ({
+  part,
+  items: lectures.filter((l) => l.data.part === part),
+})).filter((g) => g.items.length > 0);
+---
+
+<Base
+  title="Lectures | linearly"
+  description="The full course in six parts, from vectors to eigenvalues, the SVD, and Fourier. Each lecture pairs slides with an article, diagrams, and code, and maps to MIT 18.06 wherever the two overlap."
+>
+  <section class="container-prose">
+    <header class="pt-20 pb-10">
+      <p class="label">The course</p>
+      <h1 class="display mt-3 text-[2.6rem]">Lectures</h1>
+      <p class="mt-4 text-ink-soft">
+        Six parts. Each lecture pairs a slide deck with a written article, hand-drawn diagrams, and
+        the same computation in four frameworks. Work in order. Every lecture leans on the ones
+        before it.
+      </p>
+    </header>
+
+    {
+      byPart.map(({ part, items }, i) => (
+        <section class="mt-12">
+          <h2 class="part-head display text-[1.3rem]">
+            <span class:list={['swatch', PART_COLORS[i]]} aria-hidden="true" />
+            <span class="label !text-ink-muted">Part {ROMAN[i]}</span>
+            {part}
+          </h2>
+          <ul class="mt-4 list-none space-y-3 p-0">
+            {items.map((lecture) => (
+              <TocRow lecture={lecture} color={PART_COLORS[i]} />
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </section>
+</Base>

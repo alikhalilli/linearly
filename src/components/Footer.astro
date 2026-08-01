@@ -1,0 +1,168 @@
+---
+const cols = [
+  {
+    head: 'Course',
+    swatch: 'bg-part1',
+    links: [
+      { href: '/lectures', label: 'Lectures' },
+      { href: '/roadmap', label: 'Roadmap' },
+      { href: '/resources', label: 'Library' },
+    ],
+  },
+  {
+    head: 'Companions',
+    swatch: 'bg-part2',
+    links: [
+      { href: 'https://web.mit.edu/18.06/www/', label: 'MIT 18.06' },
+      { href: 'https://math.mit.edu/~gs/linearalgebra/', label: "Strang's book" },
+      {
+        href: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab',
+        label: '3Blue1Brown',
+      },
+    ],
+  },
+  {
+    head: 'Project',
+    swatch: 'bg-part3',
+    links: [
+      { href: '/about', label: 'About' },
+      { href: '/contributors', label: 'Contributors' },
+      {
+        href: 'https://github.com/alikhalilli/linearly/blob/main/CONTRIBUTING.md',
+        label: 'Contribute',
+      },
+      {
+        href: 'https://github.com/alikhalilli/linearly/blob/main/CITATION.cff',
+        label: 'Cite this course',
+      },
+    ],
+  },
+];
+---
+
+<footer class="mt-24 border-t-2 border-rule bg-wash">
+  <div class="container-wide grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
+    <div>
+      <a
+        href="/"
+        class="display card-brutal inline-block bg-part4 px-3 py-1 text-[1.05rem] !text-[#141414] no-underline"
+      >
+        linearly
+      </a>
+      <p class="mt-4 max-w-[26ch] text-[0.9rem] leading-[1.65] text-ink-muted">
+        Linear algebra for people building AI. Free, open, and drawn until it's obvious.
+      </p>
+      <div class="mt-5 flex gap-3">
+        <a
+          href="https://github.com/alikhalilli/linearly"
+          rel="noopener"
+          aria-label="GitHub repository"
+          title="GitHub"
+          class="icon-btn !text-ink no-underline"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+            ></path>
+          </svg>
+        </a>
+        <a
+          href="https://x.com/linearlyai"
+          rel="noopener"
+          aria-label="linearly on X"
+          title="X"
+          class="icon-btn !text-ink no-underline"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231ZM17.083 19.77h1.833L7.084 4.126H5.117Z"
+            ></path>
+          </svg>
+        </a>
+        <a
+          href="https://www.instagram.com/linearly.ai/"
+          rel="noopener"
+          aria-label="linearly on Instagram"
+          title="Instagram"
+          class="icon-btn !text-ink no-underline"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect>
+            <circle cx="12" cy="12" r="4.4"></circle>
+            <circle cx="17.4" cy="6.6" r="0.6" fill="currentColor" stroke="none"></circle>
+          </svg>
+        </a>
+        <a
+          href="https://www.linkedin.com/company/linearly/"
+          rel="noopener"
+          aria-label="linearly on LinkedIn"
+          title="LinkedIn"
+          class="icon-btn !text-ink no-underline"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455ZM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065Zm1.782 13.019H3.555V9h3.564ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0Z"
+            ></path>
+          </svg>
+        </a>
+        <a href="/rss.xml" aria-label="RSS feed" title="RSS" class="icon-btn !text-ink no-underline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"></path>
+            <circle cx="5" cy="19" r="1.6" fill="currentColor" stroke="none"></circle>
+          </svg>
+        </a>
+        <a
+          href="https://khalilli.ai"
+          rel="noopener"
+          aria-label="Ali Khalilli's site"
+          title="khalilli.ai"
+          class="icon-btn !text-ink no-underline"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    {
+      cols.map((col) => (
+        <nav aria-label={col.head}>
+          <p class="flex items-center gap-2">
+            <span class:list={['h-2.5 w-2.5 rounded-[3px] border-2 border-rule', col.swatch]} aria-hidden="true" />
+            <span class="label !text-ink">{col.head}</span>
+          </p>
+          <ul class="mt-4 list-none space-y-2.5 p-0">
+            {col.links.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  rel="noopener"
+                  class="font-display text-[0.9rem] font-[550] !text-ink-muted no-underline transition-colors hover:!text-ink hover:underline"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))
+    }
+  </div>
+
+  <div class="border-t-2 border-rule bg-paper py-4">
+    <div class="container-wide flex flex-wrap items-baseline justify-between gap-2">
+      <p class="label !text-ink-faint">
+        © 2026{' '}
+        <a href="https://khalilli.ai" rel="noopener" class="!text-ink-faint underline decoration-1 underline-offset-2 hover:!text-ink">Ali Khalilli</a>{' '}
+        and{' '}
+        <a href="/contributors" class="!text-ink-faint underline decoration-1 underline-offset-2 hover:!text-ink">contributors</a>
+      </p>
+      <p class="label !text-ink-faint">
+        <a href="/about#license" class="!text-ink-faint underline decoration-1 underline-offset-2 hover:!text-ink">Free to learn from. Not for sale.</a>{' '}
+        <a href="https://web.mit.edu/18.06/www/" rel="noopener" class="!text-ink-faint underline decoration-1 underline-offset-2 hover:!text-ink">Built on MIT 18.06.</a>
+      </p>
+    </div>
+  </div>
+</footer>

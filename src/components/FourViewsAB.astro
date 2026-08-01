@@ -1,0 +1,246 @@
+---
+/**
+ * FourViewsAB: one product AB, four highlight modes. Pick a reading, pick a
+ * piece, and the picture shows which slice of A meets which slice of B and
+ * which part of AB comes out. Every number on screen is computed from the two
+ * arrays in the script, so the four readings really do agree.
+ * Zero dependencies, ~2KB of JS.
+ */
+---
+
+<div class="four-views card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. One product, four readings</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 372 196"
+      class="mx-auto w-full max-w-[24rem]"
+      aria-label="Interactive picture: slices of A and B light up together with the part of AB they produce"
+      style="font:italic 15px var(--font-serif)"
+    >
+      <g class="hl-a"></g>
+      <g class="hl-b"></g>
+      <g class="hl-c"></g>
+      <g stroke="var(--color-ink)" fill="none" stroke-linecap="round" stroke-width="1.6">
+        <path d="M20,70 l-7,0 l0,78 l7,0" />
+        <path d="M134,70 l7,0 l0,78 l-7,0" />
+        <path d="M162,55 l-7,0 l0,108 l7,0" />
+        <path d="M244,55 l7,0 l0,108 l-7,0" />
+        <path d="M272,70 l-7,0 l0,78 l7,0" />
+        <path d="M354,70 l7,0 l0,78 l-7,0" />
+      </g>
+      <g class="nums" fill="var(--color-ink)" text-anchor="middle">
+        <text x="77" y="48" font-style="normal" font-size="11" letter-spacing="0.08em">A</text>
+        <text x="203" y="40" font-style="normal" font-size="11" letter-spacing="0.08em">B</text>
+        <text x="313" y="48" font-style="normal" font-size="11" letter-spacing="0.08em">AB</text>
+        <text x="148" y="114" font-style="normal" font-size="16">&#183;</text>
+        <text x="258" y="114" font-style="normal" font-size="16">=</text>
+        <text x="45" y="99">1</text><text x="77" y="99">2</text><text x="109" y="99">3</text>
+        <text x="45" y="129">4</text><text x="77" y="129">5</text><text x="109" y="129">6</text>
+        <text x="187" y="84">1</text><text x="219" y="84">0</text>
+        <text x="187" y="114">2</text><text x="219" y="114">1</text>
+        <text x="187" y="144">0</text><text x="219" y="144">3</text>
+        <text x="297" y="99">5</text><text x="329" y="99">11</text>
+        <text x="297" y="129">14</text><text x="329" y="129">23</text>
+      </g>
+      <text
+        class="hint"
+        x="186"
+        y="182"
+        text-anchor="middle"
+        fill="var(--color-ink-muted)"
+        font-style="normal"
+        font-size="13">Entry (1,1) is row 1 of A dotted with column 1 of B.</text
+      >
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Reading of AB">
+        <button class="view chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-v="0">row &#215; column</button>
+        <button class="view chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-v="1">column &#215; row</button>
+        <button class="view chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-v="2">matrix &#215; column</button>
+        <button class="view chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-v="3">row &#215; matrix</button>
+      </div>
+      <div class="flex flex-wrap gap-1.5 pieces" role="group" aria-label="Which piece"></div>
+      <p class="font-mono text-[0.78rem] leading-[1.5] text-ink-soft break-words">
+        <span class="calc-out"></span>
+      </p>
+      <p class="text-[0.82rem] text-ink-muted">
+        Orange is what you take in, green is what comes out. The numbers never change.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const A = [
+    [1, 2, 3],
+    [4, 5, 6],
+  ];
+  const B = [
+    [1, 0],
+    [2, 1],
+    [0, 3],
+  ];
+
+  // Cell centres, computed from the same box geometry drawn above.
+  const acx = (j: number) => 20 + 9 + 32 * (j + 0.5);
+  const acy = (i: number) => 70 + 9 + 30 * (i + 0.5);
+  const bcx = (j: number) => 162 + 9 + 32 * (j + 0.5);
+  const bcy = (i: number) => 55 + 9 + 30 * (i + 0.5);
+  const ccx = (j: number) => 272 + 9 + 32 * (j + 0.5);
+  const ccy = (i: number) => 70 + 9 + 30 * (i + 0.5);
+
+  const vec = (a: number[]) => '(' + a.join(', ') + ')';
+
+  for (const root of document.querySelectorAll<HTMLElement>('.four-views')) {
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const gA = root.querySelector<SVGGElement>('.hl-a')!;
+    const gB = root.querySelector<SVGGElement>('.hl-b')!;
+    const gC = root.querySelector<SVGGElement>('.hl-c')!;
+    const hint = root.querySelector<SVGTextElement>('.hint')!;
+    const pieceRow = root.querySelector<HTMLElement>('.pieces')!;
+    const calc = root.querySelector<HTMLElement>('.calc-out')!;
+
+    // digits live in one group; index them so a highlighted one can take dark ink
+    const nums = [...root.querySelectorAll<SVGTextElement>('.nums text')].slice(5);
+    const NUM = { a: nums.slice(0, 6), b: nums.slice(6, 12), c: nums.slice(12, 16) };
+    function clearInk() {
+      for (const t of nums) t.setAttribute('fill', 'var(--color-ink)');
+    }
+    function inkOn(which: 'a' | 'b' | 'c', cells: Array<[number, number]>, ncol: number) {
+      for (const [i, j] of cells) NUM[which][i * ncol + j]?.setAttribute('fill', '#141414');
+    }
+
+    function paint(
+      g: SVGGElement,
+      cells: Array<[number, number]>,
+      cx: (j: number) => number,
+      cy: (i: number) => number,
+      strong: boolean,
+    ) {
+      g.replaceChildren();
+      for (const [i, j] of cells) {
+        const r = document.createElementNS(svgNS, 'rect');
+        r.setAttribute('x', String(cx(j) - 16));
+        r.setAttribute('y', String(cy(i) - 15));
+        r.setAttribute('width', '32');
+        r.setAttribute('height', '30');
+        r.setAttribute('rx', '3');
+        r.setAttribute('fill', strong ? 'var(--color-part5)' : 'var(--color-part1)');
+        r.setAttribute('opacity', '1');
+        g.appendChild(r);
+      }
+    }
+
+    const rowA = (i: number) => [0, 1, 2].map((j) => [i, j] as [number, number]);
+    const colA = (j: number) => [0, 1].map((i) => [i, j] as [number, number]);
+    const rowB = (i: number) => [0, 1].map((j) => [i, j] as [number, number]);
+    const colB = (j: number) => [0, 1, 2].map((i) => [i, j] as [number, number]);
+    const allA = [0, 1].flatMap(rowA);
+    const allB = [0, 1, 2].flatMap(rowB);
+    const allC = [0, 1].flatMap((i) => [0, 1].map((j) => [i, j] as [number, number]));
+
+    const VIEWS = [
+      {
+        pieces: ['(1,1)', '(1,2)', '(2,1)', '(2,2)'],
+        show(p: number) {
+          const i = p >> 1,
+            j = p & 1;
+          paint(gA, rowA(i), acx, acy, true);
+          paint(gB, colB(j), bcx, bcy, true);
+          paint(gC, [[i, j]], ccx, ccy, false);
+          clearInk(); inkOn('a', rowA(i), 3); inkOn('b', colB(j), 2); inkOn('c', [[i, j]], 2);
+          const terms = [0, 1, 2].map((k) => `${A[i][k]}×${B[k][j]}`).join(' + ');
+          const val = [0, 1, 2].reduce((s, k) => s + A[i][k] * B[k][j], 0);
+          calc.textContent = `entry (${i + 1},${j + 1}) = ${terms} = ${val}`;
+          hint.textContent = `Entry (${i + 1},${j + 1}) is row ${i + 1} of A dotted with column ${j + 1} of B.`;
+        },
+      },
+      {
+        pieces: ['piece 1', 'piece 2', 'piece 3'],
+        show(k: number) {
+          paint(gA, colA(k), acx, acy, true);
+          paint(gB, rowB(k), bcx, bcy, true);
+          paint(gC, allC, ccx, ccy, false);
+          clearInk(); inkOn('a', colA(k), 3); inkOn('b', rowB(k), 2); inkOn('c', allC, 2);
+          const u = [A[0][k], A[1][k]];
+          const v = B[k];
+          const m = u.map((a) => v.map((b) => a * b));
+          calc.textContent = `${vec(u)} times ${vec(v)} = rows ${vec(m[0])} and ${vec(m[1])}. The three pieces add to AB.`;
+          hint.textContent = `Column ${k + 1} of A times row ${k + 1} of B fills the whole of AB.`;
+        },
+      },
+      {
+        pieces: ['column 1', 'column 2'],
+        show(j: number) {
+          paint(gA, allA, acx, acy, true);
+          paint(gB, colB(j), bcx, bcy, true);
+          paint(gC, colA(j), ccx, ccy, false);
+          clearInk(); inkOn('a', allA, 3); inkOn('b', colB(j), 2); inkOn('c', colA(j), 2);
+          const terms = [0, 1, 2]
+            .map((k) => `${B[k][j]}×${vec([A[0][k], A[1][k]])}`)
+            .join(' + ');
+          const out = [0, 1].map((i) => [0, 1, 2].reduce((s, k) => s + A[i][k] * B[k][j], 0));
+          calc.textContent = `column ${j + 1} of AB = ${terms} = ${vec(out)}`;
+          hint.textContent = `Column ${j + 1} of AB is a combination of the columns of A.`;
+        },
+      },
+      {
+        pieces: ['row 1', 'row 2'],
+        show(i: number) {
+          paint(gA, rowA(i), acx, acy, true);
+          paint(gB, allB, bcx, bcy, true);
+          paint(gC, rowB(i), ccx, ccy, false);
+          clearInk(); inkOn('a', rowA(i), 3); inkOn('b', allB, 2); inkOn('c', rowB(i), 2);
+          const terms = [0, 1, 2].map((k) => `${A[i][k]}×${vec(B[k])}`).join(' + ');
+          const out = [0, 1].map((j) => [0, 1, 2].reduce((s, k) => s + A[i][k] * B[k][j], 0));
+          calc.textContent = `row ${i + 1} of AB = ${terms} = ${vec(out)}`;
+          hint.textContent = `Row ${i + 1} of AB is a combination of the rows of B.`;
+        },
+      },
+    ];
+
+    let v = 0;
+    let p = 0;
+
+    function buildPieces() {
+      pieceRow.replaceChildren();
+      VIEWS[v].pieces.forEach((label, idx) => {
+        const b = document.createElement('button');
+        b.className = 'chip !px-2 !py-2 !text-[0.72rem]' + (idx === p ? '' : ' chip-ghost');
+        b.textContent = label;
+        b.setAttribute('aria-pressed', String(idx === p));
+        b.addEventListener('click', () => {
+          p = idx;
+          buildPieces();
+          VIEWS[v].show(p);
+        });
+        pieceRow.appendChild(b);
+      });
+    }
+
+    function markViews() {
+      for (const other of root.querySelectorAll<HTMLButtonElement>('.view')) {
+        const on = Number(other.dataset.v) === v;
+        other.classList.toggle('chip-ghost', !on);
+        other.setAttribute('aria-pressed', String(on));
+      }
+    }
+
+    for (const btn of root.querySelectorAll<HTMLButtonElement>('.view')) {
+      btn.addEventListener('click', () => {
+        v = Number(btn.dataset.v);
+        p = 0;
+        markViews();
+        buildPieces();
+        VIEWS[v].show(p);
+      });
+    }
+    markViews();
+    buildPieces();
+    VIEWS[v].show(p);
+  }
+</script>

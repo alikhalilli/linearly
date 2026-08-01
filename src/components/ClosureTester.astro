@@ -1,0 +1,218 @@
+---
+/**
+ * ClosureTester: pick a candidate set, slide two of its vectors and a scalar,
+ * and watch the two closure questions get answered. Sets that are subspaces
+ * never break; the shifted line and the quarter-plane do. ~2KB of JS.
+ */
+---
+
+<div class="closure-tester card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Break the set if you can</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 340 300"
+      class="mx-auto w-full max-w-[24rem]"
+      aria-label="Interactive picture: a candidate set with two of its vectors, their sum, and a scalar multiple, each marked as inside or outside"
+      style="font:italic 15px var(--font-serif)"
+    >
+      <polygon class="region" points="" fill="var(--color-part2)" opacity="0"></polygon>
+      <line class="setline" x1="0" y1="0" x2="0" y2="0" stroke="var(--color-stroke-warm)" stroke-width="2.6" opacity="0.9"></line>
+      <g stroke="var(--color-ink-faint)" stroke-width="1" opacity="0.5">
+        <line x1="4" y1="150" x2="336" y2="150"></line>
+        <line x1="170" y1="6" x2="170" y2="294"></line>
+      </g>
+      <circle cx="170" cy="150" r="3" fill="var(--color-ink-faint)"></circle>
+      <line class="v-arrow" x1="170" y1="150" x2="170" y2="150" stroke="var(--color-accent)" stroke-width="3.2" stroke-linecap="round"></line>
+      <line class="w-arrow" x1="170" y1="150" x2="170" y2="150" stroke="var(--color-accent)" stroke-width="3.2" stroke-linecap="round" opacity="0.5"></line>
+      <line class="s-link" x1="170" y1="150" x2="170" y2="150" stroke="var(--color-ink-faint)" stroke-width="1.3" stroke-dasharray="4 4"></line>
+      <line class="m-link" x1="170" y1="150" x2="170" y2="150" stroke="var(--color-ink-faint)" stroke-width="1.3" stroke-dasharray="4 4"></line>
+      <circle class="sum-dot" cx="170" cy="150" r="6" fill="var(--color-part1)" stroke="var(--color-ink)" stroke-width="1.4"></circle>
+      <circle class="mul-dot" cx="170" cy="150" r="6" fill="var(--color-part1)" stroke="var(--color-ink)" stroke-width="1.4"></circle>
+      <text class="v-lab" x="0" y="0" fill="var(--color-ink)" font-size="14" font-style="italic">v</text>
+      <text class="w-lab" x="0" y="0" fill="var(--color-ink)" font-size="14" font-style="italic" opacity="0.7">w</text>
+      <text class="sum-lab" x="0" y="0" fill="var(--color-ink)" font-size="13.5" font-style="italic">v + w</text>
+      <text class="mul-lab" x="0" y="0" fill="var(--color-ink)" font-size="13.5" font-style="italic">cv</text>
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Candidate sets">
+        <button class="setpick chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center" data-k="0">Line through 0</button>
+        <button class="setpick chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center" data-k="1">Shifted line</button>
+        <button class="setpick chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center" data-k="2">First quadrant</button>
+        <button class="setpick chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center" data-k="3">Whole plane</button>
+      </div>
+      <label class="block">
+        <span class="label" style="text-transform:none">v along the set</span>
+        <input class="t-in mt-1 w-full accent-[var(--color-accent)]" type="range" min="-1" max="1" step="0.05" value="0.7" />
+      </label>
+      <label class="block">
+        <span class="label" style="text-transform:none">w along the set</span>
+        <input class="s-in mt-1 w-full accent-[var(--color-accent)]" type="range" min="-1" max="1" step="0.05" value="-0.5" />
+      </label>
+      <label class="block">
+        <span class="label" style="text-transform:none">c = <output class="c-out !text-ink">-1.0</output></span>
+        <input class="c-in mt-1 w-full accent-[var(--color-stroke-warm)]" type="range" min="-2" max="2" step="0.1" value="-1" />
+      </label>
+      <p class="font-mono text-[0.8rem] leading-[1.7] text-ink-soft">
+        v + w <span class="sum-out">inside</span><br />
+        c v <span class="mul-out">inside</span>
+      </p>
+      <p class="verdict text-[0.84rem] leading-[1.5] text-ink-muted">
+        Both questions pass so far. Keep looking.
+      </p>
+      <p class="text-[0.78rem] leading-[1.5] text-ink-muted">
+        Blue is what you move. A test dot turns green when it stays in the set and pink when it
+        leaves.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.closure-tester')) {
+    const U = 26;
+    const OX = 170;
+    const OY = 150;
+    const px = (x: number) => OX + x * U;
+    const py = (y: number) => OY - y * U;
+    const EPS = 1e-9;
+
+    type Cand = {
+      at: (p: number) => [number, number];
+      inside: (v: [number, number]) => boolean;
+      line: [number, number, number, number] | null;
+      poly: string;
+      why: string;
+      ok: string;
+    };
+    const sets: Cand[] = [
+      {
+        at: (p) => [2.4 * p, 1.2 * p],
+        inside: (v) => Math.abs(v[1] - v[0] / 2) < 1e-6,
+        line: [1, 234.5, 339, 65.5],
+        poly: '',
+        why: '',
+        ok: 'A line through the origin is a subspace. Nothing you slide will break it.',
+      },
+      {
+        at: (p) => [2.4 * p, 1.2 * p + 1.5],
+        inside: (v) => Math.abs(v[1] - v[0] / 2 - 1.5) < 1e-6,
+        line: [1, 195.5, 339, 26.5],
+        poly: '',
+        why: 'A shifted line breaks. It also misses the origin, which is the fastest way to spot it.',
+        ok: 'Only c = 1 survives here, and the sum never does.',
+      },
+      {
+        at: (p) => {
+          const th = ((p + 1) * Math.PI) / 4;
+          return [2.4 * Math.cos(th), 2.4 * Math.sin(th)];
+        },
+        inside: (v) => v[0] >= -EPS && v[1] >= -EPS,
+        line: null,
+        poly: '170,150 339,150 339,6 170,6',
+        why: 'Scaling by a negative number leaves the quarter-plane, so it is not a subspace.',
+        ok: 'Adding never breaks this one. Now slide c below zero.',
+      },
+      {
+        at: (p) => {
+          const th = (p + 1) * Math.PI;
+          return [2.4 * Math.cos(th), 2.4 * Math.sin(th)];
+        },
+        inside: () => true,
+        line: null,
+        poly: '4,6 336,6 336,294 4,294',
+        why: '',
+        ok: 'The whole plane is a subspace of itself. There is nowhere to fall out to.',
+      },
+    ];
+
+    let k = 0;
+    const tIn = root.querySelector<HTMLInputElement>('.t-in')!;
+    const sIn = root.querySelector<HTMLInputElement>('.s-in')!;
+    const cIn = root.querySelector<HTMLInputElement>('.c-in')!;
+    const region = root.querySelector<SVGPolygonElement>('.region')!;
+    const setline = root.querySelector<SVGLineElement>('.setline')!;
+    const put = (sel: string, x: number, y: number) => {
+      const e = root.querySelector<SVGElement>(sel)!;
+      if (e.tagName === 'circle') {
+        e.setAttribute('cx', String(x));
+        e.setAttribute('cy', String(y));
+      } else {
+        e.setAttribute('x', String(x));
+        e.setAttribute('y', String(y));
+      }
+    };
+    const tip = (sel: string, x: number, y: number) => {
+      const e = root.querySelector<SVGLineElement>(sel)!;
+      e.setAttribute('x2', String(x));
+      e.setAttribute('y2', String(y));
+    };
+
+    function update() {
+      const S = sets[k];
+      const v = S.at(Number(tIn.value));
+      const w = S.at(Number(sIn.value));
+      const c = Number(cIn.value);
+      const sum: [number, number] = [v[0] + w[0], v[1] + w[1]];
+      const mul: [number, number] = [c * v[0], c * v[1]];
+
+      region.setAttribute('points', S.poly);
+      region.setAttribute('opacity', S.poly ? '0.55' : '0');
+      if (S.line) {
+        setline.setAttribute('opacity', '0.75');
+        setline.setAttribute('x1', String(S.line[0]));
+        setline.setAttribute('y1', String(S.line[1]));
+        setline.setAttribute('x2', String(S.line[2]));
+        setline.setAttribute('y2', String(S.line[3]));
+      } else {
+        setline.setAttribute('opacity', '0');
+      }
+
+      tip('.v-arrow', px(v[0]), py(v[1]));
+      tip('.w-arrow', px(w[0]), py(w[1]));
+      put('.v-lab', px(v[0]) + 11, py(v[1]) - 9);
+      put('.w-lab', px(w[0]) + 11, py(w[1]) - 9);
+      put('.sum-dot', px(sum[0]), py(sum[1]));
+      put('.mul-dot', px(mul[0]), py(mul[1]));
+      put('.sum-lab', px(sum[0]) + 9, py(sum[1]) + 4);
+      put('.mul-lab', px(mul[0]) + 9, py(mul[1]) + 4);
+      const sl = root.querySelector<SVGLineElement>('.s-link')!;
+      sl.setAttribute('x1', String(px(v[0])));
+      sl.setAttribute('y1', String(py(v[1])));
+      sl.setAttribute('x2', String(px(sum[0])));
+      sl.setAttribute('y2', String(py(sum[1])));
+      tip('.m-link', px(mul[0]), py(mul[1]));
+
+      const okSum = S.inside(sum);
+      const okMul = S.inside(mul);
+      const mark = (el: Element, ok: boolean) => {
+        el.textContent = ok ? 'is inside' : 'has LEFT the set';
+        (el as HTMLElement).style.color = ok ? '' : 'var(--color-stroke-warm)';
+      };
+      mark(root.querySelector('.sum-out')!, okSum);
+      mark(root.querySelector('.mul-out')!, okMul);
+      const paint = (sel: string, ok: boolean) =>
+        root
+          .querySelector(sel)!
+          .setAttribute('fill', ok ? 'var(--color-part1)' : 'var(--color-part3)');
+      paint('.sum-dot', okSum);
+      paint('.mul-dot', okMul);
+      root.querySelector('.c-out')!.textContent = c.toFixed(1);
+      root.querySelector('.verdict')!.textContent =
+        okSum && okMul ? S.ok : S.why;
+      for (const b of root.querySelectorAll<HTMLButtonElement>('.setpick'))
+        b.classList.toggle('!bg-wash', Number(b.dataset.k) === k);
+    }
+
+    for (const i of [tIn, sIn, cIn]) i.addEventListener('input', update);
+    for (const b of root.querySelectorAll<HTMLButtonElement>('.setpick'))
+      b.addEventListener('click', () => {
+        k = Number(b.dataset.k);
+        update();
+      });
+    update();
+  }
+</script>

@@ -1,0 +1,182 @@
+---
+/**
+ * BigPictureExplorer: the four fundamental subspaces of the chapter's running
+ * matrix, drawn as four rooms. Click a room and the panel shows that
+ * subspace's dimension, its actual basis vectors, and the place elimination
+ * hands that basis to you. Zero dependencies, ~2KB of JS on the page.
+ */
+---
+
+<div class="bigpicture-explorer card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Click a room</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 410 300"
+      class="mx-auto w-full max-w-[24rem]"
+      aria-label="Interactive picture of the four fundamental subspaces. Click a region to see its dimension and basis."
+    >
+      <g stroke="var(--color-ink)" fill="none" stroke-width="1.4" opacity="0.55">
+        <path d="M28,58 L20,58 L20,242 L28,242" />
+        <path d="M382,58 L390,58 L390,242 L382,242" />
+      </g>
+      <text x="18" y="46" fill="var(--color-ink)" font-size="13" font-family="var(--font-serif)" font-style="italic">R⁴</text>
+      <text x="376" y="46" fill="var(--color-ink)" font-size="13" font-family="var(--font-serif)" font-style="italic">R³</text>
+
+      <g stroke="var(--color-accent)" fill="none" stroke-width="1.9">
+        <path d="M158,122 L222,113" />
+        <path d="M222,113 l-9,-2 M222,113 l-8,4" />
+        <path d="M158,180 L312,153" />
+        <path d="M312,153 l-9,-1 M312,153 l-7,5" />
+      </g>
+      <g class="rooms">
+        <polygon class="room" data-key="row" points="140,150 50,116 84,60 174,94" />
+        <polygon class="room" data-key="null" points="140,150 50,184 84,240 174,206" />
+        <polygon class="room" data-key="col" points="320,150 230,116 264,60 354,94" />
+        <polygon class="room" data-key="lnull" points="320,150 230,184 264,240 354,206" />
+      </g>
+      <text x="188" y="106" fill="var(--color-ink)" font-size="12" font-family="var(--font-serif)" font-style="italic">A</text>
+      <text x="232" y="163" fill="var(--color-ink)" font-size="12" font-family="var(--font-serif)" font-style="italic">A</text>
+
+      <g fill="var(--color-ink)" text-anchor="middle" font-family="var(--font-serif)" font-size="13" font-style="italic">
+        <text x="112" y="100">row space</text>
+        <text x="112" y="120" font-size="12" font-style="normal">dim 2</text>
+        <text x="112" y="192">null space</text>
+        <text x="112" y="212" font-size="12" font-style="normal">dim 2</text>
+        <text x="292" y="100">column space</text>
+        <text x="292" y="120" font-size="12" font-style="normal">dim 2</text>
+        <text x="292" y="192">left null space</text>
+        <text x="292" y="212" font-size="12" font-style="normal">dim 1</text>
+      </g>
+
+      <circle cx="140" cy="150" r="3.5" fill="var(--color-ink)" />
+      <circle cx="320" cy="150" r="3.5" fill="var(--color-ink)" />
+      <text x="128" y="167" fill="var(--color-ink)" font-size="12" font-family="var(--font-serif)">0</text>
+      <text x="332" y="164" fill="var(--color-ink)" font-size="12" font-family="var(--font-serif)">0</text>
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Pick a subspace">
+        <button class="pick chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center" data-key="row">Row space</button>
+        <button class="pick chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center" data-key="col">Column space</button>
+        <button class="pick chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center" data-key="null">Null space</button>
+        <button class="pick chip chip-ghost !px-3 !py-2 !text-[0.72rem] min-w-[2.5rem] text-center" data-key="lnull">Left null space</button>
+      </div>
+      <p class="display text-[0.95rem]"><span class="swatch sw-out" style="background:var(--color-part5)"></span><span class="nm-out">Row space</span> <span class="sym-out font-mono text-[0.8rem] text-ink-muted">C(Aᵀ)</span></p>
+      <p class="text-[0.82rem] text-ink-soft">
+        Lives in <span class="home-out">R⁴</span>, dimension <span class="dim-out">2</span>.
+      </p>
+      <p class="font-mono text-[0.78rem] leading-[1.7] text-ink-soft basis-out">
+        (1, 0, 2, 0)<br />(0, 1, 0, 2)
+      </p>
+      <p class="text-[0.82rem] text-ink-muted">
+        Basis read off <span class="src-out">the pivot rows of R</span>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bigpicture-explorer .room {
+    fill-opacity: 0.32;
+    stroke: var(--color-ink);
+    stroke-width: 1.6;
+    cursor: pointer;
+    transition: fill-opacity 120ms ease;
+  }
+  .bigpicture-explorer .room[data-key='row'] { fill: var(--color-part5); }
+  .bigpicture-explorer .room[data-key='col'] { fill: var(--color-part1); }
+  .bigpicture-explorer .room[data-key='null'] { fill: var(--color-part2); }
+  .bigpicture-explorer .room[data-key='lnull'] { fill: var(--color-part6); }
+  .bigpicture-explorer .room:hover {
+    fill-opacity: 0.5;
+  }
+  .bigpicture-explorer .room[data-on='1'] {
+    fill-opacity: 0.72;
+    stroke-width: 3.2;
+  }
+  .bigpicture-explorer .swatch {
+    width: 0.72rem;
+    height: 0.72rem;
+    display: inline-block;
+    border: 1px solid var(--color-ink);
+    vertical-align: -1px;
+    margin-inline-end: 0.3rem;
+  }
+</style>
+
+<script>
+  type Room = {
+    nm: string;
+    sw: string;
+    sym: string;
+    home: string;
+    dim: string;
+    basis: string[];
+    src: string;
+  };
+
+  const DATA: Record<string, Room> = {
+    row: {
+      nm: 'Row space',
+      sw: 'var(--color-part5)',
+      sym: 'C(Aᵀ)',
+      home: 'R⁴',
+      dim: '2',
+      basis: ['(1, 0, 2, 0)', '(0, 1, 0, 2)'],
+      src: 'the pivot rows of R',
+    },
+    col: {
+      nm: 'Column space',
+      sw: 'var(--color-part1)',
+      sym: 'C(A)',
+      home: 'R³',
+      dim: '2',
+      basis: ['(1, 3, 4)', '(2, 8, 10)'],
+      src: 'the pivot columns of A itself',
+    },
+    null: {
+      nm: 'Null space',
+      sw: 'var(--color-part2)',
+      sym: 'N(A)',
+      home: 'R⁴',
+      dim: '2',
+      basis: ['(−2, 0, 1, 0)', '(0, −2, 0, 1)'],
+      src: 'the two special solutions',
+    },
+    lnull: {
+      nm: 'Left null space',
+      sw: 'var(--color-part6)',
+      sym: 'N(Aᵀ)',
+      home: 'R³',
+      dim: '1',
+      basis: ['(−1, −1, 1)'],
+      src: 'the last row of E, where EA = R',
+    },
+  };
+
+  for (const root of document.querySelectorAll<HTMLElement>('.bigpicture-explorer')) {
+    const rooms = root.querySelectorAll<SVGPolygonElement>('.room');
+    const picks = root.querySelectorAll<HTMLButtonElement>('.pick');
+    const out = (c: string) => root.querySelector<HTMLElement>(c)!;
+
+    function show(key: string) {
+      const d = DATA[key];
+      for (const r of rooms) r.setAttribute('data-on', r.dataset.key === key ? '1' : '0');
+      for (const p of picks) p.setAttribute('aria-pressed', String(p.dataset.key === key));
+      out('.sw-out').setAttribute('style', 'background:' + d.sw);
+      out('.nm-out').textContent = d.nm;
+      out('.sym-out').textContent = d.sym;
+      out('.home-out').textContent = d.home;
+      out('.dim-out').textContent = d.dim;
+      out('.basis-out').innerHTML = d.basis.join('<br />');
+      out('.src-out').textContent = d.src;
+    }
+
+    for (const r of rooms) r.addEventListener('click', () => show(r.dataset.key!));
+    for (const p of picks) p.addEventListener('click', () => show(p.dataset.key!));
+    show('row');
+  }
+</script>

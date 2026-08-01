@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="26 46 872 556" role="img" aria-label="The four fundamental subspaces. In R^n, the row space and null space grow out of the same origin. In R^m, the column space and left null space. A carries x in the row space to Ax in the column space, and sends the null space to zero.">
+<defs>
+<clipPath id="clip-ra"><polygon points="330,300 92,236 36,120 274,184"/></clipPath>
+<clipPath id="clip-na"><polygon points="330,300 92,364 36,480 274,416"/></clipPath>
+<clipPath id="clip-ca"><polygon points="590,300 828,236 884,120 646,184"/></clipPath>
+<clipPath id="clip-nat"><polygon points="590,300 828,364 884,480 646,416"/></clipPath>
+</defs>
+<polygon points="330,300 92,236 36,120 274,184" fill="#ff8c42" fill-opacity="0.13" stroke="#ff8c42" stroke-width="2.5" stroke-linejoin="round"/>
+<g clip-path="url(#clip-ra)">
+<text x="46" y="138" fill="#ff8c42" opacity="0.58" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·······0000········</text>
+<text x="46" y="154" fill="#ff8c42" opacity="0.77" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">0········0·11·1···1</text>
+<text x="46" y="170" fill="#ff8c42" opacity="0.42" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">1·0001·0··1···01···</text>
+<text x="46" y="186" fill="#ff8c42" opacity="0.80" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">······0····1···0·0·</text>
+<text x="46" y="202" fill="#ff8c42" opacity="0.45" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">1100····001···1··0·</text>
+<text x="46" y="218" fill="#ff8c42" opacity="0.76" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·1···1····1···0·1··</text>
+<text x="46" y="234" fill="#ff8c42" opacity="0.61" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">01··0·0·0··0··1··0·</text>
+<text x="46" y="250" fill="#ff8c42" opacity="0.66" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">········1··11··1··1</text>
+<text x="46" y="266" fill="#ff8c42" opacity="0.73" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">··10····1····0··1··</text>
+<text x="46" y="282" fill="#ff8c42" opacity="0.52" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">··110·11···1·0·0···</text>
+</g>
+<text x="52" y="70" fill="#ff8c42" font-family="ui-monospace, Menlo, monospace" font-size="26" font-weight="700">R(A)</text>
+<text x="52" y="92" fill="#ff8c42" opacity="0.85" font-family="ui-monospace, Menlo, monospace" font-size="13">row space</text>
+<text x="52" y="112" fill="currentColor" opacity="0.6" font-family="ui-monospace, Menlo, monospace" font-size="13">dim r</text>
+<polygon points="330,300 92,364 36,480 274,416" fill="#5b7bff" fill-opacity="0.13" stroke="#5b7bff" stroke-width="2.5" stroke-linejoin="round"/>
+<g clip-path="url(#clip-na)">
+<text x="46" y="318" fill="#5b7bff" opacity="0.53" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·110··11010110··010</text>
+<text x="46" y="334" fill="#5b7bff" opacity="0.72" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·01·1··10···1111···</text>
+<text x="46" y="350" fill="#5b7bff" opacity="0.67" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·11··10·1·1··11··1·</text>
+<text x="46" y="366" fill="#5b7bff" opacity="0.60" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·0····0····01······</text>
+<text x="46" y="382" fill="#5b7bff" opacity="0.77" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">1·············0····</text>
+<text x="46" y="398" fill="#5b7bff" opacity="0.44" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·1····1···0··10···0</text>
+<text x="46" y="414" fill="#5b7bff" opacity="0.80" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">··1·1··1110·1··0···</text>
+<text x="46" y="430" fill="#5b7bff" opacity="0.43" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·1·01····0····0····</text>
+<text x="46" y="446" fill="#5b7bff" opacity="0.77" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·····1··1··1···0·0·</text>
+<text x="46" y="462" fill="#5b7bff" opacity="0.59" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·001·0····0··10·00·</text>
+</g>
+<text x="52" y="548" fill="#5b7bff" font-family="ui-monospace, Menlo, monospace" font-size="26" font-weight="700">N(A)</text>
+<text x="52" y="570" fill="#5b7bff" opacity="0.85" font-family="ui-monospace, Menlo, monospace" font-size="13">null space</text>
+<text x="52" y="590" fill="currentColor" opacity="0.6" font-family="ui-monospace, Menlo, monospace" font-size="13">dim n − r</text>
+<polygon points="590,300 828,236 884,120 646,184" fill="#3ecf6e" fill-opacity="0.13" stroke="#3ecf6e" stroke-width="2.5" stroke-linejoin="round"/>
+<g clip-path="url(#clip-ca)">
+<text x="600" y="138" fill="#3ecf6e" opacity="0.58" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·······01·1·00···0·</text>
+<text x="600" y="154" fill="#3ecf6e" opacity="0.77" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">····0·····11··10·0·</text>
+<text x="600" y="170" fill="#3ecf6e" opacity="0.42" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">······10·10·00·····</text>
+<text x="600" y="186" fill="#3ecf6e" opacity="0.80" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">··001·0·0·····1·0··</text>
+<text x="600" y="202" fill="#3ecf6e" opacity="0.45" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">1···0····00··1·····</text>
+<text x="600" y="218" fill="#3ecf6e" opacity="0.76" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·0··0··0···00···1·0</text>
+<text x="600" y="234" fill="#3ecf6e" opacity="0.61" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·0··101·11··1000·1·</text>
+<text x="600" y="250" fill="#3ecf6e" opacity="0.66" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·1·····0·01···0··10</text>
+<text x="600" y="266" fill="#3ecf6e" opacity="0.73" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">··0··0·0··1···0··1·</text>
+<text x="600" y="282" fill="#3ecf6e" opacity="0.52" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·0·10····00··10····</text>
+</g>
+<text x="888" y="70" fill="#3ecf6e" font-family="ui-monospace, Menlo, monospace" font-size="26" font-weight="700" text-anchor="end">C(A)</text>
+<text x="888" y="92" fill="#3ecf6e" opacity="0.85" font-family="ui-monospace, Menlo, monospace" font-size="13" text-anchor="end">column space</text>
+<text x="888" y="112" fill="currentColor" opacity="0.6" font-family="ui-monospace, Menlo, monospace" font-size="13" text-anchor="end">dim r</text>
+<polygon points="590,300 828,364 884,480 646,416" fill="#b07fff" fill-opacity="0.13" stroke="#b07fff" stroke-width="2.5" stroke-linejoin="round"/>
+<g clip-path="url(#clip-nat)">
+<text x="600" y="318" fill="#b07fff" opacity="0.53" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">0·····011··01····1·</text>
+<text x="600" y="334" fill="#b07fff" opacity="0.72" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·····1·1·1·01···11·</text>
+<text x="600" y="350" fill="#b07fff" opacity="0.67" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">····1·····1·0··1···</text>
+<text x="600" y="366" fill="#b07fff" opacity="0.60" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">···1····0···10·1··1</text>
+<text x="600" y="382" fill="#b07fff" opacity="0.77" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">1···········100····</text>
+<text x="600" y="398" fill="#b07fff" opacity="0.44" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">0·10·111·1·10··00··</text>
+<text x="600" y="414" fill="#b07fff" opacity="0.80" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">1·01··0······0·1···</text>
+<text x="600" y="430" fill="#b07fff" opacity="0.43" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">0···1·1·0····101··0</text>
+<text x="600" y="446" fill="#b07fff" opacity="0.77" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">·0···1···11··110···</text>
+<text x="600" y="462" fill="#b07fff" opacity="0.59" font-family="ui-monospace, Menlo, monospace" font-size="12" letter-spacing="7">1··11···00··00····0</text>
+</g>
+<text x="888" y="548" fill="#b07fff" font-family="ui-monospace, Menlo, monospace" font-size="26" font-weight="700" text-anchor="end">N(Aᵀ)</text>
+<text x="888" y="570" fill="#b07fff" opacity="0.85" font-family="ui-monospace, Menlo, monospace" font-size="13" text-anchor="end">left null space</text>
+<text x="888" y="590" fill="currentColor" opacity="0.6" font-family="ui-monospace, Menlo, monospace" font-size="13" text-anchor="end">dim m − r</text>
+<text x="252" y="92" fill="currentColor" opacity="0.9" font-family="ui-monospace, Menlo, monospace" font-size="21" font-weight="700" text-anchor="middle">ℝⁿ</text>
+<text x="668" y="92" fill="currentColor" opacity="0.9" font-family="ui-monospace, Menlo, monospace" font-size="21" font-weight="700" text-anchor="middle">ℝᵐ</text>
+<text x="256" y="306" fill="currentColor" opacity="0.8" font-family="ui-monospace, Menlo, monospace" font-size="19" text-anchor="middle">⊥</text>
+<text x="668" y="306" fill="currentColor" opacity="0.8" font-family="ui-monospace, Menlo, monospace" font-size="19" text-anchor="middle">⊥</text>
+<circle cx="196" cy="224" r="15" fill="var(--color-paper, #fff)" opacity="0.8"/>
+<circle cx="712" cy="224" r="17" fill="var(--color-paper, #fff)" opacity="0.8"/>
+<circle cx="196" cy="378" r="15" fill="var(--color-paper, #fff)" opacity="0.8"/>
+<circle cx="196" cy="228" r="4" fill="currentColor"/>
+<text x="188" y="214" fill="currentColor" font-family="ui-monospace, Menlo, monospace" font-size="15" font-style="italic">x</text>
+<path d="M204,224 C 330,128 570,128 705.5,224.8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M705.5,224.8 l-11.8,-2.2 M705.5,224.8 l-5.9,-10.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+<circle cx="710" cy="228" r="4" fill="currentColor"/>
+<text x="702" y="212" fill="currentColor" font-family="ui-monospace, Menlo, monospace" font-size="15" font-style="italic">Ax</text>
+<text x="453" y="136" fill="currentColor" opacity="0.95" font-family="ui-monospace, Menlo, monospace" font-size="16" text-anchor="middle">x ↦ Ax</text>
+<path d="M240,262 C 350,200 552,200 662,256" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2 7" stroke-linecap="round" opacity="0.5"/>
+<circle cx="196" cy="380" r="4" fill="#5b7bff"/>
+<text x="184" y="366" fill="#5b7bff" font-family="ui-monospace, Menlo, monospace" font-size="15" font-style="italic">xₙ</text>
+<path d="M204,378 C 340,350 480,322 575.3,303" fill="none" stroke="#5b7bff" stroke-width="2.2" stroke-dasharray="8 6" stroke-linecap="round"/>
+<path d="M575.3,303 l-11.7,-2.8 M575.3,303 l-9.7,7.1" fill="none" stroke="#5b7bff" stroke-width="2.2" stroke-linecap="round"/>
+<text x="424" y="320" fill="#5b7bff" opacity="0.95" font-family="ui-monospace, Menlo, monospace" font-size="15" text-anchor="middle">xₙ ↦ 0</text>
+<circle cx="330" cy="300" r="4" fill="currentColor"/>
+<circle cx="590" cy="300" r="13" fill="var(--color-paper, #fff)" stroke="currentColor" stroke-width="2.2"/>
+<text x="590" y="305.5" fill="currentColor" font-family="ui-monospace, Menlo, monospace" font-size="15" font-weight="700" text-anchor="middle">0</text>
+</svg>

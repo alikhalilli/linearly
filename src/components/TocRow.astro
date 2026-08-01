@@ -1,0 +1,80 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  lecture: CollectionEntry<'lectures'>;
+  /** Tailwind background class for the part color, e.g. "bg-part1". */
+  color?: string;
+}
+
+const { lecture, color = 'bg-part4' } = Astro.props;
+const { number, title, description, status, slides } = lecture.data;
+const planned = status === 'planned';
+const numberLabel = Number.isInteger(number) ? String(number).padStart(2, '0') : String(number);
+const tag = planned ? 'planned' : status === 'ready' ? 'read' : 'slides';
+
+// Every lecture has a generated topic drawing (scripts/generate-thumbs.mjs).
+const thumbs = import.meta.glob<string>('../assets/thumbs/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+const art = thumbs[`../assets/thumbs/${lecture.id}.svg`];
+---
+
+{
+  planned ? (
+    <li class="flex items-start gap-4 rounded-lg border-2 border-dashed border-ink-faint px-4 py-3 opacity-70 sm:items-center">
+      {art && (
+        <span class="toc-thumb hidden h-[76px] w-[132px] shrink-0 overflow-hidden rounded-md border-2 border-dashed border-ink-faint bg-wash text-ink opacity-80 sm:block">
+          <Fragment set:html={art} />
+        </span>
+      )}
+      <div class="min-w-0">
+        <div class="flex items-baseline gap-2.5">
+          <span class="hidden font-mono text-[0.8rem] font-bold text-ink-faint sm:inline">{numberLabel}</span>
+          <span class="display text-[1.02rem]">{title}</span>
+        </div>
+        <p class="mt-0.5 text-[0.9rem] text-ink-muted">{description}</p>
+      </div>
+      <span class="label ml-auto shrink-0 self-start pt-1">{tag}</span>
+    </li>
+  ) : (
+    <li>
+      <a
+        href={`/lectures/${lecture.id}`}
+        class="card-brutal card-hover group flex items-start gap-4 !text-ink px-4 py-3 no-underline sm:items-center"
+      >
+        {
+          art && (
+            <span class="toc-thumb hidden h-[76px] w-[132px] shrink-0 overflow-hidden rounded-md border-2 border-rule bg-wash text-ink sm:block">
+              <Fragment set:html={art} />
+            </span>
+          )
+        }
+        <span class:list={['badge-num sm:hidden', color]}>{numberLabel}</span>
+        <div class="min-w-0">
+          <div class="flex items-baseline gap-2.5">
+            <span class="hidden font-mono text-[0.8rem] font-bold text-accent sm:inline">{numberLabel}</span>
+            <span class="display text-[1.02rem]">{title}</span>
+          </div>
+          <p class="mt-0.5 text-[0.9rem] text-ink-muted">{description}</p>
+        </div>
+        <span class="label ml-auto hidden shrink-0 self-start pt-1 sm:inline">
+          {slides ? `${slides} slides` : 'article'}
+        </span>
+      </a>
+    </li>
+  )
+}
+
+<style>
+  .toc-thumb :global(svg) {
+    width: 100%;
+    height: 100%;
+    transition: transform 200ms ease-out;
+  }
+  .group:hover .toc-thumb :global(svg) {
+    transform: scale(1.07);
+  }
+</style>

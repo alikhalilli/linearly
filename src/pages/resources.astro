@@ -1,0 +1,528 @@
+---
+import Base from '../layouts/Base.astro';
+
+type Item = { href: string; label: string; note: string; free?: boolean };
+type Book = Item & { cover: string; author: string };
+
+const startHere: Item[] = [
+  {
+    href: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab',
+    label: '3Blue1Brown, Essence of Linear Algebra',
+    note: 'A few hours of animation that install the right pictures: what a span is, what a determinant measures, why a matrix is a function. Watch it first, then accept that the feeling it gives you only becomes real understanding at a desk, with problems. Unchanged since 2021, and nothing has replaced it.',
+    free: true,
+  },
+  {
+    href: '/lectures',
+    label: 'This course',
+    note: 'Slides, plain-language articles, and code in four frameworks, lecture by lecture. Built to be the desk where the problems happen.',
+    free: true,
+  },
+  {
+    href: 'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/',
+    label: 'MIT 18.06, Gilbert Strang',
+    note: 'The filmed lectures this course follows, watched more than twenty million times. Strang teaches from worked examples on a blackboard, and his delight in them is half the teaching. Watch a lecture after fighting its problem set, not instead.',
+    free: true,
+  },
+];
+
+const books: Book[] = [
+  {
+    href: 'https://math.mit.edu/~gs/linearalgebra/',
+    label: 'Introduction to Linear Algebra',
+    author: 'Gilbert Strang',
+    cover: '/covers/ila6.webp',
+    note: 'The main text for 18.06 and for this course. Strang circles each idea several times, always through worked matrices, and never makes a ceremony of proving things. A wonderful first read and a poor reference: good luck finding the fact again later. The sixth edition starts from A = CR and ends in optimization and deep learning. His site gives away sample sections, old exams, and solutions.',
+  },
+  {
+    href: 'https://math.mit.edu/~gs/everyone/',
+    label: 'Linear Algebra for Everyone',
+    author: 'Gilbert Strang',
+    cover: '/covers/lafe.webp',
+    note: 'After fifty years of teaching the subject, Strang started it over from independent columns: the first pages factor A = CR, and row rank equals column rank before elimination even appears. This book was the trial run, and its seven chapters became the sixth edition\'s core. Same ideas, half the length, with a complete free solution manual. Pick it if the data-science half of the big book doesn\'t call you.',
+  },
+  {
+    href: 'https://hefferon.net/linearalgebra/',
+    label: 'Linear Algebra',
+    author: 'Jim Hefferon',
+    cover: '/covers/hefferon.webp',
+    note: 'A complete first course, free, with the LaTeX source published and a companion book that works every single exercise. A click jumps from problem to answer and back. Hefferon proves everything Strang waves at, but slowly, with the reader\'s maturity as the stated goal. The typesetting is plain and the pace is patient, which is the price of being the best self-study text on this shelf.',
+    free: true,
+  },
+  {
+    href: 'https://www.pearson.com/en-us/subject-catalog/p/linear-algebra-and-its-applications/P200000006235/9780136880929',
+    label: 'Linear Algebra and Its Applications',
+    author: 'Lay, Lay, McDonald',
+    cover: '/covers/lay-laa.webp',
+    note: 'The standard first course at hundreds of American universities, and the book Strang usually gets weighed against. David Lay helped found the NSF study group that rewrote the first course in the 1990s, and this is that reform in print: the hard ideas arrive early, in concrete R^n, then return later in full generality. The running Invertible Matrix Theorem collects one more equivalent statement every few sections until it holds most of the course. Lay died in 2018; his brother Steven and Judi McDonald finished this sixth edition. Where Strang is quirky, Lay is careful, and some readers need exactly that.',
+  },
+  {
+    href: 'https://web.stanford.edu/~boyd/vmls/',
+    label: 'Introduction to Applied Linear Algebra',
+    author: 'Boyd and Vandenberghe',
+    cover: '/covers/boyd.webp',
+    note: 'The word determinant never appears in this book, and eigenvalue appears once, in the sentence saying it is not covered. That is the design: one concept, independence; one tool, the QR factorization; one method, least squares. On that budget it builds data fitting, classification, and control. The free PDF, slides, and Julia and Python companions make a full course. The spectral half of the subject must come from somewhere else.',
+    free: true,
+  },
+  {
+    href: 'https://mml-book.github.io/',
+    label: 'Mathematics for Machine Learning',
+    author: 'Deisenroth, Faisal, Ong',
+    cover: '/covers/mml.webp',
+    note: 'A bridge back into math for people already headed for ML. Part one compresses linear algebra through optimization into terse summary chapters; part two spends it on four methods, and the PCA chapter is the best answer in print to why eigenvectors matter. Too dense for a first exposure, ideal for finding your gaps. The free PDF absorbs corrections continuously, so it is more accurate than the printed book.',
+    free: true,
+  },
+  {
+    href: 'https://math.mit.edu/~gs/learningfromdata/',
+    label: 'Linear Algebra and Learning from Data',
+    author: 'Gilbert Strang',
+    cover: '/covers/lalfd.webp',
+    note: 'The textbook of MIT 18.065, written from the course. It assumes 18.06 is behind you. Part one retells the highlights fast and lands on the SVD and Eckart-Young; the later parts survey optimization, statistics, and deep learning in a teacher\'s shorthand. Dense but direct, like his lectures. Read it between our Part VI and real ML work.',
+  },
+  {
+    href: 'https://linear.axler.net/',
+    label: 'Linear Algebra Done Right',
+    author: 'Sheldon Axler',
+    cover: '/covers/axler.webp',
+    note: 'The rigorous second pass. Determinants are exiled to page 354 of 404, and eigenvalues arrive through polynomials instead, which rewires how you see the subject. The exercises carry the course; the prose exists to make you ready for them. No data and no computation, on purpose. The fourth edition is open access, with free videos for every section on the author\'s site.',
+    free: true,
+  },
+  {
+    href: 'https://sites.google.com/a/brown.edu/sergei-treil-homepage/linear-algebra-done-wrong',
+    label: 'Linear Algebra Done Wrong',
+    author: 'Sergei Treil',
+    cover: '/covers/treil-ladw.webp',
+    note: 'The other free proof-first book, written by an analyst, with a title that is a joke at Axler\'s expense: determinants show up early here and get a serious treatment. Treil defines a basis before independence, stays in real and complex spaces, and aims at readers heading for analysis. It is the text of Brown\'s honors course, still being revised in 2026. The sharper, faster sibling of Done Right.',
+    free: true,
+  },
+  {
+    href: 'https://people.maths.ox.ac.uk/trefethen/text.html',
+    label: 'Numerical Linear Algebra',
+    author: 'Trefethen and Bau',
+    cover: '/covers/trefethen.webp',
+    note: 'Forty lectures of about eight pages, each readable in one sitting. The SVD arrives in Lecture 4; Trefethen believes this was the first textbook to put it up front. Gaussian elimination, which every other book opens with, is held back to Lecture 20 for being tediously familiar. This is the book that explains what happens when you call lstsq, and the one numerical people reread. From 1997, reissued for its 25th year.',
+  },
+];
+
+const shelves: { id: string; title: string; color: string; blurb: string; items: Item[] }[] = [
+  {
+    id: 'video',
+    title: 'Video courses',
+    color: 'bg-part2',
+    blurb: 'Video builds pictures. It does not replace solving problems.',
+    items: [
+      {
+        href: 'https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/',
+        label: 'MIT 18.06SC',
+        note: '18.06 rebuilt for people studying alone: the same 35 lectures, plus 36 recitation videos where an MIT teaching assistant works one problem start to finish, plus every exam with solutions. The recitations are the hidden asset. When a topic breaks you, watch one being repaired slowly.',
+        free: true,
+      },
+      {
+        href: 'https://ocw.mit.edu/courses/res-18-010-a-2020-vision-of-linear-algebra-spring-2020/',
+        label: 'Strang, A Vision of Linear Algebra',
+        note: 'Ten short videos where Strang argues for reordering the whole subject: column space first, A = CR before elimination. Think of it as a closing argument. It explains why his books changed, and it lands hardest right after your first pass.',
+        free: true,
+      },
+      {
+        href: 'https://ocw.mit.edu/courses/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/',
+        label: 'MIT 18.065, Matrix Methods',
+        note: 'The sequel course, taught from Learning from Data. The first third is the best second-course material on film: norms, the SVD, Eckart-Young, the pseudoinverse. Problem sets are light and grading was by project, so treat it as lectures to think alongside, and bring your own exercises.',
+        free: true,
+      },
+      {
+        href: 'https://ee263.stanford.edu/archive/',
+        label: 'Stanford EE263, the Boyd archive',
+        note: 'Boyd\'s graduate matrix-methods course, preserved as he taught it: the full course reader, twenty lecture decks, filmed lectures, and the famous matrix crimes note on the mistakes everyone makes. Least norm, regularization, the matrix exponential. The natural step after his book.',
+        free: true,
+      },
+      {
+        href: 'https://www.youtube.com/playlist?list=PLlXfTHzgMRUKXD88IdzS14F4NxAZudSmv',
+        label: 'Pavel Grinfeld, MathTheBeautiful',
+        note: 'The usual answer to what 3Blue1Brown leaves out: over a hundred short videos that do the mechanics, one tool per video, across four playlists. Filmed years ago, and none of it has aged. Pairs with Strang the way practice pairs with lectures.',
+        free: true,
+      },
+      {
+        href: 'https://www.youtube.com/playlist?list=PLQ3UicqQtfNsivZX5TmUAoUkkBqFT8aOL',
+        label: 'MIT 6.7350, Numerical Algorithms',
+        note: 'Justin Solomon\'s 2025 course: conditioning, LU, QR, the road to the SVD, conjugate gradients, framed for ML and graphics throughout. The strongest modern sequel to 18.06 on film, and the course-shaped version of what Trefethen\'s book teaches.',
+        free: true,
+      },
+      {
+        href: 'https://www.youtube.com/playlist?list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv',
+        label: 'Steve Brunton, SVD series',
+        note: 'The SVD taught the way working engineers use it: data matrices, economy form, truncation, PCA. Brunton starts from applications and backfills the algebra, the mirror image of a math course, which is exactly why it works as a complement.',
+        free: true,
+      },
+      {
+        href: 'https://www.youtube.com/@ProfWonMath/courses',
+        label: 'Prof Won Math',
+        note: 'Complete filmed courses on abstract linear algebra following Axler. One of the few places Done Right exists as a full lecture series.',
+        free: true,
+      },
+    ],
+  },
+  {
+    id: 'interactive',
+    title: 'Interactive explanations',
+    color: 'bg-part3',
+    blurb: 'Things you move with your hands. Ten minutes here saves hours of squinting at symbols.',
+    items: [
+      {
+        href: 'https://textbooks.math.gatech.edu/ila/',
+        label: 'Interactive Linear Algebra, Georgia Tech',
+        note: 'A complete free textbook where the figures are alive: drag a vector and watch the row picture and the column picture move together. The strongest interactive treatment of the core, elimination through eigenvalues. Georgia Tech teaches from it.',
+        free: true,
+      },
+      {
+        href: 'https://setosa.io/ev/eigenvectors-and-eigenvalues/',
+        label: 'Setosa, Eigenvectors and Eigenvalues',
+        note: 'Drag a vector and watch which directions survive a matrix unchanged. Eigenvalues taught through moving systems, a Fibonacci stepper and a two-city migration model. From 2015, and still the clearest page on the idea.',
+        free: true,
+      },
+      {
+        href: 'https://immersivemath.com/ila/',
+        label: 'Immersive Linear Algebra',
+        note: 'A book where every figure is a 3D scene you can rotate. The figures carry more than the prose, so use it as a second telling, next to a book that explains more.',
+        free: true,
+      },
+      {
+        href: 'http://matrixmultiplication.xyz/',
+        label: 'matrixmultiplication.xyz',
+        note: 'One animation. Row meets column, folds, and multiplies. Thirty seconds here and matrix multiplication stops being an arbitrary rule.',
+        free: true,
+      },
+      {
+        href: 'https://timbaumann.info/svd-image-compression-demo/',
+        label: 'SVD image compression demo',
+        note: 'A photo and a rank slider. Drag it and watch low-rank approximation happen to a picture you chose. The fastest intuition for what singular values measure.',
+        free: true,
+      },
+    ],
+  },
+  {
+    id: 'practice',
+    title: 'Practice',
+    color: 'bg-part4',
+    blurb: 'Everything here has solutions, so you can be wrong in private.',
+    items: [
+      {
+        href: 'https://web.mit.edu/18.06/www/old.shtml',
+        label: 'MIT 18.06 exam archive',
+        note: 'Real 18.06 exams back to 1997, with solutions. Sit them against a clock. One exam failed in private teaches more than ten problem sets grazed.',
+        free: true,
+      },
+      {
+        href: 'https://github.com/mitmath/1806',
+        label: '18.06 current semester',
+        note: 'The problem sets MIT assigns right now, with Julia notebooks. Read it to calibrate: this is what present-day mastery of this material means.',
+        free: true,
+      },
+      {
+        href: 'https://github.com/rougier/numpy-100',
+        label: '100 NumPy exercises',
+        note: 'A hundred array drills with solutions, from broadcasting to stride tricks. The fastest route from reading NumPy to writing it.',
+        free: true,
+      },
+      {
+        href: 'https://www.hackerrank.com/domains/mathematics/linear-algebra-foundations',
+        label: 'HackerRank, Linear Algebra Foundations',
+        note: 'Quick drills with instant judging. Good for warming up before real problems.',
+        free: true,
+      },
+      {
+        href: 'https://mathacademy.com/',
+        label: 'Math Academy',
+        note: 'Adaptive, mastery-based courses including linear algebra. Paid, the only one on this shelf that is. The strongest structured option if self-pacing keeps failing you.',
+      },
+    ],
+  },
+  {
+    id: 'scratch',
+    title: 'Build it yourself',
+    color: 'bg-part5',
+    blurb: 'Implementation is the strongest form of understanding.',
+    items: [
+      {
+        href: 'https://www.deep-ml.com/',
+        label: 'Deep-ML',
+        note: 'Graded coding problems for ML math: matmul, covariance, power iteration, PCA. The closest thing to LeetCode for this course\'s material.',
+        free: true,
+      },
+      {
+        href: 'https://github.com/srush/Tensor-Puzzles',
+        label: 'Tensor Puzzles',
+        note: 'Rebuild 21 tensor operations from one primitive, broadcasting only. These puzzles find the gaps a NumPy tutorial leaves.',
+        free: true,
+      },
+      {
+        href: 'https://github.com/srush/GPU-Puzzles',
+        label: 'GPU Puzzles',
+        note: 'Then write the GPU kernels for those operations yourself, in a notebook, no setup.',
+        free: true,
+      },
+      {
+        href: 'https://minitorch.github.io/',
+        label: 'MiniTorch',
+        note: 'Build a small PyTorch clone as a structured course: tensors, autograd, backprop. The long road, and the one that ends with you understanding your tools.',
+        free: true,
+      },
+      {
+        href: 'https://github.com/karpathy/micrograd',
+        label: 'micrograd',
+        note: 'Backpropagation in about a hundred lines, by Karpathy. Read it, close it, write it again without looking. The third step is the exercise.',
+        free: true,
+      },
+      {
+        href: 'https://www.tensortonic.com/',
+        label: 'TensorTonic',
+        note: 'A thousand algorithms from scratch, ML math to CUDA kernels, with the papers behind each. Runs in the browser.',
+        free: true,
+      },
+      {
+        href: 'https://github.com/srush/Autodiff-Puzzles',
+        label: 'Autodiff Puzzles',
+        note: 'Write the derivative of each operation yourself. The best preparation for understanding what backward() actually does.',
+        free: true,
+      },
+      {
+        href: 'https://leetgpu.com/',
+        label: 'LeetGPU',
+        note: 'CUDA challenges judged in the browser on real GPUs. No setup, no cloud bill.',
+        free: true,
+      },
+      {
+        href: 'https://github.com/gpu-mode/Triton-Puzzles',
+        label: 'Triton Puzzles',
+        note: 'Puzzle practice for Triton, the language most new ML kernels are written in.',
+        free: true,
+      },
+      {
+        href: 'https://github.com/gpu-mode/reference-kernels',
+        label: 'GPU MODE kernel leaderboard',
+        note: 'Write a faster Cholesky, QR, or symmetric eigensolver kernel and get ranked against everyone, on real GPUs, free. The only leaderboard anywhere with a linear algebra track.',
+        free: true,
+      },
+      {
+        href: 'https://github.com/srush/LLM-Training-Puzzles',
+        label: 'LLM Training Puzzles',
+        note: 'Distributed training as puzzles. For after the course, when one GPU stops being enough.',
+        free: true,
+      },
+      {
+        href: 'https://github.com/callummcdougall/ARENA_3.0',
+        label: 'ARENA, Chapter 0',
+        note: 'The tensor exercises used to train AI safety engineers. The ray tracer built from pure array operations is famous for a reason.',
+        free: true,
+      },
+      {
+        href: 'https://github.com/fastai/numerical-linear-algebra',
+        label: 'fast.ai, Computational Linear Algebra',
+        note: 'The decompositions from this course at real scale, in Python: refactored SVD, randomized methods, the parts textbooks skip.',
+        free: true,
+      },
+    ],
+  },
+  {
+    id: 'ai',
+    title: 'For AI, specifically',
+    color: 'bg-part6',
+    blurb: 'Short reading that ties this course to modern machine learning.',
+    items: [
+      {
+        href: 'https://explained.ai/matrix-calculus/',
+        label: 'The Matrix Calculus You Need for Deep Learning',
+        note: 'Parr and Howard derive every Jacobian in a backward pass, slowly, with the shapes written out. Read it before you look inside an autograd engine.',
+        free: true,
+      },
+      {
+        href: 'https://distill.pub/2017/momentum/',
+        label: 'Why Momentum Really Works',
+        note: 'Goh analyzes gradient descent by diagonalizing it: the eigenvalues set the step size, the condition number sets the pain. The interactive figures are the argument.',
+        free: true,
+      },
+      {
+        href: 'https://math.mit.edu/~gs/learningfromdata/siam.pdf',
+        label: 'Strang, The Functions of Deep Learning',
+        note: 'Strang explains a neural network as a piecewise linear function and counts its pieces. A few pages, hosted on his own site, and the cleanest bridge from this course to deep learning.',
+        free: true,
+      },
+    ],
+  },
+  {
+    id: 'reference',
+    title: 'Reference',
+    color: 'bg-part1',
+    blurb: 'Not for reading. For keeping open in a tab.',
+    items: [
+      {
+        href: 'https://github.com/kenjihiranabe/The-Art-of-Linear-Algebra',
+        label: 'The Art of Linear Algebra',
+        note: 'Hiranabe drew Strang\'s whole course as one set of diagrams, with the Matrix World map. Free, widely translated. Print it and pin it above your desk.',
+        free: true,
+      },
+      {
+        href: 'https://nhigham.com/index-of-what-is-articles/',
+        label: 'Nick Higham, the What Is series',
+        note: 'Ninety-five short notes, one matrix concept each, by the authority on numerical accuracy. The series ended eight days before Higham\'s death in 2024 and stands complete. The best quick second opinion on anything matrix-shaped.',
+        free: true,
+      },
+      {
+        href: 'https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf',
+        label: 'The Matrix Cookbook',
+        note: 'Hundreds of identities and matrix derivatives, stated without proof and frozen since 2012. Everyone uses it and nobody reads it. Check anything load-bearing at matrixcalculus.org first.',
+        free: true,
+      },
+      {
+        href: 'https://kconrad.math.uconn.edu/blurbs/',
+        label: 'Keith Conrad, expository blurbs',
+        note: 'Dozens of short, careful notes on exactly the second-course topics that ambush you in papers: tensor products, complexification, the minimal polynomial. When you need three precise pages instead of a chapter, this is the shelf.',
+        free: true,
+      },
+      {
+        href: 'https://blogs.cornell.edu/charlievl/cvl_home/books/',
+        label: 'Golub and Van Loan, Matrix Computations',
+        note: 'The algorithm encyclopedia: block algorithms, operation counts, and the details Trefethen deliberately leaves out. Fourth edition, 2013. Keep Horn and Johnson\'s Matrix Analysis beside it for the theory half. You consult these two; nobody reads them through.',
+      },
+      {
+        href: 'https://www.matrixcalculus.org/',
+        label: 'matrixcalculus.org',
+        note: 'Type a matrix expression, get its derivative, symbolically. The only tool of its kind on the web. Check your hand derivations here.',
+        free: true,
+      },
+      {
+        href: 'https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/c501620f128ab205bc267770934d707a_MIT18_06SCF11_ZoomNotes.pdf',
+        label: 'Strang, ZoomNotes for Linear Algebra',
+        note: 'The whole course compressed into about eighty pages of Strang\'s own notes, written during remote teaching. The closest thing to borrowing his binder.',
+        free: true,
+      },
+      {
+        href: 'https://web.mit.edu/18.06/www/Essays/newpaper_ver3.pdf',
+        label: 'Strang, The Four Fundamental Subspaces: 4 Lines',
+        note: 'The fundamental theorem told with a rank one matrix, so all four subspaces are lines you can draw. His 1993 Monthly paper grew into this free retelling, and this site\'s hero drawing comes from the same picture.',
+        free: true,
+      },
+      {
+        href: 'https://math.mit.edu/~gs/linearalgebra/ila6/lucr.pdf',
+        label: 'Strang and Moler, LU and CR Elimination',
+        note: 'The case for teaching A = CR first, made in ten pages by Strang and the author of MATLAB. This paper is why his newer books look the way they do, and why our factorization lectures follow them.',
+        free: true,
+      },
+    ],
+  },
+];
+
+const jump = [
+  { id: 'books', title: 'Books' },
+  ...shelves.map((s) => ({ id: s.id, title: s.title })),
+];
+---
+
+<Base
+  title="Library. The best material for learning linear algebra"
+  description="The books, video courses, interactive tools, practice sites, and papers worth your time, each with an honest note on how it teaches and who it fits. Everything else was left out on purpose."
+>
+  <div class="container-wide">
+    <header class="pt-16 pb-8">
+      <p class="label">The shelf</p>
+      <h1 class="display mt-3 text-[clamp(2.2rem,5vw,3.2rem)]">Library</h1>
+      <p class="mt-4 max-w-[52ch] text-ink-soft">
+        The material on the internet that is actually worth your hours. Every entry has a note that
+        says how it teaches, where it is weak, and who it is for. If you want an order to take them
+        in, use the <a href="/roadmap">roadmap</a>.
+      </p>
+      <nav aria-label="Library sections" class="mt-6 flex flex-wrap gap-2">
+        {
+          jump.map((s) => (
+            <a href={`#${s.id}`} class="chip chip-ghost !px-3 !py-1.5 !text-[0.8rem]">
+              {s.title}
+            </a>
+          ))
+        }
+      </nav>
+    </header>
+
+    <section aria-label="Start here" class="mb-14">
+      <h2 class="display text-[1.5rem]">If you only take three things</h2>
+      <ul class="mt-5 grid list-none gap-4 p-0 md:grid-cols-3">
+        {
+          startHere.map((item) => (
+            <li class="card-brutal card-hover p-0">
+              <a href={item.href} rel="noopener" class="block h-full !text-ink p-5 no-underline">
+                <span class="display text-[1.05rem]">{item.label}</span>
+                <p class="mt-2 text-[0.9rem] leading-[1.6] text-ink-muted">{item.note}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section id="books" class="mb-16 scroll-mt-24" aria-labelledby="h-books">
+      <h2 id="h-books" class="part-head display text-[1.5rem]">
+        <span class="swatch bg-part1" aria-hidden="true"></span>
+        Books
+      </h2>
+      <p class="mt-2 text-[0.9375rem] text-ink-muted">
+        Ten books, in the rough order you would meet them. Each one is defined by what it refuses
+        to do, and the notes say so.
+      </p>
+      <ul class="mt-6 grid list-none gap-5 p-0 lg:grid-cols-2">
+        {
+          books.map((book) => (
+            <li class="card-brutal card-hover overflow-hidden p-0">
+              <a href={book.href} rel="noopener" class="flex h-full !text-ink no-underline">
+                <div class="relative flex w-[118px] shrink-0 items-center justify-center border-e-2 border-rule bg-wash sm:w-[132px]">
+                  <img
+                    src={book.cover}
+                    alt={`Cover of ${book.label}`}
+                    class="aspect-[3/4] w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    width="360"
+                    height="480"
+                  />
+                  {book.free && (
+                    <span class="label absolute right-1.5 top-1.5 rounded border-2 border-rule bg-part1 px-1.5 py-0.5 !text-[0.62rem] !text-[#141414]">
+                      free
+                    </span>
+                  )}
+                </div>
+                <div class="p-4">
+                  <span class="display block text-[1rem] leading-snug">{book.label}</span>
+                  <span class="label mt-1 block !text-[0.62rem]">{book.author}</span>
+                  <p class="mt-2 text-[0.84rem] leading-[1.6] text-ink-muted">{book.note}</p>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    {
+      shelves.map((shelf) => (
+        <section id={shelf.id} class="mb-14 scroll-mt-24" aria-labelledby={`h-${shelf.id}`}>
+          <h2 id={`h-${shelf.id}`} class="part-head display text-[1.5rem]">
+            <span class:list={['swatch', shelf.color]} aria-hidden="true" />
+            {shelf.title}
+          </h2>
+          <p class="mt-2 text-[0.9375rem] text-ink-muted">{shelf.blurb}</p>
+          <ul class="mt-5 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
+            {shelf.items.map((item) => (
+              <li class="card-brutal card-hover p-0">
+                <a href={item.href} rel="noopener" class="block h-full !text-ink p-4 no-underline">
+                  <span class="display text-[0.95rem] leading-snug">{item.label}</span>
+                  {item.free && (
+                    <span class="label ms-2 rounded border border-ink-faint px-1 py-0.5 !text-[0.6rem]">
+                      free
+                    </span>
+                  )}
+                  <p class="mt-1.5 text-[0.86rem] leading-[1.6] text-ink-muted">{item.note}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</Base>

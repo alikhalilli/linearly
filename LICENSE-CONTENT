@@ -1,0 +1,33 @@
+The course content of linearly — the lecture articles, figures and their
+Excalidraw sources, slide decks, exercises, and all other teaching material
+(everything under src/content/, public/slides/, public/covers/, and
+drawings/) — is licensed under the Creative Commons
+Attribution-NonCommercial-ShareAlike 4.0 International License
+(CC BY-NC-SA 4.0).
+
+In plain words:
+
+  - You may read, share, copy, translate, and adapt this material freely
+    for learning and teaching.
+  - You must give credit: "Ali Khalilli and the linearly contributors,
+    linearly (https://linearly.space)", link the license, and say if
+    you changed the material.
+  - You may NOT use this material commercially. Selling it, putting it
+    behind a paywall, bundling it into a paid course or product, or using
+    it to promote a commercial service is not permitted.
+  - If you adapt it, your version must carry this same license, so it
+    stays free for everyone.
+
+Nonprofit classroom use by schools and universities is welcome and is not
+commercial use. If you are unsure whether your use is commercial, ask by
+opening an issue on the repository.
+
+The plain-words summary above is not the license. The license is the full
+legal text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+The site's source code is licensed separately under the PolyForm
+Noncommercial License 1.0.0; see LICENSE.
+
+linearly is built as a reading companion to MIT 18.06 by Gilbert Strang.
+It contains no reproduced material from the course or its textbooks;
+everything here is original writing and original drawings.

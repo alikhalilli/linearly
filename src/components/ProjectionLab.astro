@@ -1,0 +1,175 @@
+---
+/**
+ * ProjectionLab: drag b anywhere in the plane, turn the line a with a slider,
+ * and watch the shadow p slide along the line while the error e stays
+ * perpendicular. Live readouts for x-hat, the two lengths, and the entries of
+ * the projection matrix P = aa^T / a^T a.
+ * Zero dependencies, ~2KB of JS on the page.
+ */
+---
+
+<div class="projection-lab card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Drag the target, watch the shadow</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 340 300"
+      class="lab-svg mx-auto w-full max-w-[24rem] touch-none select-none"
+      aria-label="Interactive picture: a line through a, a draggable target b, its shadow p on the line, and the perpendicular error"
+    >
+      <g stroke="var(--color-ink-faint)" stroke-width="1" opacity="0.35">
+        {Array.from({ length: 9 }, (_, i) => <line x1={12 + i * 39} y1="8" x2={12 + i * 39} y2="292" />)}
+        {Array.from({ length: 8 }, (_, i) => <line x1="8" y1={11 + i * 39} x2="332" y2={11 + i * 39} />)}
+      </g>
+      <g stroke="var(--color-ink)" stroke-width="1.2" opacity="0.55">
+        <line x1="8" y1="167" x2="332" y2="167" />
+        <line x1="168" y1="8" x2="168" y2="292" />
+      </g>
+      <line class="a-line" x1="8" y1="167" x2="332" y2="167" stroke="var(--color-ink)" stroke-width="1.2" stroke-dasharray="2 6" />
+      <line class="a-arrow" x1="168" y1="167" x2="270" y2="167" stroke="var(--color-ink)" stroke-width="2.6" stroke-linecap="round" />
+      <line class="e-line" x1="168" y1="167" x2="168" y2="167" stroke="var(--color-accent)" stroke-width="2" stroke-dasharray="6 4" />
+      <path class="ra-mark" d="" fill="none" stroke="var(--color-ink)" stroke-width="1.2" />
+      <line class="p-arrow" x1="168" y1="167" x2="168" y2="167" stroke="var(--color-stroke-green)" stroke-width="3.5" stroke-linecap="round" />
+      <line class="b-arrow" x1="168" y1="167" x2="240" y2="90" stroke="var(--color-stroke-warm)" stroke-width="2.6" stroke-linecap="round" />
+      <circle class="b-dot" cx="240" cy="90" r="7" fill="var(--color-stroke-warm)" />
+      <text class="a-label" x="276" y="163" fill="var(--color-ink)" font-size="14" font-style="italic" font-family="var(--font-serif)">a</text>
+      <text class="b-label" x="248" y="86" fill="var(--color-ink)" font-size="14" font-style="italic" font-family="var(--font-serif)">b</text>
+      <text class="p-label" x="168" y="167" fill="var(--color-ink)" font-size="14" font-style="italic" font-family="var(--font-serif)">p</text>
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Preset targets">
+        <button class="preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-b="2,1.4">Reset</button>
+        <button class="preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-along="1">b along a</button>
+        <button class="preset chip chip-ghost !px-2 !py-2 sm:!py-1 !text-[0.72rem]" data-perp="1">b perpendicular</button>
+      </div>
+      <label class="block">
+        <span class="label" style="text-transform:none">direction of a = <output class="ang-out !text-ink">0</output>&#176;</span>
+        <input class="ang-in mt-1 h-6 w-full sm:h-4  accent-[var(--color-ink)]" type="range" min="0" max="179" step="1" value="0" />
+      </label>
+      <p class="font-mono text-[0.82rem] leading-6 text-ink-soft">
+        a = (<span class="ax-out">2.00</span>, <span class="ay-out">0.00</span>)<br />
+        b = (<span class="bx-out">2.00</span>, <span class="by-out">1.40</span>)<br />
+        x&#770; = <span class="xh-out">1.00</span><br />
+        length of p = <span class="np-out">2.00</span><br />
+        length of e = <span class="ne-out">1.40</span>
+      </p>
+      <p class="font-mono text-[0.78rem] leading-5 text-ink-soft">
+        P = [<span class="p11-out">1.00</span> <span class="p12-out">0.00</span>;
+        <span class="p21-out">0.00</span> <span class="p22-out">0.00</span>]
+      </p>
+      <p class="text-[0.82rem] text-ink-muted">
+        Drag anywhere in the picture to move b. Warm is the target you chose, green is the shadow
+        the line can reach, blue is what is left over. The right-angle mark never breaks, and the
+        two diagonal entries of P always add to 1.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.projection-lab')) {
+    const U = 39; // pixels per unit
+    const OX = 168;
+    const OY = 167;
+    const svg = root.querySelector<SVGSVGElement>('.lab-svg')!;
+    const angIn = root.querySelector<HTMLInputElement>('.ang-in')!;
+    const b = { x: 2, y: 1.4 };
+    const px = (x: number) => OX + x * U;
+    const py = (y: number) => OY - y * U;
+    const set = (sel: string, a: Record<string, string>) => {
+      const el = root.querySelector(sel)!;
+      for (const k in a) el.setAttribute(k, a[k]);
+    };
+    const put = (sel: string, v: string) => (root.querySelector(sel)!.textContent = v);
+
+    function update() {
+      const th = (Number(angIn.value) * Math.PI) / 180;
+      const ax = 2 * Math.cos(th);
+      const ay = 2 * Math.sin(th);
+      const aa = ax * ax + ay * ay;
+      const xh = (ax * b.x + ay * b.y) / aa;
+      const p = { x: xh * ax, y: xh * ay };
+      const e = { x: b.x - p.x, y: b.y - p.y };
+      const L = 2.1;
+      set('.a-line', { x1: String(px(-L * ax)), y1: String(py(-L * ay)), x2: String(px(L * ax)), y2: String(py(L * ay)) });
+      set('.a-arrow', { x2: String(px(ax)), y2: String(py(ay)) });
+      set('.a-label', { x: String(px(ax) + 8), y: String(py(ay) - 6) });
+      set('.b-arrow', { x2: String(px(b.x)), y2: String(py(b.y)) });
+      set('.b-dot', { cx: String(px(b.x)), cy: String(py(b.y)) });
+      set('.b-label', { x: String(px(b.x) + 10), y: String(py(b.y) - 6) });
+      set('.p-arrow', { x2: String(px(p.x)), y2: String(py(p.y)) });
+      set('.p-label', { x: String(px(p.x) + 7), y: String(py(p.y) + 18) });
+      set('.e-line', { x1: String(px(p.x)), y1: String(py(p.y)), x2: String(px(b.x)), y2: String(py(b.y)) });
+      // right-angle square at p, built from the two unit directions in screen coordinates
+      const ne = Math.hypot(e.x, e.y);
+      const s = 11;
+      if (ne > 0.15) {
+        const ux = (ax / 2) * s;
+        const uy = (-ay / 2) * s;
+        const vx = (e.x / ne) * s;
+        const vy = (-e.y / ne) * s;
+        const sg = xh >= 0 ? 1 : -1; // keep the square on the same side as p
+        const X0 = px(p.x);
+        const Y0 = py(p.y);
+        set('.ra-mark', {
+          d: `M${X0 + ux * sg},${Y0 + uy * sg} L${X0 + ux * sg + vx},${Y0 + uy * sg + vy} L${X0 + vx},${Y0 + vy}`,
+        });
+      } else {
+        set('.ra-mark', { d: '' });
+      }
+      put('.ang-out', angIn.value);
+      put('.ax-out', ax.toFixed(2));
+      put('.ay-out', ay.toFixed(2));
+      put('.bx-out', b.x.toFixed(2));
+      put('.by-out', b.y.toFixed(2));
+      put('.xh-out', xh.toFixed(2));
+      put('.np-out', Math.hypot(p.x, p.y).toFixed(2));
+      put('.ne-out', ne.toFixed(2));
+      put('.p11-out', ((ax * ax) / aa).toFixed(2));
+      put('.p12-out', ((ax * ay) / aa).toFixed(2));
+      put('.p21-out', ((ax * ay) / aa).toFixed(2));
+      put('.p22-out', ((ay * ay) / aa).toFixed(2));
+    }
+
+    function fromEvent(ev: PointerEvent) {
+      const r = svg.getBoundingClientRect();
+      const x = ((ev.clientX - r.left) * 340) / r.width;
+      const y = ((ev.clientY - r.top) * 300) / r.height;
+      b.x = Math.max(-4, Math.min(4, Math.round(((x - OX) / U) * 10) / 10));
+      b.y = Math.max(-3.6, Math.min(3.6, Math.round(((OY - y) / U) * 10) / 10));
+      update();
+    }
+    let dragging = false;
+    svg.addEventListener('pointerdown', (ev) => {
+      dragging = true;
+      svg.setPointerCapture(ev.pointerId);
+      fromEvent(ev);
+    });
+    svg.addEventListener('pointermove', (ev) => dragging && fromEvent(ev));
+    svg.addEventListener('pointerup', () => (dragging = false));
+    svg.addEventListener('pointercancel', () => (dragging = false));
+    angIn.addEventListener('input', update);
+    for (const btn of root.querySelectorAll<HTMLButtonElement>('.preset')) {
+      btn.addEventListener('click', () => {
+        const th = (Number(angIn.value) * Math.PI) / 180;
+        if (btn.dataset.along) {
+          b.x = 2.6 * Math.cos(th);
+          b.y = 2.6 * Math.sin(th);
+        } else if (btn.dataset.perp) {
+          b.x = -2.2 * Math.sin(th);
+          b.y = 2.2 * Math.cos(th);
+        } else {
+          const [x, y] = btn.dataset.b!.split(',').map(Number);
+          b.x = x;
+          b.y = y;
+          angIn.value = '0';
+        }
+        update();
+      });
+    }
+    update();
+  }
+</script>

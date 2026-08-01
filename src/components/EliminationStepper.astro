@@ -1,0 +1,295 @@
+---
+/**
+ * EliminationStepper: press Eliminate and watch one entry become zero, with the
+ * matrix that did it shown beside the system. The state after each step is
+ * computed live as (step matrix) times (current augmented matrix), so the page
+ * is running the lecture's claim rather than replaying a recording.
+ * One preset needs a row exchange. Zero dependencies, ~2KB of JS.
+ */
+---
+
+<div class="elim-stepper card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. One step at a time, one zero at a time</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 400 210"
+      class="mx-auto w-full max-w-[24rem]"
+      aria-label="Interactive picture: the step matrix on the left, the augmented system on the right, updating as you eliminate"
+      style="font:italic 15px var(--font-serif)"
+    >
+      <g stroke="var(--color-ink)" fill="none" stroke-linecap="round">
+        <path d="M32,52 l-7,0 l0,108 l7,0" stroke-width="1.6" />
+        <path d="M140,52 l7,0 l0,108 l-7,0" stroke-width="1.6" />
+        <path d="M204,52 l-7,0 l0,108 l7,0" stroke-width="1.6" />
+        <path d="M374,52 l7,0 l0,108 l-7,0" stroke-width="1.6" />
+        <path d="M327,58 L327,154" stroke-width="1.1" stroke-dasharray="4 4" />
+      </g>
+      <rect class="emark" x="0" y="0" width="30" height="26" rx="4"
+            fill="var(--color-part4)" opacity="0" stroke="none" />
+      <rect class="mark" x="0" y="0" width="38" height="30" rx="4"
+            fill="var(--color-part4)" opacity="0" stroke="none" />
+      <g fill="var(--color-ink)" text-anchor="middle">
+        <text class="step-t" x="86" y="40" font-style="normal" font-size="11" letter-spacing="0.08em"
+          >IDENTITY</text
+        >
+        <text x="289" y="40" font-style="normal" font-size="11" letter-spacing="0.08em">A &#8739; b</text>
+        <text x="172" y="112" font-style="normal" font-size="16">&#215;</text>
+        <g class="step-cells"></g>
+        <g class="aug-cells"></g>
+      </g>
+      <text
+        class="caption"
+        x="200"
+        y="192"
+        text-anchor="middle"
+        fill="var(--color-ink-muted)"
+        font-style="normal"
+        font-size="13">Nothing has happened yet. Press Eliminate.</text
+      >
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Which system">
+        <button class="pre chip !px-2 !py-2 !text-[0.72rem]" data-p="run">Running example</button>
+        <button class="pre chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-p="swap">Needs a swap</button>
+      </div>
+      <div class="flex flex-wrap gap-1.5">
+        <button class="go chip chip-ghost !px-2 !py-2 !text-[0.72rem]">Eliminate &#8594;</button>
+        <button class="back chip chip-ghost !px-2 !py-2 !text-[0.72rem]">&#8592; Back</button>
+        <button class="reset chip chip-ghost !px-2 !py-2 !text-[0.72rem]">Reset</button>
+      </div>
+      <p class="font-mono text-[0.82rem] text-ink-soft">
+        step <span class="k-out">0</span> of <span class="n-out">3</span> &nbsp; pivots so far:&nbsp;<span class="piv-out">none</span>
+      </p>
+      <p class="text-[0.82rem] text-ink-muted">
+        Yellow on the left is the one entry doing the work. Yellow on the right is what it
+        changed. Watch the second preset stall on a zero pivot.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  type Step = {
+    m: number[][]; name: string; note: string;
+    mark: [number, number] | null; emark: [number, number] | null;
+  };
+  type Preset = { aug: number[][]; steps: Step[] };
+
+  const eye = () => [
+    [1, 0, 0],
+    [0, 1, 0],
+    [0, 0, 1],
+  ];
+  const withEntry = (i: number, j: number, v: number) => {
+    const m = eye();
+    m[i][j] = v;
+    return m;
+  };
+  const swap23 = () => [
+    [1, 0, 0],
+    [0, 0, 1],
+    [0, 1, 0],
+  ];
+
+  const PRESETS: Record<string, Preset> = {
+    run: {
+      aug: [
+        [2, 4, -2, 2],
+        [4, 9, -3, 8],
+        [-2, -3, 7, 10],
+      ],
+      steps: [
+        {
+          m: withEntry(1, 0, -2),
+          name: 'E₂₁',
+          note: 'Row 2 minus 2 times row 1. The 4 below the pivot becomes 0.',
+          mark: [1, 0],
+          emark: [1, 0],
+        },
+        {
+          m: withEntry(2, 0, 1),
+          name: 'E₃₁',
+          note: 'Row 3 plus row 1. The multiplier is −1, so the entry is +1.',
+          mark: [2, 0],
+          emark: [2, 0],
+        },
+        {
+          m: withEntry(2, 1, -1),
+          name: 'E₃₂',
+          note: 'Row 3 minus row 2. Staircase reached: pivots 2, 1, 4.',
+          mark: [2, 1],
+          emark: [2, 1],
+        },
+      ],
+    },
+    swap: {
+      aug: [
+        [1, 2, 1, 4],
+        [2, 4, 3, 9],
+        [1, 1, 2, 4],
+      ],
+      steps: [
+        {
+          m: withEntry(1, 0, -2),
+          name: 'E₂₁',
+          note: 'Row 2 minus 2 times row 1. Careful: it wiped out the 4 as well.',
+          mark: [1, 0],
+          emark: [1, 0],
+        },
+        {
+          m: withEntry(2, 0, -1),
+          name: 'E₃₁',
+          note: 'Row 3 minus row 1. Column 1 is clear, but the second pivot is 0.',
+          mark: [2, 0],
+          emark: [2, 0],
+        },
+        {
+          m: swap23(),
+          name: 'P₂₃',
+          note: 'No multiple of row 2 can fix a zero pivot. Exchange rows 2 and 3.',
+          mark: [1, 1],
+          emark: null,
+        },
+      ],
+    },
+  };
+
+  const fmt = (v: number) => {
+    const r = Math.round(v * 1000) / 1000;
+    return Object.is(r, -0) ? '0' : String(r).replace('-', '−');
+  };
+
+  for (const root of document.querySelectorAll<HTMLElement>('.elim-stepper')) {
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const stepG = root.querySelector<SVGGElement>('.step-cells')!;
+    const augG = root.querySelector<SVGGElement>('.aug-cells')!;
+    const mark = root.querySelector<SVGRectElement>('.mark')!;
+    const emark = root.querySelector<SVGRectElement>('.emark')!;
+    const caption = root.querySelector<SVGTextElement>('.caption')!;
+    const stepTitle = root.querySelector<SVGTextElement>('.step-t')!;
+
+    // Cell centres, computed once. Step matrix: 3 columns of 30 inside a 9px pad
+    // at x=32. Augmented matrix: 4 columns of 38 inside a 9px pad at x=204.
+    // Both hold 3 rows of 30 starting at y=52; +5 puts text on its baseline.
+    const sx = (j: number) => 32 + 9 + 30 * (j + 0.5);
+    const ax = (j: number) => 204 + 9 + 38 * (j + 0.5);
+    const cy = (i: number) => 52 + 9 + 30 * (i + 0.5) + 5;
+
+    const stepT: SVGTextElement[] = [];
+    const augT: SVGTextElement[] = [];
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        const t = document.createElementNS(svgNS, 'text');
+        t.setAttribute('x', String(sx(j)));
+        t.setAttribute('y', String(cy(i)));
+        stepG.appendChild(t);
+        stepT.push(t);
+      }
+      for (let j = 0; j < 4; j++) {
+        const t = document.createElementNS(svgNS, 'text');
+        t.setAttribute('x', String(ax(j)));
+        t.setAttribute('y', String(cy(i)));
+        augG.appendChild(t);
+        augT.push(t);
+      }
+    }
+
+    let key = 'run';
+    let k = 0;
+
+    function stateAt(n: number) {
+      const p = PRESETS[key];
+      let s = p.aug.map((r) => r.slice());
+      for (let t = 0; t < n; t++) {
+        const m = p.steps[t].m;
+        const out: number[][] = [];
+        for (let i = 0; i < 3; i++) {
+          const row: number[] = [];
+          for (let j = 0; j < 4; j++) {
+            let acc = 0;
+            for (let q = 0; q < 3; q++) acc += m[i][q] * s[q][j];
+            row.push(acc);
+          }
+          out.push(row);
+        }
+        s = out;
+      }
+      return s;
+    }
+
+    function render() {
+      const p = PRESETS[key];
+      const cur = stateAt(k);
+      const step = k > 0 ? p.steps[k - 1] : null;
+      const m = step ? step.m : eye();
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+          stepT[i * 3 + j].textContent = fmt(m[i][j]);
+          stepT[i * 3 + j].setAttribute('fill', 'var(--color-ink)');
+        }
+        for (let j = 0; j < 4; j++) {
+          augT[i * 4 + j].textContent = fmt(cur[i][j]);
+          augT[i * 4 + j].setAttribute('fill', 'var(--color-ink)');
+        }
+      }
+      // a digit on a yellow chip needs dark ink in both themes, as the callouts do
+      if (step && step.mark) augT[step.mark[0] * 4 + step.mark[1]].setAttribute('fill', '#141414');
+      if (step && step.emark) stepT[step.emark[0] * 3 + step.emark[1]].setAttribute('fill', '#141414');
+      stepTitle.textContent = step ? step.name : 'IDENTITY';
+      caption.textContent = step ? step.note : 'Nothing has happened yet. Press Eliminate.';
+      if (step && step.mark) {
+        mark.setAttribute('x', String(ax(step.mark[1]) - 19));
+        mark.setAttribute('y', String(cy(step.mark[0]) - 20));
+        mark.setAttribute('opacity', '1');
+      } else {
+        mark.setAttribute('opacity', '0');
+      }
+      if (step && step.emark) {
+        emark.setAttribute('x', String(sx(step.emark[1]) - 15));
+        emark.setAttribute('y', String(cy(step.emark[0]) - 18));
+        emark.setAttribute('opacity', '1');
+      } else {
+        emark.setAttribute('opacity', '0');
+      }
+      root.querySelector('.k-out')!.textContent = String(k);
+      root.querySelector('.n-out')!.textContent = String(p.steps.length);
+      const pivots: string[] = [];
+      for (let i = 0; i < Math.min(k, 3); i++) pivots.push(fmt(cur[i][i]));
+      root.querySelector('.piv-out')!.textContent = pivots.length ? pivots.join(', ') : 'none';
+    }
+
+    root.querySelector('.go')!.addEventListener('click', () => {
+      k = Math.min(k + 1, PRESETS[key].steps.length);
+      render();
+    });
+    root.querySelector('.back')!.addEventListener('click', () => {
+      k = Math.max(k - 1, 0);
+      render();
+    });
+    root.querySelector('.reset')!.addEventListener('click', () => {
+      k = 0;
+      render();
+    });
+    function markPresets() {
+      for (const btn of root.querySelectorAll<HTMLButtonElement>('.pre')) {
+        const on = btn.dataset.p === key;
+        btn.classList.toggle('chip-ghost', !on);
+        btn.setAttribute('aria-pressed', String(on));
+      }
+    }
+    for (const btn of root.querySelectorAll<HTMLButtonElement>('.pre')) {
+      btn.addEventListener('click', () => {
+        key = btn.dataset.p!;
+        k = 0;
+        markPresets();
+        render();
+      });
+    }
+    markPresets();
+    render();
+  }
+</script>

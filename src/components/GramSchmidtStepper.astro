@@ -1,0 +1,199 @@
+---
+/**
+ * GramSchmidtStepper: drag the two starting vectors, then press Step and watch
+ * Gram-Schmidt run. Step 1 shrinks a to unit length. Step 2 subtracts b's
+ * shadow on q1. Step 3 stretches what is left back to length 1. The entries of
+ * R fill in beside the picture as they are computed.
+ * Zero dependencies, ~2KB of JS on the page.
+ */
+---
+
+<div class="gs-stepper card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Drag the two vectors, then press Step</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 340 300"
+      class="gs-svg mx-auto w-full max-w-[24rem] touch-none"
+      aria-label="Interactive picture: two vectors turning into a perpendicular unit pair, one Gram-Schmidt step at a time"
+    >
+      <g stroke="var(--color-ink-faint)" stroke-width="1" opacity="0.4">
+        <line x1="14" y1="248" x2="330" y2="248"></line>
+        <line x1="62" y1="14" x2="62" y2="290"></line>
+      </g>
+      <circle cx="62" cy="248" r="58" fill="none" stroke="var(--color-ink-faint)" stroke-width="1.2" stroke-dasharray="4 4"></circle>
+
+      <line class="gs-shadow" stroke="var(--color-accent)" stroke-width="6" stroke-dasharray="7 4" stroke-linecap="round" opacity="0"></line>
+      <line class="gs-raw" stroke="var(--color-stroke-warm)" stroke-width="1.6" stroke-dasharray="3 4" opacity="0"></line>
+      <line class="gs-resid" stroke="var(--color-stroke-warm)" stroke-width="2.6" stroke-linecap="round" opacity="0"></line>
+
+      <line class="gs-a" stroke="var(--color-stroke-warm)" stroke-width="3" stroke-linecap="round"></line>
+      <line class="gs-b" stroke="var(--color-stroke-warm)" stroke-width="3" stroke-linecap="round"></line>
+      <line class="gs-q1" stroke="var(--color-stroke-green)" stroke-width="5" stroke-linecap="round" opacity="0"></line>
+      <line class="gs-q2" stroke="var(--color-stroke-green)" stroke-width="5" stroke-linecap="round" opacity="0"></line>
+
+      <circle class="gs-ah" r="6" fill="var(--color-stroke-warm)"></circle>
+      <circle class="gs-bh" r="6" fill="var(--color-stroke-warm)"></circle>
+      <text class="gs-al" fill="var(--color-ink)" font-size="15" font-style="italic" font-family="var(--font-serif)">a</text>
+      <text class="gs-bl" fill="var(--color-ink)" font-size="15" font-style="italic" font-family="var(--font-serif)">b</text>
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5">
+        <button class="gs-step chip chip-ghost !px-3 !py-2 sm:!py-1 !text-[0.72rem]" type="button">Step</button>
+        <button class="gs-reset chip chip-ghost !px-3 !py-2 sm:!py-1 !text-[0.72rem]" type="button">Reset</button>
+      </div>
+      <p class="gs-say text-[0.84rem] text-ink-soft">
+        Two independent vectors. Neither has length 1, and they are not at a right angle.
+      </p>
+      <div>
+        <p class="label">R so far</p>
+        <table class="mt-1 w-full max-w-[10rem] border-collapse text-center font-mono text-[0.8rem] text-ink-soft">
+          <tbody>
+            <tr>
+              <td class="r11 border border-ink-faint px-1 py-0.5">?</td>
+              <td class="r12 border border-ink-faint px-1 py-0.5">?</td>
+            </tr>
+            <tr>
+              <td class="border border-ink-faint px-1 py-0.5">0</td>
+              <td class="r22 border border-ink-faint px-1 py-0.5">?</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-[0.82rem] text-ink-muted">
+        Drag either head. Push the two vectors nearly parallel and watch the leftover almost
+        vanish before it is stretched back to length 1.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.gs-stepper')) {
+    const U = 58,
+      OX = 62,
+      OY = 248;
+    const svg = root.querySelector<SVGSVGElement>('.gs-svg')!;
+    const pick1 = <T extends Element>(s: string) => root.querySelector<T>(s)!;
+    const A0: [number, number] = [2.4, 0.8];
+    const B0: [number, number] = [0.9, 2.1];
+    let a: [number, number] = [...A0];
+    let b: [number, number] = [...B0];
+    let step = 0;
+    const px = (x: number) => OX + x * U;
+    const py = (y: number) => OY - y * U;
+    const fmt = (v: number) => (Math.abs(v) < 0.005 ? '0.00' : v.toFixed(2));
+
+    function seg(sel: string, x1: number, y1: number, x2: number, y2: number, show: boolean) {
+      const el = pick1<SVGLineElement>(sel);
+      el.setAttribute('x1', String(px(x1)));
+      el.setAttribute('y1', String(py(y1)));
+      el.setAttribute('x2', String(px(x2)));
+      el.setAttribute('y2', String(py(y2)));
+      el.setAttribute('opacity', show ? '1' : '0');
+    }
+    const WARM = 'var(--color-stroke-warm)';
+    const GREEN = 'var(--color-stroke-green)';
+    function head(sel: string, x: number, y: number, done: boolean) {
+      const el = pick1<SVGCircleElement>(sel);
+      el.setAttribute('cx', String(px(x)));
+      el.setAttribute('cy', String(py(y)));
+      el.setAttribute('fill', done ? GREEN : WARM);
+    }
+    function cell(sel: string, value: string, done: boolean) {
+      const el = pick1<HTMLElement>(sel);
+      el.textContent = value;
+      el.style.background = done ? 'var(--color-part4)' : '';
+      el.style.color = done ? '#141414' : '';
+    }
+    function tag(sel: string, x: number, y: number, s: string) {
+      const el = pick1<SVGTextElement>(sel);
+      el.setAttribute('x', String(px(x) + 10));
+      el.setAttribute('y', String(py(y) + 5));
+      el.textContent = s;
+    }
+
+    const SAY = [
+      'Two independent vectors. Neither has length 1, and they are not at a right angle.',
+      'Step 1. Divide a by its own length. The direction survives, the size becomes 1. That length is the first entry of R.',
+      'Step 2. Subtract the shadow of b on q1. What is left points at a right angle to q1, and the dashed copy shows it moved back to the origin.',
+      'Step 3. Stretch the leftover to length 1. Two perpendicular unit vectors, and R is finished.',
+    ];
+
+    function update() {
+      const na = Math.hypot(a[0], a[1]) || 1e-9;
+      const q1: [number, number] = [a[0] / na, a[1] / na];
+      const r12 = q1[0] * b[0] + q1[1] * b[1];
+      const p: [number, number] = [r12 * q1[0], r12 * q1[1]];
+      const res: [number, number] = [b[0] - p[0], b[1] - p[1]];
+      const nr = Math.hypot(res[0], res[1]) || 1e-9;
+      const q2: [number, number] = [res[0] / nr, res[1] / nr];
+
+      seg('.gs-a', 0, 0, a[0], a[1], step === 0);
+      seg('.gs-b', 0, 0, b[0], b[1], step <= 2);
+      seg('.gs-q1', 0, 0, q1[0], q1[1], step >= 1);
+      seg('.gs-q2', 0, 0, q2[0], q2[1], step >= 3);
+      seg('.gs-shadow', 0, 0, p[0], p[1], step === 2);
+      seg('.gs-resid', p[0], p[1], b[0], b[1], step === 2);
+      seg('.gs-raw', 0, 0, res[0], res[1], step >= 2);
+
+      head('.gs-ah', step >= 1 ? q1[0] : a[0], step >= 1 ? q1[1] : a[1], step >= 1);
+      head('.gs-bh', step >= 3 ? q2[0] : b[0], step >= 3 ? q2[1] : b[1], step >= 3);
+      tag('.gs-al', step >= 1 ? q1[0] : a[0], step >= 1 ? q1[1] : a[1], step >= 1 ? 'q₁' : 'a');
+      tag('.gs-bl', step >= 3 ? q2[0] : b[0], step >= 3 ? q2[1] : b[1], step >= 3 ? 'q₂' : 'b');
+
+      cell('.r11', step >= 1 ? fmt(na) : '?', step >= 1);
+      cell('.r12', step >= 2 ? fmt(r12) : '?', step >= 2);
+      cell('.r22', step >= 3 ? fmt(nr) : '?', step >= 3);
+      pick1('.gs-say').textContent = SAY[step];
+    }
+
+    function at(e: PointerEvent): [number, number] {
+      const r = svg.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 340;
+      const y = ((e.clientY - r.top) / r.height) * 300;
+      return [(x - OX) / U, (OY - y) / U];
+    }
+
+    let dragging: 'a' | 'b' | null = null;
+    svg.addEventListener('pointerdown', (e) => {
+      const v = at(e);
+      const da = Math.hypot(v[0] - a[0], v[1] - a[1]);
+      const db = Math.hypot(v[0] - b[0], v[1] - b[1]);
+      if (Math.min(da, db) > 0.8) return;
+      dragging = da < db ? 'a' : 'b';
+      svg.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+    svg.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const v = at(e);
+      v[0] = Math.max(-0.6, Math.min(4.4, v[0]));
+      v[1] = Math.max(-0.5, Math.min(3.8, v[1]));
+      if (Math.hypot(v[0], v[1]) < 0.3) return;
+      if (dragging === 'a') a = v;
+      else b = v;
+      update();
+    });
+    const stop = () => {
+      dragging = null;
+    };
+    svg.addEventListener('pointerup', stop);
+    svg.addEventListener('pointercancel', stop);
+
+    pick1<HTMLButtonElement>('.gs-step').addEventListener('click', () => {
+      step = (step + 1) % 4;
+      update();
+    });
+    pick1<HTMLButtonElement>('.gs-reset').addEventListener('click', () => {
+      a = [...A0];
+      b = [...B0];
+      step = 0;
+      update();
+    });
+    update();
+  }
+</script>

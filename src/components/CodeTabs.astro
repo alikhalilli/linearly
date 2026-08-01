@@ -1,0 +1,109 @@
+---
+/**
+ * CodeTabs — one concept, four frameworks.
+ * Usage in MDX:
+ *   <CodeTabs>
+ *     <Fragment slot="numpy">```python …```</Fragment>
+ *     <Fragment slot="pytorch">```python …```</Fragment>
+ *   </CodeTabs>
+ * Any subset of slots works. The chosen tab is remembered site-wide.
+ * One Copy button sits at the right edge of the tab row and copies the
+ * active tab's code.
+ */
+const FRAMEWORKS = [
+  { slot: 'numpy', label: 'NumPy' },
+  { slot: 'pytorch', label: 'PyTorch' },
+  { slot: 'jax', label: 'JAX' },
+  { slot: 'tensorflow', label: 'TensorFlow' },
+] as const;
+
+const present = FRAMEWORKS.filter((f) => Astro.slots.has(f.slot));
+---
+
+<div class="code-tabs card-brutal my-6 overflow-hidden">
+  <div class="flex items-center justify-between gap-2 border-b-2 border-rule bg-wash pe-2 ps-2 pt-1">
+    <div class="flex gap-1 overflow-x-auto" role="tablist" aria-label="Framework">
+      {
+        present.map((f, i) => (
+          <button
+            role="tab"
+            data-framework={f.slot}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+            class="label cursor-pointer border-0 border-b-2 border-transparent bg-transparent px-3 py-2.5 whitespace-nowrap !tracking-[0.1em] aria-selected:border-accent aria-selected:!text-ink hover:!text-ink sm:py-2"
+          >
+            {f.label}
+          </button>
+        ))
+      }
+    </div>
+    <button class="code-copy tabs-copy mb-1 min-h-10 shrink-0 sm:min-h-0" type="button" aria-label="Copy the active tab's code">
+      Copy
+    </button>
+  </div>
+  {
+    present.map((f, i) => (
+      <div role="tabpanel" data-framework={f.slot} hidden={i !== 0}>
+        <slot name={f.slot} />
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  const KEY = 'linearly-framework';
+
+  function activate(group: HTMLElement, framework: string, focus = false) {
+    const tabs = group.querySelectorAll<HTMLButtonElement>('[role="tab"]');
+    const panels = group.querySelectorAll<HTMLElement>('[role="tabpanel"]');
+    let found = false;
+    tabs.forEach((tab) => {
+      const active = tab.dataset.framework === framework;
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      if (active) {
+        found = true;
+        if (focus) tab.focus();
+      }
+    });
+    if (!found) return;
+    panels.forEach((p) => (p.hidden = p.dataset.framework !== framework));
+  }
+
+  document.querySelectorAll<HTMLElement>('.code-tabs').forEach((group) => {
+    const saved = localStorage.getItem(KEY);
+    if (saved) activate(group, saved);
+
+    group.querySelectorAll<HTMLButtonElement>('[role="tab"]').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const framework = tab.dataset.framework!;
+        localStorage.setItem(KEY, framework);
+        document
+          .querySelectorAll<HTMLElement>('.code-tabs')
+          .forEach((g) => activate(g, framework, g === group));
+      });
+    });
+
+    group.querySelector('[role="tablist"]')!.addEventListener('keydown', (e) => {
+      const event = e as KeyboardEvent;
+      if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+      const tabs = [...group.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+      const idx = tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
+      const next = tabs[(idx + (event.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      next.click();
+    });
+
+    const copy = group.querySelector<HTMLButtonElement>('.tabs-copy');
+    copy?.addEventListener('click', async () => {
+      const pre = group.querySelector<HTMLElement>('[role="tabpanel"]:not([hidden]) pre');
+      if (!pre) return;
+      await navigator.clipboard.writeText((pre.textContent ?? '').trimEnd());
+      copy.textContent = 'Copied';
+      copy.classList.add('done');
+      setTimeout(() => {
+        copy.textContent = 'Copy';
+        copy.classList.remove('done');
+      }, 1600);
+    });
+  });
+</script>

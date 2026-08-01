@@ -1,0 +1,155 @@
+---
+/**
+ * MatrixPlayground: four sliders set the entries of a 2x2 matrix A, and the
+ * picture shows what A does to the plane. The faint grid is where the grid
+ * lines land, the shaded patch is where the unit square lands, and the two
+ * thick arrows are the landing spots of the basis vectors: e1 in orange,
+ * e2 in green. Presets jump to the classic machines.
+ * Zero dependencies, ~2KB of JS on the page.
+ */
+---
+
+<div class="matrix-playground card-brutal my-8 overflow-hidden">
+  <div class="border-b-2 border-rule bg-wash px-4 py-2">
+    <span class="label !text-ink">Try it. Four numbers move the whole plane</span>
+  </div>
+
+  <div class="grid gap-4 p-4 sm:grid-cols-[1fr_15rem]">
+    <svg
+      viewBox="0 0 340 300"
+      class="mx-auto w-full max-w-[24rem]"
+      aria-label="Interactive picture: the grid, the unit square, and the basis arrows move as the matrix entries change"
+    >
+      <g class="grid-img" stroke="var(--color-ink-faint)" stroke-width="1" opacity="0.45"></g>
+      <g stroke="var(--color-ink)" stroke-width="1.4" opacity="0.6">
+        <line x1="10" y1="150" x2="330" y2="150" />
+        <line x1="170" y1="10" x2="170" y2="290" />
+      </g>
+      <polygon
+        class="sq-img"
+        points="170,150 200,150 200,120 170,120"
+        fill="var(--color-part4)"
+        fill-opacity="0.4"
+        stroke="none"
+      />
+      <line class="e1-arrow" x1="170" y1="150" x2="200" y2="150" stroke="var(--color-stroke-warm)" stroke-width="3.2" stroke-linecap="round" />
+      <line class="e2-arrow" x1="170" y1="150" x2="170" y2="120" stroke="var(--color-stroke-green)" stroke-width="3.2" stroke-linecap="round" />
+      <circle class="e1-dot" cx="200" cy="150" r="4.5" fill="var(--color-stroke-warm)" />
+      <circle class="e2-dot" cx="170" cy="120" r="4.5" fill="var(--color-stroke-green)" />
+      <text class="e1-label" x="237" y="168" fill="var(--color-ink)" stroke="var(--color-card)" stroke-width="3.5" paint-order="stroke" font-size="14" font-style="italic" font-family="var(--font-serif)">(a, c)</text>
+      <text class="e2-label" x="193" y="112" text-anchor="end" fill="var(--color-ink)" stroke="var(--color-card)" stroke-width="3.5" paint-order="stroke" font-size="14" font-style="italic" font-family="var(--font-serif)">(b, d)</text>
+    </svg>
+
+    <div class="flex flex-col justify-center gap-3">
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Preset matrices">
+        <button class="preset chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-m="1,0,0,1">Identity</button>
+        <button class="preset chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-m="0,-1,1,0">Rotate 90°</button>
+        <button class="preset chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-m="1,1,0,1">Shear</button>
+        <button class="preset chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-m="-1,0,0,1">Reflect</button>
+        <button class="preset chip chip-ghost !px-2 !py-2 !text-[0.72rem]" data-m="1,0.5,2,1">Collapse</button>
+      </div>
+      <label class="block">
+        <span class="label" style="text-transform:none">a = <output class="a-out !text-ink">2.0</output></span>
+        <input class="a-in mt-1 h-10 w-full accent-[var(--color-stroke-warm)]" type="range" min="-2" max="2" step="0.1" value="2" />
+      </label>
+      <label class="block">
+        <span class="label" style="text-transform:none">b = <output class="b-out !text-ink">1.0</output></span>
+        <input class="b-in mt-1 h-10 w-full accent-[var(--color-stroke-green)]" type="range" min="-2" max="2" step="0.1" value="1" />
+      </label>
+      <label class="block">
+        <span class="label" style="text-transform:none">c = <output class="c-out !text-ink">0.0</output></span>
+        <input class="c-in mt-1 h-10 w-full accent-[var(--color-stroke-warm)]" type="range" min="-2" max="2" step="0.1" value="0" />
+      </label>
+      <label class="block">
+        <span class="label" style="text-transform:none">d = <output class="d-out !text-ink">1.0</output></span>
+        <input class="d-in mt-1 h-10 w-full accent-[var(--color-stroke-green)]" type="range" min="-2" max="2" step="0.1" value="1" />
+      </label>
+      <p class="font-mono text-[0.82rem] text-ink-soft">
+        det A = ad − bc = <span class="det-out">2.0</span>
+      </p>
+      <p class="text-[0.82rem] text-ink-muted">
+        The orange arrow is where e₁ lands, the green arrow is where e₂ lands, and the yellow patch
+        is where the unit square lands. Press Collapse and watch the plane flatten to a line: that
+        is a singular matrix.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('.matrix-playground')) {
+    const U = 30; // pixels per unit
+    const OX = 170;
+    const OY = 150;
+    const K = 6; // grid lines each side, drawn long enough to leave the frame
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const gridG = root.querySelector<SVGGElement>('.grid-img')!;
+    const lines: SVGLineElement[] = [];
+    for (let i = 0; i < (2 * K + 1) * 2; i++) {
+      const l = document.createElementNS(svgNS, 'line');
+      gridG.appendChild(l);
+      lines.push(l);
+    }
+
+    const ins = ['a', 'b', 'c', 'd'].map(
+      (n) => root.querySelector<HTMLInputElement>(`.${n}-in`)!,
+    );
+    const px = (x: number) => OX + x * U;
+    const py = (y: number) => OY - y * U;
+
+    function update() {
+      const [a, b, c, d] = ins.map((i) => Number(i.value));
+      // Images of the grid lines x = k and y = k. A straight line stays straight,
+      // so two mapped endpoints are enough.
+      let li = 0;
+      for (let k = -K; k <= K; k++) {
+        let l = lines[li++];
+        l.setAttribute('x1', String(px(a * k + b * -K)));
+        l.setAttribute('y1', String(py(c * k + d * -K)));
+        l.setAttribute('x2', String(px(a * k + b * K)));
+        l.setAttribute('y2', String(py(c * k + d * K)));
+        l = lines[li++];
+        l.setAttribute('x1', String(px(a * -K + b * k)));
+        l.setAttribute('y1', String(py(c * -K + d * k)));
+        l.setAttribute('x2', String(px(a * K + b * k)));
+        l.setAttribute('y2', String(py(c * K + d * k)));
+      }
+      const corners = [
+        [0, 0],
+        [a, c],
+        [a + b, c + d],
+        [b, d],
+      ];
+      root
+        .querySelector('.sq-img')!
+        .setAttribute('points', corners.map(([x, y]) => `${px(x)},${py(y)}`).join(' '));
+      const e1 = root.querySelector<SVGLineElement>('.e1-arrow')!;
+      const e2 = root.querySelector<SVGLineElement>('.e2-arrow')!;
+      e1.setAttribute('x2', String(px(a)));
+      e1.setAttribute('y2', String(py(c)));
+      e2.setAttribute('x2', String(px(b)));
+      e2.setAttribute('y2', String(py(d)));
+      root.querySelector('.e1-dot')!.setAttribute('cx', String(px(a)));
+      root.querySelector('.e1-dot')!.setAttribute('cy', String(py(c)));
+      root.querySelector('.e2-dot')!.setAttribute('cx', String(px(b)));
+      root.querySelector('.e2-dot')!.setAttribute('cy', String(py(d)));
+      root.querySelector('.e1-label')!.setAttribute('x', String(px(a) + 7));
+      root.querySelector('.e1-label')!.setAttribute('y', String(py(c) + 18));
+      root.querySelector('.e2-label')!.setAttribute('x', String(px(b) - 7));
+      root.querySelector('.e2-label')!.setAttribute('y', String(py(d) - 8));
+      ['a', 'b', 'c', 'd'].forEach((n, i) => {
+        root.querySelector(`.${n}-out`)!.textContent = Number(ins[i].value).toFixed(1);
+      });
+      root.querySelector('.det-out')!.textContent = (a * d - b * c).toFixed(1);
+    }
+
+    for (const i of ins) i.addEventListener('input', update);
+    for (const btn of root.querySelectorAll<HTMLButtonElement>('.preset')) {
+      btn.addEventListener('click', () => {
+        btn.dataset.m!.split(',').forEach((v, i) => (ins[i].value = v));
+        update();
+      });
+    }
+    update();
+  }
+</script>

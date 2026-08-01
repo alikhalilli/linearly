@@ -1,0 +1,217 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SlideViewer from '../../components/SlideViewer.astro';
+import CodeTabs from '../../components/CodeTabs.astro';
+import Callout from '../../components/Callout.astro';
+import Figure from '../../components/Figure.astro';
+import SpanPlayground from '../../components/SpanPlayground.astro';
+import MatrixPlayground from '../../components/MatrixPlayground.astro';
+import CodeFigure from '../../components/CodeFigure.astro';
+import LectureToc from '../../components/LectureToc.astro';
+import { PARTS, ROMAN, PART_COLORS, numberLabel as numLabel } from '../../lib/course';
+
+export async function getStaticPaths() {
+  const lectures = await getCollection('lectures', ({ data }) => data.status !== 'planned');
+  return lectures.map((lecture) => ({
+    params: { slug: lecture.id },
+    props: { lecture },
+  }));
+}
+
+const { lecture } = Astro.props;
+const { Content, headings } = await render(lecture);
+const { number, title, description, mit1806, strang, deck, slides } = lecture.data;
+
+const all = (await getCollection('lectures', ({ data }) => data.status !== 'planned')).sort(
+  (a, b) => a.data.number - b.data.number,
+);
+const idx = all.findIndex((l) => l.id === lecture.id);
+const prev = idx > 0 ? all[idx - 1] : undefined;
+const next = idx < all.length - 1 ? all[idx + 1] : undefined;
+const numberLabel = numLabel(number);
+
+// The course contents for the sidebar and drawer: every lecture, planned ones
+// included (muted, unlinked), with this lecture's sections nested under it.
+const everything = (await getCollection('lectures')).sort((a, b) => a.data.number - b.data.number);
+const tocGroups = PARTS.map((part, i) => ({
+  part,
+  roman: ROMAN[i],
+  swatch: PART_COLORS[i],
+  items: everything
+    .filter((l) => l.data.part === part)
+    .map((l) => ({
+      id: l.id,
+      number: l.data.number,
+      title: l.data.title,
+      planned: l.data.status === 'planned',
+    })),
+})).filter((g) => g.items.length > 0);
+// Rendered heading text triples KaTeX content (HTML + MathML + source), so
+// the display text comes from the raw source lines, math stripped to its
+// plain reading; the slugs still come from the pipeline so anchors match.
+const rawH2 = [...lecture.body.matchAll(/^## (.+)$/gm)].map((m) =>
+  m[1]
+    .replace(/\$([^$]+)\$/g, (_all: string, tex: string) =>
+      tex
+        .replace(/\\[a-zA-Z]+/g, '')
+        .replace(/[{}]/g, '')
+        .trim(),
+    )
+    .trim(),
+);
+const h2s = headings.filter((h) => h.depth === 2);
+const tocHeadings = h2s.map((h, i) => ({
+  slug: h.slug,
+  text: rawH2.length === h2s.length ? rawH2[i] : h.text,
+}));
+
+const meta = [
+  slides ? `${slides} slides` : null,
+  mit1806 ?? null,
+  strang ? `Strang ${strang}` : null,
+].filter(Boolean);
+
+const lessonSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LearningResource',
+  name: `Lecture ${numberLabel}: ${title}`,
+  description,
+  url: new URL(`/lectures/${lecture.id}`, Astro.site).href,
+  learningResourceType: 'Lecture',
+  educationalUse: 'self-study',
+  isAccessibleForFree: true,
+  inLanguage: 'en',
+  license: 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
+  position: number,
+  isPartOf: {
+    '@type': 'Course',
+    name: 'linearly: the math of AI, drawn and coded',
+    url: 'https://linearly.space',
+  },
+};
+---
+
+<Base title={`Lecture ${numberLabel}: ${title} | linearly`} description={description}>
+  <script is:inline type="application/ld+json" slot="head" set:html={JSON.stringify(lessonSchema)} />
+  <div class="xl:grid xl:grid-cols-[290px_minmax(0,1fr)]">
+  <aside class="hidden border-r-2 border-rule bg-wash xl:block">
+    <div class="sticky top-0 max-h-screen overflow-y-auto px-6 pt-10 pb-16">
+      <LectureToc groups={tocGroups} currentId={lecture.id} headings={tocHeadings} />
+    </div>
+  </aside>
+  <div class="min-w-0">
+  <article data-pagefind-body>
+    <header class="container-prose pt-20 pb-8">
+      <p class="label">Lecture {numberLabel}</p>
+      <h1 class="display mt-3 text-[2.6rem]">{title}</h1>
+      <p class="mt-4 text-ink-soft">{description}</p>
+      {meta.length > 0 && <p class="label mt-6">{meta.join('  /  ')}</p>}
+      <div class="mt-8 border-b border-rule-strong"></div>
+    </header>
+
+    <div class="container-prose">
+      {deck && slides && <SlideViewer deck={deck} count={slides} title={`Lecture ${numberLabel} slides`} />}
+      <div class="prose">
+        <Content components={{ SlideViewer, CodeTabs, Callout, Figure, SpanPlayground, MatrixPlayground, pre: CodeFigure }} />
+      </div>
+    </div>
+
+    <nav
+      class="container-prose mt-16 grid gap-4 sm:grid-cols-2"
+      aria-label="Lecture navigation"
+    >
+      {
+        prev ? (
+          <a href={`/lectures/${prev.id}`} class="card-brutal card-hover block !text-ink p-4 no-underline">
+            <span class="label">Previous</span>
+            <span class="display mt-1 block text-[0.98rem]">← {prev.data.title}</span>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        next && (
+          <a href={`/lectures/${next.id}`} class="card-brutal card-hover block !text-ink p-4 text-right no-underline sm:col-start-2">
+            <span class="label">Next</span>
+            <span class="display mt-1 block text-[0.98rem]">{next.data.title} →</span>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+  </div>
+  </div>
+
+  <div class="xl:hidden">
+    <button
+      id="toc-open"
+      class="icon-btn fixed right-5 bottom-5 z-40 !h-11 !w-11 bg-paper !text-ink"
+      aria-label="Open the course contents"
+      aria-expanded="false"
+      aria-controls="toc-drawer"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 6h16M4 12h16M4 18h10"></path>
+      </svg>
+    </button>
+  </div>
+  <div
+    id="toc-backdrop"
+    class="fixed inset-0 z-40 hidden xl:hidden"
+    style="background: rgba(20, 20, 20, 0.45)"
+  >
+  </div>
+  <div
+    id="toc-drawer"
+    class="fixed inset-y-0 left-0 z-50 w-[310px] max-w-[86vw] -translate-x-full overflow-y-auto border-r-2 border-rule bg-paper px-6 pt-8 pb-16 transition-transform duration-200 xl:hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Course contents"
+    data-pagefind-ignore
+  >
+    <LectureToc groups={tocGroups} currentId={lecture.id} headings={tocHeadings} />
+  </div>
+
+  <script>
+    // Scrollspy: the section whose heading was most recently scrolled past
+    // is marked active in both copies of the contents (sidebar and drawer).
+    const links = [...document.querySelectorAll<HTMLAnchorElement>('.toc-link')];
+    const heads = [...document.querySelectorAll<HTMLElement>('article .prose h2[id]')];
+    let current = '';
+    const update = () => {
+      let id = '';
+      for (const h of heads) {
+        if (h.getBoundingClientRect().top <= 140) id = h.id;
+        else break;
+      }
+      if (id === current) return;
+      current = id;
+      for (const l of links) l.classList.toggle('active', l.dataset.target === id);
+    };
+    document.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    update();
+
+    // The mobile drawer.
+    const openBtn = document.getElementById('toc-open')!;
+    const drawer = document.getElementById('toc-drawer')!;
+    const backdrop = document.getElementById('toc-backdrop')!;
+    const setOpen = (open: boolean) => {
+      drawer.classList.toggle('-translate-x-full', !open);
+      backdrop.classList.toggle('hidden', !open);
+      openBtn.setAttribute('aria-expanded', String(open));
+      document.documentElement.classList.toggle('overflow-hidden', open);
+    };
+    openBtn.addEventListener('click', () =>
+      setOpen(openBtn.getAttribute('aria-expanded') !== 'true'),
+    );
+    backdrop.addEventListener('click', () => setOpen(false));
+    drawer.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) setOpen(false);
+    });
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  </script>
+</Base>

@@ -1,0 +1,529 @@
+---
+import Base from '../layouts/Base.astro';
+
+type Entry = { href: string; label: string; note: string; free?: boolean };
+
+const facts = [
+  { text: 'Nearly all of it free', color: 'bg-part1' },
+  { text: 'About 150 hours', color: 'bg-part2' },
+  { text: 'No calculus needed', color: 'bg-part3' },
+  { text: 'Checkpoints at every stage', color: 'bg-part4' },
+];
+
+const method = [
+  {
+    n: '1',
+    title: 'Survey',
+    text: 'Flip through the slides once, fast. Two minutes. You are not learning yet. You are building a map so nothing later surprises you.',
+  },
+  {
+    n: '2',
+    title: 'Read, and redraw',
+    text: "Read slowly. At each diagram, close it and draw it from memory, labels too. If you can't, read that part again. The drawing is the test.",
+  },
+  {
+    n: '3',
+    title: 'Run and predict',
+    text: 'Before you run each code block, say what it will print. Then change the numbers until something breaks, and look at what broke.',
+  },
+  {
+    n: '4',
+    title: 'Solve',
+    text: 'Do the exercises. Then a few MIT problems. Watch Strang only after you have solved. It lands better when you struggled first.',
+  },
+  {
+    n: '5',
+    title: 'Close the loop',
+    text: 'Explain the idea in five sentences to a friend. Tomorrow, derive the formula again. Next week, one more problem. That is what makes it permanent.',
+  },
+];
+
+const week = [
+  ['Mon', 'Survey and read one lecture. Redraw its figures.'],
+  ['Tue', 'Run its code. Do its exercises.'],
+  ['Wed', 'Three problems from the matching MIT set. Then watch Strang.'],
+  ['Thu', 'Survey and read the next lecture.'],
+  ['Fri', 'Its code and exercises.'],
+  ['Sat', "Explain the week to a friend or a notebook. Re-derive the week's key formulas."],
+  ['Sun', 'Rest. Or one old exam question, if you feel like it.'],
+];
+
+const stages: {
+  n: string;
+  color: string;
+  time: string;
+  title: string;
+  body: string;
+  entries: Entry[];
+  checkpoint: string;
+}[] = [
+  {
+    n: '0',
+    color: 'bg-part1',
+    time: 'Before you start',
+    title: 'Prerequisites',
+    body: 'You need school algebra, the idea of a function, and enough Python to run a script. That is all. You do not need calculus. When a lecture wants an idea from calculus, it builds that idea on the spot.',
+    entries: [
+      {
+        href: 'https://www.khanacademy.org/math/algebra',
+        label: 'Khan Academy, Algebra',
+        note: 'If solving 2x + 3 = 7 feels rusty, spend a weekend here first. Nothing else is missing.',
+        free: true,
+      },
+    ],
+    checkpoint: 'You can plot the point (2, 3) and solve 2x + 3 = 7 without thinking.',
+  },
+  {
+    n: '1',
+    color: 'bg-part2',
+    time: 'Week 1. About 4 hours',
+    title: 'Get the pictures',
+    body: 'Watch Essence of Linear Algebra from start to finish before you study anything. No notes. No pausing to memorize. Let the animations put the core pictures in your head: vectors are arrows, matrices move space, determinants scale volume. Everything in this course hangs on those pictures.',
+    entries: [
+      {
+        href: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab',
+        label: '3Blue1Brown, Essence of Linear Algebra',
+        note: 'Sixteen short chapters. The most useful four hours in math education.',
+        free: true,
+      },
+    ],
+    checkpoint: 'You can explain to a friend, waving your hands, what a matrix does to space.',
+  },
+  {
+    n: '2',
+    color: 'bg-part3',
+    time: 'Months 1 to 3. About 80 hours',
+    title: 'The course',
+    body: 'Work through the lectures here in order, with the five-step method. One lecture every two or three days is a good pace. Speed is not the goal. Each lecture page names its matching Strang video and book sections, so pair them as you go.',
+    entries: [
+      { href: '/lectures', label: 'The lectures', note: 'You are here. Begin at Lecture 0.', free: true },
+      {
+        href: 'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/',
+        label: 'MIT 18.06, Gilbert Strang',
+        note: 'The classic lectures. Watch after solving, not before.',
+        free: true,
+      },
+      {
+        href: 'https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/',
+        label: 'MIT 18.06SC',
+        note: 'The same course rebuilt for self-study. Recitation videos and worked exams for every unit.',
+        free: true,
+      },
+      {
+        href: 'https://math.mit.edu/~gs/linearalgebra/',
+        label: 'Strang, Introduction to Linear Algebra',
+        note: 'The book both courses follow. Some sections are free on its site.',
+      },
+      {
+        href: 'https://github.com/mitmath/1806',
+        label: '18.06 on GitHub',
+        note: 'The live MIT semester. Notes, problem sets, Julia notebooks.',
+        free: true,
+      },
+    ],
+    checkpoint:
+      'You can find a null space by hand, draw the four fundamental subspaces on a blank page, and say what least squares minimizes.',
+  },
+  {
+    n: '3',
+    color: 'bg-part4',
+    time: 'Every week, from week 2. About 30 hours',
+    title: 'Practice',
+    body: 'Reading feels like understanding. Solving is understanding. Do problems from the first week on, and treat every wrong answer as the system working. At the end of each part of the course, sit a real MIT exam with the clock running and the book closed.',
+    entries: [
+      {
+        href: 'https://web.mit.edu/18.06/www/old.shtml',
+        label: 'MIT 18.06 exam archive',
+        note: 'Real exams from 1997 to 2015, with solutions.',
+        free: true,
+      },
+      {
+        href: 'https://github.com/rougier/numpy-100',
+        label: '100 NumPy exercises',
+        note: 'Array drills with solutions, easy to devious.',
+        free: true,
+      },
+      {
+        href: 'https://www.deep-ml.com/',
+        label: 'Deep-ML',
+        note: 'Coding problems for ML math, graded online.',
+        free: true,
+      },
+    ],
+    checkpoint: 'You pass an archived Exam 1 with the book closed and the clock running.',
+  },
+  {
+    n: '4',
+    color: 'bg-part5',
+    time: 'Months 3 to 5. About 40 hours',
+    title: 'The bridge to AI',
+    body: "This is where the course pays off: the SVD, low-rank structure, PCA, and the linear algebra inside neural networks. Read Strang's data book next to Part VI of this course. Most of all, build things.",
+    entries: [
+      {
+        href: 'https://math.mit.edu/~gs/learningfromdata/',
+        label: 'Strang, Linear Algebra and Learning from Data',
+        note: 'The bridge book. SVD, optimization, neural networks.',
+      },
+      {
+        href: 'https://ocw.mit.edu/courses/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/',
+        label: 'MIT 18.065, Matrix Methods',
+        note: "Strang's follow-up course for the machine learning era, fully filmed.",
+        free: true,
+      },
+      {
+        href: 'https://mml-book.github.io/',
+        label: 'Mathematics for Machine Learning',
+        note: 'Free book. Connects linear algebra to regression, PCA, and SVMs.',
+        free: true,
+      },
+      {
+        href: 'https://explained.ai/matrix-calculus/',
+        label: 'The Matrix Calculus You Need for Deep Learning',
+        note: 'Every derivative used in deep learning, derived slowly.',
+        free: true,
+      },
+      {
+        href: 'https://github.com/fastai/numerical-linear-algebra',
+        label: 'fast.ai, Computational Linear Algebra',
+        note: 'The same decompositions at real scale, in Python.',
+        free: true,
+      },
+    ],
+    checkpoint: 'You can write PCA in plain NumPy and defend every line.',
+  },
+  {
+    n: '5',
+    color: 'bg-part6',
+    time: 'Whenever you want more',
+    title: 'The rigorous second pass',
+    body: 'Linear algebra rewards a second pass at a higher level. Axler rebuilds the subject through proofs. Trefethen and Bau rebuild it through computation. Pick the one that matches where you are going, or take both.',
+    entries: [
+      {
+        href: 'https://linear.axler.net/',
+        label: 'Axler, Linear Algebra Done Right',
+        note: 'The standard rigorous text. Free from the author, with his lecture videos on the same page.',
+        free: true,
+      },
+      {
+        href: 'https://www.youtube.com/@ProfWonMath/courses',
+        label: 'Prof Won Math',
+        note: 'Full university courses on abstract linear algebra, following Axler.',
+        free: true,
+      },
+      {
+        href: 'https://people.maths.ox.ac.uk/trefethen/text.html',
+        label: 'Trefethen and Bau, Numerical Linear Algebra',
+        note: 'How the algorithms behave in floating point. The standard numerical text.',
+      },
+      {
+        href: 'https://web.stanford.edu/~boyd/vmls/',
+        label: 'Boyd and Vandenberghe, Applied Linear Algebra',
+        note: 'A gentler formal book with very good exercises. Free, with Julia and Python companions.',
+        free: true,
+      },
+    ],
+    checkpoint: 'You read a proof of the spectral theorem for fun.',
+  },
+];
+
+const stuck = [
+  {
+    move: 'Draw the 2 by 2 case by hand.',
+    why: 'Most confusion cannot survive a small example. If it does, you found the real question.',
+  },
+  {
+    move: 'Check it in NumPy.',
+    why: 'Ten seconds, no judgment. The computer settles arguments you are having with yourself.',
+  },
+  {
+    move: 'Watch the matching recitation on 18.06SC.',
+    why: 'A different teacher, working a full problem. That is what recitations are for.',
+  },
+  {
+    move: 'Read the same idea in Interactive Linear Algebra.',
+    why: 'A second telling with live figures. Often the second telling is the one that lands.',
+    href: 'https://textbooks.math.gatech.edu/ila/',
+  },
+  {
+    move: 'Ask on Math Stack Exchange.',
+    why: 'Show what you tried. Half the time you find the answer while writing the question.',
+    href: 'https://math.stackexchange.com/',
+  },
+];
+
+const traps = [
+  'Watching without solving. It feels like progress. It is not.',
+  'Memorizing steps instead of pictures. Steps decay in a week. Pictures last for years.',
+  'Skipping exercises because the reading made sense. Understanding you cannot use is not understanding yet.',
+  'Sprinting. Two lectures a day for a week, then nothing for a month. One hour a day beats both.',
+];
+
+const scratch: Entry[] = [
+  {
+    href: 'https://www.deep-ml.com/',
+    label: 'Deep-ML',
+    note: 'Graded Python problems for ML math: matmul, power iteration, PCA. Start here.',
+    free: true,
+  },
+  {
+    href: 'https://www.tensortonic.com/',
+    label: 'TensorTonic',
+    note: 'A thousand algorithms from scratch, with the math and papers behind each. Runs in the browser.',
+    free: true,
+  },
+  {
+    href: 'https://github.com/srush/Tensor-Puzzles',
+    label: 'Tensor Puzzles',
+    note: 'Rebuild 21 tensor operations from one primitive. Pure array thinking.',
+    free: true,
+  },
+  {
+    href: 'https://github.com/karpathy/micrograd',
+    label: 'micrograd',
+    note: 'Backpropagation in about a hundred lines. Then write your own without looking.',
+    free: true,
+  },
+  {
+    href: 'https://github.com/srush/Autodiff-Puzzles',
+    label: 'Autodiff Puzzles',
+    note: 'Write the derivative of each operation yourself. The best prep for backpropagation.',
+    free: true,
+  },
+  {
+    href: 'https://minitorch.github.io/',
+    label: 'MiniTorch',
+    note: 'Build a small PyTorch clone as a structured course: tensors, broadcasting, autograd.',
+    free: true,
+  },
+  {
+    href: 'https://github.com/srush/GPU-Puzzles',
+    label: 'GPU Puzzles',
+    note: 'One level down. Write the GPU kernels for your matrix operations yourself.',
+    free: true,
+  },
+  {
+    href: 'https://leetgpu.com/',
+    label: 'LeetGPU',
+    note: 'CUDA challenges judged in the browser, on real GPUs. No setup, no cloud bill.',
+    free: true,
+  },
+  {
+    href: 'https://github.com/srush/Triton-Puzzles',
+    label: 'Triton Puzzles',
+    note: 'The same puzzle style for Triton, the language most new ML kernels are written in.',
+    free: true,
+  },
+];
+---
+
+<Base
+  title="Roadmap. How to learn linear algebra for AI"
+  description="A study method, a staged path from 3Blue1Brown through MIT 18.06 to the SVD, honest time estimates, checkpoints, and what to do when you are stuck. Nearly everything on it is free."
+>
+  <div class="container-wide">
+    <header class="pt-16 pb-10">
+      <p class="label">The plan</p>
+      <h1 class="display mt-3 text-[clamp(2.2rem,5vw,3.2rem)]">Roadmap</h1>
+      <p class="mt-4 max-w-[54ch] text-ink-soft">
+        This page is a sequence, not a pile of links. Each stage says what to do, how long it
+        takes, and how you will know you are done. If you only remember one thing: solving beats
+        watching, every single week.
+      </p>
+      <ul class="mt-6 flex list-none flex-wrap gap-2.5 p-0">
+        {
+          facts.map((f) => (
+            <li
+              class:list={[
+                'rounded-md border-2 border-rule px-3 py-1 font-display text-[0.82rem] font-bold !text-[#141414]',
+                f.color,
+              ]}
+            >
+              {f.text}
+            </li>
+          ))
+        }
+      </ul>
+    </header>
+
+    <nav aria-label="Stages at a glance" class="card-brutal mb-16 overflow-x-auto p-5">
+      <p class="label mb-5 !text-ink">The path at a glance</p>
+      <ol class="flex min-w-max list-none items-start gap-0 p-0">
+        {
+          stages.map((s, i) => (
+            <li class="flex items-start">
+              <a href={`#stage-${s.n}`} class="group flex w-32 flex-col items-center gap-2 text-center !text-ink no-underline">
+                <span class:list={['badge-num', s.color, 'transition-transform group-hover:-translate-y-0.5']}>{s.n}</span>
+                <span class="display text-[0.82rem] leading-tight">{s.title}</span>
+                <span class="label !text-[0.6rem] !text-ink-faint">{s.time.split('.')[0]}</span>
+              </a>
+              {i < stages.length - 1 && <span class="mt-4 h-0.5 w-5 shrink-0 bg-ink-faint" aria-hidden="true" />}
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <section aria-labelledby="method" class="mb-16">
+      <h2 id="method" class="display text-[1.6rem]">First, the method</h2>
+      <p class="mt-2 max-w-[54ch] text-[0.9995rem] text-ink-soft">
+        How you study matters more than what you study. Every lecture here is built for the same
+        five-step loop. It takes discipline for a week. Then it becomes a habit.
+      </p>
+      <ol class="mt-6 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-5">
+        {
+          method.map((m) => (
+            <li class="card-brutal flex flex-col gap-2 p-4">
+              <span class="display text-[1.8rem] text-accent">{m.n}</span>
+              <span class="display text-[0.95rem]">{m.title}</span>
+              <p class="text-[0.85rem] leading-[1.6] text-ink-muted">{m.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="mt-5 max-w-[60ch] text-[0.9375rem] text-ink-muted">
+        One warning. Watching lectures feels productive long before it is. Here, video comes after
+        solving, as the reward for it.
+      </p>
+    </section>
+
+    <section aria-labelledby="week" class="mb-16">
+      <h2 id="week" class="display text-[1.6rem]">What a week looks like</h2>
+      <p class="mt-2 max-w-[54ch] text-[0.9995rem] text-ink-soft">
+        One hour a day, at the Stage 2 pace of two lectures a week. The schedule matters more than
+        the hours.
+      </p>
+      <div class="card-brutal mt-6 max-w-[40rem] overflow-hidden">
+        <ul class="list-none p-0">
+          {
+            week.map(([day, plan], i) => (
+              <li class:list={['flex gap-4 px-5 py-2.5', i % 2 === 1 && 'bg-wash']}>
+                <span class="label w-[3.2ch] shrink-0 pt-0.5 !text-ink">{day}</span>
+                <span class="text-[0.92rem] text-ink-soft">{plan}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="path">
+      <h2 id="path" class="display text-[1.6rem]">Then, the path</h2>
+
+      <ol class="relative mt-8 list-none space-y-10 border-s-[3px] border-rule ps-8 p-0">
+        {
+          stages.map((s) => (
+            <li id={`stage-${s.n}`} class="relative scroll-mt-24">
+              <span class:list={['badge-num absolute -start-[3rem] top-1', s.color]} aria-hidden="true">
+                {s.n}
+              </span>
+              <article class="card-brutal overflow-hidden">
+                <header class:list={['flex flex-wrap items-baseline justify-between gap-2 border-b-2 border-rule px-6 py-3', s.color]}>
+                  <h3 class="display text-[1.2rem] !text-[#141414]">{s.title}</h3>
+                  <p class="font-mono text-[0.72rem] font-semibold uppercase tracking-wide !text-[#141414] opacity-80">
+                    {s.time}
+                  </p>
+                </header>
+                <div class="px-6 py-5">
+                  <p class="max-w-[62ch]">{s.body}</p>
+                  {s.entries.length > 0 && (
+                    <ul class="mt-5 grid list-none gap-x-8 gap-y-4 p-0 lg:grid-cols-2">
+                      {s.entries.map((e) => (
+                        <li class="text-[0.9375rem]">
+                          <a href={e.href} rel="noopener" class="font-[550]">
+                            {e.label}
+                          </a>
+                          {e.free && (
+                            <span class="label ms-2 rounded border border-ink-faint px-1 py-0.5 !text-[0.6rem]">free</span>
+                          )}
+                          <p class="text-ink-muted">{e.note}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <p class="mt-5 rounded-md border-2 border-rule bg-part1 px-4 py-3 text-[0.9375rem] !text-[#141414]">
+                    <strong>Done when:</strong> {s.checkpoint}
+                  </p>
+                </div>
+              </article>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="mt-16 grid gap-6 lg:grid-cols-2" aria-label="Getting unstuck, and the traps">
+      <div class="card-brutal p-6">
+        <h2 class="display text-[1.3rem]">When you are stuck</h2>
+        <p class="mt-2 text-[0.9375rem] text-ink-soft">In this order. Most confusion dies at step one.</p>
+        <ol class="mt-4 list-none space-y-3.5 p-0">
+          {
+            stuck.map((s, i) => (
+              <li class="flex gap-3">
+                <span class="display shrink-0 text-[1rem] text-accent">{i + 1}.</span>
+                <p class="text-[0.9375rem]">
+                  {s.href ? (
+                    <a href={s.href} rel="noopener" class="font-[550]">
+                      {s.move}
+                    </a>
+                  ) : (
+                    <strong>{s.move}</strong>
+                  )}{' '}
+                  <span class="text-ink-muted">{s.why}</span>
+                </p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div class="card-brutal border-2 p-6" style="background: color-mix(in oklab, var(--color-part5) 18%, var(--color-card))">
+        <h2 class="display text-[1.3rem]">The four ways people quit</h2>
+        <p class="mt-2 text-[0.9375rem] text-ink-soft">
+          Almost everyone who abandons this subject does it one of these ways. Name them and they lose
+          most of their power.
+        </p>
+        <ul class="mt-4 list-none space-y-3.5 p-0">
+          {
+            traps.map((t) => (
+              <li class="flex gap-3">
+                <span class="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-[3px] border-2 border-rule bg-part5" aria-hidden="true" />
+                <p class="text-[0.9375rem]">{t}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-16" aria-labelledby="scratch">
+      <h2 id="scratch" class="display text-[1.6rem]">All along, build it yourself</h2>
+      <p class="mt-2 max-w-[62ch] text-[0.9995rem] text-ink-soft">
+        Nothing proves understanding like implementation. When the course introduces an algorithm,
+        write it before you call the library. The classic ladder: matrix multiplication, then LU,
+        then QR, then eigenvalues by power iteration, then a small SVD. These sites turn the ladder
+        into graded practice, in order, from NumPy to GPU kernels.
+      </p>
+      <ul class="mt-6 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          scratch.map((e) => (
+            <li class="card-brutal card-hover p-0">
+              <a href={e.href} rel="noopener" class="block h-full !text-ink p-4 no-underline">
+                <span class="display text-[0.98rem]">{e.label}</span>
+                <p class="mt-1 text-[0.875rem] text-ink-muted">{e.note}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-6 max-w-[62ch]">
+        A good final project: eigenfaces. Load a face dataset, center it, compute the covariance,
+        find the principal components with your own power iteration, and rebuild faces from twenty
+        numbers. It uses everything in this course and fits in an afternoon.
+      </p>
+    </section>
+
+    <p class="mt-16 border-t-2 border-rule pt-6 text-[0.9375rem] text-ink-muted">
+      Everything named here, plus the rest of the shelf, is in the <a href="/resources">library</a>.
+    </p>
+  </div>
+</Base>

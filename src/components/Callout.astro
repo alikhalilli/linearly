@@ -1,0 +1,28 @@
+---
+/**
+ * Callout: short asides in the lecture's voice.
+ * intuition: the picture to keep. note: context. warning: a trap. check: exercises.
+ */
+interface Props {
+  type?: 'intuition' | 'note' | 'warning' | 'check';
+  title?: string;
+}
+
+const { type = 'note', title } = Astro.props;
+
+const meta = {
+  intuition: { label: 'Intuition', bg: 'bg-part2' },
+  note: { label: 'Note', bg: 'bg-wash' },
+  warning: { label: 'Careful', bg: 'bg-part5' },
+  check: { label: 'Check yourself', bg: 'bg-part1' },
+}[type];
+
+const darkText = type !== 'note';
+---
+
+<aside class:list={['card-brutal my-8 px-5 py-4', meta.bg, darkText && '!text-[#141414] callout-colored']}>
+  <p class="display mb-2 text-[0.9rem]">{title ?? meta.label}</p>
+  <div class:list={['text-[0.9995rem] leading-[1.7] [&>*+*]:mt-2', darkText && '[&_a]:!text-[#1a2fa0]']}>
+    <slot />
+  </div>
+</aside>
