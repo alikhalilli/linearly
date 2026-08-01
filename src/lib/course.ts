@@ -1,4 +1,4 @@
-/** The course's six parts, shared by the lectures index and the lecture TOC. */
+/** The course's seven parts, shared by the lectures index and the lecture TOC. */
 export const PARTS = [
   "Foundations",
   "Solving Ax = b",
@@ -6,9 +6,10 @@ export const PARTS = [
   "Orthogonality",
   "Determinants & Eigenvalues",
   "The Missing Third",
+  "The Machine",
 ] as const;
 
-export const ROMAN = ["I", "II", "III", "IV", "V", "VI"];
+export const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII"];
 
 export const PART_COLORS = [
   "bg-part1",
@@ -17,6 +18,7 @@ export const PART_COLORS = [
   "bg-part4",
   "bg-part5",
   "bg-part6",
+  "bg-part7",
 ];
 
 /** 4 -> "04", 7.5 -> "7.5" */

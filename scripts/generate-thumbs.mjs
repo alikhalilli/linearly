@@ -368,6 +368,103 @@ const thumbs = {
       s += `<rect x="${64 + i * 24}" y="106" width="16" height="7" rx="2" fill="${cols[i]}"/>`;
     return s;
   },
+
+  // 23 · Memory layout — a 3x4 matrix flattens row by row into one line.
+  'lecture-23': () => {
+    let s = '';
+    const rowCols = [C.green, C.cyan, C.orange];
+    for (let r = 0; r < 3; r++)
+      for (let c = 0; c < 4; c++)
+        s += `<rect x="${28 + c * 24}" y="${26 + r * 24}" width="21" height="21" rx="3" fill="${rowCols[r]}" opacity="0.85"/>`;
+    s += arrow(136, 62, 172, 100, ink, 2.2);
+    for (let i = 0; i < 12; i++)
+      s += `<rect x="${26 + i * 18}" y="112" width="15" height="15" rx="3" fill="${rowCols[(i / 4) | 0]}" opacity="0.85"/>`;
+    s += txt(150, 34, 'row-major', ink, 12);
+    return s;
+  },
+
+  // 24 · CPU speed — measured steps down a log scale: 4481, 1621, 89, 70, 16 ms.
+  //     Bar heights are 28 * log10(ms): 102, 90, 55, 52, 34.
+  'lecture-24': () => {
+    let s = `<line x1="26" y1="128" x2="242" y2="128" stroke="${ink}" stroke-width="2"/>`;
+    const h = [102, 90, 55, 52, 34];
+    for (let i = 0; i < 5; i++) {
+      const color = i === 4 ? C.green : i >= 2 ? C.yellow : C.orange;
+      s += `<rect x="${44 + i * 40}" y="${128 - h[i]}" width="26" height="${h[i]}" rx="3" fill="${color}" opacity="0.9"/>`;
+    }
+    s += txt(38, 18, '4.4s', C.orange, 12);
+    s += txt(204, 88, '16ms', C.green, 12);
+    return s;
+  },
+
+  // 25 · GPU — a 2x2 grid of blocks, threads inside, one warp row lit.
+  'lecture-25': () => {
+    let s = '';
+    for (let bx = 0; bx < 2; bx++)
+      for (let by = 0; by < 2; by++) {
+        const X = 40 + bx * 100, Y = 24 + by * 56;
+        const hot = bx === 0 && by === 0;
+        s += `<rect x="${X}" y="${Y}" width="84" height="44" rx="4" fill="none" stroke="${hot ? C.green : ink}" stroke-width="2.2" opacity="${hot ? 1 : 0.5}"/>`;
+        for (let r = 0; r < 2; r++)
+          for (let c = 0; c < 8; c++) {
+            const warp = hot && r === 0;
+            s += `<rect x="${X + 5 + c * 10}" y="${Y + 6 + r * 18}" width="7" height="14" rx="2" fill="${warp ? C.cyan : hot ? C.green : ink}" opacity="${warp ? 0.95 : hot ? 0.45 : 0.25}"/>`;
+          }
+      }
+    s += txt(40, 142, 'grid  ·  block  ·  warp', ink, 11);
+    return s;
+  },
+
+  // 26 · GEMM kernel — A strip, B strip, and C with block/warp/thread tiles nested.
+  'lecture-26': () => {
+    let s = `<rect x="124" y="36" width="100" height="100" rx="3" fill="none" stroke="${ink}" stroke-width="2.2"/>`;
+    s += `<rect x="124" y="18" width="100" height="12" rx="3" fill="${C.cyan}" opacity="0.8"/>`;
+    s += `<rect x="106" y="36" width="12" height="100" rx="3" fill="${C.orange}" opacity="0.8"/>`;
+    s += `<rect x="140" y="52" width="48" height="48" rx="3" fill="${C.yellow}" opacity="0.3" stroke="${C.yellow}" stroke-width="2"/>`;
+    s += `<rect x="148" y="60" width="24" height="24" rx="2" fill="${C.orange}" opacity="0.4" stroke="${C.orange}" stroke-width="2"/>`;
+    s += `<rect x="152" y="64" width="9" height="9" rx="1.5" fill="${C.green}"/>`;
+    s += txt(24, 30, 'B', C.cyan, 13, 'font-style="italic"');
+    s += txt(24, 50, 'A', C.orange, 13, 'font-style="italic"');
+    s += txt(24, 90, 'block', C.yellow, 11);
+    s += txt(24, 106, 'warp', C.orange, 11);
+    s += txt(24, 122, 'thread', C.green, 11);
+    return s;
+  },
+
+  // 27 · Layouts — (4,3):(3,1) as a function: coordinate (2,1) lands on 7.
+  //     Cell (r,c) holds 3r + c, the layout function itself.
+  'lecture-27': () => {
+    let s = txt(36, 24, '(4,3):(3,1)', C.purple, 14, 'font-weight="700"');
+    for (let r = 0; r < 4; r++)
+      for (let c = 0; c < 3; c++) {
+        const hot = r === 2 && c === 1;
+        s += `<rect x="${36 + c * 28}" y="${34 + r * 26}" width="25" height="23" rx="3" fill="${hot ? C.purple : 'none'}" fill-opacity="${hot ? 0.3 : 0}" stroke="${C.purple}" stroke-width="1.8" opacity="${hot ? 1 : 0.55}"/>`;
+        s += txt(44 + c * 28, 50 + r * 26, String(3 * r + c), hot ? C.purple : ink, 12);
+      }
+    s += arrow(196, 100, 136, 96, C.purple, 2.2);
+    s += txt(200, 92, '(2,1)', ink, 12);
+    s += txt(200, 108, '↦ 7', C.purple, 12);
+    return s;
+  },
+
+  // 28 · Sparse — a mostly empty grid becomes three short CSR arrays.
+  'lecture-28': () => {
+    let s = '';
+    const nz = [[0, 2], [1, 5], [2, 0], [3, 3], [4, 6], [5, 1]];
+    for (let r = 0; r < 6; r++)
+      for (let c = 0; c < 8; c++) {
+        const hit = nz.some(([a, b]) => a === r && b === c);
+        s += hit
+          ? `<rect x="${30 + c * 17}" y="${18 + r * 15}" width="13" height="11" rx="2" fill="${C.green}"/>`
+          : `<circle cx="${36 + c * 17}" cy="${23 + r * 15}" r="1.4" fill="${ink}" opacity="0.3"/>`;
+      }
+    s += arrow(176, 76, 200, 76, ink, 2.2);
+    for (let i = 0; i < 6; i++) s += `<rect x="${208}" y="${20 + i * 8}" width="10" height="6" rx="1" fill="${C.green}"/>`;
+    for (let i = 0; i < 6; i++) s += `<rect x="${224}" y="${20 + i * 8}" width="10" height="6" rx="1" fill="${C.cyan}"/>`;
+    for (let i = 0; i < 7; i++) s += `<rect x="${240}" y="${20 + i * 8}" width="10" height="6" rx="1" fill="${C.orange}"/>`;
+    s += txt(204, 96, 'CSR', ink, 11);
+    return s;
+  },
 };
 
 const dir = join(import.meta.dirname, '..', 'src', 'assets', 'thumbs');

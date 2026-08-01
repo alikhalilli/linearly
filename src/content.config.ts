@@ -15,6 +15,7 @@ const lectures = defineCollection({
       "Orthogonality",
       "Determinants & Eigenvalues",
       "The Missing Third",
+      "The Machine",
     ]),
     /** Folder name under /public/slides holding 1.webp … N.webp, if the lecture has a deck. */
     deck: z.string().optional(),
