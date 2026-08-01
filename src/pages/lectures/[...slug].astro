@@ -165,8 +165,8 @@ const lessonSchema = {
        for the contents panel in place. */
     .toc-bar {
       display: block;
-      width: 16px;
-      height: 2.5px;
+      width: 18px;
+      height: 3px;
       border-radius: 2px;
       background: var(--color-ink-faint);
       opacity: 0.55;
@@ -176,7 +176,7 @@ const lessonSchema = {
         opacity 0.15s ease;
     }
     .toc-bar.active {
-      width: 26px;
+      width: 28px;
       background: var(--color-ink);
       opacity: 1;
     }
@@ -187,23 +187,38 @@ const lessonSchema = {
       width: 280px;
       max-height: 74vh;
       overflow-y: auto;
-      padding: 0.9rem 0.55rem;
-      background: var(--color-paper);
-      border: 1px solid color-mix(in oklab, var(--color-rule) 22%, transparent);
+      padding: 0.4rem 0.35rem;
+      background: light-dark(#ffffff, #232329);
       border-radius: 10px;
-      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.16);
+      box-shadow:
+        0 0 0 1px color-mix(in oklab, var(--color-ink) 7%, transparent),
+        0 3px 6px rgba(15, 15, 15, 0.09),
+        0 9px 24px rgba(15, 15, 15, 0.18);
       opacity: 0;
       pointer-events: none;
-      transform: translateY(-50%) translateX(-6px);
+      transform: translateY(-50%) scale(0.97);
+      transform-origin: left center;
       transition:
-        opacity 0.15s ease,
-        transform 0.15s ease;
+        opacity 0.12s ease-out,
+        transform 0.12s ease-out;
     }
     #toc-rail:hover .toc-panel,
     #toc-rail:focus-within .toc-panel {
       opacity: 1;
       pointer-events: auto;
-      transform: translateY(-50%) translateX(0);
+      transform: translateY(-50%) scale(1);
+    }
+    #toc-rail .toc-panel::-webkit-scrollbar {
+      width: 9px;
+    }
+    #toc-rail .toc-panel::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    #toc-rail .toc-panel::-webkit-scrollbar-thumb {
+      border: 3px solid transparent;
+      border-radius: 9px;
+      background: color-mix(in oklab, var(--color-ink) 22%, transparent);
+      background-clip: padding-box;
     }
     #toc-rail:hover .toc-bars,
     #toc-rail:focus-within .toc-bars {

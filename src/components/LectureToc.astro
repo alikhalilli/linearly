@@ -24,7 +24,7 @@ const { numberLabel, title, headings } = Astro.props;
     {
       headings.map((h) => (
         <li>
-          <a href={`#${h.slug}`} data-target={h.slug} class="toc-link">
+          <a href={`#${h.slug}`} data-target={h.slug} class="toc-link" title={h.text}>
             {h.text}
           </a>
         </li>
@@ -43,8 +43,10 @@ const { numberLabel, title, headings } = Astro.props;
     align-items: baseline;
     gap: 0.55rem;
     margin: 0;
-    padding: 0.22rem 0.5rem;
-    font-size: 0.84rem;
+    padding: 0.28rem 0.55rem;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 0.875rem;
     font-weight: 600;
     line-height: 1.35;
     color: var(--color-ink);
@@ -58,10 +60,13 @@ const { numberLabel, title, headings } = Astro.props;
   }
   .toc-link {
     display: block;
-    padding: 0.18rem 0.5rem 0.18rem 1.6rem;
+    padding: 0.24rem 0.55rem 0.24rem 1.7rem;
     border-radius: 6px;
-    font-size: 0.8rem;
-    line-height: 1.35;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: var(--color-ink-muted);
     text-decoration: none;
     transition:
@@ -82,9 +87,9 @@ const { numberLabel, title, headings } = Astro.props;
   }
   .toc-all {
     display: block;
-    padding: 0.18rem 0.5rem;
+    padding: 0.22rem 0.55rem;
     border-radius: 6px;
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     color: var(--color-ink-faint);
     text-decoration: none;
     transition:
