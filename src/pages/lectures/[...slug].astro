@@ -9,7 +9,7 @@ import SpanPlayground from '../../components/SpanPlayground.astro';
 import MatrixPlayground from '../../components/MatrixPlayground.astro';
 import CodeFigure from '../../components/CodeFigure.astro';
 import LectureToc from '../../components/LectureToc.astro';
-import { PARTS, ROMAN, PART_COLORS, numberLabel as numLabel } from '../../lib/course';
+import { numberLabel as numLabel } from '../../lib/course';
 
 export async function getStaticPaths() {
   const lectures = await getCollection('lectures', ({ data }) => data.status !== 'planned');
@@ -31,22 +31,6 @@ const prev = idx > 0 ? all[idx - 1] : undefined;
 const next = idx < all.length - 1 ? all[idx + 1] : undefined;
 const numberLabel = numLabel(number);
 
-// The course contents for the sidebar and drawer: every lecture, planned ones
-// included (muted, unlinked), with this lecture's sections nested under it.
-const everything = (await getCollection('lectures')).sort((a, b) => a.data.number - b.data.number);
-const tocGroups = PARTS.map((part, i) => ({
-  part,
-  roman: ROMAN[i],
-  swatch: PART_COLORS[i],
-  items: everything
-    .filter((l) => l.data.part === part)
-    .map((l) => ({
-      id: l.id,
-      number: l.data.number,
-      title: l.data.title,
-      planned: l.data.status === 'planned',
-    })),
-})).filter((g) => g.items.length > 0);
 // Rendered heading text triples KaTeX content (HTML + MathML + source), so
 // the display text comes from the raw source lines, math stripped to its
 // plain reading; the slugs still come from the pipeline so anchors match.
@@ -140,7 +124,7 @@ const lessonSchema = {
       {tocHeadings.map((h) => <span class="toc-bar" data-target={h.slug} />)}
     </div>
     <div class="toc-panel">
-      <LectureToc groups={tocGroups} currentId={lecture.id} headings={tocHeadings} />
+      <LectureToc numberLabel={numberLabel} title={title} headings={tocHeadings} />
     </div>
   </div>
 
@@ -148,7 +132,7 @@ const lessonSchema = {
     <button
       id="toc-open"
       class="icon-btn fixed right-5 bottom-5 z-40 !h-11 !w-11 bg-paper !text-ink"
-      aria-label="Open the course contents"
+      aria-label="Open the contents"
       aria-expanded="false"
       aria-controls="toc-drawer"
     >
@@ -169,10 +153,10 @@ const lessonSchema = {
     style="box-shadow: 0 0 48px rgba(0, 0, 0, 0.22)"
     role="dialog"
     aria-modal="true"
-    aria-label="Course contents"
+    aria-label="Contents"
     data-pagefind-ignore
   >
-    <LectureToc groups={tocGroups} currentId={lecture.id} headings={tocHeadings} />
+    <LectureToc numberLabel={numberLabel} title={title} headings={tocHeadings} />
   </div>
 
   <style>
@@ -200,7 +184,7 @@ const lessonSchema = {
       position: absolute;
       top: 50%;
       left: 0;
-      width: 300px;
+      width: 280px;
       max-height: 74vh;
       overflow-y: auto;
       padding: 0.9rem 0.55rem;
