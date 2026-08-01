@@ -94,16 +94,6 @@ const lessonSchema = {
 
 <Base title={`Lecture ${numberLabel}: ${title} | linearly`} description={description}>
   <script is:inline type="application/ld+json" slot="head" set:html={JSON.stringify(lessonSchema)} />
-  <div class="xl:grid xl:grid-cols-[290px_minmax(0,1fr)]">
-  <aside
-    class="hidden bg-wash xl:block"
-    style="border-right: 1px solid color-mix(in oklab, var(--color-rule) 18%, transparent)"
-  >
-    <div class="sticky top-0 max-h-screen overflow-y-auto px-4 pt-10 pb-16">
-      <LectureToc groups={tocGroups} currentId={lecture.id} headings={tocHeadings} />
-    </div>
-  </aside>
-  <div class="min-w-0">
   <article data-pagefind-body>
     <header class="container-prose pt-20 pb-8">
       <p class="label">Lecture {numberLabel}</p>
@@ -144,7 +134,14 @@ const lessonSchema = {
       }
     </nav>
   </article>
-  </div>
+
+  <div id="toc-rail" class="fixed top-1/2 left-3 z-30 hidden -translate-y-1/2 xl:block">
+    <div class="toc-bars flex flex-col items-start gap-[7px] px-2 py-3" aria-hidden="true">
+      {tocHeadings.map((h) => <span class="toc-bar" data-target={h.slug} />)}
+    </div>
+    <div class="toc-panel">
+      <LectureToc groups={tocGroups} currentId={lecture.id} headings={tocHeadings} />
+    </div>
   </div>
 
   <div class="xl:hidden">
@@ -178,10 +175,62 @@ const lessonSchema = {
     <LectureToc groups={tocGroups} currentId={lecture.id} headings={tocHeadings} />
   </div>
 
+  <style>
+    /* Notion's collapsed rail: a floating stack of small dashes, the active
+       one brighter and longer. Hovering (or tabbing into) the rail swaps it
+       for the contents panel in place. */
+    .toc-bar {
+      display: block;
+      width: 16px;
+      height: 2.5px;
+      border-radius: 2px;
+      background: var(--color-ink-faint);
+      opacity: 0.55;
+      transition:
+        width 0.15s ease,
+        background-color 0.15s ease,
+        opacity 0.15s ease;
+    }
+    .toc-bar.active {
+      width: 26px;
+      background: var(--color-ink);
+      opacity: 1;
+    }
+    #toc-rail .toc-panel {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 300px;
+      max-height: 74vh;
+      overflow-y: auto;
+      padding: 0.9rem 0.55rem;
+      background: var(--color-paper);
+      border: 1px solid color-mix(in oklab, var(--color-rule) 22%, transparent);
+      border-radius: 10px;
+      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.16);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-50%) translateX(-6px);
+      transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
+    }
+    #toc-rail:hover .toc-panel,
+    #toc-rail:focus-within .toc-panel {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(-50%) translateX(0);
+    }
+    #toc-rail:hover .toc-bars,
+    #toc-rail:focus-within .toc-bars {
+      opacity: 0;
+    }
+  </style>
+
   <script>
-    // Scrollspy: the section whose heading was most recently scrolled past
-    // is marked active in both copies of the contents (sidebar and drawer).
-    const links = [...document.querySelectorAll<HTMLAnchorElement>('.toc-link')];
+    // Scrollspy: the section most recently scrolled past is marked active on
+    // the rail's bars and in both copies of the contents (panel and drawer).
+    const links = [...document.querySelectorAll<HTMLElement>('.toc-link, .toc-bar')];
     const heads = [...document.querySelectorAll<HTMLElement>('article .prose h2[id]')];
     let current = '';
     const update = () => {

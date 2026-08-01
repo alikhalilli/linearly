@@ -4,16 +4,7 @@ import Base from '../layouts/Base.astro';
 import TocRow from '../components/TocRow.astro';
 import heroArt from '../assets/hero-art.svg?raw';
 
-const PARTS = [
-  'Foundations',
-  'Solving Ax = b',
-  'Vector Spaces',
-  'Orthogonality',
-  'Determinants & Eigenvalues',
-  'The Missing Third',
-] as const;
-const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
-const PART_COLORS = ['bg-part1', 'bg-part2', 'bg-part3', 'bg-part4', 'bg-part5', 'bg-part6'];
+import { PARTS, ROMAN, PART_COLORS } from '../lib/course';
 
 const lectures = (await getCollection('lectures')).sort((a, b) => a.data.number - b.data.number);
 const byPart = PARTS.map((part) => ({
@@ -109,7 +100,7 @@ const courseSchema = {
   <section class="container-prose pt-16" aria-label="Table of contents">
     <h2 class="display text-[1.9rem]">Contents</h2>
     <p class="mt-2 text-[0.9995rem] text-ink-muted">
-      Six parts, in order. Every lecture leans on the ones before it.
+      Seven parts, in order. Every lecture leans on the ones before it.
     </p>
 
     {
