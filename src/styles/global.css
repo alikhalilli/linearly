@@ -52,6 +52,7 @@
   --color-part5: light-dark(#ffb443, #e2a049);
   --color-part6: light-dark(#c4a1ff, #a98ce0);
   --color-part7: light-dark(#ffb3a7, #e09186);
+  --color-part8: light-dark(#a9c9ff, #8ba9dd);
 
   /* The hand-drawn figure font, Excalidraw's Virgil, subset to the glyphs
      the figures use (scripts/export-figures.mjs regenerates figures;

@@ -1,0 +1,2051 @@
+---
+number: 29
+title: 'PEFT: Fine-Tuning in a Small Subspace'
+description: 'A half-billion-parameter model learns new notes in five seconds on a laptop while 99.8 percent of it stays frozen. LoRA, the adapter zoo, and the shape of the change.'
+part: 'Adaptation'
+status: 'ready'
+---
+
+## The idea in one sentence
+
+Fine-tuning asks a trained model to change, and the discovery behind every method in this
+chapter is that the change fits in a tiny structured container: name the shape of that
+container and you have named the method.
+
+## The cost of changing your mind
+
+Part VII measured what it costs to run a model. This part opens with a different bill: what it
+costs to change one.
+
+Full fine-tuning means every weight moves, and a weight that moves needs company. The optimizer
+that trains modern networks, AdamW, keeps two running averages per parameter, and the backward
+pass needs a gradient for each one, so a model in training carries several full copies of
+itself. The [PEFT library's](https://github.com/huggingface/peft) README measures this on an
+80 GB A100. Fine-tuning the 3-billion-parameter T0 takes 47.14 GB of GPU memory. The same
+model with a LoRA adapter takes 14.4 GB, and 9.8 GB if the optimizer state parks in CPU RAM.
+The 12-billion-parameter mt0 does not fit at all: full fine-tuning runs out of memory on a
+card with eighty billion bytes, while its LoRA run takes 56 GB. All four numbers in the figure
+are theirs; everything measured later in this chapter was measured here.
+
+<Figure n="1">
+  <svg slot="drawing" viewBox="0 0 773.16 314.25" width="773" role="img" aria-label="Bar chart of GPU memory while training. For the 3 billion parameter T0: 47.1 GB full fine-tuning, 14.4 GB with LoRA, 9.8 GB with LoRA plus CPU offload. For the 12 billion parameter mt0, full fine-tuning does not fit the 80 GB card and LoRA takes 56 GB. An inset compares an 11 GB full checkpoint to a 19 MB LoRA file, areas drawn to scale." style="max-width:100%;height:auto">
+<defs>
+</defs>
+<g stroke-linecap="round" data-s="0" data-note="the ceiling is one 80 GB card">
+<g transform="translate(10 254) rotate(0 200 0)">
+<path d="M0 0 C80.74 -1.47, 163.56 -1.76, 400 0 M0 0 C106.53 -1.41, 212.36 -1.74, 400 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round" data-s="0">
+<g stroke-opacity="0.6" fill-opacity="0.6" transform="translate(10 78) rotate(0 200 0)">
+<path d="M0 0 C82.36 -0.25, 164.51 -0.42, 400 0" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="8 9.5">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(27.21 56) rotate(0 84.63 8.125)" data-s="0">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">the whole card: 80 GB</text>
+</g>
+<g transform="translate(145.25 288) rotate(0 100.75 8.125)" data-s="0">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">GPU memory while training</text>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(30 150.29) rotate(0 22 51.855000000000004)" data-s="1" data-note="every weight needs its own optimizer">
+<path d="M-0.52 -1.94 L43.71 -0.9 L43.37 101.99 L-0.2 104.34" stroke="none" stroke-width="0" fill="var(--color-part5)">
+</path>
+<path d="M0 0 C10.55 0.85, 16.64 1.13, 44 0 M0 0 C14.72 -0.07, 31.71 0.22, 44 0 M44 0 C43.45 33.71, 42.41 65.56, 44 103.71 M44 0 C44.18 37.32, 45.84 74.46, 44 103.71 M44 103.71 C31.4 101.79, 16.55 104.23, 0 103.71 M44 103.71 C29.44 103.61, 16.28 103.48, 0 103.71 M0 103.71 C0.87 63.56, -1.94 24.08, 0 0 M0 103.71 C0.92 75.59, 0.26 46.76, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(31.07 130.29000000000002) rotate(0 28.210000000000004 8.125000000000007)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">47.1 GB</text>
+</g>
+<g transform="translate(40.959999999999994 262) rotate(0 14.880000000000003 7.5)" data-s="1">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">full</text>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(92 222.32) rotate(0 22 15.840000000000003)" data-s="1">
+<path d="M0.03 0.37 L44.03 0.12 L44.42 32.61 L-0.71 30.97" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C8.06 0.96, 17.84 -0.6, 44 0 M0 0 C16.64 0.33, 32.98 0.3, 44 0 M44 0 C43.16 6.88, 44.93 13.57, 44 31.68 M44 0 C44.37 8.74, 43.55 18.41, 44 31.68 M44 31.68 C34.82 32.53, 26.39 32, 0 31.68 M44 31.68 C34.08 31.53, 23.53 31.8, 0 31.68 M0 31.68 C0.21 25.1, -0.4 17.6, 0 0 M0 31.68 C-0.07 21.4, -0.14 10.64, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(93.07 202.32) rotate(0 28.210000000000008 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">14.4 GB</text>
+</g>
+<g transform="translate(102.96000000000001 262) rotate(0 14.879999999999995 7.5)" data-s="1">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">LoRA</text>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(154 232.44) rotate(0 22 10.780000000000001)" data-s="1">
+<path d="M0.32 -0.28 L44.2 0.69 L43.16 22.28 L0.68 21.83" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C8.35 -0.95, 18.36 -0.21, 44 0 M0 0 C17.14 0.25, 33.55 0.05, 44 0 M44 0 C44.6 6.24, 44.66 13.04, 44 21.56 M44 0 C44.3 4.92, 43.83 8.79, 44 21.56 M44 21.56 C32.18 22.23, 19 21.94, 0 21.56 M44 21.56 C28.54 21.76, 12.13 21.35, 0 21.56 M0 21.56 C-0.01 16.63, 0.18 11.52, 0 0 M0 21.56 C-0.21 13.36, -0.04 4.56, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(158.06 212.44) rotate(0 24.180000000000007 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">9.8 GB</text>
+</g>
+<g transform="translate(153.92 262) rotate(0 29.760000000000005 7.5)" data-s="1">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">LoRA+CPU</text>
+</g>
+<g transform="translate(68.26 38) rotate(0 73.78 8.75)" data-s="1">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">T0, 3B parameters</text>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(270 48) rotate(0 22 103)" data-s="2" data-note="twelve billion parameters cannot even start">
+<path d="M0.71 1.3 L42.6 -0.59 L45.6 204.43 L-0.97 206.46" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C7.12 -1.52, 17.45 0.75, 44 0 M44 0 C42.31 55.89, 44.41 113.11, 44 206 M44 206 C32.35 205.4, 20.46 207.86, 0 206 M0 206 C-2.03 141.75, -0.9 77.4, 0 0" stroke="var(--color-stroke-warm)" stroke-width="2.5" fill="none" stroke-dasharray="8 10">
+</path>
+</g>
+<g transform="translate(174.12 88) rotate(0 48.360000000000014 8.125)" data-s="2">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="var(--color-stroke-warm)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">does not fit</text>
+</g>
+<g stroke-linecap="round" data-s="2">
+<g transform="translate(242 108) rotate(0 12 0)">
+<path d="M0 0 C4.83 0.12, 9.22 -0.54, 24 0 M0 0 C4.98 0.02, 10.37 -0.53, 24 0" stroke="var(--color-stroke-warm)" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(242 108) rotate(0 12 0)">
+<path d="M12.63 3.85 C14.91 3.14, 16.93 1.95, 24 0 M12.63 3.85 C14.96 3.03, 17.53 1.87, 24 0" stroke="var(--color-stroke-warm)" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(242 108) rotate(0 12 0)">
+<path d="M12.82 -4.35 C15.06 -3.39, 17.04 -2.9, 24 0 M12.82 -4.35 C15.11 -3.39, 17.64 -2.77, 24 0" stroke="var(--color-stroke-warm)" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(332 130.8) rotate(0 22 61.6)" data-s="2">
+<path d="M-0.69 -0.96 L45.18 1.36 L43.09 122.34 L-1.5 121.63" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C7.7 -0.46, 18.49 -1.59, 44 0 M0 0 C13.45 0.78, 26.1 0.9, 44 0 M44 0 C43.14 46.97, 43.28 90.5, 44 123.2 M44 0 C42.19 28.34, 43.52 58.65, 44 123.2 M44 123.2 C35.89 124.13, 23.17 122.05, 0 123.2 M44 123.2 C32.58 122.31, 21.73 123.71, 0 123.2 M0 123.2 C2.17 96.22, 2.26 69.69, 0 0 M0 123.2 C-0.83 92.3, -1.32 61.69, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(339.05 110.8) rotate(0 20.150000000000006 8.125)" data-s="2">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">56 GB</text>
+</g>
+<g transform="translate(342.96 262) rotate(0 14.879999999999995 7.5)" data-s="2">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">LoRA</text>
+</g>
+<g transform="translate(297.24 10) rotate(0 34.72 8.75)" data-s="2">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">mt0, 12B</text>
+</g>
+<g transform="translate(280.96 262) rotate(0 14.879999999999995 7.5)" data-s="2">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">full</text>
+</g>
+<g stroke-linecap="round" data-s="3">
+<g stroke-opacity="0.45" fill-opacity="0.45" transform="translate(440 44) rotate(0 0 125)">
+<path d="M0 0 C2.79 49.56, 2.72 103.87, 0 250" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="8 9">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(480 74) rotate(0 75 75)" data-s="3" data-note="the whole model, or one adapter">
+<path d="M0.47 0.41 L151.86 -0.36 L148.04 148.3 L0.05 148.34" stroke="none" stroke-width="0" fill="var(--color-part5)">
+</path>
+<path d="M0 0 C30.53 0.24, 59.95 0.31, 150 0 M0 0 C48.13 -1.38, 95.74 -1.94, 150 0 M150 0 C150.38 55.43, 151.69 114.39, 150 150 M150 0 C150.91 43.04, 149.63 86.14, 150 150 M150 150 C93.54 151.15, 31.98 150.07, 0 150 M150 150 C107.18 151.05, 63.62 151.78, 0 150 M0 150 C1.25 110.37, 0.52 70.18, 0 0 M0 150 C-0.37 95.58, 0.14 42.97, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(537.75 134) rotate(0 23.25 9.375)" data-s="3">
+<text x="0" y="13.215" font-family="Virgil, Segoe UI Emoji" font-size="15px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">11 GB</text>
+</g>
+<g transform="translate(513.6 156) rotate(0 55.80000000000001 7.5)" data-s="3">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">full checkpoint</text>
+</g>
+<g stroke-linecap="round" transform="translate(660 217.77) rotate(0 3.115000000000009 3.114999999999995)" data-s="3">
+<path d="M0.35 -0.3 L5.63 0.26 L6.07 6.86 L-0.39 6.33" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C1.32 0.2, 2.51 -0.15, 6.23 0 M0 0 C2.05 0.02, 4.16 -0.08, 6.23 0 M6.23 0 C6.16 1.91, 6.35 3.51, 6.23 6.23 M6.23 0 C6.27 1.24, 6.21 2.7, 6.23 6.23 M6.23 6.23 C4.53 6.13, 2.7 6.07, 0 6.23 M6.23 6.23 C4.96 6.28, 3.54 6.22, 0 6.23 M0 6.23 C0.04 4.44, 0.13 2.75, 0 0 M0 6.23 C-0.04 4.8, 0.06 3.54, 0 0" stroke="var(--color-stroke-green)" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(609.8 244) rotate(0 74.39999999999998 7.5)" data-s="3">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">19 MB: the LoRA file</text>
+</g>
+<g transform="translate(487.88 288) rotate(0 137.64 7.5)" data-s="3">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">what you save to disk, areas to scale</text>
+</g>
+</svg>
+  The memory bill for changing your mind, from the PEFT README's measured table. Orange is
+  full fine-tuning, green is LoRA, and the pink bar never fit on the card. On the right, the
+  files you keep afterward, areas to scale.
+</Figure>
+
+The bill keeps arriving after training. A full fine-tune of T0 produces an 11 GB checkpoint,
+one per task. The LoRA checkpoint for the same job is 19 MB, which is why the inset on the
+right of Figure 1 looks like a misprint and is not. Ten tasks, ten full fine-tunes: 110 GB.
+Ten adapters: about the size of one phone photo album.
+
+## Freeze the map, learn the change
+
+Here is the whole trick in one line. The trained model applies its weight matrix $W$. Instead
+of editing $W$, keep it exactly as it is, and learn a separate update $\Delta W$ beside it:
+
+$$
+y = Wx + \Delta W x
+$$
+
+The two paths add at the output, so the base model never changes. Every gradient, every
+optimizer average, every byte you save at the end belongs to $\Delta W$ alone. If $\Delta W$
+were an arbitrary dense matrix this would save nothing, since it would be as big as $W$. So
+the entire field lives inside one question.
+
+<Figure n="2">
+  <svg slot="drawing" viewBox="0 0 550.8 244.75" width="551" role="img" aria-label="A circuit. The input x enters a frozen box W producing Wx, and also branches through a dashed box labeled Delta W with a question mark, producing Delta W x. The two paths meet at a plus junction giving y. Caption inside the drawing: the whole zoo is one question, what shape is Delta W." style="max-width:100%;height:auto">
+<defs>
+</defs>
+<g stroke-linecap="round" transform="translate(130 10) rotate(0 60 45)" data-s="0" data-note="the model you already have">
+<path d="M0 0 C25.54 -0.88, 49.76 0.38, 120 0 M0 0 C41.49 0.57, 84.74 -0.69, 120 0 M120 0 C117.8 34.84, 120.28 68.17, 120 90 M120 0 C119.29 31.01, 119.39 62.14, 120 90 M120 90 C75.27 88.56, 32.96 88.47, 0 90 M120 90 C79.91 88.78, 39.77 88.83, 0 90 M0 90 C0.1 62.13, -1.44 32.66, 0 0 M0 90 C0.04 66.74, -0.45 42.83, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(185.4 38) rotate(0 6.200000000000003 12.5)" data-s="0">
+<text x="0" y="17.619999999999997" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">W</text>
+</g>
+<g stroke-linecap="round" data-s="0">
+<g transform="translate(10 55) rotate(0 58 0)">
+<path d="M0 0 C22.43 0.56, 47.49 -1.77, 116 0 M0 0 C33.97 -0.07, 68.46 1.1, 116 0" stroke="var(--color-stroke-warm)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(10 55) rotate(0 58 0)">
+<path d="M92.61 8.83 C96.05 7.72, 102.15 3.58, 116 0 M92.61 8.83 C99 5.67, 105.92 4.22, 116 0" stroke="var(--color-stroke-warm)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(10 55) rotate(0 58 0)">
+<path d="M92.41 -8.27 C95.97 -5.88, 102.12 -6.53, 116 0 M92.41 -8.27 C98.89 -6.34, 105.88 -2.7, 116 0" stroke="var(--color-stroke-warm)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(26.549999999999997 28) rotate(0 4.649999999999999 9.375)" data-s="0">
+<text x="0" y="13.215" font-family="Virgil, Segoe UI Emoji" font-size="15px" fill="var(--color-stroke-warm)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">x</text>
+</g>
+<g stroke-linecap="round" data-s="0">
+<g transform="translate(254 55) rotate(0 61.599999999999994 17.5)">
+<path d="M0 0 C18.01 -1.81, 34.57 0.25, 86 0 M0 0 C20.62 -0.83, 42.51 -1.22, 86 0 M86 0 C99.14 12.36, 109.26 24.97, 123.2 35 M86 0 C95.82 8.07, 104.48 16.17, 123.2 35" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(254 55) rotate(0 61.599999999999994 17.5)">
+<path d="M100.51 24.51 C105.65 25.19, 109.26 29.4, 123.2 35 M100.51 24.51 C105.88 26.66, 112.48 28.81, 123.2 35" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(254 55) rotate(0 61.599999999999994 17.5)">
+<path d="M112.56 12.38 C115.34 15.61, 116.48 22.3, 123.2 35 M112.56 12.38 C115.08 17.55, 118.77 22.63, 123.2 35" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(297.56 28) rotate(0 8.680000000000007 8.75)" data-s="0">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Wx</text>
+</g>
+<g transform="translate(172.06 74) rotate(0 24.180000000000007 8.125)" data-s="1" data-note="not one of its numbers moves">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">frozen</text>
+</g>
+<g stroke-linecap="round" transform="translate(56 51) rotate(0 4 4)" data-s="2">
+<path d="M4.61 -0.06 C5.41 0, 6.19 0.47, 6.79 1.08 C7.38 1.69, 8.12 2.67, 8.19 3.58 C8.27 4.48, 7.84 5.8, 7.26 6.5 C6.68 7.2, 5.6 7.63, 4.71 7.76 C3.82 7.89, 2.6 7.64, 1.91 7.3 C1.22 6.95, 0.89 6.45, 0.56 5.69 C0.24 4.93, -0.3 3.58, -0.04 2.73 C0.21 1.89, 1.37 1.07, 2.11 0.6 C2.85 0.13, 3.96 -0.04, 4.39 -0.1 C4.82 -0.15, 4.66 0.22, 4.7 0.26 M4.45 -0.47 C5.21 -0.42, 6.05 0.64, 6.63 1.39 C7.21 2.13, 7.83 3.24, 7.94 3.99 C8.04 4.74, 7.75 5.16, 7.27 5.89 C6.78 6.61, 5.83 8.04, 5.04 8.34 C4.25 8.65, 3.33 8.09, 2.54 7.72 C1.75 7.35, 0.73 6.88, 0.33 6.1 C-0.07 5.32, -0.04 3.99, 0.13 3.05 C0.3 2.11, 0.63 1, 1.36 0.45 C2.09 -0.1, 4.08 -0.11, 4.52 -0.25 C4.97 -0.39, 4.12 -0.57, 4.05 -0.39" stroke="none" stroke-width="0" fill="var(--color-accent)">
+</path>
+<path d="M3.71 0.31 C4.54 0.24, 5.9 0.22, 6.63 0.65 C7.35 1.08, 7.92 2.08, 8.05 2.91 C8.18 3.75, 7.84 4.86, 7.43 5.65 C7.03 6.43, 6.43 7.27, 5.64 7.61 C4.85 7.95, 3.6 7.91, 2.71 7.67 C1.82 7.43, 0.71 6.85, 0.3 6.18 C-0.11 5.5, 0.14 4.45, 0.26 3.62 C0.39 2.79, 0.39 1.77, 1.05 1.22 C1.7 0.66, 3.72 0.5, 4.21 0.31 C4.7 0.11, 4 0.07, 3.97 0.04 M4.88 -0.33 C5.82 -0.34, 6.79 0.26, 7.39 0.98 C7.99 1.7, 8.51 3.04, 8.49 4 C8.48 4.95, 7.91 6.11, 7.28 6.71 C6.65 7.3, 5.61 7.38, 4.69 7.57 C3.78 7.77, 2.54 8.25, 1.79 7.88 C1.04 7.5, 0.5 6.18, 0.18 5.34 C-0.13 4.49, -0.4 3.68, -0.1 2.8 C0.19 1.92, 1.13 0.52, 1.93 0.08 C2.73 -0.36, 4.19 0.21, 4.71 0.16 C5.23 0.1, 5.04 -0.37, 5.04 -0.26" stroke="var(--color-accent)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-linecap="round" data-s="2" data-note="a second path learns the change">
+<g transform="translate(60 55) rotate(0 33 47.5)">
+<path d="M0 0 C-0.61 17.96, -2.35 40.26, 0 95 M0 0 C-0.29 31.94, -0.87 61.74, 0 95 M0 95 C16.96 96.91, 36.04 96.7, 66 95 M0 95 C22.36 95.73, 44.23 94.51, 66 95" stroke="var(--color-accent)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(60 55) rotate(0 33 47.5)">
+<path d="M42.47 103.45 C47.17 100.39, 50.24 101.52, 66 95 M42.47 103.45 C50.93 101.51, 58.1 97.21, 66 95" stroke="var(--color-accent)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(60 55) rotate(0 33 47.5)">
+<path d="M42.54 86.35 C47.14 86.79, 50.2 91.42, 66 95 M42.54 86.35 C50.81 90.04, 57.96 91.38, 66 95" stroke="var(--color-accent)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round" transform="translate(130 120) rotate(0 60 30)" data-s="2">
+<path d="M0 0 C23.26 0.8, 48.9 -0.14, 120 0 M120 0 C119.14 13.79, 121.13 25.29, 120 60 M120 60 C82.43 60.23, 46.21 62.69, 0 60 M0 60 C1.49 41.58, -2.17 23.65, 0 0" stroke="var(--color-accent)" stroke-width="2.5" fill="none" stroke-dasharray="8 10">
+</path>
+</g>
+<g transform="translate(169.72 135) rotate(0 11.16000000000001 11.25)" data-s="2">
+<text x="0" y="15.858" font-family="Virgil, Segoe UI Emoji" font-size="18px" fill="var(--color-accent)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">ΔW</text>
+</g>
+<g transform="translate(217.39999999999998 135) rotate(0 6.199999999999989 12.5)" data-s="2">
+<text x="0" y="17.619999999999997" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="var(--color-accent)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">?</text>
+</g>
+<g stroke-linecap="round" data-s="2">
+<g transform="translate(254 150) rotate(0 61.599999999999994 -16.950000000000003)">
+<path d="M0 0 C16.87 -1.78, 36.02 -2.12, 86 0 M0 0 C18.12 -0.12, 36.55 1.25, 86 0 M86 0 C95.28 -9.38, 99.86 -14.01, 123.2 -33.9 M86 0 C95.95 -8.59, 103.87 -16.93, 123.2 -33.9" stroke="var(--color-accent)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(254 150) rotate(0 61.599999999999994 -16.950000000000003)">
+<path d="M111.43 -11.84 C113.06 -18.01, 117.02 -22.87, 123.2 -33.9 M111.43 -11.84 C113.49 -17.1, 115.77 -20.54, 123.2 -33.9" stroke="var(--color-accent)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(254 150) rotate(0 61.599999999999994 -16.950000000000003)">
+<path d="M100.01 -24.57 C104 -28.15, 110.3 -30.4, 123.2 -33.9 M100.01 -24.57 C104.5 -27, 109.26 -27.67, 123.2 -33.9" stroke="var(--color-accent)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(294.34 122) rotate(0 13.02000000000001 8.75)" data-s="2">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="var(--color-accent)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">ΔWx</text>
+</g>
+<g stroke-linecap="round" transform="translate(374 86) rotate(0 17 17)" data-s="3" data-note="outputs add, the base never changes">
+<path d="M17.94 -0.06 C21.46 -0.18, 26.13 1.78, 28.77 4.29 C31.42 6.8, 33.38 11.4, 33.8 15 C34.21 18.61, 33.25 22.92, 31.25 25.93 C29.26 28.95, 25.24 32, 21.84 33.07 C18.44 34.14, 14.18 33.78, 10.85 32.35 C7.52 30.92, 3.52 27.67, 1.86 24.49 C0.19 21.32, -0.02 16.85, 0.85 13.29 C1.71 9.74, 4.14 5.37, 7.04 3.15 C9.94 0.93, 16.09 0.48, 18.25 -0.02 C20.4 -0.52, 19.95 -0.19, 19.96 0.15 M20.39 0.47 C23.88 1.19, 28.07 4.29, 30.3 7.05 C32.53 9.8, 33.84 13.48, 33.75 16.99 C33.65 20.5, 32.18 25.2, 29.74 28.1 C27.3 31, 22.65 33.91, 19.08 34.41 C15.52 34.9, 11.43 33.04, 8.36 31.07 C5.28 29.09, 1.87 25.88, 0.64 22.56 C-0.6 19.25, -0.47 14.6, 0.97 11.18 C2.42 7.77, 5.96 3.9, 9.3 2.06 C12.65 0.21, 19.12 0.4, 21.04 0.12 C22.97 -0.16, 21.04 -0.01, 20.85 0.37" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(386.86 92) rotate(0 5.5800000000000125 11.25)" data-s="3">
+<text x="0" y="15.858" font-family="Virgil, Segoe UI Emoji" font-size="18px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">+</text>
+</g>
+<g stroke-linecap="round" data-s="3">
+<g transform="translate(410 103) rotate(0 48 0)">
+<path d="M0 0 C18.35 -2.72, 38.84 -2.26, 96 0 M0 0 C29.52 0.39, 58.88 0.62, 96 0" stroke="var(--color-stroke-green)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(410 103) rotate(0 48 0)">
+<path d="M72.6 8.81 C76.01 5, 81.64 3.65, 96 0 M72.6 8.81 C79.93 6.47, 87.1 4.01, 96 0" stroke="var(--color-stroke-green)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(410 103) rotate(0 48 0)">
+<path d="M72.41 -8.29 C76.01 -8.6, 81.68 -6.45, 96 0 M72.41 -8.29 C79.82 -5.4, 87.05 -2.64, 96 0" stroke="var(--color-stroke-green)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(454.54999999999995 76) rotate(0 4.649999999999977 9.375)" data-s="3">
+<text x="0" y="13.215" font-family="Virgil, Segoe UI Emoji" font-size="15px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">y</text>
+</g>
+<g transform="translate(94.4 216) rotate(0 223.2 9.375)" data-s="4" data-note="the whole chapter is this question">
+<text x="0" y="13.215" font-family="Virgil, Segoe UI Emoji" font-size="15px" fill="var(--color-accent)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">the whole zoo is one question: what shape is ΔW?</text>
+</g>
+</svg>
+  The frame every method shares. Orange is the input, blue is the learned path, green is the
+  adapted output. The dashed box is the question.
+</Figure>
+
+What shape should $\Delta W$ take, so that it is small enough to be cheap and rich enough to
+carry the change? Each answer to that question is a named method, and there are dozens of
+names. The good news is that the answers sort into a handful of families, and every family
+runs on mathematics this course has already built.
+
+## The waist returns
+
+Lecture 6 drew this chapter's first answer before the question existed. Figure 3 there put a
+frozen $W$ next to a thin $C$ times a wide $R$ and marked their shared dimension $r$ as the
+waist. That is LoRA, low-rank adaptation, from the 2021 paper by Hu and colleagues at
+Microsoft ([arXiv:2106.09685](https://arxiv.org/abs/2106.09685)): set
+
+$$
+\Delta W = CR
+$$
+
+with $C$ tall and $r$ columns wide, $R$ flat and $r$ rows tall. The update is a rank-$r$
+matrix, and Lecture 8 is why that is a real constraint: a rank-16 matrix, however large its
+footprint, carries 16 independent directions and no more. The bet is that adapting a task
+needs few directions, even when the model needs millions of coordinates.
+
+The library makes the bet concrete in four lines. Everything below runs on the machine this
+course is written on, an Apple M3 Max, in float32, on the half-billion-parameter Qwen2.5-0.5B:
+
+```python
+import torch
+from transformers import AutoModelForCausalLM
+from peft import LoraConfig, TaskType, get_peft_model
+
+model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-0.5B",
+                                             dtype=torch.float32)
+config = LoraConfig(r=16, lora_alpha=32, task_type=TaskType.CAUSAL_LM)
+model = get_peft_model(model, config)
+
+model.print_trainable_parameters()
+# trainable params: 1,081,344 || all params: 495,114,112 || trainable%: 0.2184
+
+for name, module in model.named_modules():
+    if "layers.0." in name and name.endswith(("lora_A.default", "lora_B.default")):
+        print(name, tuple(next(iter(module.parameters())).shape))
+# ...layers.0.self_attn.q_proj.lora_A.default (16, 896)
+# ...layers.0.self_attn.q_proj.lora_B.default (896, 16)
+# ...layers.0.self_attn.v_proj.lora_A.default (16, 896)
+# ...layers.0.self_attn.v_proj.lora_B.default (128, 16)
+
+C = model.state_dict()[
+    "base_model.model.model.layers.0.self_attn.q_proj.lora_B.default.weight"]
+print("largest entry of the thin factor on day one:", float(C.abs().max()))
+# largest entry of the thin factor on day one: 0.0
+```
+
+One naming wrinkle before the numbers. The code calls the wide factor `lora_A` and the thin
+one `lora_B`, because the paper writes the update as $BA$ and applies $A$ first. This course
+keeps its own letters from Lecture 6: the wide first factor is $R$, the thin second one is
+$C$. Same matrices, same waist.
+
+The printed shapes say exactly where the budget went. By default the library adapts two
+matrices per transformer block, the queries and the values. Qwen's width is 896, so each
+$R$ is $16 \times 896$. The query update's $C$ is $896 \times 16$, and the value update's
+$C$ is $128 \times 16$, because this model shares key-value heads and its value output is
+only 128 tall. The adapter never gets a say in any of this; it inherits whatever geometry
+the frozen model already has.
+
+<Figure n="3">
+  <svg slot="drawing" viewBox="0 0 720.88 181" width="721" role="img" aria-label="Three acts. Day one: W plus a dashed C at zero times a random R, so the sum is exactly W. Training: only the thin green C and the wide orange R move, scaled by alpha over r. Deployed: a single green matrix labeled W plus C R, one matrix, no extra latency." style="max-width:100%;height:auto">
+<defs>
+</defs>
+<g transform="translate(75.46 10) rotate(0 30.380000000000003 8.75)" data-s="0" data-note="C is zero: nothing has changed">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">day one</text>
+</g>
+<g stroke-linecap="round" transform="translate(10 72) rotate(0 35 35)" data-s="0">
+<path d="M0 0 C12.46 -1.77, 26.92 -0.52, 70 0 M0 0 C28.52 -1.06, 54.39 0.05, 70 0 M70 0 C69.35 19.73, 69.04 39.83, 70 70 M70 0 C71.05 16.97, 71.09 34.32, 70 70 M70 70 C40.88 70.89, 13.91 68.78, 0 70 M70 70 C44.3 69.71, 20.18 69.51, 0 70 M0 70 C-2.23 46.9, -1.16 26.8, 0 0 M0 70 C0.55 48.32, -0.61 28.43, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(41.32 96) rotate(0 4.960000000000001 10)" data-s="0">
+<text x="0" y="14.096" font-family="Virgil, Segoe UI Emoji" font-size="16px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">W</text>
+</g>
+<g transform="translate(89.55 98) rotate(0 4.649999999999999 9.375)" data-s="0">
+<text x="0" y="13.215" font-family="Virgil, Segoe UI Emoji" font-size="15px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">+</text>
+</g>
+<g stroke-linecap="round" transform="translate(108 72) rotate(0 6 35)" data-s="0">
+<path d="M0 0 C2.07 -0.27, 4.7 0.28, 12 0 M12 0 C12.24 14.5, 11.29 29.93, 12 70 M12 70 C7.75 70.63, 3.08 70.56, 0 70 M0 70 C0.44 43.07, 1.17 18.56, 0 0" stroke="currentColor" stroke-width="2.5" fill="none" stroke-dasharray="8 10">
+</path>
+</g>
+<g transform="translate(111.01 46) rotate(0 4.029999999999994 8.125)" data-s="0">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">C</text>
+</g>
+<g transform="translate(111.01 150) rotate(0 4.029999999999994 8.125)" data-s="0">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">0</text>
+</g>
+<g transform="translate(130.01 98) rotate(0 4.030000000000001 8.125)" data-s="0">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">×</text>
+</g>
+<g stroke-opacity="0.6" fill-opacity="0.6" stroke-linecap="round" transform="translate(146 72) rotate(0 35 6)" data-s="0">
+<path d="M-0.59 0.98 L70.8 0.08 L69.12 12.86 L-0.71 11.92" stroke="none" stroke-width="0" fill="var(--color-part5)">
+</path>
+<path d="M0 0 C13.4 -0.66, 27.68 0.66, 70 0 M0 0 C20.5 0.14, 42 -0.04, 70 0 M70 0 C70.03 3.62, 69.94 8.39, 70 12 M70 0 C69.73 3.32, 69.83 6.77, 70 12 M70 12 C48.56 12.84, 25.26 13.03, 0 12 M70 12 C53.04 12.14, 36.1 12.14, 0 12 M0 12 C-0.01 8.11, 0.22 4.15, 0 0 M0 12 C0.22 7.87, 0.22 3.52, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(178.01 46) rotate(0 4.030000000000001 8.125)" data-s="0">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">R</text>
+</g>
+<g transform="translate(165.82 92) rotate(0 20.460000000000008 6.875)" data-s="0">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">random</text>
+</g>
+<g stroke-linecap="round" data-s="1">
+<g transform="translate(230 107) rotate(0 20 0)">
+<path d="M0 0 C7.54 -0.1, 15.91 -0.48, 40 0 M0 0 C13.01 -0.41, 24.58 0.23, 40 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(230 107) rotate(0 20 0)">
+<path d="M21.22 6.87 C24.44 5.34, 28.47 3.56, 40 0 M21.22 6.87 C27.57 4.35, 32.5 2.84, 40 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(230 107) rotate(0 20 0)">
+<path d="M21.19 -6.81 C24.37 -5.54, 28.4 -4.52, 40 0 M21.19 -6.81 C27.56 -5.05, 32.49 -2.27, 40 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(348.24 10) rotate(0 34.72 8.75)" data-s="1" data-note="only the thin factors move">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">training</text>
+</g>
+<g stroke-linecap="round" transform="translate(286 72) rotate(0 35 35)" data-s="1">
+<path d="M0 0 C14.75 1.49, 27.09 1.13, 70 0 M0 0 C17.35 0.04, 36.6 -0.24, 70 0 M70 0 C68.3 23.32, 70.32 44.93, 70 70 M70 0 C69.86 25.42, 70.66 49.38, 70 70 M70 70 C45.89 68.56, 22.99 68.44, 0 70 M70 70 C52.85 69.67, 34.64 70.13, 0 70 M0 70 C1.28 54.46, 0.72 39.88, 0 0 M0 70 C-0.46 48.06, 0.38 24.99, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(317.32 96) rotate(0 4.960000000000008 10)" data-s="1">
+<text x="0" y="14.096" font-family="Virgil, Segoe UI Emoji" font-size="16px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">W</text>
+</g>
+<g transform="translate(365.55 98) rotate(0 4.650000000000006 9.375)" data-s="1">
+<text x="0" y="13.215" font-family="Virgil, Segoe UI Emoji" font-size="15px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">+</text>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(384 72) rotate(0 6 35)" data-s="1">
+<path d="M-0.49 -0.1 L11.25 0.93 L12.41 70.97 L-0.34 69.86" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.75 -0.43, 4.75 -0.36, 12 0 M0 0 C3.56 0.15, 6.82 -0.03, 12 0 M12 0 C12.52 15.21, 11.82 30.3, 12 70 M12 0 C12.25 19.39, 12 38.07, 12 70 M12 70 C9.75 69.46, 6.58 69.57, 0 70 M12 70 C7.51 70.04, 3.11 69.77, 0 70 M0 70 C0.4 53.29, 0.92 37.81, 0 0 M0 70 C0.17 44.03, -0.16 18.39, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(387.01 46) rotate(0 4.030000000000001 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">C</text>
+</g>
+<g transform="translate(406.01 98) rotate(0 4.030000000000001 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">×</text>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(422 72) rotate(0 35 6)" data-s="1">
+<path d="M-0.2 -0.76 L69.42 -0.51 L69.15 12.76 L-0.95 12.83" stroke="none" stroke-width="0" fill="var(--color-part5)">
+</path>
+<path d="M0 0 C15.11 -0.09, 28.92 0.33, 70 0 M0 0 C20.51 -0.21, 40.11 0.31, 70 0 M70 0 C69.99 3.43, 69.75 7.24, 70 12 M70 0 C70.18 2.29, 70.24 4.76, 70 12 M70 12 C48.85 13.05, 28.06 11.49, 0 12 M70 12 C49.37 11.98, 29.56 11.87, 0 12 M0 12 C-0.02 8.66, -0.43 5.31, 0 0 M0 12 C-0.09 9.2, -0.14 6.53, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(454.01 46) rotate(0 4.030000000000001 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="var(--color-stroke-warm)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">R</text>
+</g>
+<g transform="translate(406.11 154) rotate(0 44.329999999999984 6.875)" data-s="1">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">scaled by α/r</text>
+</g>
+<g stroke-linecap="round" data-s="2">
+<g transform="translate(506 107) rotate(0 20 0)">
+<path d="M0 0 C7.26 0.35, 17.16 1.07, 40 0 M0 0 C12.26 0.03, 24.18 0.38, 40 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(506 107) rotate(0 20 0)">
+<path d="M21.3 7.08 C24.22 5.88, 29.76 5.15, 40 0 M21.3 7.08 C27.07 4.85, 32.49 3.03, 40 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(506 107) rotate(0 20 0)">
+<path d="M21.12 -6.6 C24.02 -4.99, 29.6 -2.93, 40 0 M21.12 -6.6 C26.92 -4.65, 32.39 -2.29, 40 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(513.35 86) rotate(0 17.05000000000001 6.875)" data-s="2">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">merge</text>
+</g>
+<g transform="translate(610.24 10) rotate(0 34.72000000000003 8.75)" data-s="2">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">deployed</text>
+</g>
+<g stroke-linecap="round" transform="translate(600 72) rotate(0 35 35)" data-s="2" data-note="merged: the seam disappears">
+<path d="M0 0 C13.04 0.76, 27.26 -1.21, 70 0 M0 0 C22.18 -0.27, 44.81 0.07, 70 0 M70 0 C71.25 22.9, 67.59 46.02, 70 70 M70 0 C70.67 17.88, 70.24 34.45, 70 70 M70 70 C50.91 70.24, 32.06 68.1, 0 70 M70 70 C47.39 69.64, 23.1 70.74, 0 70 M0 70 C-0.61 48.03, 1.19 28.97, 0 0 M0 70 C-0.07 45.8, 0.77 23.54, 0 0" stroke="var(--color-stroke-green)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(618.44 90) rotate(0 22.319999999999993 7.5)" data-s="2">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">W + CR</text>
+</g>
+<g transform="translate(612 114) rotate(0 31 6.25)" data-s="2">
+<text x="0" y="8.809999999999999" font-family="Virgil, Segoe UI Emoji" font-size="10px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">one matrix</text>
+</g>
+<g transform="translate(591.84 156) rotate(0 59.51999999999998 7.5)" data-s="2">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">no extra latency</text>
+</g>
+</svg>
+  A LoRA's life in three acts. It is born asleep ($C = 0$), it trains thin, and it retires
+  into the base matrix. Green is the thin factor, orange the wide one.
+</Figure>
+
+Three details in Figure 3 do a lot of quiet work. First, $C$ starts as all zeros, and the
+printed check above confirms it: the largest entry is exactly 0.0. Since $CR = 0$, on day one
+the wrapped model is the base model, bit for bit, and training starts from what the model
+already knows instead of from noise. Second, the update enters scaled by $\alpha/r$, here
+$32/16 = 2$, so if you change the rank later the update's size does not silently change with
+it. Third, when training ends you can merge: replace the frozen matrix with $W + CR$ once,
+and the adapter machinery vanishes. The merged model has the same shape, the same speed, and
+the same memory as the original. We will watch the merge happen, and measure how little it
+changes, at the end of the chapter.
+
+First, the receipt. The printed count is not something to take on faith; it is something to
+check by hand, the way this course checks everything:
+
+<Figure n="4">
+  <svg slot="drawing" viewBox="0 0 647.62 180" width="648" role="img" aria-label="The printed output of print trainable parameters: trainable params 1,081,344, all params 495,114,112, trainable percent 0.2184, the last line highlighted in yellow. Beside it the hand check: q gives 16 times 896 plus 896 times 16 equals 28,672, v gives 16 times 896 plus 128 times 16 equals 16,384, one layer is 45,056, and 24 layers give 1,081,344." style="max-width:100%;height:auto">
+<defs>
+</defs>
+<g stroke-linecap="round" transform="translate(10 10) rotate(0 180 70)" data-s="0" data-note="the printed truth">
+<path d="M0 0 C74.35 2.34, 147.53 1.64, 360 0 M0 0 C101.4 -1.07, 201.68 -1.03, 360 0 M360 0 C362.03 47.99, 360.81 93.39, 360 140 M360 0 C360.94 54.64, 360.43 108.59, 360 140 M360 140 C224.05 141.69, 89.72 142.42, 0 140 M360 140 C243.47 139.32, 127.92 139.97, 0 140 M0 140 C-0.76 90.99, -2.19 43.94, 0 0 M0 140 C0.19 84.99, -0.83 30.07, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(34 28) rotate(0 125.55000000000001 9.375)" data-s="0">
+<text x="0" y="13.215" font-family="Virgil, Segoe UI Emoji" font-size="15px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">trainable params: 1,081,344</text>
+</g>
+<g transform="translate(34 62) rotate(0 106.94999999999999 9.375)" data-s="0">
+<text x="0" y="13.215" font-family="Virgil, Segoe UI Emoji" font-size="15px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">all params: 495,114,112</text>
+</g>
+<g stroke-linecap="round" transform="translate(26 94) rotate(0 125 15)" data-s="1" data-note="a fifth of one percent">
+<path d="M-1.86 -0.53 L249.05 1.47 L250.69 28.43 L-1.25 28.4" stroke="none" stroke-width="0" fill="var(--color-part4)">
+</path>
+<path d="M0 0 C52.27 -0.26, 102.94 -0.68, 250 0 M0 0 C74.42 -0.03, 148.31 -0.25, 250 0 M250 0 C250.39 6.74, 249.75 16.38, 250 30 M250 0 C249.24 9.36, 249.43 18.06, 250 30 M250 30 C185.67 28.06, 119.95 29.4, 0 30 M250 30 C188.01 30.94, 126.73 30.69, 0 30 M0 30 C-0.64 17.61, -0.48 8.67, 0 0 M0 30 C1.09 22.65, 0.56 15.17, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(34 100) rotate(0 83.7 9.375)" data-s="1">
+<text x="0" y="13.215" font-family="Virgil, Segoe UI Emoji" font-size="15px" fill="#141414" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">trainable%: 0.2184</text>
+</g>
+<g transform="translate(420 32) rotate(0 68.50999999999999 8.125)" data-s="2">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">check it by hand:</text>
+</g>
+<g transform="translate(420 62) rotate(0 108.81 8.125)" data-s="2">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">q: 16×896 + 896×16 = 28,672</text>
+</g>
+<g transform="translate(420 90) rotate(0 108.81 8.125)" data-s="2">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">v: 16×896 + 128×16 = 16,384</text>
+</g>
+<g transform="translate(420 118) rotate(0 68.50999999999999 8.125)" data-s="2">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">one layer: 45,056</text>
+</g>
+<g transform="translate(420 146) rotate(0 80.60000000000002 8.125)" data-s="2" data-note="the receipt is checkable">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">24 layers: 1,081,344</text>
+</g>
+<g stroke-linecap="round" data-s="2">
+<g stroke-opacity="0.45" fill-opacity="0.45" transform="translate(410 20) rotate(0 0 75)">
+<path d="M0 0 C1.33 29.32, 0.16 61.07, 0 150" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="8 9">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+</svg>
+  The receipt, and the arithmetic that proves it. Two matrices per layer, two factors each,
+  24 layers. The yellow line is the whole story: a fifth of one percent moves.
+</Figure>
+
+That is the shape of the era we train in: a half-billion numbers stand still while a million
+learn.
+
+## Why a tiny rank is enough
+
+The honest answer is that nobody fully knows, but the strongest evidence predates LoRA. In
+2020, Aghajanyan, Zettlemoyer and Gupta measured the intrinsic dimension of fine-tuning
+([arXiv:2012.13255](https://arxiv.org/abs/2012.13255)): pick a random low-dimensional
+subspace of the full weight space, allow updates only inside it, and see how few dimensions
+still solve the task. For RoBERTa on a standard sentence-pair benchmark, 200 dimensions
+reached ninety percent of full fine-tuning. Not 200 million: 200. Pretraining seems to do the
+hard, high-dimensional work once, and a task update mostly steers between abilities the model
+already has.
+
+LoRA turns that observation into an architecture, with $r$ as the dial. Too small and the
+update cannot span the directions the task needs; the model undershoots and the loss stalls.
+Larger $r$ buys capacity linearly in parameters, and past the task's real dimension the extra
+rows buy nothing. The library defaults to $r$ between 8 and 64 because that range keeps
+winning empirically, and this chapter's own run will show $r = 16$ overshooting a tiny task
+by a comfortable margin.
+
+## The map of the zoo
+
+The PEFT library's tuner folder holds about forty named methods, and the names churn every
+few months. The shapes do not. Sorted by the shape of $\Delta W$, the whole zoo collapses
+into six families.
+
+<Figure n="5">
+  <svg slot="drawing" viewBox="0 0 912.44 552" width="912" role="img" aria-label="Six cards, one per family, each with a small drawing, method names, and its measured trained percentage. Add a thin product: LoRA, AdaLoRA, HiRA, DoRA, 0.22 percent. Rotate, do not add: OFT, BOFT, HRA, 0.27 percent. A few coefficients, a fixed basis: FourierFT, WaveFT, 0.0097 percent. A structured product: LoKr and LoHa, 0.012 percent. Rescale the channels: IA3, VeRA, RandLoRA, 0.0056 percent. Leave W alone, tune the input: prompt, prefix, p-tuning, 0.0029 percent." style="max-width:100%;height:auto;min-width:560px">
+<defs>
+</defs>
+<g transform="translate(269.04 10) rotate(0 233.11999999999998 10)" data-s="0" data-note="one question sorts the whole zoo">
+<text x="0" y="14.096" font-family="Virgil, Segoe UI Emoji" font-size="16px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">every method is an answer to: what shape is ΔW?</text>
+</g>
+<g stroke-linecap="round" transform="translate(10 58) rotate(0 136 116)" data-s="1" data-note="the waist from Lecture 6">
+<path d="M0 0 C56.49 -1.39, 110.65 -2.15, 272 0 M0 0 C76.26 -0.17, 152.79 0.17, 272 0 M272 0 C270.99 70.36, 269.84 142.99, 272 232 M272 0 C271.81 75.49, 271.86 153.31, 272 232 M272 232 C198.21 235.22, 125.34 233.16, 0 232 M272 232 C178.57 231.06, 86.1 230.7, 0 232 M0 232 C-0.55 184.14, -0.16 139.7, 0 0 M0 232 C0.81 165, 0.53 95.93, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(24 68) rotate(0 78.12 8.75)" data-s="1">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">add a thin product</text>
+</g>
+<g transform="translate(24 236) rotate(0 93 7.5)" data-s="1">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">LoRA, AdaLoRA, HiRA, DoRA</text>
+</g>
+<g transform="translate(24 260) rotate(0 66.96 7.5)" data-s="1">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">0.22% trained here</text>
+</g>
+<g stroke-linecap="round" transform="translate(40 110) rotate(0 28 28)" data-s="1">
+<path d="M0 0 C11.89 0.18, 24.65 0.01, 56 0 M0 0 C21.13 0.09, 42.13 -0.6, 56 0 M56 0 C54.79 13.1, 56.88 26.86, 56 56 M56 0 C55.34 13, 56.99 24.81, 56 56 M56 56 C40.13 54.22, 19.78 57.57, 0 56 M56 56 C39.06 56.71, 22.48 55.8, 0 56 M0 56 C1.9 34.31, 0.48 15.99, 0 0 M0 56 C-0.55 39.77, -0.21 22.79, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(65.01 128) rotate(0 4.030000000000001 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">W</text>
+</g>
+<g transform="translate(105.01 130) rotate(0 4.030000000000001 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">+</text>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(124 110) rotate(0 4.5 28)" data-s="1">
+<path d="M-0.46 -0.7 L9.44 0.91 L8.57 55.51 L-0.63 56.7" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.07 0.22, 3.41 0.31, 9 0 M0 0 C3.48 0.19, 6.73 -0.04, 9 0 M9 0 C9.78 20.7, 9.11 40.46, 9 56 M9 0 C9.1 19.64, 8.27 39.7, 9 56 M9 56 C7.2 56.43, 5.25 56.39, 0 56 M9 56 C6.92 56.25, 4.77 56.19, 0 56 M0 56 C0.72 33.67, 0.8 11.78, 0 0 M0 56 C-0.53 36.37, -0.11 16.25, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(143.24 130) rotate(0 3.719999999999999 7.5)" data-s="1">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">×</text>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(162 110) rotate(0 28 4.5)" data-s="1">
+<path d="M-0.94 -0.47 L56.55 0.62 L55.39 9.03 L0.96 9.68" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C10.83 -0.5, 22 -0.09, 56 0 M0 0 C18.65 -0.15, 37.19 0.55, 56 0 M56 0 C56.18 2.47, 56.27 3.85, 56 9 M56 0 C55.79 2.97, 55.82 5.7, 56 9 M56 9 C37.2 9.19, 18.63 8.61, 0 9 M56 9 C38.85 8.43, 21.33 9.19, 0 9 M0 9 C-0.41 6.28, -0.14 4.57, 0 0 M0 9 C0.07 6.71, -0.12 4.61, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(174.82 134) rotate(0 20.460000000000008 6.875)" data-s="1">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">rank r</text>
+</g>
+<g stroke-linecap="round" transform="translate(306 58) rotate(0 136 116)" data-s="2" data-note="rotations cannot change a length">
+<path d="M0 0 C56.06 0.72, 112.61 1.67, 272 0 M0 0 C74.97 -1.25, 148.78 -1.38, 272 0 M272 0 C270.73 67.14, 272.52 137.75, 272 232 M272 0 C271.25 60.03, 271.18 119.13, 272 232 M272 232 C205.58 232.39, 137.31 233.83, 0 232 M272 232 C166.27 231.15, 59.62 232.16, 0 232 M0 232 C-2.48 149.7, -0.54 70.94, 0 0 M0 232 C0.04 148.75, -0.39 66.11, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(320 68) rotate(0 78.12 8.75)" data-s="2">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">rotate, do not add</text>
+</g>
+<g transform="translate(320 236) rotate(0 52.079999999999984 7.5)" data-s="2">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">OFT, BOFT, HRA</text>
+</g>
+<g transform="translate(320 260) rotate(0 66.95999999999998 7.5)" data-s="2">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">0.27% trained here</text>
+</g>
+<g stroke-linecap="round" transform="translate(346 110) rotate(0 28 28)" data-s="2">
+<path d="M0 0 C11.32 0.09, 23.14 -1.89, 56 0 M0 0 C19.84 0.08, 39.71 -1.21, 56 0 M56 0 C54.64 12.24, 56.19 26.57, 56 56 M56 0 C56.81 19.63, 56.33 40.2, 56 56 M56 56 C38.73 54.64, 21.45 54.48, 0 56 M56 56 C35.92 56.36, 15.8 57.21, 0 56 M0 56 C1.15 37.01, 1.57 21.52, 0 0 M0 56 C0.43 35.13, 0.6 14.67, 0 0" stroke="var(--color-accent)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.7" fill-opacity="0.7" stroke-linecap="round" transform="translate(350 114) rotate(0 7.5 7.5)" data-s="2">
+<path d="M0.4 -0.67 L15.95 0.61 L14.78 15.88 L-0.46 14.63" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.59 -0.2, 6.85 0.63, 15 0 M0 0 C3.8 0.34, 7.01 0.31, 15 0 M15 0 C14.23 4.52, 14.39 8.5, 15 15 M15 0 C14.96 4.75, 15.12 9.87, 15 15 M15 15 C10.64 15, 7.25 15.5, 0 15 M15 15 C8.7 15.12, 3.05 15.02, 0 15 M0 15 C-0.03 10.63, 0.33 6.77, 0 0 M0 15 C0.25 10.06, -0.37 5.24, 0 0" stroke="var(--color-accent)" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.7" fill-opacity="0.7" stroke-linecap="round" transform="translate(366.5 130.5) rotate(0 7.5 7.5)" data-s="2">
+<path d="M-0.84 0.45 L14 -0.53 L15.69 15.15 L-0.67 15.62" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.66 -0.53, 5.98 0.38, 15 0 M0 0 C4.58 -0.38, 9.46 0.05, 15 0 M15 0 C15.54 4.36, 15.27 9.87, 15 15 M15 0 C14.69 4.3, 15.18 8.96, 15 15 M15 15 C10.99 15.43, 8.92 15, 0 15 M15 15 C11.55 15.19, 7.93 15.43, 0 15 M0 15 C-0.53 8.52, 0.02 3.22, 0 0 M0 15 C-0.18 10.75, 0.01 6.6, 0 0" stroke="var(--color-accent)" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.7" fill-opacity="0.7" stroke-linecap="round" transform="translate(383 147) rotate(0 7.5 7.5)" data-s="2">
+<path d="M-0.07 -0.44 L14.06 0.33 L14.6 14.41 L-0.87 14.61" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.23 0.49, 6.61 -0.02, 15 0 M0 0 C5.36 -0.34, 11.16 -0.21, 15 0 M15 0 C15.49 5.7, 14.79 9.74, 15 15 M15 0 C15.01 4.59, 15.09 8.8, 15 15 M15 15 C9.84 14.37, 3.09 14.5, 0 15 M15 15 C10.65 15.11, 6.8 14.93, 0 15 M0 15 C0.31 9.4, -0.43 5.66, 0 0 M0 15 C-0.01 11.45, 0.24 8.72, 0 0" stroke="var(--color-accent)" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(341.11 174) rotate(0 44.329999999999984 6.875)" data-s="2">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="var(--color-accent)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">R, orthogonal</text>
+</g>
+<g transform="translate(415.01 130) rotate(0 4.030000000000001 8.125)" data-s="2">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">×</text>
+</g>
+<g stroke-linecap="round" transform="translate(434 110) rotate(0 28 28)" data-s="2">
+<path d="M0 0 C12.47 -1.68, 21.22 1.53, 56 0 M0 0 C22.8 -0.42, 43.92 -0.41, 56 0 M56 0 C56.17 13.88, 54.89 28.82, 56 56 M56 0 C55.65 11.93, 56.55 22.89, 56 56 M56 56 C40.81 58.03, 25.12 54.86, 0 56 M56 56 C44.03 56.76, 32.7 54.93, 0 56 M0 56 C0.22 34.41, -0.18 15.29, 0 0 M0 56 C-0.57 39.73, -1.41 25.4, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(459.01 128) rotate(0 4.030000000000001 8.125)" data-s="2">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">W</text>
+</g>
+<g stroke-linecap="round" transform="translate(602 58) rotate(0 136 116)" data-s="3" data-note="choose little, inherit full rank">
+<path d="M0 0 C54.74 -0.54, 112.77 -0.84, 272 0 M0 0 C91.07 0.81, 182.98 1.16, 272 0 M272 0 C272.64 73.9, 273.01 146.14, 272 232 M272 0 C272.07 83.36, 270.96 167.6, 272 232 M272 232 C165.41 233.94, 62.48 233.81, 0 232 M272 232 C195.08 231.76, 118.33 231.72, 0 232 M0 232 C2.92 175.41, 0.09 120.62, 0 0 M0 232 C-1.97 145.38, -0.7 56.88, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(616 68) rotate(0 143.22000000000003 8.75)" data-s="3">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">a few coefficients, a fixed basis</text>
+</g>
+<g transform="translate(616 236) rotate(0 63.24000000000001 7.5)" data-s="3">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">FourierFT, WaveFT</text>
+</g>
+<g transform="translate(616 260) rotate(0 74.39999999999998 7.5)" data-s="3">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">0.0097% trained here</text>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(628 110) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C1.74 0.06, 4.61 0.18, 11 0 M0 0 C2.47 -0.24, 5.1 0.12, 11 0 M11 0 C11.5 3.14, 11.47 5.18, 11 11 M11 0 C10.83 3.1, 10.91 5.94, 11 11 M11 11 C8.42 11.12, 5.57 10.52, 0 11 M11 11 C8.49 10.87, 5.79 10.73, 0 11 M0 11 C-0.14 8.31, -0.47 7.12, 0 0 M0 11 C-0.1 6.94, -0.05 2.74, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(640 110) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.53 -0.29, 3.97 -0.12, 11 0 M0 0 C3.04 -0.22, 6.34 -0.07, 11 0 M11 0 C11.47 3.02, 11.13 6.18, 11 11 M11 0 C11.18 2.76, 10.96 5.27, 11 11 M11 11 C6.47 11.44, 2.39 11.25, 0 11 M11 11 C7.83 10.91, 4.97 11.02, 0 11 M0 11 C-0.51 6.76, 0.4 3.42, 0 0 M0 11 C0.13 7.46, 0.22 3.74, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(652 110) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.21 0.57, 4.43 -0.31, 11 0 M0 0 C4.16 -0.08, 8.14 -0.15, 11 0 M11 0 C11.33 4, 10.67 7.18, 11 11 M11 0 C10.98 2.42, 11 4.61, 11 11 M11 11 C6.73 10.66, 3.62 10.89, 0 11 M11 11 C7.17 10.96, 3.59 10.76, 0 11 M0 11 C0.22 7.4, 0.18 5.21, 0 0 M0 11 C0.26 7.97, -0.16 4.74, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(664 110) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C1.9 0.22, 4.89 0.5, 11 0 M0 0 C2.53 -0.05, 5.53 0.22, 11 0 M11 0 C11.19 3.89, 11.31 8.19, 11 11 M11 0 C11.22 4.29, 10.93 8.34, 11 11 M11 11 C6.99 10.98, 3.74 10.52, 0 11 M11 11 C7.06 11.01, 2.76 11.06, 0 11 M0 11 C-0.26 8.05, -0.16 5.91, 0 0 M0 11 C-0.17 8.48, 0.01 5.74, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(676 110) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.68 -0.02, 4.25 0.31, 11 0 M0 0 C3.65 -0.03, 6.78 0.03, 11 0 M11 0 C11.15 4.87, 10.97 9.19, 11 11 M11 0 C11.01 3.95, 10.98 8.22, 11 11 M11 11 C8.34 11.3, 4.96 11.25, 0 11 M11 11 C8.6 11.06, 6.33 10.8, 0 11 M0 11 C0.47 6.5, -0.38 3.3, 0 0 M0 11 C0.07 6.79, -0.26 2.35, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(688 110) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.37 -0.26, 4.72 0.12, 11 0 M0 0 C4.22 0.11, 8.58 -0.05, 11 0 M11 0 C11.01 2.56, 10.51 4.69, 11 11 M11 0 C10.81 3.62, 11.02 7.55, 11 11 M11 11 C8.6 10.52, 6.18 10.88, 0 11 M11 11 C8.5 11.11, 5.51 11.1, 0 11 M0 11 C0.1 7.14, 0.49 4, 0 0 M0 11 C0.19 7.3, -0.09 3.35, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(628 122) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.06 0.49, 4.08 -0.17, 11 0 M0 0 C2.59 0.13, 5.42 -0.24, 11 0 M11 0 C10.87 2.44, 11.15 5.7, 11 11 M11 0 C11.16 3.28, 11.07 6.89, 11 11 M11 11 C8.85 10.84, 6.31 10.52, 0 11 M11 11 C7.84 11.16, 4.68 10.84, 0 11 M0 11 C-0.38 7.79, 0.16 5.8, 0 0 M0 11 C-0.13 7.81, 0.19 4.35, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(640 122) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C1.74 0.25, 4.54 -0.36, 11 0 M0 0 C3.71 0.16, 7.22 0.12, 11 0 M11 0 C10.83 3.42, 10.81 6.7, 11 11 M11 0 C10.96 2.95, 11.11 6.22, 11 11 M11 11 C6.91 11.16, 3.13 11.25, 0 11 M11 11 C7.18 11.21, 3.85 11.13, 0 11 M0 11 C0.35 6.24, -0.07 2.09, 0 0 M0 11 C0 8.32, -0.19 5.9, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(652 122) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0.9 0.51 L11.02 0.88 L10.11 11.89 L-0.34 11.48" stroke="none" stroke-width="0" fill="var(--color-part4)">
+</path>
+<path d="M0 0 C2.53 -0.11, 5 0.45, 11 0 M0 0 C2.08 0.18, 4.61 -0.07, 11 0 M11 0 C10.69 3.31, 11.45 7.71, 11 11 M11 0 C10.75 3.16, 11.15 5.55, 11 11 M11 11 C7.17 11.37, 4.35 10.77, 0 11 M11 11 C7.07 11.26, 3.03 10.88, 0 11 M0 11 C-0.02 6.88, -0.29 3.89, 0 0 M0 11 C0.23 6.63, 0.09 2.5, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(664 122) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.21 -0.35, 4.37 0.26, 11 0 M0 0 C3.2 -0.23, 5.86 -0.15, 11 0 M11 0 C10.55 4.29, 11 8.71, 11 11 M11 0 C11.1 2.82, 11.2 5.43, 11 11 M11 11 C7.42 10.59, 4.48 11.51, 0 11 M11 11 C8.61 11.31, 6.05 11.17, 0 11 M0 11 C-0.5 7.53, 0.47 4.59, 0 0 M0 11 C-0.19 7.14, -0.29 3.5, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(676 122) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C1.9 0.51, 4.83 0.07, 11 0 M0 0 C3.77 -0.21, 7.66 0.21, 11 0 M11 0 C10.51 1.98, 10.65 4.21, 11 11 M11 0 C10.9 2.49, 11.24 4.77, 11 11 M11 11 C8.78 10.91, 5.7 11.14, 0 11 M11 11 C7.95 10.7, 5.22 10.8, 0 11 M0 11 C0.23 8.18, 0.25 6.38, 0 0 M0 11 C0.04 7.65, -0.01 4.5, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(688 122) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.69 0.16, 4.19 -0.22, 11 0 M0 0 C2.15 -0.18, 4.5 0.02, 11 0 M11 0 C11.47 2.96, 11.29 5.22, 11 11 M11 0 C11.25 4.35, 11.29 8.5, 11 11 M11 11 C9.03 11.23, 6.92 10.77, 0 11 M11 11 C7.84 10.75, 4.4 11.1, 0 11 M0 11 C-0.15 6.62, 0.02 3.78, 0 0 M0 11 C0.16 8.16, 0.16 5.5, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(628 134) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.37 -0.08, 4.65 -0.41, 11 0 M0 0 C3.27 -0.04, 6.3 -0.06, 11 0 M11 0 C11.44 2.84, 10.95 6.22, 11 11 M11 0 C11.04 4.02, 10.78 7.83, 11 11 M11 11 C7.09 10.46, 2.64 11.51, 0 11 M11 11 C7.19 10.8, 3.57 10.84, 0 11 M0 11 C0.47 8.37, -0.31 4.47, 0 0 M0 11 C-0.15 8.67, -0.11 6.5, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(640 134) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.06 -0.43, 4.01 0.39, 11 0 M0 0 C3.84 -0.02, 8.09 -0.25, 11 0 M11 0 C11.3 3.83, 10.49 7.22, 11 11 M11 0 C10.84 3.68, 10.82 7.71, 11 11 M11 11 C7.34 10.78, 3.87 11.14, 0 11 M11 11 C7.08 10.85, 2.74 11.13, 0 11 M0 11 C0.1 9.01, -0.54 6.27, 0 0 M0 11 C-0.03 6.98, 0.06 3.1, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(652 134) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C1.74 0.43, 4.48 0.21, 11 0 M0 0 C2.76 0.01, 4.94 0.11, 11 0 M11 0 C11.15 3.71, 11.13 8.23, 11 11 M11 0 C11.08 3.35, 10.76 7.04, 11 11 M11 11 C7.6 11.1, 3.99 10.77, 0 11 M11 11 C8.62 10.9, 6.32 10.88, 0 11 M0 11 C-0.27 7.46, 0.34 2.57, 0 0 M0 11 C0.1 7.5, -0.32 4.1, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(664 134) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.53 0.19, 4.94 0.02, 11 0 M0 0 C3.33 0.14, 6.74 0.03, 11 0 M11 0 C11.12 4.7, 10.79 8.13, 11 11 M11 0 C10.87 3.01, 10.8 6.38, 11 11 M11 11 C7.86 11.42, 5.21 11.5, 0 11 M11 11 C7.96 10.95, 5.49 11.17, 0 11 M0 11 C0.35 8.11, 0 4.36, 0 0 M0 11 C-0.22 8.01, -0.04 5.65, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(676 134) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.21 -0.16, 4.3 -0.27, 11 0 M0 0 C3.9 0.17, 8.53 -0.16, 11 0 M11 0 C10.98 2.38, 11.43 4.73, 11 11 M11 0 C11.22 2.68, 10.85 5.71, 11 11 M11 11 C8.11 10.64, 6.44 11.14, 0 11 M11 11 C7.85 11, 4.66 10.91, 0 11 M0 11 C-0.02 8.75, -0.22 5.06, 0 0 M0 11 C-0.1 8.52, 0.13 6.65, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(688 134) rotate(0 5.5 5.5)" data-s="3">
+<path d="M-0.24 0.54 L11.53 0.59 L10.32 11.27 L-0.18 10.41" stroke="none" stroke-width="0" fill="var(--color-part4)">
+</path>
+<path d="M0 0 C1.9 -0.41, 4.76 -0.46, 11 0 M0 0 C2.82 0.19, 5.38 0.2, 11 0 M11 0 C10.83 2.26, 10.98 5.74, 11 11 M11 0 C11.02 2.89, 10.89 5.04, 11 11 M11 11 C7.27 10.96, 2.16 10.77, 0 11 M11 11 C7.19 11.05, 3.28 11.21, 0 11 M0 11 C-0.39 7.2, -0.44 2.45, 0 0 M0 11 C0.14 6.83, -0.14 3.25, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(628 146) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0.53 -0.35 L11.59 -0.55 L11.23 10.53 L-0.38 11.41" stroke="none" stroke-width="0" fill="var(--color-part4)">
+</path>
+<path d="M0 0 C2.69 0.34, 4.13 0.34, 11 0 M0 0 C3.39 0.22, 7.18 0.01, 11 0 M11 0 C10.8 3.25, 10.63 6.74, 11 11 M11 0 C10.82 2.55, 10.93 4.92, 11 11 M11 11 C7.52 11.28, 3.38 11.5, 0 11 M11 11 C6.54 11.1, 2.46 10.95, 0 11 M0 11 C0.23 7.85, 0.32 3.15, 0 0 M0 11 C-0.29 7.34, 0.03 4.25, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(640 146) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.37 0.1, 4.59 0.16, 11 0 M0 0 C4.51 -0.2, 8.42 -0.07, 11 0 M11 0 C10.66 3.13, 11.27 6.65, 11 11 M11 0 C11.16 4.42, 10.98 8.66, 11 11 M11 11 C7.78 11.49, 4.6 11.03, 0 11 M11 11 C8.63 11.15, 6.03 11.24, 0 11 M0 11 C-0.14 8.49, 0.1 4.95, 0 0 M0 11 C-0.05 7.85, -0.24 5.25, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(652 146) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.06 -0.14, 5.05 -0.03, 11 0 M0 0 C2.88 -0.17, 5.82 -0.26, 11 0 M11 0 C10.63 4.12, 10.93 7.65, 11 11 M11 0 C10.96 4.08, 11.02 7.99, 11 11 M11 11 C8.03 10.71, 4.73 10.66, 0 11 M11 11 C7.97 11.09, 5.2 10.88, 0 11 M0 11 C-0.51 9.14, -0.13 6.74, 0 0 M0 11 C0.07 8.91, -0.07 6.25, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(664 146) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C1.74 -0.49, 4.41 -0.33, 11 0 M0 0 C3.45 -0.14, 7.61 0.1, 11 0 M11 0 C10.48 4, 10.47 8.65, 11 11 M11 0 C10.76 3.75, 11.07 7.32, 11 11 M11 11 C8.29 11.03, 5.95 11.39, 0 11 M11 11 C7.86 11.14, 4.38 11.17, 0 11 M0 11 C0.11 7.59, -0.46 3.04, 0 0 M0 11 C0.3 7.22, 0.21 2.85, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(676 146) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.53 0.37, 4.87 -0.51, 11 0 M0 0 C2.38 -0.01, 4.46 0.03, 11 0 M11 0 C11.44 2.78, 11.11 5.26, 11 11 M11 0 C11.11 3.41, 11.11 7.2, 11 11 M11 11 C6.35 11.35, 2.77 11.03, 0 11 M11 11 C7.2 11.18, 3.55 10.92, 0 11 M0 11 C-0.26 8.23, 0.41 4.84, 0 0 M0 11 C-0.12 7.73, -0.17 3.85, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(688 146) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.21 0.02, 4.24 0.29, 11 0 M0 0 C2.95 0.02, 6.26 -0.16, 11 0 M11 0 C11.41 2.67, 10.77 6.26, 11 11 M11 0 C10.9 3.08, 11.16 6.54, 11 11 M11 11 C7.7 10.57, 2.9 10.66, 0 11 M11 11 C6.54 11.23, 2.72 11.21, 0 11 M0 11 C0.47 8.88, 0.19 5.53, 0 0 M0 11 C0.11 8.24, 0.11 4.85, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(628 158) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C1.9 -0.22, 4.7 0.11, 11 0 M0 0 C4.07 0.04, 7.5 0.2, 11 0 M11 0 C11.26 3.65, 11.41 6.16, 11 11 M11 0 C11.25 2.74, 11.2 5.87, 11 11 M11 11 C7.96 10.9, 4.12 11.39, 0 11 M11 11 C8.63 10.73, 5.75 10.95, 0 11 M0 11 C0.1 7.33, -0.04 2.93, 0 0 M0 11 C0.24 8.75, -0.27 6.4, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(640 158) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.69 -0.46, 4.06 -0.08, 11 0 M0 0 C2.44 0.18, 4.9 0.12, 11 0 M11 0 C11.12 3.54, 10.96 7.17, 11 11 M11 0 C11.05 2.4, 11.24 5.2, 11 11 M11 11 C8.21 11.22, 5.34 11.02, 0 11 M11 11 C7.98 10.78, 4.92 11.25, 0 11 M0 11 C-0.39 7.97, -0.37 3.62, 0 0 M0 11 C-0.19 7.06, -0.1 3, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(652 158) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.37 0.28, 4.52 -0.38, 11 0 M0 0 C3.01 0.2, 6.69 -0.07, 11 0 M11 0 C11.09 4.52, 10.61 8.17, 11 11 M11 0 C10.74 2.62, 11.18 5.08, 11 11 M11 11 C8.47 11.54, 5.46 10.66, 0 11 M11 11 C7.87 10.83, 4.09 10.99, 0 11 M0 11 C0.34 8.62, 0.5 5.42, 0 0 M0 11 C0.04 7.57, 0.18 4, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(664 158) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.06 0.04, 4.98 0.54, 11 0 M0 0 C4.13 0.23, 7.94 -0.26, 11 0 M11 0 C10.95 2.2, 11.25 4.78, 11 11 M11 0 C11.08 4.48, 11.22 8.81, 11 11 M11 11 C6.52 10.76, 2.29 11.39, 0 11 M11 11 C7.21 10.88, 3.26 11.28, 0 11 M0 11 C-0.03 7.07, 0.28 1.72, 0 0 M0 11 C0.17 8.09, -0.2 5, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(676 158) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0.16 0.8 L10.15 0.01 L10.35 11.17 L-0.42 11.33" stroke="none" stroke-width="0" fill="var(--color-part4)">
+</path>
+<path d="M0 0 C1.74 -0.31, 4.35 0.24, 11 0 M0 0 C2.5 -0.19, 5.34 0.21, 11 0 M11 0 C10.8 3.19, 10.8 5.78, 11 11 M11 0 C10.88 4.15, 10.72 8.15, 11 11 M11 11 C6.78 11.08, 3.51 11.02, 0 11 M11 11 C6.55 10.93, 2.44 11.03, 0 11 M0 11 C-0.51 7.71, -0.06 3.51, 0 0 M0 11 C-0.15 8.6, 0.08 6, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(688 158) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.53 -0.55, 4.81 0.05, 11 0 M0 0 C3.62 -0.16, 7.13 0.02, 11 0 M11 0 C10.77 3.07, 11.55 5.68, 11 11 M11 0 C11.23 3.81, 10.76 7.48, 11 11 M11 11 C7.04 11.4, 3.63 10.66, 0 11 M11 11 C8.64 10.98, 6.01 11.32, 0 11 M0 11 C0.22 8.36, -0.28 5.31, 0 0 M0 11 C-0.02 6.91, -0.3 2.6, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(628 170) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.22 0.31, 4.17 -0.13, 11 0 M0 0 C4.19 -0.13, 8.38 -0.17, 11 0 M11 0 C10.63 2.96, 11.1 6.69, 11 11 M11 0 C11.02 3.48, 10.8 6.81, 11 11 M11 11 C8.39 10.51, 4.86 11.28, 0 11 M11 11 C7.98 10.92, 5.18 10.95, 0 11 M0 11 C-0.15 9.01, 0.59 6, 0 0 M0 11 C0.21 7.42, -0.02 3.6, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(640 170) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C1.9 -0.04, 4.63 -0.43, 11 0 M0 0 C2.56 -0.11, 5.77 0.19, 11 0 M11 0 C10.59 3.94, 10.75 7.69, 11 11 M11 0 C10.82 3.14, 10.85 6.69, 11 11 M11 11 C8.65 10.83, 6.08 10.91, 0 11 M11 11 C7.33 10.97, 4.36 10.7, 0 11 M0 11 C0.47 7.45, 0.26 3.4, 0 0 M0 11 C-0.22 7.93, 0.15 4.6, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(652 170) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.69 -0.28, 4 0.49, 11 0 M0 0 C3.68 0.03, 7.02 0.11, 11 0 M11 0 C11.55 3.82, 11.39 8.69, 11 11 M11 0 C11.17 2.81, 10.89 6.03, 11 11 M11 11 C8.9 11.15, 6.2 10.55, 0 11 M11 11 C7.22 11.02, 2.98 10.99, 0 11 M0 11 C0.1 8.1, 0.03 4.1, 0 0 M0 11 C0.02 8.44, -0.12 6.15, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(664 170) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.37 0.47, 4.46 0.19, 11 0 M0 0 C2.06 0.05, 4.42 -0.08, 11 0 M11 0 C11.41 2.61, 10.94 5.3, 11 11 M11 0 C10.97 2.47, 10.94 5.36, 11 11 M11 11 C6.96 11.47, 3.02 11.28, 0 11 M11 11 C6.56 11.07, 2.15 10.73, 0 11 M0 11 C-0.27 8.75, -0.19 5.89, 0 0 M0 11 C0.14 6.75, 0.05 2.75, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(676 170) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C2.06 0.23, 4.92 0, 11 0 M0 0 C3.18 0.08, 6.21 -0.27, 11 0 M11 0 C11.37 2.49, 10.59 5.2, 11 11 M11 0 C10.76 2.68, 10.98 4.69, 11 11 M11 11 C7.21 10.69, 4.25 10.91, 0 11 M11 11 C8.65 11.12, 5.73 11.03, 0 11 M0 11 C0.35 7.19, -0.53 2.19, 0 0 M0 11 C-0.28 7.26, 0.22 3.75, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.25" fill-opacity="0.25" stroke-linecap="round" transform="translate(688 170) rotate(0 5.5 5.5)" data-s="3">
+<path d="M0 0 C1.74 -0.01, 4.28 -0.18, 11 0 M0 0 C3.75 0.21, 7.46 0.2, 11 0 M11 0 C11.23 3.48, 11.23 6.21, 11 11 M11 0 C11.11 4.55, 11.02 8.97, 11 11 M11 11 C7.47 11.01, 4.37 10.54, 0 11 M11 11 C7.99 11.17, 4.9 10.77, 0 11 M0 11 C-0.02 7.84, 0.35 3.99, 0 0 M0 11 C-0.05 7.77, -0.05 4.75, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-linecap="round" data-s="3">
+<g transform="translate(710 146) rotate(0 17 0)">
+<path d="M0 0 C7.47 -0.7, 14.37 -0.9, 34 0 M0 0 C6.89 0.44, 14.9 0.03, 34 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(710 146) rotate(0 17 0)">
+<path d="M18.07 5.92 C21.78 4.15, 24.98 2.75, 34 0 M18.07 5.92 C21.13 5.01, 25.13 3.37, 34 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(710 146) rotate(0 17 0)">
+<path d="M17.99 -5.71 C21.67 -5.1, 24.89 -4.1, 34 0 M17.99 -5.71 C21.02 -4.1, 25.03 -3.21, 34 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(710.9 124) rotate(0 21.69999999999999 6.25)" data-s="3">
+<text x="0" y="8.809999999999999" font-family="Virgil, Segoe UI Emoji" font-size="10px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">inverse</text>
+</g>
+<g transform="translate(710.9 158) rotate(0 21.69999999999999 6.25)" data-s="3">
+<text x="0" y="8.809999999999999" font-family="Virgil, Segoe UI Emoji" font-size="10px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Fourier</text>
+</g>
+<g stroke-linecap="round" transform="translate(752 110) rotate(0 36 36)" data-s="3">
+<path d="M0 0 C16.34 -0.38, 31.42 -0.2, 72 0 M0 0 C17.38 -0.28, 34.15 0.55, 72 0 M72 0 C72.07 18.24, 71.52 31.75, 72 72 M72 0 C70.75 21.18, 72.02 41.95, 72 72 M72 72 C48.25 73.05, 24.41 73.34, 0 72 M72 72 C53.77 71.76, 36.36 71.87, 0 72 M0 72 C2.48 52.71, 1.95 30.23, 0 0 M0 72 C0.69 50.35, 1.35 29.15, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(782.02 138) rotate(0 8.060000000000002 8.125)" data-s="3">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">ΔW</text>
+</g>
+<g stroke-linecap="round" transform="translate(10 310) rotate(0 136 116)" data-s="4" data-note="structure buys size cheaply">
+<path d="M0 0 C55.24 0.28, 112.57 -2.39, 272 0 M0 0 C101.74 -1.93, 205.16 -2.49, 272 0 M272 0 C269.84 67.61, 270.84 138.83, 272 232 M272 0 C271.2 56.94, 272.1 115.25, 272 232 M272 232 C201.74 229, 132.33 228.44, 0 232 M272 232 C183.87 229.94, 96.03 229.85, 0 232 M0 232 C-0.87 147.6, -0.42 60.2, 0 0 M0 232 C1.03 139.67, 1.87 49.3, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(24 320) rotate(0 86.8 8.75)" data-s="4">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">a structured product</text>
+</g>
+<g transform="translate(24 488) rotate(0 133.92 7.5)" data-s="4">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">LoKr (Kronecker), LoHa (elementwise)</text>
+</g>
+<g transform="translate(24 512) rotate(0 70.68 7.5)" data-s="4">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">0.012% trained here</text>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(36 366) rotate(0 14 14)" data-s="4">
+<path d="M-0.87 -0.26 L28.12 0.56 L28.86 27.66 L0.11 27.2" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C5.1 0.82, 11.47 -0.49, 28 0 M0 0 C7.31 0.48, 14.46 0.55, 28 0 M28 0 C28.65 6.12, 28.95 13.35, 28 28 M28 0 C28.34 9.96, 27.66 19.76, 28 28 M28 28 C19.82 27.65, 11.36 28.29, 0 28 M28 28 C20.27 28.01, 12.29 27.72, 0 28 M0 28 C0.64 19.35, -0.03 8.6, 0 0 M0 28 C-0.07 22.81, -0.24 16.61, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(73.01 372) rotate(0 4.030000000000001 8.125)" data-s="4">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">×</text>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(90 372) rotate(0 8 8)" data-s="4">
+<path d="M0.65 -0.03 L16.23 0.28 L16.68 16.18 L-0.3 15.18" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.45 -0.23, 6.3 0.48, 16 0 M0 0 C3.41 -0.36, 7 -0.13, 16 0 M16 0 C16.08 4.63, 15.42 10.55, 16 16 M16 0 C15.67 4.76, 15.84 9.4, 16 16 M16 16 C12.13 16.66, 8.5 16.77, 0 16 M16 16 C9.73 16.15, 3.89 15.83, 0 16 M0 16 C-0.74 13.09, 0.74 9.95, 0 0 M0 16 C-0.31 11.42, -0.31 5.97, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(117.01 372) rotate(0 4.029999999999994 8.125)" data-s="4">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">=</text>
+</g>
+<g stroke-opacity="0.6" fill-opacity="0.6" stroke-linecap="round" transform="translate(138 350) rotate(0 16 16)" data-s="4">
+<path d="M0 0 C5.64 0.63, 12.47 -0.28, 32 0 M0 0 C11.58 -0.14, 22.75 0.36, 32 0 M32 0 C31.76 11.92, 31.79 23.93, 32 32 M32 0 C31.59 7.73, 31.72 16.32, 32 32 M32 32 C19.92 32.02, 10.74 31.66, 0 32 M32 32 C23.77 32.42, 15.85 31.91, 0 32 M0 32 C-0.53 23.18, -0.14 13.9, 0 0 M0 32 C0.24 25.65, 0.4 19.13, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.6" fill-opacity="0.6" stroke-linecap="round" transform="translate(172 350) rotate(0 16 16)" data-s="4">
+<path d="M0 0 C7.06 0.24, 13.31 -0.57, 32 0 M0 0 C7.08 -0.13, 13.94 -0.02, 32 0 M32 0 C31.78 7.73, 31.24 13.8, 32 32 M32 0 C32.24 6.82, 31.81 14.52, 32 32 M32 32 C22.85 32.61, 11.88 33, 0 32 M32 32 C23.08 32.2, 13.37 32.13, 0 32 M0 32 C0.83 25.06, -0.51 16.59, 0 0 M0 32 C-0.27 20.76, -0.03 9.31, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.6" fill-opacity="0.6" stroke-linecap="round" transform="translate(138 384) rotate(0 16 16)" data-s="4">
+<path d="M0 0 C6.49 -0.47, 12.16 0.82, 32 0 M0 0 C9.98 -0.12, 18.93 -0.4, 32 0 M32 0 C31.47 7.94, 32.36 16.47, 32 32 M32 0 C31.88 6.92, 31.9 12.71, 32 32 M32 32 C23.78 31.21, 15.03 32.34, 0 32 M32 32 C21.39 32.3, 10.88 31.68, 0 32 M0 32 C0.2 20.55, -0.88 8.48, 0 0 M0 32 C-0.1 22.27, 0.23 12.3, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.6" fill-opacity="0.6" stroke-linecap="round" transform="translate(172 384) rotate(0 16 16)" data-s="4">
+<path d="M0 0 C5.92 -0.86, 13 0.53, 32 0 M0 0 C11.88 0.21, 23.93 0.54, 32 0 M32 0 C31.17 8.15, 31.49 19.14, 32 32 M32 0 C31.52 12.41, 31.99 23.7, 32 32 M32 32 C24.7 31.8, 16.18 31.69, 0 32 M32 32 C19.7 32.4, 8.4 32.22, 0 32 M0 32 C-0.76 22.44, 0.43 11.17, 0 0 M0 32 C0.39 23.78, -0.2 15.28, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(109.9 426) rotate(0 83.7 6.25)" data-s="4">
+<text x="0" y="8.809999999999999" font-family="Virgil, Segoe UI Emoji" font-size="10px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">every block, one small tile</text>
+</g>
+<g stroke-linecap="round" transform="translate(306 310) rotate(0 136 116)" data-s="5" data-note="one learned number per channel">
+<path d="M0 0 C56.15 -0.09, 110.92 -0.74, 272 0 M0 0 C85.52 -0.99, 170.32 -1.68, 272 0 M272 0 C273.38 80.98, 271.99 164.23, 272 232 M272 0 C271.71 76.03, 272.33 151.87, 272 232 M272 232 C174.7 231.81, 79.5 230.85, 0 232 M272 232 C202.53 231.09, 132.7 232.2, 0 232 M0 232 C0.63 140.65, 0.15 46.11, 0 0 M0 232 C1.71 147.48, 2.69 62.36, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(320 320) rotate(0 86.80000000000001 8.75)" data-s="5">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">rescale the channels</text>
+</g>
+<g transform="translate(320 488) rotate(0 70.68 7.5)" data-s="5">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">IA3, VeRA, RandLoRA</text>
+</g>
+<g transform="translate(320 512) rotate(0 74.4 7.5)" data-s="5">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">0.0056% trained here</text>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(336 354) rotate(0 28 7)" data-s="5">
+<path d="M0 0 C11.42 -0.27, 23.89 -0.28, 56 0 M0 0 C10.91 0.01, 22.13 0, 56 0 M56 0 C56.17 3.83, 55.4 7.88, 56 14 M56 0 C56.23 2.97, 56.34 6.57, 56 14 M56 14 C45.04 13.05, 32.61 13.44, 0 14 M56 14 C44.14 14.09, 31.6 14.58, 0 14 M0 14 C0.74 9.3, -0.12 4.45, 0 0 M0 14 C0.07 8.74, 0.01 3.83, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(336 371) rotate(0 28 7)" data-s="5">
+<path d="M0 0 C10.85 -0.56, 22.73 -0.48, 56 0 M0 0 C15.54 -0.05, 30.58 0.55, 56 0 M56 0 C55.99 5.08, 56.22 9.16, 56 14 M56 0 C55.97 2.54, 56.4 5.72, 56 14 M56 14 C35.69 13.67, 15.21 14.8, 0 14 M56 14 C41.47 14.22, 27.15 14.15, 0 14 M0 14 C0.13 10.12, -0.55 5.34, 0 0 M0 14 C0.37 9.39, 0.36 5.1, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(336 388) rotate(0 28 7)" data-s="5">
+<path d="M0 0 C12.28 1.14, 23.57 -0.67, 56 0 M0 0 C19.17 -0.11, 39.03 0.1, 56 0 M56 0 C55.81 4.93, 55.64 10.44, 56 14 M56 0 C56.27 5.61, 55.61 10.47, 56 14 M56 14 C37.54 14.28, 20.2 14.17, 0 14 M56 14 C38.8 13.78, 22.7 14.16, 0 14 M0 14 C-0.35 10.95, 0.57 7.62, 0 0 M0 14 C-0.18 10.04, -0.12 6.38, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(336 405) rotate(0 28 7)" data-s="5">
+<path d="M0 0 C11.71 0.29, 22.41 0.57, 56 0 M0 0 C12.6 -0.17, 24.08 -0.36, 56 0 M56 0 C55.77 3.38, 56.6 6.11, 56 14 M56 0 C56.02 5.18, 55.67 9.62, 56 14 M56 14 C39.39 14.9, 23.2 13.53, 0 14 M56 14 C37.13 13.91, 18.26 13.73, 0 14 M0 14 C0.58 8.97, 0.28 2.91, 0 0 M0 14 C0.12 10.69, 0.23 7.65, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(336 422) rotate(0 28 7)" data-s="5">
+<path d="M0 0 C11.14 -0.01, 23.25 0.38, 56 0 M0 0 C16.23 0.32, 32.52 -0.25, 56 0 M56 0 C55.58 3.24, 56.02 5.99, 56 14 M56 0 C55.76 4.76, 55.73 9.48, 56 14 M56 14 C41.24 13.51, 28.19 14.9, 0 14 M56 14 C34.46 14.04, 12.81 14.3, 0 14 M0 14 C-0.03 9.79, -0.14 5.2, 0 0 M0 14 C0.28 8.54, -0.25 3.32, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(407.01 386) rotate(0 4.030000000000001 8.125)" data-s="5">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">×</text>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(428 354) rotate(0 7 7)" data-s="5">
+<path d="M-0.38 0.92 L13.19 0.83 L14.19 13.67 L0.23 14.05" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.22 0.6, 5.71 -0.39, 14 0 M0 0 C3.44 0.23, 6.48 -0.01, 14 0 M14 0 C13.36 4.34, 14.4 8.55, 14 14 M14 0 C13.94 3.9, 13.84 7.78, 14 14 M14 14 C9.15 14.24, 3.1 13.46, 0 14 M14 14 C10.37 14.22, 6.51 14.32, 0 14 M0 14 C0.43 11.44, 0.68 8.37, 0 0 M0 14 C0.04 9.84, 0.32 5.87, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(428 371) rotate(0 7 7)" data-s="5">
+<path d="M0.38 0.03 L13.25 -0.31 L13.1 14.93 L0.03 13.05" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.82 0.3, 6.3 -0.63, 14 0 M0 0 C4.17 -0.29, 8.77 -0.12, 14 0 M14 0 C14.58 4.19, 13.82 9.82, 14 14 M14 0 C13.68 3.48, 13.89 6.93, 14 14 M14 14 C9.47 14.65, 4.65 14.39, 0 14 M14 14 C9.53 14.28, 5.46 14, 0 14 M0 14 C-0.19 9.46, 0.26 3.65, 0 0 M0 14 C0.19 10.49, -0.16 7.84, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(428 388) rotate(0 7 7)" data-s="5">
+<path d="M-0.85 -0.85 L13.3 0.55 L14.01 14.2 L-0.18 14.04" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.42 -0.15, 5.48 0.4, 14 0 M0 0 C5.59 -0.26, 10.36 0.34, 14 0 M14 0 C14.4 5.45, 14.64 11.1, 14 14 M14 0 C14.13 3.05, 13.95 6.78, 14 14 M14 14 C9.8 13.66, 6.21 13.92, 0 14 M14 14 C9.39 14.35, 4.41 13.67, 0 14 M0 14 C-0.66 10.28, -0.03 5.94, 0 0 M0 14 C-0.21 8.34, 0.2 3.52, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(428 405) rotate(0 7 7)" data-s="5">
+<path d="M-0.09 0.26 L13.36 -0.6 L14.92 13.46 L-0.38 13.03" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.42 -0.46, 6.07 0.16, 14 0 M0 0 C3.52 -0.23, 7.04 0.1, 14 0 M14 0 C14.35 2.5, 14.2 5.38, 14 14 M14 0 C13.87 2.62, 14.01 5.93, 14 14 M14 14 C10.12 14.06, 6.37 13.45, 0 14 M14 14 C8.55 13.71, 3.35 14.04, 0 14 M0 14 C0.27 11.11, -0.32 8.23, 0 0 M0 14 C-0.05 8.99, -0.29 4.79, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(428 422) rotate(0 7 7)" data-s="5">
+<path d="M0.67 -0.62 L13.42 0.26 L13.84 14.72 L-0.59 14.02" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.02 0.5, 5.26 -0.22, 14 0 M0 0 C4.25 -0.06, 9.33 0, 14 0 M14 0 C14.17 3.75, 13.62 6.65, 14 14 M14 0 C14.31 4.99, 14.06 10.68, 14 14 M14 14 C10.45 14.47, 7.92 14.39, 0 14 M14 14 C10.52 13.77, 7.9 13.72, 0 14 M0 14 C-0.34 9.13, 0.66 3.51, 0 0 M0 14 C0.25 9.64, 0.07 6.06, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(474.29 386) rotate(0 23.869999999999976 6.875)" data-s="5">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">per row</text>
+</g>
+<g stroke-linecap="round" transform="translate(602 310) rotate(0 136 116)" data-s="6" data-note="adapt the input, keep the map">
+<path d="M0 0 C54.39 1.07, 113.21 2.91, 272 0 M0 0 C71.77 -0.7, 144.43 -0.23, 272 0 M272 0 C272.18 74.54, 272.29 147.87, 272 232 M272 0 C272.99 77.32, 273.91 152.94, 272 232 M272 232 C180.75 232.17, 86.45 231.2, 0 232 M272 232 C187.59 229.6, 103.22 229.31, 0 232 M0 232 C1.65 174.92, 1.58 115.74, 0 0 M0 232 C0.9 142.42, 0.75 51.19, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(616 320) rotate(0 125.86000000000001 8.75)" data-s="6">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">leave W alone, tune the input</text>
+</g>
+<g transform="translate(616 488) rotate(0 89.27999999999997 7.5)" data-s="6">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">prompt, prefix, p-tuning</text>
+</g>
+<g transform="translate(616 512) rotate(0 74.39999999999998 7.5)" data-s="6">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">0.0029% trained here</text>
+</g>
+<g stroke-linecap="round" transform="translate(642 350) rotate(0 95 22)" data-s="6">
+<path d="M0 0 C40.58 -0.87, 78.71 -1.71, 190 0 M0 0 C67.49 -0.53, 133.65 -1.06, 190 0 M190 0 C187.99 13.21, 191.56 22.97, 190 44 M190 0 C189.95 9.88, 190.63 19.79, 190 44 M190 44 C115.65 45.93, 43.75 46.69, 0 44 M190 44 C138.75 43.79, 86.66 42.96, 0 44 M0 44 C-2.02 35.35, 0.02 23.53, 0 0 M0 44 C0.82 27.12, 1.31 9.98, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(706.64 364) rotate(0 40.920000000000016 7.5)" data-s="6">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">W untouched</text>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(646 418) rotate(0 8 20)" data-s="6">
+<path d="M0.78 0.29 L15.87 -0.89 L15.13 40.83 L-0.22 39.96" stroke="none" stroke-width="0" fill="var(--color-part6)">
+</path>
+<path d="M0 0 C3 0.48, 6.59 0.3, 16 0 M0 0 C5.1 -0.25, 9.16 -0.28, 16 0 M16 0 C16.74 12.22, 15.39 27.22, 16 40 M16 0 C16.28 14.91, 15.52 30.85, 16 40 M16 40 C11.72 39.31, 5.69 39.21, 0 40 M16 40 C9.96 40.16, 5.01 39.73, 0 40 M0 40 C-0.22 28.59, -0.66 17.43, 0 0 M0 40 C-0.34 28.24, 0.07 16.28, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(668 418) rotate(0 8 20)" data-s="6">
+<path d="M-0.46 -0.59 L15.93 -0.03 L16.05 40.1 L-0.42 40.96" stroke="none" stroke-width="0" fill="var(--color-part6)">
+</path>
+<path d="M0 0 C2.54 0.13, 7.26 0.03, 16 0 M0 0 C5.93 -0.21, 11.77 0.24, 16 0 M16 0 C16.41 14.72, 16.49 28.45, 16 40 M16 0 C15.93 14.8, 15.62 28.65, 16 40 M16 40 C12.09 39.78, 7.46 40.28, 0 40 M16 40 C9.8 40.23, 3 40.16, 0 40 M0 40 C0.78 30.95, 0.59 21.07, 0 0 M0 40 C0.2 30.14, -0.31 20.04, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(690 418) rotate(0 8 20)" data-s="6">
+<path d="M0.3 0.52 L15.98 0.82 L16.96 39.36 L-0.63 39.95" stroke="none" stroke-width="0" fill="var(--color-part6)">
+</path>
+<path d="M0 0 C3.69 -0.38, 6.33 -0.4, 16 0 M0 0 C3.56 -0.01, 7.99 0.13, 16 0 M16 0 C16.48 15.21, 15.98 31.68, 16 40 M16 0 C15.58 13.7, 15.71 26.45, 16 40 M16 40 C12.46 40.25, 9.24 39.74, 0 40 M16 40 C12.04 40.3, 8.2 39.79, 0 40 M0 40 C0.17 25.31, 0.25 10.71, 0 0 M0 40 C0.33 32.04, -0.09 23.79, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(718 418) rotate(0 8 20)" data-s="6">
+<path d="M0 0 C3.23 -0.73, 7.01 -0.67, 16 0 M0 0 C5.19 0.02, 9.8 -0.15, 16 0 M16 0 C16.14 9.7, 15.08 18.91, 16 40 M16 0 C16.23 12.6, 15.81 24.25, 16 40 M16 40 C9.63 40.71, 3.02 39.21, 0 40 M16 40 C11.88 40.37, 7 40.21, 0 40 M0 40 C-0.44 27.68, -0.1 14.34, 0 0 M0 40 C-0.13 25.94, 0.53 11.55, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(740 418) rotate(0 8 20)" data-s="6">
+<path d="M0 0 C2.77 0.52, 6.08 0.66, 16 0 M0 0 C6.02 0.06, 12.41 -0.43, 16 0 M16 0 C16.21 10.19, 16.58 22.14, 16 40 M16 0 C15.88 11.49, 15.91 23.04, 16 40 M16 40 C10.01 39.58, 4.8 40.28, 0 40 M16 40 C10.93 40.29, 5.8 39.68, 0 40 M0 40 C0.55 30.04, -0.84 19.98, 0 0 M0 40 C0.01 27.83, -0.25 15.31, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(762 418) rotate(0 8 20)" data-s="6">
+<path d="M0 0 C3.91 0.01, 6.75 0.23, 16 0 M0 0 C4.45 0.26, 7.82 0.26, 16 0 M16 0 C15.88 12.68, 15.68 23.37, 16 40 M16 0 C16.53 10.39, 16.01 20.84, 16 40 M16 40 C10.38 40.05, 6.58 39.74, 0 40 M16 40 C9.97 39.56, 4.59 40.11, 0 40 M0 40 C-0.06 24.4, 0.82 7.62, 0 0 M0 40 C0.54 29.73, 0.37 19.07, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(784 418) rotate(0 8 20)" data-s="6">
+<path d="M0 0 C3.46 -0.34, 5.82 -0.04, 16 0 M0 0 C5.28 0.3, 10.44 -0.02, 16 0 M16 0 C15.54 13.18, 16.77 26.6, 16 40 M16 0 C16.18 9.28, 16.1 18.64, 16 40 M16 40 C12.35 40.51, 6.76 40.81, 0 40 M16 40 C13.01 39.63, 9.79 39.74, 0 40 M0 40 C-0.67 26.76, 0.47 13.26, 0 0 M0 40 C-0.32 31.63, -0.41 23.83, 0 0" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(661.9 468) rotate(0 21.69999999999999 6.25)" data-s="6">
+<text x="0" y="8.809999999999999" font-family="Virgil, Segoe UI Emoji" font-size="10px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">learned</text>
+</g>
+<g transform="translate(734.4 468) rotate(0 37.19999999999999 6.25)" data-s="6">
+<text x="0" y="8.809999999999999" font-family="Virgil, Segoe UI Emoji" font-size="10px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">the sentence</text>
+</g>
+<g stroke-linecap="round" data-s="6">
+<g transform="translate(654 414) rotate(0 0 -8)">
+<path d="M0 0 C0.44 -3.29, -0.29 -6.04, 0 -16 M0 0 C-0.12 -5.79, 0.07 -10.96, 0 -16" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(654 414) rotate(0 0 -8)">
+<path d="M2.75 -8.49 C2.4 -10.04, 1.47 -11.31, 0 -16 M2.75 -8.49 C1.74 -11.22, 0.89 -13.64, 0 -16" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(654 414) rotate(0 0 -8)">
+<path d="M-2.72 -8.48 C-1.95 -10.02, -1.75 -11.29, 0 -16 M-2.72 -8.48 C-1.85 -11.2, -0.81 -13.62, 0 -16" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round" data-s="6">
+<g transform="translate(732 414) rotate(0 0 -8)">
+<path d="M0 0 C-0.03 -3.71, 0.36 -6.37, 0 -16 M0 0 C0.35 -3.66, 0.37 -7.09, 0 -16" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(732 414) rotate(0 0 -8)">
+<path d="M2.99 -8.58 C2.36 -10.31, 1.94 -11.52, 0 -16 M2.99 -8.58 C2.52 -10.28, 1.88 -11.87, 0 -16" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(732 414) rotate(0 0 -8)">
+<path d="M-2.48 -8.39 C-1.99 -10.17, -1.28 -11.42, 0 -16 M-2.48 -8.39 C-1.77 -10.14, -1.22 -11.77, 0 -16" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round" data-s="6">
+<g transform="translate(802 414) rotate(0 0 -8)">
+<path d="M0 0 C-0.5 -2.52, -0.58 -6.71, 0 -16 M0 0 C0.01 -4.73, -0.13 -9.62, 0 -16" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(802 414) rotate(0 0 -8)">
+<path d="M2.66 -8.45 C1.86 -9.62, 1.28 -11.62, 0 -16 M2.66 -8.45 C1.9 -10.68, 1.06 -12.99, 0 -16" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(802 414) rotate(0 0 -8)">
+<path d="M-2.81 -8.51 C-2.49 -9.66, -1.95 -11.65, 0 -16 M-2.81 -8.51 C-2 -10.74, -1.26 -13.04, 0 -16" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+</svg>
+  The map. Green marks what trains, yellow marks chosen cells, blue marks a rotation, purple
+  marks the input side. Each percentage is measured on this chapter's 0.5B model, with the
+  run below the map.
+</Figure>
+
+Every card was checked against the library's source before it was drawn, and every
+percentage below was printed by wrapping the same base model on this machine:
+
+| shape of the change | method, as measured | numbers that train | share |
+| --- | --- | --- | --- |
+| two low-rank pairs, multiplied entrywise | LoHa, $r = 16$ | 2,162,688 | 0.4359% |
+| block rotations | OFT, blocks of 64 | 1,354,752 | 0.2735% |
+| one low-rank pair | LoRA, $r = 16$ | 1,081,344 | 0.2184% |
+| a chain of reflections | HRA, $r = 8$ | 344,064 | 0.0696% |
+| one scale per channel | IA3 | 141,312 | 0.0286% |
+| a Kronecker product | LoKr, $r = 16$ | 61,056 | 0.0124% |
+| chosen Fourier coefficients | FourierFT, 1,000 per matrix | 48,000 | 0.0097% |
+| shared random pair, tiny diagonals | VeRA, $r = 256$ | 27,648 | 0.0056% |
+| learned input vectors | prompt tuning, 16 tokens | 14,336 | 0.0029% |
+
+LoRA, LoHa, LoKr, HRA, OFT and FourierFT adapt the query and value matrices of all 24
+layers, like the run above. IA3 uses its own defaults, keys and values plus each block's
+down-projection. VeRA adapts the queries only, since it shares one frozen pair across
+layers and needs those layers to agree in shape. The families, one at a time:
+
+**Add a thin product.** LoRA's family. AdaLoRA starts wider and learns which directions
+matter, carrying an importance score per direction and pruning rank away from layers that
+waste it, so the budget migrates to the layers that need it. DoRA splits each output
+channel's length from its direction and trains the lengths separately. HiRA multiplies
+instead of adding at the very last step: its update is $W \circ (CR)$, the frozen weight
+scaled entrywise by a low-rank pattern, which lets a rank-16 pair paint a high-rank change
+because $W$ itself has full rank to lend.
+
+**A structured product.** LoKr builds $\Delta W$ as a Kronecker product. On this model's
+$896 \times 896$ query matrix it stores a $28 \times 28$ and a $32 \times 32$ factor, 1,808
+numbers standing in for 802,816, because each entry of the small matrix stamps a whole tile.
+LoHa multiplies two low-rank products entrywise, $(C_1 R_1) \circ (C_2 R_2)$, spending
+exactly twice LoRA's budget; the table shows the factor of two to the digit, 2,162,688
+against 1,081,344.
+
+**A few coefficients in a fixed basis.** FourierFT stores nothing shaped like a matrix at
+all: 1,000 chosen positions in the frequency plane, one learned number each, and an inverse
+Fourier transform builds the dense $\Delta W$ from them on demand. The basis is fixed and
+free; only the coefficients train. WaveFT plays the same game in a wavelet basis. This is
+the same bet a JPEG makes about images: the interesting matrices are sparse somewhere, once
+you pick the right somewhere.
+
+**Rescale the channels.** IA3 trains one number per channel and multiplies: 896 for the
+queries' outputs, 128 for the values', 4,864 across each block's down-projection input.
+VeRA, from Kopiczko, Blankevoort and Asano
+([arXiv:2310.11454](https://arxiv.org/abs/2310.11454)), is this family's sharpest trick,
+and Figure 6 shows it.
+
+<Figure n="6">
+  <svg slot="drawing" viewBox="0 0 490 354.25" width="490" role="img" aria-label="One frozen random pair of matrices A and B shared by every layer, with dashed arrows fanning out to three layer boxes. Inside each layer only two small green vectors named d and b train: 1,152 numbers a layer, 27,648 in all." style="max-width:100%;height:auto">
+<defs>
+</defs>
+<g stroke-opacity="0.6" fill-opacity="0.6" stroke-linecap="round" transform="translate(130 36) rotate(0 50 18)" data-s="0" data-note="one random pair serves every layer">
+<path d="M-0.67 -0.55 L99.13 1.59 L100.99 37.5 L-0.68 35.47" stroke="none" stroke-width="0" fill="var(--color-part2)">
+</path>
+<path d="M0 0 C21.55 -2.39, 39.55 -0.86, 100 0 M0 0 C26.41 -0.3, 51.62 0.16, 100 0 M100 0 C98.3 13.16, 101.41 26.66, 100 36 M100 0 C99.15 8.93, 100.53 18.31, 100 36 M100 36 C63.98 37.02, 29.18 37.74, 0 36 M100 36 C62.14 36.82, 24.46 36.38, 0 36 M0 36 C-0.99 24.68, 2.02 12.74, 0 0 M0 36 C0.64 27.11, 0.46 17.5, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(153.09 46) rotate(0 36.269999999999996 8.125)" data-s="0">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">A, random</text>
+</g>
+<g stroke-opacity="0.6" fill-opacity="0.6" stroke-linecap="round" transform="translate(260 36) rotate(0 50 18)" data-s="0">
+<path d="M-1.62 -0.09 L99.36 1.02 L100.64 34.55 L-1.5 35.44" stroke="none" stroke-width="0" fill="var(--color-part2)">
+</path>
+<path d="M0 0 C19.26 1.13, 42.91 -0.93, 100 0 M0 0 C19.2 0.92, 39.96 -0.19, 100 0 M100 0 C101.74 8.83, 98.58 19, 100 36 M100 0 C99.73 13.89, 98.91 28.25, 100 36 M100 36 C70.46 33.64, 43.32 33.36, 0 36 M100 36 C74.45 37.5, 46.63 36.84, 0 36 M0 36 C-0.2 21.71, -0.12 6.45, 0 0 M0 36 C-0.03 23.24, 0.12 11.59, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(283.09 46) rotate(0 36.27000000000001 8.125)" data-s="0">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">B, random</text>
+</g>
+<g transform="translate(148.4 10) rotate(0 130.2 7.5)" data-s="0">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">frozen, never trained, never stored</text>
+</g>
+<g stroke-opacity="0.7" fill-opacity="0.7" stroke-linecap="round" transform="translate(10 126) rotate(0 235 23)" data-s="1">
+<path d="M0 0 C96.25 -0.87, 192.63 -1.53, 470 0 M0 0 C102.07 2.29, 203.57 1.64, 470 0 M470 0 C470.55 14.72, 471.97 32.25, 470 46 M470 0 C469.6 13.7, 469.47 29.91, 470 46 M470 46 C300.37 46.01, 129.9 44.3, 0 46 M470 46 C288.57 44.14, 106.74 44.14, 0 46 M0 46 C-0.72 35.88, 0.95 26.29, 0 0 M0 46 C-0.44 36.21, 0.21 27.31, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(26 140) rotate(0 28.210000000000008 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">layer 1</text>
+</g>
+<g stroke-opacity="0.7" fill-opacity="0.7" stroke-linecap="round" transform="translate(10 188) rotate(0 235 23)" data-s="1">
+<path d="M0 0 C97.03 1.57, 192.35 2.89, 470 0 M0 0 C169.02 -0.97, 338.71 -0.53, 470 0 M470 0 C470.05 9.1, 469.19 21.99, 470 46 M470 0 C470.22 12.96, 469.88 24.46, 470 46 M470 46 C336 45.98, 203.49 45.63, 0 46 M470 46 C343.44 45.12, 218.07 45.02, 0 46 M0 46 C0.92 32.09, -0.35 18.37, 0 0 M0 46 C-1.09 31.31, -0.11 17.35, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(26 202) rotate(0 28.210000000000008 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">layer 2</text>
+</g>
+<g stroke-opacity="0.7" fill-opacity="0.7" stroke-linecap="round" transform="translate(10 250) rotate(0 235 23)" data-s="1">
+<path d="M0 0 C96 1.58, 193.87 1.28, 470 0 M0 0 C142.88 0.9, 285.85 0.64, 470 0 M470 0 C468.63 12.68, 469.49 26.14, 470 46 M470 0 C470.84 10.22, 470.29 21.01, 470 46 M470 46 C373.42 45.96, 275.28 46.96, 0 46 M470 46 C305.2 46.09, 140.5 45.89, 0 46 M0 46 C1.64 28.31, 1.43 10.46, 0 0 M0 46 C0.26 35.6, -0.42 27.79, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(26 264) rotate(0 28.210000000000008 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">layer 3</text>
+</g>
+<g stroke-linecap="round" data-s="1">
+<g transform="translate(180 76) rotate(0 -30 22)">
+<path d="M0 0 C-11.46 7.78, -23.28 16.55, -60 44" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="8 9">
+</path>
+</g>
+<g transform="translate(180 76) rotate(0 -30 22)">
+<path d="M-46.29 23.1 C-48.46 26.2, -50.77 30.23, -60 44" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(180 76) rotate(0 -30 22)">
+<path d="M-36.06 36.8 C-40.47 37.08, -44.89 38.28, -60 44" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round" data-s="1" data-note="every layer borrows the same pair">
+<g transform="translate(310 76) rotate(0 30 22)">
+<path d="M0 0 C11.25 11.41, 22.91 20.37, 60 44" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="8 9">
+</path>
+</g>
+<g transform="translate(310 76) rotate(0 30 22)">
+<path d="M35.66 38.31 C39.9 41.5, 44.24 42.6, 60 44" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(310 76) rotate(0 30 22)">
+<path d="M45.01 23.99 C47.21 30.04, 49.62 34.08, 60 44" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(184.28 94) rotate(0 81.84000000000002 6.875)" data-s="1">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">the same A and B, reused</text>
+</g>
+<g stroke-opacity="0.95" fill-opacity="0.95" stroke-linecap="round" transform="translate(250 142) rotate(0 42 6)" data-s="2">
+<path d="M0.35 -0.67 L84.36 0.78 L83.27 12.44 L0.8 11.63" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C17.77 0.09, 35.52 0.25, 84 0 M0 0 C21.96 0.17, 43.98 -0.08, 84 0 M84 0 C84.32 3.83, 84.07 6.24, 84 12 M84 0 C84.17 3.84, 84.15 7.27, 84 12 M84 12 C65.36 11.75, 47.44 12.6, 0 12 M84 12 C54.07 11.87, 24.7 11.86, 0 12 M0 12 C-0.56 8.5, 0.17 5.3, 0 0 M0 12 C-0.19 7.84, -0.15 3.14, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.95" fill-opacity="0.95" stroke-linecap="round" transform="translate(360 142) rotate(0 21 6)" data-s="2" data-note="each layer trains two small vectors">
+<path d="M-0.89 0.44 L42.42 -0.36 L42.18 11.71 L0.6 12.62" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C8.56 -0.8, 17.09 -0.53, 42 0 M0 0 C14.48 0.68, 28.21 0.04, 42 0 M42 0 C42.29 3.71, 41.69 7.34, 42 12 M42 0 C41.95 3.48, 42.2 6.55, 42 12 M42 12 C25.29 12.52, 10.6 12.12, 0 12 M42 12 C25.87 12.17, 9.19 11.61, 0 12 M0 12 C0.23 9.21, -0.08 6.06, 0 0 M0 12 C0.06 8.4, 0.16 4.23, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.95" fill-opacity="0.95" stroke-linecap="round" transform="translate(250 204) rotate(0 42 6)" data-s="2">
+<path d="M-0.13 -0.44 L84.47 0.5 L83.09 12.97 L0.39 11.61" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C16.62 0.88, 35.2 -0.75, 84 0 M0 0 C17.45 -0.29, 35.34 -0.31, 84 0 M84 0 C84.13 3.58, 84.39 8.43, 84 12 M84 0 C83.73 3.11, 84.25 5.82, 84 12 M84 12 C56.42 11.03, 28.14 11.38, 0 12 M84 12 C64.24 12.17, 43.82 12.06, 0 12 M0 12 C-0.17 7.51, -0.32 3.22, 0 0 M0 12 C0.2 8.96, -0.26 5.32, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.95" fill-opacity="0.95" stroke-linecap="round" transform="translate(360 204) rotate(0 21 6)" data-s="2">
+<path d="M0.63 0.67 L42.53 -0.65 L42 12.23 L0.19 12.6" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C9.42 0.5, 16.78 0.97, 42 0 M0 0 C11.32 -0.36, 23.27 0.22, 42 0 M42 0 C41.97 4.65, 41.9 9.53, 42 12 M42 0 C42.11 2.74, 42.3 5.09, 42 12 M42 12 C29.92 11.73, 16.44 12.83, 0 12 M42 12 C30.08 12.39, 18.38 11.72, 0 12 M0 12 C0.5 8.22, 0.51 5.18, 0 0 M0 12 C-0.15 9.51, 0.05 7.01, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.95" fill-opacity="0.95" stroke-linecap="round" transform="translate(250 266) rotate(0 42 6)" data-s="2">
+<path d="M-0.6 -0.22 L84.59 0.21 L84.92 11.5 L-0.01 11.6" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C17.48 -0.32, 34.88 0.24, 84 0 M0 0 C29.74 -0.58, 59.31 -0.39, 84 0 M84 0 C83.94 2.13, 83.52 4.62, 84 12 M84 0 C83.89 4.78, 83.75 9.76, 84 12 M84 12 C62.27 12.31, 40.44 12.16, 0 12 M84 12 C57.61 11.48, 30.34 12.25, 0 12 M0 12 C0.1 8.92, 0.27 5.94, 0 0 M0 12 C-0.01 7.67, 0.23 3.31, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g stroke-opacity="0.95" fill-opacity="0.95" stroke-linecap="round" transform="translate(360 266) rotate(0 21 6)" data-s="2">
+<path d="M0.16 0.9 L42.64 -0.93 L41.83 12.76 L-0.22 12.59" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C8.28 -0.62, 16.46 0.04, 42 0 M0 0 C9.17 0.02, 19.34 -0.18, 42 0 M42 0 C41.78 3.2, 42.22 5.72, 42 12 M42 0 C42.27 4.41, 41.79 9.03, 42 12 M42 12 C32.54 12.93, 24.27 11.53, 0 12 M42 12 C26.88 11.62, 11.78 11.83, 0 12 M0 12 C-0.31 7.23, 0.02 3.1, 0 0 M0 12 C0.24 8.23, -0.06 4.4, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(236 139) rotate(0 3.719999999999999 7.5)" data-s="2">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">d</text>
+</g>
+<g transform="translate(346 139) rotate(0 3.719999999999999 7.5)" data-s="2">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">b</text>
+</g>
+<g transform="translate(113.44 328) rotate(0 177.31999999999996 8.125)" data-s="3" data-note="smaller than one LoRA layer">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">trains: 1,152 numbers a layer, 27,648 in all</text>
+</g>
+</svg>
+  VeRA's trick. One random pair, frozen and shared by the whole model; each layer trains
+  only two small vectors (green) that rescale it. The pair can be left out of the checkpoint
+  entirely: a seed regenerates it.
+</Figure>
+
+Random projections mix directions well enough that a fixed random $C$ and $R$ can serve
+every layer at once, with each layer training only two small vectors that rescale the pair's
+rows and columns, here 1,152 numbers a layer. The pair itself can be rebuilt from a stored
+seed instead of shipped, and the whole run trains 27,648 numbers, thirty-nine times fewer
+than LoRA. RandLoRA extends the idea with several frozen random bases combined by small
+trainable diagonals.
+
+Two families are missing from this walk, because each earns its own section.
+
+<Callout type="note">
+  The names in the table are the stable ones. The library's 2025 and 2026 arrivals, FRoD,
+  PEANuT, Lily, MiSS, RoAD and a dozen more, are variations inside the same six shapes.
+  Learn the families and the next reading of the release notes costs minutes.
+</Callout>
+
+## Rotate, do not add
+
+Every additive method can change how strongly the model responds along some direction. A
+rotation cannot, and that is the point of the orthogonal family. Lecture 13 built matrices
+with orthonormal columns exactly because they leave every length alone, and this family
+turns that guarantee into an adapter: instead of $W + \Delta W$, it applies
+
+$$
+W' = RW
+$$
+
+with $R$ orthogonal. Then for any input, $\norm{RWx} = \norm{Wx}$: whatever the layer used
+to produce, the adapted layer produces something exactly as long, only turned. The update
+cannot blow activations up and cannot crush them to zero, no matter what training does to
+its parameters, because the constraint is built into the shape rather than begged for with a
+small learning rate.
+
+<Figure n="7">
+  <svg slot="drawing" viewBox="0 0 621.03 282.25" width="621" role="img" aria-label="Two dashed circles of radius 104. Left panel: adding an update Delta w to the orange vector w moves the green tip off the circle and the length becomes 145. Right panel: an orthogonal R slides the same w along the circle and the length stays 104." style="max-width:100%;height:auto">
+<defs>
+</defs>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(10 26) rotate(0 104 104)" data-s="0">
+<path d="M127.26 2.59 C139.08 3.57, 150.72 9.74, 161.02 16.76 C171.32 23.77, 181.66 34.22, 189.07 44.68 C196.47 55.14, 202.26 67.49, 205.43 79.53 C208.6 91.57, 209.66 104.53, 208.09 116.9 C206.52 129.26, 202.05 142.66, 195.99 153.72 C189.92 164.78, 181.37 175.2, 171.72 183.28 C162.06 191.36, 149.97 198.2, 138.03 202.2 C126.1 206.2, 112.51 207.63, 100.09 207.29 C87.66 206.96, 75.12 205.11, 63.49 200.2 C51.87 195.29, 39.39 186.78, 30.35 177.84 C21.31 168.89, 14.41 157.85, 9.24 146.54 C4.07 135.23, 0.09 122.25, -0.67 109.98 C-1.43 97.72, 0.77 84.79, 4.67 72.94 C8.56 61.09, 14.63 48.78, 22.69 38.9 C30.75 29.03, 42.06 19.99, 53.03 13.71 C63.99 7.44, 73.53 2.13, 88.48 1.25 C103.42 0.37, 131.28 5.76, 142.69 8.43 C154.1 11.11, 157.38 15.79, 156.93 17.29" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="8 9">
+</path>
+</g>
+<g stroke-linecap="round" data-s="0">
+<g transform="translate(114 130) rotate(0 48 -20)">
+<path d="M0 0 C20.05 -8.54, 41.23 -14.61, 96 -40 M0 0 C22.66 -8.98, 43.77 -18.54, 96 -40" stroke="var(--color-stroke-warm)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(114 130) rotate(0 48 -20)">
+<path d="M77.59 -23.09 C81.76 -26.75, 87.01 -28.08, 96 -40 M77.59 -23.09 C82.25 -26.84, 85.31 -31.03, 96 -40" stroke="var(--color-stroke-warm)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(114 130) rotate(0 48 -20)">
+<path d="M71.02 -38.88 C76.58 -39.31, 83.17 -37.4, 96 -40 M71.02 -38.88 C77.25 -38.94, 81.84 -39.46, 96 -40" stroke="var(--color-stroke-warm)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(158.78 124) rotate(0 4.340000000000003 8.75)" data-s="0" data-note="the same w, both sides">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="var(--color-stroke-warm)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">w</text>
+</g>
+<g stroke-linecap="round" data-s="1" data-note="an added update moves the tip">
+<g transform="translate(216.58999999999997 92.37) rotate(0 9 -25)">
+<path d="M0 0 C1.56 -8.6, 8.36 -20.33, 18 -50" stroke="var(--color-accent)" stroke-width="2.5" fill="none" stroke-dasharray="8 10">
+</path>
+</g>
+<g transform="translate(216.58999999999997 92.37) rotate(0 9 -25)">
+<path d="M18.26 -25 C16.21 -28.36, 19.26 -34.95, 18 -50" stroke="var(--color-accent)" stroke-width="2.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(216.58999999999997 92.37) rotate(0 9 -25)">
+<path d="M2.13 -30.68 C3.42 -32.97, 9.79 -38.39, 18 -50" stroke="var(--color-accent)" stroke-width="2.5" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(244.01999999999998 62) rotate(0 8.060000000000002 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="var(--color-accent)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Δw</text>
+</g>
+<g stroke-linecap="round" data-s="2">
+<g transform="translate(114 130) rotate(0 57 -45)">
+<path d="M0 0 C22.46 -19.91, 46.63 -39.45, 114 -90 M0 0 C35.06 -30.12, 72.69 -58.35, 114 -90" stroke="var(--color-stroke-green)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(114 130) rotate(0 57 -45)">
+<path d="M100.54 -68.93 C102.97 -73.7, 106.49 -79.08, 114 -90 M100.54 -68.93 C103.9 -76.71, 109.29 -82.85, 114 -90" stroke="var(--color-stroke-green)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(114 130) rotate(0 57 -45)">
+<path d="M90.15 -82.52 C94.84 -84.59, 100.49 -87.18, 114 -90 M90.15 -82.52 C96.94 -85.96, 105.67 -87.75, 114 -90" stroke="var(--color-stroke-green)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(196.06 10) rotate(0 24.180000000000007 8.125)" data-s="2" data-note="the tip leaves the circle">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">w + Δw</text>
+</g>
+<g transform="translate(53.28 164) rotate(0 81.84000000000002 7.5)" data-s="2">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">length 104 becomes 145</text>
+</g>
+<g transform="translate(42.239999999999995 256) rotate(0 96.72 8.125)" data-s="2">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">add: any length you like</text>
+</g>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(360 26) rotate(0 104 104)" data-s="3">
+<path d="M91.5 -0.05 C103.3 -2.92, 118.94 0.22, 131.18 3.43 C143.42 6.64, 155.01 11.89, 164.93 19.19 C174.85 26.48, 183.83 36.48, 190.71 47.21 C197.58 57.95, 203.36 71.28, 206.15 83.59 C208.95 95.89, 209.65 108.86, 207.46 121.07 C205.27 133.28, 199.62 146.14, 193.03 156.85 C186.43 167.55, 177.58 177.49, 167.9 185.32 C158.22 193.16, 146.79 200.19, 134.93 203.87 C123.07 207.56, 109.14 208.42, 96.73 207.44 C84.31 206.45, 71.65 203.45, 60.44 197.97 C49.22 192.5, 38.17 183.84, 29.46 174.6 C20.75 165.35, 13.12 153.83, 8.18 142.51 C3.24 131.2, 0.27 119.05, -0.18 106.7 C-0.63 94.35, 1.05 80.43, 5.46 68.41 C9.87 56.39, 18 43.95, 26.28 34.59 C34.56 25.24, 43.1 18.11, 55.14 12.29 C67.17 6.47, 90.58 1.44, 98.5 -0.33 C106.43 -2.11, 102.68 -0.21, 102.67 1.63" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="8 9">
+</path>
+</g>
+<g stroke-linecap="round" data-s="3">
+<g transform="translate(464 130) rotate(0 48 -20)">
+<path d="M0 0 C17.96 -10.66, 40.55 -18.93, 96 -40 M0 0 C26.34 -10.43, 54.23 -20.94, 96 -40" stroke="var(--color-stroke-warm)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(464 130) rotate(0 48 -20)">
+<path d="M77.96 -22.7 C79.85 -27.91, 86.43 -31.53, 96 -40 M77.96 -22.7 C82.3 -27.34, 88.32 -31.49, 96 -40" stroke="var(--color-stroke-warm)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(464 130) rotate(0 48 -20)">
+<path d="M71.05 -38.34 C74.33 -40.42, 82.32 -40.82, 96 -40 M71.05 -38.34 C77.25 -38.55, 85.21 -38.3, 96 -40" stroke="var(--color-stroke-warm)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(508.78 124) rotate(0 4.339999999999975 8.75)" data-s="3">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="var(--color-stroke-warm)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">w</text>
+</g>
+<g stroke-linecap="round" data-s="4" data-note="rotated, the tip stays on">
+<g transform="translate(464 130) rotate(0 27.850000000000023 -43.915)">
+<path d="M0 0 C11.22 -17.27, 23.17 -34.97, 55.7 -87.83 M0 0 C12.34 -19.48, 24.96 -40.05, 55.7 -87.83" stroke="var(--color-stroke-green)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(464 130) rotate(0 27.850000000000023 -43.915)">
+<path d="M50.24 -63.43 C51.2 -67.97, 52.84 -72.64, 55.7 -87.83 M50.24 -63.43 C51.12 -68.43, 52.45 -74.77, 55.7 -87.83" stroke="var(--color-stroke-green)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(464 130) rotate(0 27.850000000000023 -43.915)">
+<path d="M35.84 -72.65 C39.76 -75.2, 44.36 -77.98, 55.7 -87.83 M35.84 -72.65 C39.92 -75.64, 44.49 -79.91, 55.7 -87.83" stroke="var(--color-stroke-green)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(515.72 14.170000000000002) rotate(0 8.060000000000002 8.125)" data-s="4">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Rw</text>
+</g>
+<g stroke-linecap="round" data-s="4">
+<g transform="translate(560 90) rotate(0 -20.149999999999977 -23.915)">
+<path d="M0 0 C-0.39 -1.81, -1.44 -3.14, -3.33 -7.21 M-3.33 -7.21 C-4.77 -9.4, -6.49 -12.12, -7.2 -14.14 M-7.2 -14.14 C-8.3 -15.99, -9.42 -17.37, -11.59 -20.75 M-11.59 -20.75 C-13.05 -23.23, -14.79 -24.74, -16.47 -27.02 M-16.47 -27.02 C-17.77 -28.86, -20.08 -30.92, -21.82 -32.89 M-21.82 -32.89 C-23.34 -34.1, -24.43 -35.28, -27.59 -38.33 M-27.59 -38.33 C-29.59 -40.06, -31.58 -41.79, -33.77 -43.32 M-33.77 -43.32 C-35.28 -44.3, -37.17 -45.45, -40.3 -47.83" stroke="var(--color-accent)" stroke-width="2" fill="none" stroke-dasharray="8 9.5">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(585.01 50) rotate(0 4.029999999999973 8.125)" data-s="4">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="var(--color-accent)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">R</text>
+</g>
+<g transform="translate(408.8 164) rotate(0 74.4 7.5)" data-s="4">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">length 104 stays 104</text>
+</g>
+<g transform="translate(377.29 256) rotate(0 116.86999999999998 8.125)" data-s="4">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">rotate: the norm is a promise</text>
+</g>
+</svg>
+  The same $w$ twice. Adding an update (left, blue dashes) is free to leave the circle:
+  length 104 becomes 145. A rotation (right) can only slide along it. Every landing point
+  is computed; both tips sit on the circle to the pixel.
+</Figure>
+
+OFT makes $R$ block-diagonal to keep it affordable. On this model it stores 14 blocks of
+size 64 per adapted matrix, and inside each block it trains only the strictly-upper skew
+entries, 2,016 of them, because a classical construction, the Cayley transform, turns any
+skew-symmetric matrix into an orthogonal one. Orthogonality is not a penalty the loss must
+maintain; it is an algebraic certainty. BOFT builds the same promise from butterfly factors,
+sparse rotations that compose into a dense one. HRA composes $r$ Householder reflections,
+the mirrors $I - 2uu^{\T}$, training only the $r$ mirror normals per matrix, 344,064 numbers
+in the run above.
+
+## Leave the map alone
+
+The last family refuses the question. Lecture 1 turned words into vectors precisely so that
+the model could compute with them, and soft prompts adapt the model by editing those vectors
+instead of any weight. Prepend $k$ learned vectors to the input sequence, freeze everything
+else, and let attention do the rest:
+
+<Figure n="8">
+  <svg slot="drawing" viewBox="0 0 469.90999999999997 282.25" width="470" role="img" aria-label="A frozen model box fed by column vectors from below. Three purple learned vectors p1, p2, p3 are prepended to the sentence tokens the, null, space, of, A. Only the purple vectors train: 16 vectors times 896 numbers is 14,336 in training." style="max-width:100%;height:auto">
+<defs>
+</defs>
+<g stroke-opacity="0.6" fill-opacity="0.6" stroke-linecap="round" transform="translate(151.76 120) rotate(0 10 30)" data-s="0" data-note="the sentence arrives as vectors">
+<path d="M0 0 C2.83 -1.66, 9.33 0.46, 20 0 M0 0 C6.51 0.7, 12.56 -0.82, 20 0 M20 0 C22.31 24.78, 19.21 45.25, 20 60 M20 0 C19.2 17.28, 19.22 33.3, 20 60 M20 60 C15.96 58.51, 8.64 61.7, 0 60 M20 60 C14.45 59.93, 8.05 59.91, 0 60 M0 60 C1.58 38.51, 0.8 18.49, 0 0 M0 60 C-1.3 40.27, 0.34 20.05, 0 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(154.17000000000002 188) rotate(0 10.230000000000004 6.875)" data-s="0">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">the</text>
+</g>
+<g stroke-opacity="0.6" fill-opacity="0.6" stroke-linecap="round" transform="translate(185.76 120) rotate(0 10 30)" data-s="0">
+<path d="M0 0 C4.55 0.19, 8.69 -1.29, 20 0 M0 0 C5.79 -0.71, 9.86 0.2, 20 0 M20 0 C20.68 17.34, 19.31 31.36, 20 60 M20 0 C19.87 13.85, 19.68 26.47, 20 60 M20 60 C12.28 60.44, 2.45 58.63, 0 60 M20 60 C15.3 59.89, 11.31 59.65, 0 60 M0 60 C-1.8 45.59, -1.52 32.29, 0 0 M0 60 C0.07 45.93, 0.05 31.2, 0 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(185.64 188) rotate(0 13.639999999999986 6.875)" data-s="0">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">null</text>
+</g>
+<g stroke-opacity="0.6" fill-opacity="0.6" stroke-linecap="round" transform="translate(219.76 120) rotate(0 10 30)" data-s="0">
+<path d="M0 0 C2.26 -1.57, 8.05 1.35, 20 0 M0 0 C3.06 -0.52, 7.17 0.82, 20 0 M20 0 C20.25 17.9, 20.6 41.47, 20 60 M20 0 C20.53 22.42, 20.14 45.64, 20 60 M20 60 C12.6 58.78, 8.27 59.96, 0 60 M20 60 C14.15 60.25, 8.57 59.78, 0 60 M0 60 C-1.18 40.66, 0.16 22.1, 0 0 M0 60 C-0.55 39.58, -0.23 20.35, 0 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(217.11 188) rotate(0 17.05000000000001 6.875)" data-s="0">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">space</text>
+</g>
+<g stroke-opacity="0.6" fill-opacity="0.6" stroke-linecap="round" transform="translate(253.76 120) rotate(0 10 30)" data-s="0">
+<path d="M0 0 C3.98 0.28, 7.41 -0.4, 20 0 M0 0 C6.33 0.06, 14.47 -0.16, 20 0 M20 0 C19.82 10.46, 21.89 23.58, 20 60 M20 0 C19.2 18.99, 20.6 38.8, 20 60 M20 60 C16.92 61.11, 10.08 61.3, 0 60 M20 60 C12.99 60.61, 5.83 59.92, 0 60 M0 60 C0.64 35.74, -0.95 11.91, 0 0 M0 60 C0.83 45.24, -0.52 31.51, 0 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(258.7 188) rotate(0 6.819999999999993 6.875)" data-s="0">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">of</text>
+</g>
+<g stroke-opacity="0.6" fill-opacity="0.6" stroke-linecap="round" transform="translate(287.76 120) rotate(0 10 30)" data-s="0">
+<path d="M0 0 C5.69 -1.87, 6.77 1.84, 20 0 M0 0 C5.6 0.25, 11.77 0.47, 20 0 M20 0 C19.39 15.02, 19.19 33.69, 20 60 M20 0 C19.86 15.56, 21.06 33.97, 20 60 M20 60 C13.24 59.44, 3.9 58.63, 0 60 M20 60 C15.84 60.97, 9.09 60.05, 0 60 M0 60 C1.26 42.81, 0.73 25.72, 0 0 M0 60 C0.21 38.89, -0.81 18.66, 0 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(295.23 188) rotate(0 3.4099999999999966 6.875)" data-s="0">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">A</text>
+</g>
+<g stroke-linecap="round" transform="translate(51.760000000000005 10) rotate(0 180 31)" data-s="1" data-note="the map itself never moves">
+<path d="M0 0 C73.57 -0.68, 149.24 -0.61, 360 0 M0 0 C83.77 0.56, 167.12 -0.3, 360 0 M360 0 C357.76 20.27, 359.27 41.17, 360 62 M360 0 C360.55 14.58, 361.54 28.04, 360 62 M360 62 C257.43 64.43, 156.5 63.28, 0 62 M360 62 C240.06 63.52, 120.72 64.06, 0 62 M0 62 C-2.12 39.17, -1.6 16.1, 0 0 M0 62 C-0.41 46.06, 0.91 30.84, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(135.16000000000003 30) rotate(0 130.2 8.75)" data-s="1">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">the model, every weight frozen</text>
+</g>
+<g stroke-linecap="round" data-s="1">
+<g transform="translate(161.76 116) rotate(0 0 -18)">
+<path d="M0 0 C0.67 -6.42, 0.8 -15.57, 0 -36 M0 0 C0.45 -13.92, -0.2 -26.92, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(161.76 116) rotate(0 0 -18)">
+<path d="M6.15 -19.08 C5.42 -21.66, 4.27 -26.7, 0 -36 M6.15 -19.08 C4.18 -25.81, 1.28 -31.68, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(161.76 116) rotate(0 0 -18)">
+<path d="M-6.16 -19.09 C-4.36 -21.7, -2.98 -26.75, 0 -36 M-6.16 -19.09 C-3.5 -25.76, -1.76 -31.63, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round" data-s="1">
+<g transform="translate(195.76 116) rotate(0 0 -18)">
+<path d="M0 0 C0.07 -6.94, -0.39 -13.99, 0 -36 M0 0 C0.02 -9.2, 0.16 -17.99, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(195.76 116) rotate(0 0 -18)">
+<path d="M6.25 -19.12 C4.97 -22.17, 3.27 -25.33, 0 -36 M6.25 -19.12 C4.67 -23.55, 3.24 -27.61, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(195.76 116) rotate(0 0 -18)">
+<path d="M-6.07 -19.05 C-4.81 -22.12, -3.98 -25.28, 0 -36 M-6.07 -19.05 C-4.59 -23.49, -2.96 -27.56, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round" data-s="1">
+<g transform="translate(229.76 116) rotate(0 0 -18)">
+<path d="M0 0 C-0.53 -7.46, 0.42 -14.4, 0 -36 M0 0 C-0.41 -11.69, 0.52 -23.45, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(229.76 116) rotate(0 0 -18)">
+<path d="M6.39 -19.17 C4.55 -22.71, 4.09 -25.76, 0 -36 M6.39 -19.17 C3.94 -24.69, 2.73 -30.29, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(229.76 116) rotate(0 0 -18)">
+<path d="M-5.92 -19 C-5.23 -22.52, -3.15 -25.61, 0 -36 M-5.92 -19 C-4.43 -24.6, -1.69 -30.26, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round" data-s="1">
+<g transform="translate(263.76 116) rotate(0 0 -18)">
+<path d="M0 0 C0.87 -7.97, -0.77 -14.82, 0 -36 M0 0 C0.17 -14.17, -0.11 -27.92, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(263.76 116) rotate(0 0 -18)">
+<path d="M6.12 -19.07 C5.61 -23.06, 2.88 -26.04, 0 -36 M6.12 -19.07 C3.84 -25.79, 1.19 -32.09, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(263.76 116) rotate(0 0 -18)">
+<path d="M-6.19 -19.1 C-4.17 -23.1, -4.37 -26.08, 0 -36 M-6.19 -19.1 C-3.64 -25.74, -1.47 -32.04, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round" data-s="1">
+<g transform="translate(297.76 116) rotate(0 0 -18)">
+<path d="M0 0 C0.26 -6.49, 0.04 -15.24, 0 -36 M0 0 C-0.26 -9.46, 0.25 -18.99, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(297.76 116) rotate(0 0 -18)">
+<path d="M6.23 -19.11 C5.17 -21.78, 3.68 -26.47, 0 -36 M6.23 -19.11 C4.34 -23.54, 3.14 -28.02, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(297.76 116) rotate(0 0 -18)">
+<path d="M-6.08 -19.06 C-4.61 -21.71, -3.56 -26.4, 0 -36 M-6.08 -19.06 C-4.72 -23.47, -2.66 -27.97, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(31.760000000000005 120) rotate(0 10 30)" data-s="2" data-note="learned vectors join the sentence">
+<path d="M0.36 0.61 L19.66 -1.9 L21.97 58.6 L-1.01 58.86" stroke="none" stroke-width="0" fill="var(--color-part6)">
+</path>
+<path d="M0 0 C3.41 0.64, 9.89 -1.85, 20 0 M0 0 C7.33 0.28, 12.64 -0.53, 20 0 M20 0 C19.67 21.55, 21.21 47.19, 20 60 M20 0 C20.66 16.13, 19.93 31.22, 20 60 M20 60 C14.68 61.54, 10.06 58.22, 0 60 M20 60 C15.66 60.19, 10.75 59.26, 0 60 M0 60 C-0.14 38.65, 0.1 17.86, 0 0 M0 60 C-0.18 42.33, 0.3 22.85, 0 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(36.7 188) rotate(0 6.819999999999993 6.875)" data-s="2">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">p1</text>
+</g>
+<g stroke-linecap="round" data-s="2">
+<g transform="translate(41.760000000000005 116) rotate(0 0 -18)">
+<path d="M0 0 C0.46 -8.05, 0.47 -14.5, 0 -36 M0 0 C0.46 -9.71, 0.33 -19.99, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(41.760000000000005 116) rotate(0 0 -18)">
+<path d="M6.46 -19.2 C5.56 -23.26, 4.24 -25.86, 0 -36 M6.46 -19.2 C5.08 -23.59, 3.15 -28.47, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(41.760000000000005 116) rotate(0 0 -18)">
+<path d="M-5.85 -18.98 C-4.22 -23.03, -3 -25.68, 0 -36 M-5.85 -18.98 C-3.78 -23.39, -2.26 -28.33, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(65.76 120) rotate(0 10 30)" data-s="2">
+<path d="M0.94 -0.71 L20 -0.77 L19.44 58.19 L1.77 60.81" stroke="none" stroke-width="0" fill="var(--color-part6)">
+</path>
+<path d="M0 0 C3.98 1.61, 6.93 -0.29, 20 0 M0 0 C7.24 0.96, 13.59 -0.2, 20 0 M20 0 C18.43 18.39, 20.55 34.36, 20 60 M20 0 C20.66 22.99, 20.62 44.97, 20 60 M20 60 C15.16 61.04, 6.79 58.21, 0 60 M20 60 C12.93 60.73, 6.64 60.46, 0 60 M0 60 C-0.6 37.26, 1.23 16.57, 0 0 M0 60 C-0.71 38.81, 0.26 17.58, 0 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(70.7 188) rotate(0 6.819999999999993 6.875)" data-s="2">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">p2</text>
+</g>
+<g stroke-linecap="round" data-s="2">
+<g transform="translate(75.76 116) rotate(0 0 -18)">
+<path d="M0 0 C0.65 -7.6, -1.1 -15.75, 0 -36 M0 0 C0.18 -10.97, -0.58 -20.99, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(75.76 116) rotate(0 0 -18)">
+<path d="M5.85 -18.98 C5.29 -22.63, 2.51 -26.81, 0 -36 M5.85 -18.98 C4.33 -24.32, 1.9 -28.79, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(75.76 116) rotate(0 0 -18)">
+<path d="M-6.46 -19.2 C-4.49 -22.86, -4.74 -26.99, 0 -36 M-6.46 -19.2 C-4.33 -24.42, -3.11 -28.83, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(99.76 120) rotate(0 10 30)" data-s="2">
+<path d="M1.52 1.98 L20.34 0.37 L20.91 61.77 L0.54 58.76" stroke="none" stroke-width="0" fill="var(--color-part6)">
+</path>
+<path d="M0 0 C4.55 -1.42, 7.98 1.28, 20 0 M0 0 C7.14 -0.36, 14.55 0.13, 20 0 M20 0 C21.19 23.24, 19.89 49.52, 20 60 M20 0 C19.46 17.84, 20.11 36.72, 20 60 M20 60 C11.64 60.54, 3.51 58.21, 0 60 M20 60 C14.2 60.87, 8.53 59.26, 0 60 M0 60 C-1.07 35.87, -1.65 15.28, 0 0 M0 60 C-0.04 47.29, -0.57 34.31, 0 0" stroke="currentColor" stroke-width="1.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(104.7 188) rotate(0 6.819999999999993 6.875)" data-s="2">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">p3</text>
+</g>
+<g stroke-linecap="round" data-s="2">
+<g transform="translate(109.76 116) rotate(0 0 -18)">
+<path d="M0 0 C-0.79 -7.16, -0.32 -15.01, 0 -36 M0 0 C-0.09 -11.22, -0.5 -22, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(109.76 116) rotate(0 0 -18)">
+<path d="M5.82 -18.97 C3.85 -22.24, 3.08 -26.14, 0 -36 M5.82 -18.97 C3.99 -24.3, 1.81 -29.2, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(109.76 116) rotate(0 0 -18)">
+<path d="M-6.5 -19.21 C-5.93 -22.45, -4.16 -26.31, 0 -36 M-6.5 -19.21 C-4.47 -24.41, -2.81 -29.23, 0 -36" stroke="currentColor" stroke-width="1" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(10 216) rotate(0 96.72 7.5)" data-s="2">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="var(--color-accent)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">the only thing that trains</text>
+</g>
+<g transform="translate(97.21 256) rotate(0 181.35 8.125)" data-s="3" data-note="fourteen thousand numbers, nothing else">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">16 vectors × 896 numbers = 14,336 in training</text>
+</g>
+</svg>
+  Prompt tuning. The sentence arrives as vectors (Lecture 1), and $k$ learned vectors
+  (purple) join the front of it. The map never moves; the input learns to steer it.
+</Figure>
+
+The measured version: 16 virtual tokens on this model is $16 \times 896 = 14{,}336$
+trainable numbers, the smallest row of the table by far. The learned vectors are not words
+and never need to be; they are free points in embedding space, chosen by gradient descent to
+push the frozen model's attention where the task lives. Prefix tuning goes deeper: it learns
+key and value vectors inside every layer's attention, where prompt tuning stops at the
+entrance. And p-tuning trains a small network that writes the prompt vectors during training
+and is thrown away after.
+Steering a frozen map by adding vectors to its input is the oldest move in this course; it
+is what every $x + \Delta x$ has done since Part I.
+
+## The four-bit base
+
+One cost survives everything above: the frozen $W$ still has to sit in memory for the
+forward pass. QLoRA, from Dettmers, Pagnoni, Holtzman and Zettlemoyer
+([arXiv:2305.14314](https://arxiv.org/abs/2305.14314)), attacks the last stronghold. Store
+the frozen base in four bits per weight, and train a full-precision LoRA on top of it.
+
+<Figure n="9">
+  <svg slot="drawing" viewBox="0 0 618.12 293" width="618" role="img" aria-label="A cyan slab labeled W, frozen, stored in 4 bits, NF4, with a full precision green C times orange R adapter above it. The input x enters, the output y leaves, and a dashed blue gradient arrow from the right lands only on the adapter." style="max-width:100%;height:auto">
+<defs>
+</defs>
+<g stroke-opacity="0.45" fill-opacity="0.45" stroke-linecap="round" transform="translate(90 142) rotate(0 165 55)" data-s="0" data-note="the frozen base squeezes to four bits">
+<path d="M1.15 1.12 L330.9 0.93 L328.03 108.41 L-1.5 110.69" stroke="none" stroke-width="0" fill="var(--color-part2)">
+</path>
+<path d="M0 0 C67 1.05, 135.85 0.84, 330 0 M0 0 C108.14 -1.44, 216.38 -2.41, 330 0 M330 0 C329.61 39.32, 330.62 84.15, 330 110 M330 0 C330.15 42.3, 329.29 83.7, 330 110 M330 110 C201.21 108.28, 73.22 109.07, 0 110 M330 110 C241.23 110.94, 153.16 111.5, 0 110 M0 110 C-1.36 77.13, 0.72 44.95, 0 0 M0 110 C0.75 68.85, -0.94 29.03, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(161.85 168) rotate(0 125.55 9.375)" data-s="0">
+<text x="0" y="13.215" font-family="Virgil, Segoe UI Emoji" font-size="15px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">W, frozen, stored in 4 bits</text>
+</g>
+<g transform="translate(136.32 198) rotate(0 159.96 7.5)" data-s="0">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">NF4: sixteen levels shaped like the weights</text>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(180 32) rotate(0 6 37)" data-s="1">
+<path d="M0.86 -0.09 L12.62 -0.96 L11.75 74.99 L0.64 73.32" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.26 -0.49, 5.29 -0.4, 12 0 M0 0 C3.93 -0.24, 8.26 -0.17, 12 0 M12 0 C11.14 21.01, 11.93 41.53, 12 74 M12 0 C12.1 22.55, 12.02 45.66, 12 74 M12 74 C8.23 74.44, 5.93 73.74, 0 74 M12 74 C7.13 73.97, 2.37 73.82, 0 74 M0 74 C-0.76 50.42, -0.92 27.92, 0 0 M0 74 C0.08 57.01, -0.52 40.56, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(183.01 10) rotate(0 4.030000000000001 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">C</text>
+</g>
+<g transform="translate(205.01 60) rotate(0 4.030000000000001 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">×</text>
+</g>
+<g stroke-opacity="0.9" fill-opacity="0.9" stroke-linecap="round" transform="translate(224 64) rotate(0 37 6)" data-s="1" data-note="the adapter stays sharp">
+<path d="M-0.85 -0.75 L74.79 -0.4 L74.49 12.79 L0.03 12.3" stroke="none" stroke-width="0" fill="var(--color-part5)">
+</path>
+<path d="M0 0 C15.16 -0.11, 29.56 0.34, 74 0 M0 0 C27.12 -0.19, 53.46 -0.25, 74 0 M74 0 C74.34 4.39, 73.79 8.93, 74 12 M74 0 C73.79 2.5, 73.94 5.35, 74 12 M74 12 C47.67 12.73, 21.68 11.81, 0 12 M74 12 C50.35 12.15, 27.55 12.23, 0 12 M0 12 C-0.44 7.63, -0.06 4.36, 0 0 M0 12 C0.23 8.4, 0.02 5.06, 0 0" stroke="currentColor" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(258.01 38) rotate(0 4.030000000000001 8.125)" data-s="1">
+<text x="0" y="11.453" font-family="Virgil, Segoe UI Emoji" font-size="13px" fill="var(--color-stroke-warm)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">R</text>
+</g>
+<g transform="translate(225.12 86) rotate(0 48.360000000000014 7.5)" data-s="1">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">16-bit, exact</text>
+</g>
+<g stroke-linecap="round" data-s="2">
+<g transform="translate(10 197) rotate(0 36 0)">
+<path d="M0 0 C15.25 -0.5, 28.9 0.99, 72 0 M0 0 C27.61 0.4, 54.78 -0.05, 72 0" stroke="var(--color-stroke-warm)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(10 197) rotate(0 36 0)">
+<path d="M48.53 8.62 C53.86 6.72, 57.52 6.44, 72 0 M48.53 8.62 C57.83 5.91, 66.75 2.21, 72 0" stroke="var(--color-stroke-warm)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(10 197) rotate(0 36 0)">
+<path d="M48.48 -8.48 C53.7 -6.86, 57.37 -3.62, 72 0 M48.48 -8.48 C57.91 -4.76, 66.85 -2.02, 72 0" stroke="var(--color-stroke-warm)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(28.78 170) rotate(0 4.340000000000003 8.75)" data-s="2">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="var(--color-stroke-warm)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">x</text>
+</g>
+<g stroke-linecap="round" data-s="2">
+<g transform="translate(424 197) rotate(0 40 0)">
+<path d="M0 0 C14.61 2.64, 31.55 0.53, 80 0 M0 0 C26.53 -0.56, 51.38 -0.58, 80 0" stroke="var(--color-stroke-green)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(424 197) rotate(0 40 0)">
+<path d="M56.39 8.21 C59.43 8.7, 64.76 4.9, 80 0 M56.39 8.21 C64.79 4.73, 71.6 2.08, 80 0" stroke="var(--color-stroke-green)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(424 197) rotate(0 40 0)">
+<path d="M56.63 -8.89 C59.56 -4.88, 64.85 -5.16, 80 0 M56.63 -8.89 C65.11 -6.9, 71.84 -4.07, 80 0" stroke="var(--color-stroke-green)" stroke-width="2" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(460.78 170) rotate(0 4.340000000000003 8.75)" data-s="2">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="var(--color-stroke-green)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">y</text>
+</g>
+<g transform="translate(108.72 268) rotate(0 197.15999999999997 7.5)" data-s="2" data-note="unpacked per multiply, never stored wide">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="var(--color-accent)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">each multiply unpacks W to 16 bits, uses it, drops it</text>
+</g>
+<g stroke-linecap="round" data-s="3" data-note="the update lands only in C and R">
+<g transform="translate(530 70) rotate(0 -108 0)">
+<path d="M0 0 C-45.55 0.52, -89.16 2.69, -216 0" stroke="var(--color-accent)" stroke-width="2.5" fill="none" stroke-dasharray="8 10">
+</path>
+</g>
+<g transform="translate(530 70) rotate(0 -108 0)">
+<path d="M-192.39 -8.23 C-198.51 -7.47, -202.42 -3.29, -216 0" stroke="var(--color-accent)" stroke-width="2.5" fill="none" pathLength="1">
+</path>
+</g>
+<g transform="translate(530 70) rotate(0 -108 0)">
+<path d="M-192.63 8.87 C-198.73 6.11, -202.59 6.78, -216 0" stroke="var(--color-accent)" stroke-width="2.5" fill="none" pathLength="1">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g transform="translate(541.16 62) rotate(0 33.48000000000002 7.5)" data-s="3">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="var(--color-accent)" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">gradients</text>
+</g>
+</svg>
+  The QLoRA sandwich. The base (cyan) is stored in four bits and never changes, so its
+  rounding error never compounds. The adapter (green and orange) stays in 16 bits, and every
+  gradient lands there.
+</Figure>
+
+Four bits allow sixteen values, so the question is where to put them. Trained weights arrive
+roughly normally distributed, and the paper's NF4 data type places its sixteen levels to be,
+in the authors' words, information-theoretically optimal for exactly that distribution:
+dense where weights crowd, sparse in the tails. Each multiply unpacks a block of $W$ back to
+16 bits, uses it, and drops it, so the wide copy never exists all at once. A second trick
+the paper calls double quantization compresses the per-block scale factors themselves. The
+gradient story is what makes it sound: gradients flow through the dequantized weights as
+constants and land only in $C$ and $R$, which live in full precision, so the base's rounding
+is a fixed lens, never an accumulating error. The arithmetic is the headline: a 7B model
+that needs 14 GB in bfloat16 stores in about 3.5 GB, and the authors fine-tuned a
+65-billion-parameter model on a single 48 GB card. This chapter cannot run that here, and
+does not pretend to; every QLoRA number above is theirs.
+
+<Callout type="intuition">
+  Keep the whole zoo in one picture: a frozen map, and six shapes of change. Thin products
+  add a few directions (rank, Lecture 8). Rotations turn without stretching (orthogonality,
+  Lecture 13). Fixed bases spend coefficients (Fourier, coming in Part VI). Scales stretch
+  channels. Prompts steer the input (vectors, Lecture 1). Quantization shrinks the frozen
+  part because frozen things compress well. Nothing in this list is new mathematics; it is
+  this course's mathematics, hired.
+</Callout>
+
+## Sixty steps on this laptop
+
+Time to train one. Twelve sentences in this course's own voice are the whole dataset, and
+the run fits in a coffee sip: sixty steps of AdamW on the adapter, everything else frozen.
+
+```python
+import time
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from peft import LoraConfig, TaskType, get_peft_model
+
+torch.manual_seed(0)
+device = "mps" if torch.backends.mps.is_available() else "cpu"
+
+tok = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B")
+model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-0.5B",
+                                             dtype=torch.float32).to(device)
+
+corpus = [
+    "The column space of A holds every vector that A can produce.",
+    "The null space of A holds every vector that A sends to zero.",
+    "The rank of a matrix is the number of independent columns it has.",
+    "A basis is a set of independent vectors that spans the space.",
+    "Elimination factors A into a lower triangle L times an upper triangle U.",
+    "The projection of b onto a line keeps the part of b along that line.",
+    "Orthogonal vectors have inner product zero and never lean on each other.",
+    "An eigenvector keeps its direction when the matrix acts on it.",
+    "The four subspaces come in two orthogonal pairs.",
+    "Least squares picks the x that makes the error perpendicular to the column space.",
+    "A rank one matrix is one column times one row.",
+    "Every A equals C times R, a thin matrix times a wide one.",
+]
+batch = tok(corpus, return_tensors="pt", padding=True)
+ids, attn = batch.input_ids.to(device), batch.attention_mask.to(device)
+labels = ids.clone()
+labels[attn == 0] = -100
+
+prompt = tok("The null space of A holds", return_tensors="pt").input_ids.to(device)
+
+def continue_text(m):
+    out = m.generate(prompt, max_new_tokens=12, do_sample=False,
+                     pad_token_id=tok.eos_token_id)
+    return tok.decode(out[0][prompt.shape[1]:], skip_special_tokens=True)
+
+print("base:", repr(continue_text(model)))
+# base: ' true for all matrices A. What is the dimension of the'
+
+peft_model = get_peft_model(model, LoraConfig(r=16, lora_alpha=32,
+                                              task_type=TaskType.CAUSAL_LM))
+opt = torch.optim.AdamW(
+    (p for p in peft_model.parameters() if p.requires_grad), lr=2e-4)
+
+t0 = time.time()
+for step in range(1, 61):
+    loss = peft_model(input_ids=ids, attention_mask=attn, labels=labels).loss
+    loss.backward()
+    opt.step()
+    opt.zero_grad()
+    if step % 10 == 0:
+        print(f"step {step:2d}   loss {loss.item():.3f}")
+print(f"{time.time() - t0:.0f} seconds on {device}")
+# step 10   loss 2.700
+# step 20   loss 1.398
+# step 30   loss 0.576
+# step 40   loss 0.282
+# step 50   loss 0.150
+# step 60   loss 0.095
+# 5 seconds on mps
+
+peft_model.eval()
+print("tuned:", repr(continue_text(peft_model)))
+with peft_model.disable_adapter():
+    print("off:  ", repr(continue_text(peft_model)))
+# tuned: ' every vector that A sends to zero. It is a free'
+# off:   ' true for all matrices A. What is the dimension of the'
+
+peft_model.save_pretrained("qwen-notes")
+import os
+print(os.path.getsize("qwen-notes/adapter_model.safetensors"), "bytes on disk")
+# 4338000 bytes on disk
+```
+
+Read the three continuations together. The base model, asked what the null space of $A$
+holds, wanders off into a quiz question. After five seconds of training, the adapter answers
+in this course's words. And inside `disable_adapter()`, the original wandering answer comes
+back verbatim, because the base weights were never touched; the old model is always intact,
+one context manager away. That is catastrophic forgetting handled by construction rather
+than by care: you cannot forget what you never overwrote.
+
+The file on disk is 4,338,000 bytes: 1,081,344 float32 numbers at 4 bytes each, plus a small
+header. The receipt from Figure 4 again, now as a file size.
+
+The saved adapter loads by name, and a model can hold several and switch:
+
+```python
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from peft import PeftModel
+
+device = "mps" if torch.backends.mps.is_available() else "cpu"
+tok = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B")
+base = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-0.5B",
+                                            dtype=torch.float32).to(device)
+
+model = PeftModel.from_pretrained(base, "qwen-notes", adapter_name="notes")
+prompt = tok("The null space of A holds", return_tensors="pt").input_ids.to(device)
+
+def continue_text():
+    out = model.generate(prompt, max_new_tokens=12, do_sample=False,
+                         pad_token_id=tok.eos_token_id)
+    return tok.decode(out[0][prompt.shape[1]:], skip_special_tokens=True)
+
+model.set_adapter("notes")
+print(model.active_adapter, "->", repr(continue_text()))
+# notes -> ' every vector that A sends to zero. It is a free'
+
+with torch.no_grad():
+    before = model(prompt).logits
+merged = model.merge_and_unload()
+with torch.no_grad():
+    after = merged(prompt).logits
+
+print("largest logit change from merging:", float((before - after).abs().max()))
+print("what is left:", type(merged).__name__)
+# largest logit change from merging: 7.2479248046875e-05
+# what is left: Qwen2ForCausalLM
+```
+
+The last two lines are Figure 3's third act, measured. Merging computed $W + CR$ once per
+adapted matrix, and the largest change in any output logit was seven hundredths of a
+thousandth, float32 rounding and nothing else. What remains is a plain `Qwen2ForCausalLM`:
+no adapter classes, no extra multiply at inference, no trace of the surgery except the new
+behavior. In one earlier run here, a freshly initialized adapter was compared against the
+raw base the same way, and the largest logit difference was exactly zero, which is the
+$C = 0$ initialization keeping its promise to the last bit.
+
+<Callout type="warning">
+  The trainable percentage counts parameters, and memory is not parameters. The frozen base
+  still occupies its full size in the forward pass, activations still scale with batch and
+  sequence length, and the optimizer state is small only because the adapter is. PEFT cuts
+  the bill from Figure 1 by a lot; it does not make training free.
+</Callout>
+
+## What this cannot do
+
+Honesty about the limits, since the zoo's marketing rarely supplies it. A rank-16 update per
+matrix is a bet that the change is small in a precise sense, and some changes are not. A new
+language, a new modality, deep new knowledge: those move the model far from where
+pretraining left it, and the intrinsic-dimension argument stops applying, because that
+argument was measured on tasks near the pretrained model's abilities. When the destination
+is far, full fine-tuning, or bigger surgery still, remains the honest tool, and the PEFT
+README itself frames its methods as reaching performance comparable to full fine-tuning on
+downstream adaptation, which is the near-destination case.
+
+The sixty-step run above also shows the small print if you read it twice. The adapter
+learned this course's sentences quickly because the base model already knew English, already
+knew mathematics, and only needed steering toward one voice. The million numbers did not add
+knowledge; they selected among abilities half a billion numbers already paid for. That is
+what fine-tuning in a small subspace means, and it is a strength exactly as long as you know
+that is what you bought.
+
+## Where this is going
+
+Look back at the map once more. The waist came from Lecture 6, the meaning of rank from
+Lecture 8, the geometry of never-stretching updates from Lecture 13, the steering power of
+added vectors from Lectures 1 and 11, and the machine all of this runs on from Part VII. A
+field that looks like forty papers a year is, from where this course stands, six shapes of
+one matrix, and you knew all six before this chapter started. That is what Part VIII is for:
+watching the course's own mathematics get hired. It grows from here; the arithmetic of
+quantization deserves a chapter of its own, and the shelf of methods will have changed again
+by the time you read this, which is exactly why the map is drawn in shapes instead of names.
+
+<Callout type="check">
+  1. Rerun Figure 4's arithmetic for $r = 8$: how many numbers train, and what share of the
+     495 million is that? The shapes in the first code block are all you need.
+  2. LoHa's row of the table is exactly twice LoRA's, 2,162,688 against 1,081,344. Point at
+     the formula in the map section that makes the factor exactly two, not roughly two.
+  3. VeRA at $r = 256$ on the queries trains $256 + 896 = 1{,}152$ numbers a layer. How many
+     would $r = 1024$ train across all 24 layers? Notice which of the two terms did not
+     move.
+  4. Show in one line of algebra why the merged model computes the same outputs:
+     expand $(W + CR)x$. Then name the situation in this chapter where you would refuse to
+     merge.
+  5. Use $R^{\T} R = I$ from Lecture 13 to prove $\norm{RWx} = \norm{Wx}$, and explain in
+     one sentence why a training loop cannot break this even by accident.
+  6. Redraw Figure 5 from memory, labels included. The drawing is the test.
+</Callout>

@@ -483,6 +483,22 @@ const thumbs = {
     s += txt(204, 96, 'CSR', ink, 11);
     return s;
   },
+
+  // 29 · PEFT — a frozen W plus a thin C times a wide R, almost nothing trains.
+  'lecture-29': () => {
+    let s = `<rect x="26" y="34" width="88" height="88" rx="4" fill="none" stroke="${ink}" stroke-width="2.2" opacity="0.55"/>`;
+    s += txt(60, 66, 'W', ink, 16, 'font-style="italic"');
+    s += txt(43, 104, 'frozen', ink, 11);
+    s += txt(122, 84, '+', C.blue, 18);
+    s += `<rect x="142" y="34" width="13" height="88" rx="3" fill="${C.green}" opacity="0.9"/>`;
+    s += txt(162, 84, '×', C.blue, 15);
+    s += `<rect x="178" y="34" width="66" height="13" rx="3" fill="${C.orange}" opacity="0.9"/>`;
+    s += txt(140, 24, 'C', C.green, 13, 'font-style="italic"');
+    s += txt(248, 44, 'R', C.orange, 13, 'font-style="italic"');
+    s += txt(178, 84, 'rank 16', C.blue, 11);
+    s += txt(140, 140, '0.2% of the weights train', C.green, 11);
+    return s;
+  },
 };
 
 const dir = join(import.meta.dirname, '..', 'src', 'assets', 'thumbs');

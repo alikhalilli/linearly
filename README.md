@@ -29,6 +29,7 @@ was worked out by hand for a room of real students.
 | V. Determinants & Eigenvalues | 14 Determinants, 15 Eigenvalues & positive definiteness | live |
 | VI. The Missing Third | 16–22: SVD, pseudoinverse, low-rank & PCA, complex eigenvalues, Fourier, convolution, capstone | planned |
 | VII. The Machine | 23–28: memory layout, CPU matmul, the GPU, GEMM kernels, the asynchronous kernel, CUTLASS & CuTe, sparse matrices | live |
+| VIII. Adaptation | 29 PEFT: LoRA, the adapter zoo, and fine-tuning as the course's own linear algebra | live |
 
 Also on the site: **[the roadmap](https://linearly.space/roadmap)**, an honest staged path for
 learning this subject, and **[the library](https://linearly.space/resources)**, a
