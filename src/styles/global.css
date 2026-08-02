@@ -577,19 +577,20 @@ pre.astro-code:not(.code-figure pre) {
   scroll-margin-top: 1.5rem;
 }
 
-/* Figure animation. The play chip beside a figure's label replays the
-   drawing in its authored order: each element group fades in on its beat,
-   and solid strokes draw themselves on (pathLength=1 lets the dash trick
-   run without measuring; dashed strokes are excluded upstream and only
-   fade). Without the fig-anim class none of this applies, so the static
-   render is untouched. */
+/* The figure beat stepper. The play chip beside a figure's label steps
+   through the drawing in its authored order: each click reveals the next
+   beat, the newest strokes draw themselves on (pathLength=1 lets the dash
+   trick run without measuring; dashed strokes are excluded upstream and
+   fade in whole), earlier beats dim slightly while the newest lands, and
+   the final beat restores full ink. Without the fig-step class none of
+   this applies, so the static render is untouched. */
 .fig-anim-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 1.4rem;
   height: 1.4rem;
-  margin-right: 0.55rem;
+  margin-right: 0.4rem;
   vertical-align: -0.32em;
   border: 1.5px solid var(--color-rule);
   border-radius: 6px;
@@ -604,31 +605,71 @@ pre.astro-code:not(.code-figure pre) {
   color: var(--color-ink);
   background: color-mix(in oklab, var(--color-ink) 6%, var(--color-paper));
 }
-svg.fig-anim > g[data-s] {
-  opacity: 0;
-  animation: fig-in 0.28s ease forwards;
-  animation-delay: var(--fad, 0ms);
+.fig-beats {
+  display: none;
+  gap: 4px;
+  margin-right: 0.55rem;
+  vertical-align: 0.06em;
 }
-svg.fig-anim > g[data-s] path[pathLength] {
+.fig-beats.live {
+  display: inline-flex;
+}
+.fig-beats i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: 1.2px solid var(--color-ink-faint);
+  background: transparent;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+.fig-beats i.done {
+  border-color: var(--color-ink-muted);
+  background: color-mix(in oklab, var(--color-ink-muted) 55%, transparent);
+}
+.fig-beats i.cur {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+}
+.fig-note {
+  margin: 0.6rem 0 0;
+  text-align: center;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-muted);
+}
+svg.fig-step > g[data-s] {
+  opacity: 0;
+}
+svg.fig-step > g[data-s].on {
+  opacity: 0.6;
+  transition: opacity 0.25s ease;
+  animation: fig-in 0.28s ease backwards;
+}
+svg.fig-step > g[data-s].on.cur,
+svg.fig-step > g[data-s].on.fin {
+  opacity: 1;
+}
+svg.fig-step > g[data-s].on.cur path[pathLength] {
   stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: fig-draw 0.55s ease forwards;
-  animation-delay: var(--fad, 0ms);
+  stroke-dashoffset: 0;
+  animation: fig-draw 0.55s ease backwards;
 }
 @keyframes fig-in {
-  to {
-    opacity: 1;
+  from {
+    opacity: 0;
   }
 }
 @keyframes fig-draw {
-  to {
-    stroke-dashoffset: 0;
+  from {
+    stroke-dashoffset: 1;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  svg.fig-anim > g[data-s],
-  svg.fig-anim > g[data-s] path[pathLength] {
+  svg.fig-step > g[data-s].on,
+  svg.fig-step > g[data-s].on.cur path[pathLength] {
     animation-duration: 0.01ms;
-    animation-delay: 0ms;
   }
 }

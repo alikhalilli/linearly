@@ -167,6 +167,8 @@ for (const mdx of mdxFiles) {
       groups.forEach((g, i) => {
         const seq = paired ? (live[i].customData?.seq ?? i) : i;
         g.setAttribute('data-s', String(seq));
+        const note = paired ? live[i].customData?.note : undefined;
+        if (note) g.setAttribute('data-note', String(note));
         for (const p of g.querySelectorAll('path')) {
           const stroke = p.getAttribute('stroke');
           const dashed =

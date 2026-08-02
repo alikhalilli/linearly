@@ -5,10 +5,14 @@
  * inherit the page's ink color via currentColor so they render correctly in
  * both themes.
  *
- * Every exported drawing carries per-element sequence annotations (data-s,
- * stamped by scripts/export-figures.mjs in authoring order), so each figure
- * can replay itself like a teacher drawing it: the play chip beside the
- * figure label animates strokes on and fades parts in, in that order.
+ * Every exported drawing carries per-element beat annotations (data-s,
+ * stamped by scripts/export-figures.mjs in authoring order; sources can
+ * stage elements together or reorder time via customData.seq, and attach a
+ * one-line micro-caption via customData.note). The play chip beside the
+ * figure label steps through those beats like a teacher drawing at a board:
+ * click for the next stroke, sit with the partial picture as long as you
+ * like. Double-click plays the remaining beats through. Past elements dim
+ * slightly while the newest beat lands, and everything restores at the end.
  */
 interface Props {
   src?: string;
@@ -28,14 +32,22 @@ const { src, alt, n } = Astro.props;
       </div>
     )
   }
+  {!src && <p class="fig-note" aria-live="polite" hidden></p>}
   <figcaption class="mt-3 text-center text-[0.9375rem] text-ink-muted">
     {
       !src && (
-        <button class="fig-anim-btn" aria-label="Animate this figure" title="Animate">
-          <svg width="9" height="9" viewBox="0 0 10 10" aria-hidden="true">
-            <path d="M2 1.2 8.6 5 2 8.8Z" fill="currentColor" />
-          </svg>
-        </button>
+        <>
+          <button
+            class="fig-anim-btn"
+            aria-label="Step through this figure"
+            title="Step through the drawing (double-click to play all)"
+          >
+            <svg width="9" height="9" viewBox="0 0 10 10" aria-hidden="true">
+              <path d="M2 1.2 8.6 5 2 8.8Z" fill="currentColor" />
+            </svg>
+          </button>
+          <span class="fig-beats" aria-hidden="true"></span>
+        </>
       )
     }
     {n !== undefined && <span class="label !tracking-[0.1em]">Fig. {n}&ensp;</span>}
@@ -44,25 +56,121 @@ const { src, alt, n } = Astro.props;
 </figure>
 
 <script>
-  // One listener for every figure on the page: replay the drawing in its
-  // authored order. Groups sharing a data-s value appear together; delays
-  // come from the rank of each sequence value, so curated sources can stage
-  // several elements on one beat.
+  // The beat stepper. One delegated listener serves every figure on the page.
+  // State lives on the svg element (data-beat); beats are the sorted unique
+  // data-s values of its top-level groups.
+  type FigState = {
+    svg: SVGSVGElement;
+    beats: number[];
+    groupsByBeat: Map<number, SVGGElement[]>;
+    dots: HTMLElement | null;
+    note: HTMLElement | null;
+  };
+
+  const states = new WeakMap<Element, FigState>();
+
+  function figState(btn: Element): FigState | null {
+    const figure = btn.closest('figure');
+    const svg = figure?.querySelector('.figure-inline > svg') as SVGSVGElement | null;
+    if (!svg) return null;
+    let st = states.get(svg);
+    if (st) return st;
+    const groups = [...svg.querySelectorAll(':scope > g[data-s]')] as SVGGElement[];
+    if (!groups.length) return null;
+    // Uncurated figures carry one beat per element, which is too many clicks
+    // for a dense drawing. Collapse long default sequences into about ten
+    // beats of consecutive elements; curated figures (few deliberate seq
+    // values) pass through untouched.
+    let seqOf = (g: SVGGElement) => Number(g.dataset.s);
+    const rawSeqs = [...new Set(groups.map(seqOf))].sort((a, b) => a - b);
+    if (rawSeqs.length > 14) {
+      const chunk = Math.ceil(rawSeqs.length / 10);
+      const rankOf = new Map(rawSeqs.map((v, i) => [v, Math.floor(i / chunk)]));
+      seqOf = (g) => rankOf.get(Number(g.dataset.s)) ?? 0;
+    }
+    const groupsByBeat = new Map<number, SVGGElement[]>();
+    for (const g of groups) {
+      const s = seqOf(g);
+      if (!groupsByBeat.has(s)) groupsByBeat.set(s, []);
+      groupsByBeat.get(s)!.push(g);
+    }
+    const beats = [...groupsByBeat.keys()].sort((a, b) => a - b);
+    const dots = figure!.querySelector('.fig-beats') as HTMLElement | null;
+    if (dots && !dots.childElementCount) {
+      for (let i = 0; i < beats.length; i++) dots.appendChild(document.createElement('i'));
+    }
+    const note = figure!.querySelector('.fig-note') as HTMLElement | null;
+    st = { svg, beats, groupsByBeat, dots, note };
+    states.set(svg, st);
+    return st;
+  }
+
+  function render(st: FigState, beat: number) {
+    // beat = how many beats are visible; 0..beats.length. Past the end exits
+    // stepping mode entirely and the figure returns to its finished self.
+    const { svg, beats, groupsByBeat, dots, note } = st;
+    if (beat > beats.length) beat = 0;
+    svg.dataset.beat = String(beat);
+    if (beat === 0) {
+      svg.classList.remove('fig-step');
+      dots?.classList.remove('live');
+      if (note) {
+        note.hidden = true;
+        note.textContent = '';
+      }
+      return;
+    }
+    svg.classList.add('fig-step');
+    dots?.classList.add('live');
+    let noteText = '';
+    beats.forEach((s, i) => {
+      const on = i < beat;
+      const cur = i === beat - 1;
+      for (const g of groupsByBeat.get(s)!) {
+        g.classList.toggle('on', on);
+        g.classList.toggle('cur', cur);
+        g.classList.toggle('fin', beat === beats.length);
+        if (cur && g.dataset.note) noteText = g.dataset.note;
+      }
+      const dot = dots?.children[i] as HTMLElement | undefined;
+      if (dot) {
+        dot.classList.toggle('done', on && !cur);
+        dot.classList.toggle('cur', cur);
+      }
+    });
+    if (note) {
+      note.textContent = noteText;
+      note.hidden = !noteText;
+    }
+  }
+
+  let playTimer: ReturnType<typeof setInterval> | null = null;
+
   document.addEventListener('click', (e) => {
     const btn = (e.target as HTMLElement).closest('.fig-anim-btn');
     if (!btn) return;
-    const svg = btn.closest('figure')?.querySelector('.figure-inline > svg');
-    if (!svg) return;
-    const groups = [...svg.querySelectorAll(':scope > g[data-s]')] as SVGGElement[];
-    if (!groups.length) return;
-    const seqs = [...new Set(groups.map((g) => Number(g.dataset.s)))].sort((a, b) => a - b);
-    const rank = new Map(seqs.map((v, i) => [v, i]));
-    const step = Math.max(80, Math.min(240, 2400 / seqs.length));
-    for (const g of groups) {
-      g.style.setProperty('--fad', `${(rank.get(Number(g.dataset.s)) ?? 0) * step}ms`);
+    const st = figState(btn);
+    if (!st) return;
+    if (playTimer) {
+      clearInterval(playTimer);
+      playTimer = null;
     }
-    svg.classList.remove('fig-anim');
-    void (svg as unknown as SVGGraphicsElement).getBoundingClientRect();
-    svg.classList.add('fig-anim');
+    render(st, Number(st.svg.dataset.beat ?? 0) + 1);
+  });
+
+  document.addEventListener('dblclick', (e) => {
+    const btn = (e.target as HTMLElement).closest('.fig-anim-btn');
+    if (!btn) return;
+    const st = figState(btn);
+    if (!st) return;
+    if (playTimer) clearInterval(playTimer);
+    playTimer = setInterval(() => {
+      const next = Number(st.svg.dataset.beat ?? 0) + 1;
+      render(st, next);
+      if (next >= st.beats.length && playTimer) {
+        clearInterval(playTimer);
+        playTimer = null;
+      }
+    }, 650);
   });
 </script>

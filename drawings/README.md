@@ -46,3 +46,20 @@ by hand.
 - One idea per drawing. If it needs a paragraph to explain, split it.
 - One folder per lecture, one file per figure, named for what it shows:
   `drawings/lecture-01/fig-1-dimension-ladder.excalidraw`.
+
+## Animation beats
+
+Every exported figure can replay itself through the play chip beside its
+label, stepping in beats like a teacher drawing at a board. The default
+beat order is the element order of the source, which is the order you
+authored the story; dense figures are auto-chunked to about ten beats.
+To curate a figure deliberately, set on elements in the source:
+
+- `customData.seq` (integer): the beat this element belongs to. Elements
+  sharing a value appear together. seq reorders time, never paint: z-order
+  is untouched, so occlusion-dependent figures are safe to re-sequence.
+- `customData.note` (string, seven words or fewer, house voice): a
+  micro-caption shown under the figure while that beat is current.
+
+Only curate figures whose default order mistells the story. A five-element
+figure in perfect order needs nothing.
