@@ -10,6 +10,7 @@
  "elements": [
   {
    "id": "e1001",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 23.41,
    "y": 34,
@@ -46,6 +47,7 @@
   },
   {
    "id": "e1002",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 20.53,
    "y": 58,
@@ -82,6 +84,7 @@
   },
   {
    "id": "e1003",
+   "customData": { "seq": 0 },
    "type": "rectangle",
    "x": 30,
    "y": 96,
@@ -109,6 +112,7 @@
   },
   {
    "id": "e1004",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 44.84,
    "y": 103.62,
@@ -145,6 +149,7 @@
   },
   {
    "id": "e1005",
+   "customData": { "seq": 0 },
    "type": "rectangle",
    "x": 70,
    "y": 96,
@@ -172,6 +177,7 @@
   },
   {
    "id": "e1006",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 87.97,
    "y": 103.62,
@@ -208,6 +214,7 @@
   },
   {
    "id": "e1007",
+   "customData": { "seq": 0 },
    "type": "rectangle",
    "x": 110,
    "y": 96,
@@ -235,6 +242,7 @@
   },
   {
    "id": "e1008",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 124.66,
    "y": 103.62,
@@ -271,6 +279,7 @@
   },
   {
    "id": "e1009",
+   "customData": { "seq": 0 },
    "type": "rectangle",
    "x": 30,
    "y": 130,
@@ -298,6 +307,7 @@
   },
   {
    "id": "e1010",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 44.89,
    "y": 137.62,
@@ -334,6 +344,7 @@
   },
   {
    "id": "e1011",
+   "customData": { "seq": 0 },
    "type": "rectangle",
    "x": 70,
    "y": 130,
@@ -361,6 +372,7 @@
   },
   {
    "id": "e1012",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 85.2,
    "y": 137.62,
@@ -397,6 +409,7 @@
   },
   {
    "id": "e1013",
+   "customData": { "seq": 0 },
    "type": "rectangle",
    "x": 110,
    "y": 130,
@@ -424,6 +437,7 @@
   },
   {
    "id": "e1014",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 125.36,
    "y": 137.62,
@@ -460,6 +474,7 @@
   },
   {
    "id": "e1015",
+   "customData": { "seq": 0 },
    "type": "rectangle",
    "x": 30,
    "y": 164,
@@ -487,6 +502,7 @@
   },
   {
    "id": "e1016",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 45.2,
    "y": 171.62,
@@ -523,6 +539,7 @@
   },
   {
    "id": "e1017",
+   "customData": { "seq": 0 },
    "type": "rectangle",
    "x": 70,
    "y": 164,
@@ -550,6 +567,7 @@
   },
   {
    "id": "e1018",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 85.97,
    "y": 171.62,
@@ -586,6 +604,7 @@
   },
   {
    "id": "e1019",
+   "customData": { "seq": 0 },
    "type": "rectangle",
    "x": 110,
    "y": 164,
@@ -613,6 +632,7 @@
   },
   {
    "id": "e1020",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 124.26,
    "y": 171.62,
@@ -649,6 +669,7 @@
   },
   {
    "id": "e1021",
+   "customData": { "seq": 0 },
    "type": "rectangle",
    "x": 30,
    "y": 198,
@@ -676,6 +697,7 @@
   },
   {
    "id": "e1022",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 45.43,
    "y": 205.62,
@@ -712,6 +734,7 @@
   },
   {
    "id": "e1023",
+   "customData": { "seq": 0 },
    "type": "rectangle",
    "x": 70,
    "y": 198,
@@ -739,6 +762,7 @@
   },
   {
    "id": "e1024",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 82.81,
    "y": 205.62,
@@ -775,6 +799,7 @@
   },
   {
    "id": "e1025",
+   "customData": { "seq": 0 },
    "type": "rectangle",
    "x": 110,
    "y": 198,
@@ -802,6 +827,7 @@
   },
   {
    "id": "e1026",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 125.94,
    "y": 205.62,
@@ -838,6 +864,7 @@
   },
   {
    "id": "e1027",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 239.77,
    "y": 34,
@@ -874,6 +901,7 @@
   },
   {
    "id": "e1028",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 248.37,
    "y": 58,
@@ -910,6 +938,7 @@
   },
   {
    "id": "e1029",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 250,
    "y": 96,
@@ -937,6 +966,7 @@
   },
   {
    "id": "e1030",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 284.84,
    "y": 103.62,
@@ -973,6 +1003,7 @@
   },
   {
    "id": "e1031",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 256,
    "y": 100,
@@ -1009,6 +1040,7 @@
   },
   {
    "id": "e1032",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 310,
    "y": 96,
@@ -1036,6 +1068,7 @@
   },
   {
    "id": "e1033",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 344.66,
    "y": 103.62,
@@ -1072,6 +1105,7 @@
   },
   {
    "id": "e1034",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 316,
    "y": 100,
@@ -1108,6 +1142,7 @@
   },
   {
    "id": "e1035",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 250,
    "y": 130,
@@ -1135,6 +1170,7 @@
   },
   {
    "id": "e1036",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 284.26,
    "y": 137.62,
@@ -1171,6 +1207,7 @@
   },
   {
    "id": "e1037",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 256,
    "y": 134,
@@ -1207,6 +1244,7 @@
   },
   {
    "id": "e1038",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 310,
    "y": 130,
@@ -1234,6 +1272,7 @@
   },
   {
    "id": "e1039",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 342.81,
    "y": 137.62,
@@ -1270,6 +1309,7 @@
   },
   {
    "id": "e1040",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 316,
    "y": 134,
@@ -1306,6 +1346,7 @@
   },
   {
    "id": "e1041",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 250,
    "y": 164,
@@ -1333,6 +1374,7 @@
   },
   {
    "id": "e1042",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 283.17,
    "y": 171.62,
@@ -1369,6 +1411,7 @@
   },
   {
    "id": "e1043",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 256,
    "y": 168,
@@ -1405,6 +1448,7 @@
   },
   {
    "id": "e1044",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 310,
    "y": 164,
@@ -1432,6 +1476,7 @@
   },
   {
    "id": "e1045",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 342.23,
    "y": 171.62,
@@ -1468,6 +1513,7 @@
   },
   {
    "id": "e1046",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 316,
    "y": 168,
@@ -1504,6 +1550,7 @@
   },
   {
    "id": "e1047",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 250,
    "y": 198,
@@ -1531,6 +1578,7 @@
   },
   {
    "id": "e1048",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 279.86,
    "y": 205.62,
@@ -1567,6 +1615,7 @@
   },
   {
    "id": "e1049",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 256,
    "y": 202,
@@ -1603,6 +1652,7 @@
   },
   {
    "id": "e1050",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 310,
    "y": 198,
@@ -1630,6 +1680,7 @@
   },
   {
    "id": "e1051",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 339.86,
    "y": 205.62,
@@ -1666,6 +1717,7 @@
   },
   {
    "id": "e1052",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 316,
    "y": 202,
@@ -1702,6 +1754,7 @@
   },
   {
    "id": "e1053",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 250,
    "y": 232,
@@ -1729,6 +1782,7 @@
   },
   {
    "id": "e1054",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 279.55,
    "y": 239.62,
@@ -1765,6 +1819,7 @@
   },
   {
    "id": "e1055",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 256,
    "y": 236,
@@ -1801,6 +1856,7 @@
   },
   {
    "id": "e1056",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 310,
    "y": 232,
@@ -1828,6 +1884,7 @@
   },
   {
    "id": "e1057",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 340.09,
    "y": 239.62,
@@ -1864,6 +1921,7 @@
   },
   {
    "id": "e1058",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 316,
    "y": 236,
@@ -1900,6 +1958,7 @@
   },
   {
    "id": "e1059",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 250,
    "y": 266,
@@ -1927,6 +1986,7 @@
   },
   {
    "id": "e1060",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 280.04,
    "y": 273.62,
@@ -1963,6 +2023,7 @@
   },
   {
    "id": "e1061",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 256,
    "y": 270,
@@ -1999,6 +2060,7 @@
   },
   {
    "id": "e1062",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 310,
    "y": 266,
@@ -2026,6 +2088,7 @@
   },
   {
    "id": "e1063",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 339.86,
    "y": 273.62,
@@ -2062,6 +2125,7 @@
   },
   {
    "id": "e1064",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 316,
    "y": 270,
@@ -2098,6 +2162,7 @@
   },
   {
    "id": "e1065",
+   "customData": { "seq": 2, "note": "two steps fit, then it wraps" },
    "type": "line",
    "x": 310,
    "y": 96,
@@ -2140,6 +2205,7 @@
   },
   {
    "id": "e1066",
+   "customData": { "seq": 2 },
    "type": "text",
    "x": 282.02,
    "y": 308,
@@ -2176,6 +2242,7 @@
   },
   {
    "id": "e1067",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 434.73,
    "y": 34,
@@ -2212,6 +2279,7 @@
   },
   {
    "id": "e1068",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 481.88,
    "y": 58,
@@ -2248,6 +2316,7 @@
   },
   {
    "id": "e1069",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 484,
    "y": 96,
@@ -2275,6 +2344,7 @@
   },
   {
    "id": "e1070",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 501.84,
    "y": 103.62,
@@ -2311,6 +2381,7 @@
   },
   {
    "id": "e1071",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 530,
    "y": 96,
@@ -2338,6 +2409,7 @@
   },
   {
    "id": "e1072",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 547.26,
    "y": 103.62,
@@ -2374,6 +2446,7 @@
   },
   {
    "id": "e1073",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 576,
    "y": 96,
@@ -2401,6 +2474,7 @@
   },
   {
    "id": "e1074",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 592.17,
    "y": 103.62,
@@ -2437,6 +2511,7 @@
   },
   {
    "id": "e1075",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 484,
    "y": 130,
@@ -2464,6 +2539,7 @@
   },
   {
    "id": "e1076",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 496.86,
    "y": 137.62,
@@ -2500,6 +2576,7 @@
   },
   {
    "id": "e1077",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 530,
    "y": 130,
@@ -2527,6 +2604,7 @@
   },
   {
    "id": "e1078",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 542.55,
    "y": 137.62,
@@ -2563,6 +2641,7 @@
   },
   {
    "id": "e1079",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 576,
    "y": 130,
@@ -2590,6 +2669,7 @@
   },
   {
    "id": "e1080",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 589.04,
    "y": 137.62,
@@ -2626,6 +2706,7 @@
   },
   {
    "id": "e1081",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 484,
    "y": 164,
@@ -2653,6 +2734,7 @@
   },
   {
    "id": "e1082",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 501.66,
    "y": 171.62,
@@ -2689,6 +2771,7 @@
   },
   {
    "id": "e1083",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 530,
    "y": 164,
@@ -2716,6 +2799,7 @@
   },
   {
    "id": "e1084",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 545.81,
    "y": 171.62,
@@ -2752,6 +2836,7 @@
   },
   {
    "id": "e1085",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 576,
    "y": 164,
@@ -2779,6 +2864,7 @@
   },
   {
    "id": "e1086",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 591.23,
    "y": 171.62,
@@ -2815,6 +2901,7 @@
   },
   {
    "id": "e1087",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 484,
    "y": 198,
@@ -2842,6 +2929,7 @@
   },
   {
    "id": "e1088",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 496.86,
    "y": 205.62,
@@ -2878,6 +2966,7 @@
   },
   {
    "id": "e1089",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 530,
    "y": 198,
@@ -2905,6 +2994,7 @@
   },
   {
    "id": "e1090",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 543.09,
    "y": 205.62,
@@ -2941,6 +3031,7 @@
   },
   {
    "id": "e1091",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 576,
    "y": 198,
@@ -2968,6 +3059,7 @@
   },
   {
    "id": "e1092",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 588.86,
    "y": 205.62,
@@ -3004,6 +3096,7 @@
   },
   {
    "id": "e1093",
+   "customData": { "seq": 1 },
    "type": "line",
    "x": 158,
    "y": 164,
@@ -3046,6 +3139,7 @@
   },
   {
    "id": "e1094",
+   "customData": { "seq": 1 },
    "type": "line",
    "x": 242,
    "y": 164,
@@ -3088,6 +3182,7 @@
   },
   {
    "id": "e1095",
+   "customData": { "seq": 1 },
    "type": "line",
    "x": 242,
    "y": 164,
@@ -3130,6 +3225,7 @@
   },
   {
    "id": "e1096",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 176.51,
    "y": 146,
@@ -3166,6 +3262,7 @@
   },
   {
    "id": "e1097",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 378,
    "y": 164,
@@ -3208,6 +3305,7 @@
   },
   {
    "id": "e1098",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 476,
    "y": 164,
@@ -3250,6 +3348,7 @@
   },
   {
    "id": "e1099",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 476,
    "y": 164,
@@ -3292,6 +3391,7 @@
   },
   {
    "id": "e1100",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 401.86,
    "y": 146,
@@ -3328,6 +3428,7 @@
   },
   {
    "id": "e1101",
+   "customData": { "seq": 4 },
    "type": "text",
    "x": 163.25,
    "y": 336,
@@ -3364,6 +3465,7 @@
   },
   {
    "id": "e1102",
+   "customData": { "seq": 4 },
    "type": "text",
    "x": 101.74,
    "y": 358,

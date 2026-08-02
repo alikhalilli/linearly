@@ -10,6 +10,7 @@
  "elements": [
   {
    "id": "e1001",
+   "customData": { "seq": 0 },
    "type": "arrow",
    "x": 70,
    "y": 384,
@@ -52,6 +53,7 @@
   },
   {
    "id": "e1002",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 70,
    "y": 372.0,
@@ -94,6 +96,7 @@
   },
   {
    "id": "e1003",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 64,
    "y": 350.02,
@@ -136,6 +139,7 @@
   },
   {
    "id": "e1004",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 57.29,
    "y": 343.77,
@@ -171,6 +175,7 @@
   },
   {
    "id": "e1005",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 64,
    "y": 277.02,
@@ -213,6 +218,7 @@
   },
   {
    "id": "e1006",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 50.41,
    "y": 270.77,
@@ -248,6 +254,7 @@
   },
   {
    "id": "e1007",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 64,
    "y": 204.02,
@@ -290,6 +297,7 @@
   },
   {
    "id": "e1008",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 43.53,
    "y": 197.77,
@@ -325,6 +333,7 @@
   },
   {
    "id": "e1009",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 64,
    "y": 131.02,
@@ -367,6 +376,7 @@
   },
   {
    "id": "e1010",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 36.65,
    "y": 124.77,
@@ -402,6 +412,7 @@
   },
   {
    "id": "e1011",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 22,
    "y": 30,
@@ -437,6 +448,7 @@
   },
   {
    "id": "e1012",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 84.0,
    "y": 101.03,
@@ -464,6 +476,7 @@
   },
   {
    "id": "e1013",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 98.33,
    "y": 109.03,
@@ -499,6 +512,7 @@
   },
   {
    "id": "e1014",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 99.89,
    "y": 382.0,
@@ -534,6 +548,7 @@
   },
   {
    "id": "e1015",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 102.88,
    "y": 397.0,
@@ -569,6 +584,7 @@
   },
   {
    "id": "e1016",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 176.0,
    "y": 118.29,
@@ -596,6 +612,7 @@
   },
   {
    "id": "e1017",
+   "customData": { "seq": 2 },
    "type": "text",
    "x": 192.12,
    "y": 126.29,
@@ -631,6 +648,7 @@
   },
   {
    "id": "e1018",
+   "customData": { "seq": 2 },
    "type": "text",
    "x": 178.69,
    "y": 382.0,
@@ -666,6 +684,7 @@
   },
   {
    "id": "e1019",
+   "customData": { "seq": 2 },
    "type": "text",
    "x": 194.91,
    "y": 397.0,
@@ -701,6 +720,7 @@
   },
   {
    "id": "e1020",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 268.0,
    "y": 118.94,
@@ -728,6 +748,7 @@
   },
   {
    "id": "e1021",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 283.95,
    "y": 126.94,
@@ -763,6 +784,7 @@
   },
   {
    "id": "e1022",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 277.09,
    "y": 382.0,
@@ -798,6 +820,7 @@
   },
   {
    "id": "e1023",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 266.41,
    "y": 397.0,
@@ -833,6 +856,7 @@
   },
   {
    "id": "e1024",
+   "customData": { "seq": 4, "note": "no new arithmetic, nineteen times faster" },
    "type": "rectangle",
    "x": 360.0,
    "y": 212.76,
@@ -860,6 +884,7 @@
   },
   {
    "id": "e1025",
+   "customData": { "seq": 4 },
    "type": "text",
    "x": 376.79,
    "y": 220.76,
@@ -895,6 +920,7 @@
   },
   {
    "id": "e1026",
+   "customData": { "seq": 4 },
    "type": "text",
    "x": 354.77,
    "y": 382.0,
@@ -930,6 +956,7 @@
   },
   {
    "id": "e1027",
+   "customData": { "seq": 4 },
    "type": "text",
    "x": 362.82,
    "y": 397.0,
@@ -965,6 +992,7 @@
   },
   {
    "id": "e1028",
+   "customData": { "seq": 5 },
    "type": "rectangle",
    "x": 452.0,
    "y": 248.63,
@@ -992,6 +1020,7 @@
   },
   {
    "id": "e1029",
+   "customData": { "seq": 5 },
    "type": "text",
    "x": 467.66,
    "y": 256.63,
@@ -1027,6 +1056,7 @@
   },
   {
    "id": "e1030",
+   "customData": { "seq": 5 },
    "type": "text",
    "x": 453.97,
    "y": 382.0,
@@ -1062,6 +1092,7 @@
   },
   {
    "id": "e1031",
+   "customData": { "seq": 5 },
    "type": "text",
    "x": 452.45,
    "y": 397.0,
@@ -1097,6 +1128,7 @@
   },
   {
    "id": "e1032",
+   "customData": { "seq": 6 },
    "type": "rectangle",
    "x": 544.0,
    "y": 318.37,
@@ -1124,6 +1156,7 @@
   },
   {
    "id": "e1033",
+   "customData": { "seq": 6 },
    "type": "text",
    "x": 562.13,
    "y": 326.37,
@@ -1159,6 +1192,7 @@
   },
   {
    "id": "e1034",
+   "customData": { "seq": 6 },
    "type": "text",
    "x": 545.51,
    "y": 382.0,
@@ -1194,6 +1228,7 @@
   },
   {
    "id": "e1035",
+   "customData": { "seq": 7, "note": "the library reaches hardware C cannot" },
    "type": "rectangle",
    "x": 636.0,
    "y": 351.75,
@@ -1221,6 +1256,7 @@
   },
   {
    "id": "e1036",
+   "customData": { "seq": 7 },
    "type": "text",
    "x": 651.96,
    "y": 359.75,
@@ -1256,6 +1292,7 @@
   },
   {
    "id": "e1037",
+   "customData": { "seq": 7 },
    "type": "text",
    "x": 637.87,
    "y": 382.0,
@@ -1291,6 +1328,7 @@
   },
   {
    "id": "e1038",
+   "customData": { "seq": 2 },
    "type": "line",
    "x": 140.0,
    "y": 101.03,
@@ -1333,6 +1371,7 @@
   },
   {
    "id": "e1039",
+   "customData": { "seq": 2 },
    "type": "text",
    "x": 148.95,
    "y": 84.57,
@@ -1368,6 +1407,7 @@
   },
   {
    "id": "e1040",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 232.0,
    "y": 118.29,
@@ -1410,6 +1450,7 @@
   },
   {
    "id": "e1041",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 240.13,
    "y": 97.69,
@@ -1445,6 +1486,7 @@
   },
   {
    "id": "e1042",
+   "customData": { "seq": 4 },
    "type": "line",
    "x": 324.0,
    "y": 118.94,
@@ -1487,6 +1529,7 @@
   },
   {
    "id": "e1043",
+   "customData": { "seq": 4 },
    "type": "text",
    "x": 328.82,
    "y": 110.75,
@@ -1522,6 +1565,7 @@
   },
   {
    "id": "e1044",
+   "customData": { "seq": 5 },
    "type": "line",
    "x": 416.0,
    "y": 212.76,
@@ -1564,6 +1608,7 @@
   },
   {
    "id": "e1045",
+   "customData": { "seq": 5 },
    "type": "text",
    "x": 424.17,
    "y": 200.15,
@@ -1599,6 +1644,7 @@
   },
   {
    "id": "e1046",
+   "customData": { "seq": 6 },
    "type": "line",
    "x": 508.0,
    "y": 248.63,
@@ -1641,6 +1687,7 @@
   },
   {
    "id": "e1047",
+   "customData": { "seq": 6 },
    "type": "text",
    "x": 514.27,
    "y": 240.03,
@@ -1676,6 +1723,7 @@
   },
   {
    "id": "e1048",
+   "customData": { "seq": 7 },
    "type": "line",
    "x": 600.0,
    "y": 318.37,
@@ -1718,6 +1766,7 @@
   },
   {
    "id": "e1049",
+   "customData": { "seq": 7 },
    "type": "text",
    "x": 606.14,
    "y": 303.31,
@@ -1753,6 +1802,7 @@
   },
   {
    "id": "e1050",
+   "customData": { "seq": 8 },
    "type": "text",
    "x": 84,
    "y": 424,
@@ -1788,6 +1838,7 @@
   },
   {
    "id": "e1051",
+   "customData": { "seq": 8 },
    "type": "text",
    "x": 84,
    "y": 446,

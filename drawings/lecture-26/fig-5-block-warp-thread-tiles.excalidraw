@@ -10,6 +10,7 @@
  "elements": [
   {
    "id": "e1001",
+   "customData": { "seq": 0 },
    "type": "rectangle",
    "x": 30.0,
    "y": 66.0,
@@ -37,6 +38,7 @@
   },
   {
    "id": "e1002",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 50.0,
    "y": 66.0,
@@ -79,6 +81,7 @@
   },
   {
    "id": "e1003",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 70.0,
    "y": 66.0,
@@ -121,6 +124,7 @@
   },
   {
    "id": "e1004",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 90.0,
    "y": 66.0,
@@ -163,6 +167,7 @@
   },
   {
    "id": "e1005",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 110.0,
    "y": 66.0,
@@ -205,6 +210,7 @@
   },
   {
    "id": "e1006",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 130.0,
    "y": 66.0,
@@ -247,6 +253,7 @@
   },
   {
    "id": "e1007",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 150.0,
    "y": 66.0,
@@ -289,6 +296,7 @@
   },
   {
    "id": "e1008",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 170.0,
    "y": 66.0,
@@ -331,6 +339,7 @@
   },
   {
    "id": "e1009",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 30.0,
    "y": 86.0,
@@ -373,6 +382,7 @@
   },
   {
    "id": "e1010",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 30.0,
    "y": 106.0,
@@ -415,6 +425,7 @@
   },
   {
    "id": "e1011",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 30.0,
    "y": 126.0,
@@ -457,6 +468,7 @@
   },
   {
    "id": "e1012",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 30.0,
    "y": 146.0,
@@ -499,6 +511,7 @@
   },
   {
    "id": "e1013",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 30.0,
    "y": 166.0,
@@ -541,6 +554,7 @@
   },
   {
    "id": "e1014",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 30.0,
    "y": 186.0,
@@ -583,6 +597,7 @@
   },
   {
    "id": "e1015",
+   "customData": { "seq": 0 },
    "type": "line",
    "x": 30.0,
    "y": 206.0,
@@ -625,6 +640,7 @@
   },
   {
    "id": "e1016",
+   "customData": { "seq": 0, "note": "yellow follows one chain down" },
    "type": "rectangle",
    "x": 170.0,
    "y": 106.0,
@@ -652,6 +668,7 @@
   },
   {
    "id": "e1017",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 30.0,
    "y": 20,
@@ -687,6 +704,7 @@
   },
   {
    "id": "e1018",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 30.0,
    "y": 42,
@@ -722,6 +740,7 @@
   },
   {
    "id": "e1019",
+   "customData": { "seq": 0 },
    "type": "text",
    "x": 30.0,
    "y": 232,
@@ -757,6 +776,7 @@
   },
   {
    "id": "e1020",
+   "customData": { "seq": 1 },
    "type": "line",
    "x": 190.0,
    "y": 106.0,
@@ -799,6 +819,7 @@
   },
   {
    "id": "e1021",
+   "customData": { "seq": 1 },
    "type": "line",
    "x": 190.0,
    "y": 126.0,
@@ -841,6 +862,7 @@
   },
   {
    "id": "e1022",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 240.0,
    "y": 66.0,
@@ -868,6 +890,7 @@
   },
   {
    "id": "e1023",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 272.22,
    "y": 78.5,
@@ -903,6 +926,7 @@
   },
   {
    "id": "e1024",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 320.0,
    "y": 66.0,
@@ -930,6 +954,7 @@
   },
   {
    "id": "e1025",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 354.72,
    "y": 78.5,
@@ -965,6 +990,7 @@
   },
   {
    "id": "e1026",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 240.0,
    "y": 106.0,
@@ -992,6 +1018,7 @@
   },
   {
    "id": "e1027",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 272.07,
    "y": 118.5,
@@ -1027,6 +1054,7 @@
   },
   {
    "id": "e1028",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 320.0,
    "y": 106.0,
@@ -1054,6 +1082,7 @@
   },
   {
    "id": "e1029",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 352.26,
    "y": 118.5,
@@ -1089,6 +1118,7 @@
   },
   {
    "id": "e1030",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 240.0,
    "y": 146.0,
@@ -1116,6 +1146,7 @@
   },
   {
    "id": "e1031",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 272.51,
    "y": 158.5,
@@ -1151,6 +1182,7 @@
   },
   {
    "id": "e1032",
+   "customData": { "seq": 1, "note": "one warp inside that block" },
    "type": "rectangle",
    "x": 320.0,
    "y": 146.0,
@@ -1178,6 +1210,7 @@
   },
   {
    "id": "e1033",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 352.64,
    "y": 158.5,
@@ -1213,6 +1246,7 @@
   },
   {
    "id": "e1034",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 240.0,
    "y": 186.0,
@@ -1240,6 +1274,7 @@
   },
   {
    "id": "e1035",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 272.51,
    "y": 198.5,
@@ -1275,6 +1310,7 @@
   },
   {
    "id": "e1036",
+   "customData": { "seq": 1 },
    "type": "rectangle",
    "x": 320.0,
    "y": 186.0,
@@ -1302,6 +1338,7 @@
   },
   {
    "id": "e1037",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 353.12,
    "y": 198.5,
@@ -1337,6 +1374,7 @@
   },
   {
    "id": "e1038",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 240.0,
    "y": 20,
@@ -1372,6 +1410,7 @@
   },
   {
    "id": "e1039",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 240.0,
    "y": 42,
@@ -1407,6 +1446,7 @@
   },
   {
    "id": "e1040",
+   "customData": { "seq": 1 },
    "type": "text",
    "x": 240.0,
    "y": 232,
@@ -1442,6 +1482,7 @@
   },
   {
    "id": "e1041",
+   "customData": { "seq": 2 },
    "type": "line",
    "x": 400.0,
    "y": 146.0,
@@ -1484,6 +1525,7 @@
   },
   {
    "id": "e1042",
+   "customData": { "seq": 2 },
    "type": "line",
    "x": 400.0,
    "y": 186.0,
@@ -1526,6 +1568,7 @@
   },
   {
    "id": "e1043",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 450.0,
    "y": 126.0,
@@ -1553,6 +1596,7 @@
   },
   {
    "id": "e1044",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 470.0,
    "y": 126.0,
@@ -1580,6 +1624,7 @@
   },
   {
    "id": "e1045",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 490.0,
    "y": 126.0,
@@ -1607,6 +1652,7 @@
   },
   {
    "id": "e1046",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 510.0,
    "y": 126.0,
@@ -1634,6 +1680,7 @@
   },
   {
    "id": "e1047",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 530.0,
    "y": 126.0,
@@ -1661,6 +1708,7 @@
   },
   {
    "id": "e1048",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 550.0,
    "y": 126.0,
@@ -1688,6 +1736,7 @@
   },
   {
    "id": "e1049",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 570.0,
    "y": 126.0,
@@ -1715,6 +1764,7 @@
   },
   {
    "id": "e1050",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 590.0,
    "y": 126.0,
@@ -1742,6 +1792,7 @@
   },
   {
    "id": "e1051",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 450.0,
    "y": 146.0,
@@ -1769,6 +1820,7 @@
   },
   {
    "id": "e1052",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 470.0,
    "y": 146.0,
@@ -1796,6 +1848,7 @@
   },
   {
    "id": "e1053",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 490.0,
    "y": 146.0,
@@ -1823,6 +1876,7 @@
   },
   {
    "id": "e1054",
+   "customData": { "seq": 2, "note": "one lane inside that warp" },
    "type": "rectangle",
    "x": 510.0,
    "y": 146.0,
@@ -1850,6 +1904,7 @@
   },
   {
    "id": "e1055",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 530.0,
    "y": 146.0,
@@ -1877,6 +1932,7 @@
   },
   {
    "id": "e1056",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 550.0,
    "y": 146.0,
@@ -1904,6 +1960,7 @@
   },
   {
    "id": "e1057",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 570.0,
    "y": 146.0,
@@ -1931,6 +1988,7 @@
   },
   {
    "id": "e1058",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 590.0,
    "y": 146.0,
@@ -1958,6 +2016,7 @@
   },
   {
    "id": "e1059",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 450.0,
    "y": 166.0,
@@ -1985,6 +2044,7 @@
   },
   {
    "id": "e1060",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 470.0,
    "y": 166.0,
@@ -2012,6 +2072,7 @@
   },
   {
    "id": "e1061",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 490.0,
    "y": 166.0,
@@ -2039,6 +2100,7 @@
   },
   {
    "id": "e1062",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 510.0,
    "y": 166.0,
@@ -2066,6 +2128,7 @@
   },
   {
    "id": "e1063",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 530.0,
    "y": 166.0,
@@ -2093,6 +2156,7 @@
   },
   {
    "id": "e1064",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 550.0,
    "y": 166.0,
@@ -2120,6 +2184,7 @@
   },
   {
    "id": "e1065",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 570.0,
    "y": 166.0,
@@ -2147,6 +2212,7 @@
   },
   {
    "id": "e1066",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 590.0,
    "y": 166.0,
@@ -2174,6 +2240,7 @@
   },
   {
    "id": "e1067",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 450.0,
    "y": 186.0,
@@ -2201,6 +2268,7 @@
   },
   {
    "id": "e1068",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 470.0,
    "y": 186.0,
@@ -2228,6 +2296,7 @@
   },
   {
    "id": "e1069",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 490.0,
    "y": 186.0,
@@ -2255,6 +2324,7 @@
   },
   {
    "id": "e1070",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 510.0,
    "y": 186.0,
@@ -2282,6 +2352,7 @@
   },
   {
    "id": "e1071",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 530.0,
    "y": 186.0,
@@ -2309,6 +2380,7 @@
   },
   {
    "id": "e1072",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 550.0,
    "y": 186.0,
@@ -2336,6 +2408,7 @@
   },
   {
    "id": "e1073",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 570.0,
    "y": 186.0,
@@ -2363,6 +2436,7 @@
   },
   {
    "id": "e1074",
+   "customData": { "seq": 2 },
    "type": "rectangle",
    "x": 590.0,
    "y": 186.0,
@@ -2390,6 +2464,7 @@
   },
   {
    "id": "e1075",
+   "customData": { "seq": 2 },
    "type": "text",
    "x": 450.0,
    "y": 20,
@@ -2425,6 +2500,7 @@
   },
   {
    "id": "e1076",
+   "customData": { "seq": 2 },
    "type": "text",
    "x": 450.0,
    "y": 42,
@@ -2460,6 +2536,7 @@
   },
   {
    "id": "e1077",
+   "customData": { "seq": 2 },
    "type": "text",
    "x": 450.0,
    "y": 58,
@@ -2495,6 +2572,7 @@
   },
   {
    "id": "e1078",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 510.0,
    "y": 166.0,
@@ -2537,6 +2615,7 @@
   },
   {
    "id": "e1079",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 530.0,
    "y": 166.0,
@@ -2579,6 +2658,7 @@
   },
   {
    "id": "e1080",
+   "customData": { "seq": 3 },
    "type": "rectangle",
    "x": 470.0,
    "y": 250.0,
@@ -2606,6 +2686,7 @@
   },
   {
    "id": "e1081",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 484.0,
    "y": 250.0,
@@ -2648,6 +2729,7 @@
   },
   {
    "id": "e1082",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 498.0,
    "y": 250.0,
@@ -2690,6 +2772,7 @@
   },
   {
    "id": "e1083",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 512.0,
    "y": 250.0,
@@ -2732,6 +2815,7 @@
   },
   {
    "id": "e1084",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 526.0,
    "y": 250.0,
@@ -2774,6 +2858,7 @@
   },
   {
    "id": "e1085",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 540.0,
    "y": 250.0,
@@ -2816,6 +2901,7 @@
   },
   {
    "id": "e1086",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 554.0,
    "y": 250.0,
@@ -2858,6 +2944,7 @@
   },
   {
    "id": "e1087",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 568.0,
    "y": 250.0,
@@ -2900,6 +2987,7 @@
   },
   {
    "id": "e1088",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 470.0,
    "y": 264.0,
@@ -2942,6 +3030,7 @@
   },
   {
    "id": "e1089",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 470.0,
    "y": 278.0,
@@ -2984,6 +3073,7 @@
   },
   {
    "id": "e1090",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 470.0,
    "y": 292.0,
@@ -3026,6 +3116,7 @@
   },
   {
    "id": "e1091",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 470.0,
    "y": 306.0,
@@ -3068,6 +3159,7 @@
   },
   {
    "id": "e1092",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 470.0,
    "y": 320.0,
@@ -3110,6 +3202,7 @@
   },
   {
    "id": "e1093",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 470.0,
    "y": 334.0,
@@ -3152,6 +3245,7 @@
   },
   {
    "id": "e1094",
+   "customData": { "seq": 3 },
    "type": "line",
    "x": 470.0,
    "y": 348.0,
@@ -3194,6 +3288,7 @@
   },
   {
    "id": "e1095",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 440.82,
    "y": 372.0,
@@ -3229,6 +3324,7 @@
   },
   {
    "id": "e1096",
+   "customData": { "seq": 3 },
    "type": "text",
    "x": 469.19,
    "y": 390.0,
@@ -3264,6 +3360,7 @@
   },
   {
    "id": "e1097",
+   "customData": { "seq": 4 },
    "type": "text",
    "x": 34,
    "y": 262,
@@ -3299,6 +3396,7 @@
   },
   {
    "id": "e1098",
+   "customData": { "seq": 4 },
    "type": "text",
    "x": 34,
    "y": 280,
@@ -3334,6 +3432,7 @@
   },
   {
    "id": "e1099",
+   "customData": { "seq": 4 },
    "type": "text",
    "x": 34,
    "y": 306,
@@ -3369,6 +3468,7 @@
   },
   {
    "id": "e1100",
+   "customData": { "seq": 4 },
    "type": "text",
    "x": 34,
    "y": 324,
