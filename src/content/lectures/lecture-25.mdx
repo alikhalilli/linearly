@@ -1442,6 +1442,2103 @@ you moved onto the chip once and then used many times.
   reused out of a store that is twenty-five times faster.
 </Callout>
 
+## Shared memory has thirty-two doors
+
+That 19.4 TB/s is a peak, and the peak has a shape.
+
+Shared memory is 32 banks, each four bytes wide, and each bank hands out one word per clock. The
+words are dealt to the banks in turn, the way cards go round a table: word 0 to bank 0, word 1 to
+bank 1, and after word 31 the deal starts again, so word 32 is back at bank 0. The four-byte word
+at index $w$ lives in bank $w \bmod 32$, and no arrangement of your code changes that map.
+
+<Figure n="5">
+  <svg slot="drawing" viewBox="0 0 637.5600000000001 203" width="638" role="img" aria-label="Four rows of thirty two cells showing shared memory drawn thirty two words to a line, with the second column filled yellow and a ruler of bank numbers underneath, so that every column is one bank." style="max-width:100%;height:auto;min-width:560px">
+<defs>
+</defs>
+<g transform="translate(10 10) rotate(0 143.22 8.75)">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">shared memory, 32 words to a line</text>
+</g>
+<g transform="translate(436.6 32) rotate(0 95.48000000000002 6.875)">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">each cell is one 4-byte word</text>
+</g>
+<g stroke-linecap="round" transform="translate(94 52) rotate(0 8 9)">
+<path d="M0 0 C3.21 -0.43, 6.26 -0.48, 16 0 M0 0 C3.66 -0.34, 6.33 -0.4, 16 0 M16 0 C16.07 4.89, 16.63 8.49, 16 18 M16 0 C16.4 4.03, 16.35 7.06, 16 18 M16 18 C9.13 17.95, 2.49 17.72, 0 18 M16 18 C12.59 17.75, 8.32 17.78, 0 18 M0 18 C-0.02 12.63, 0.04 7.71, 0 0 M0 18 C0.35 11.67, -0.09 4.2, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(110 52) rotate(0 8 9)">
+<path d="M0.98 -0.08 L15.8 0.69 L16.78 17.87 L0.11 17.32" stroke="none" stroke-width="0" fill="var(--color-part4)">
+</path>
+<path d="M0 0 C2.75 0.66, 6.93 0.69, 16 0 M0 0 C4.49 -0.3, 8.94 0.13, 16 0 M16 0 C16.02 4.7, 16.06 10.14, 16 18 M16 0 C16.07 7.08, 16.42 14.07, 16 18 M16 18 C9.5 18.41, 4.27 17.19, 0 18 M16 18 C11.63 17.82, 7.12 18.21, 0 18 M0 18 C-0.8 13.69, -0.5 8.85, 0 0 M0 18 C-0.35 12.51, 0.19 5.83, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(126 52) rotate(0 8 9)">
+<path d="M0 0 C3.89 0.31, 6 0.42, 16 0 M0 0 C5.32 -0.1, 11.55 0.01, 16 0 M16 0 C15.78 6.31, 15.32 11.78, 16 18 M16 0 C15.74 6.53, 16.49 12.98, 16 18 M16 18 C11.47 17.28, 6.05 18.25, 0 18 M16 18 C10.68 17.89, 5.92 17.84, 0 18 M0 18 C0.39 11.14, -0.87 4.59, 0 0 M0 18 C0.04 13.35, -0.26 8.37, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(142 52) rotate(0 8 9)">
+<path d="M0 0 C3.44 -0.2, 6.68 -0.01, 16 0 M0 0 C3.75 -0.07, 6.96 -0.26, 16 0 M16 0 C15.55 6.12, 16.37 11.62, 16 18 M16 0 C16.13 5.98, 15.48 11.89, 16 18 M16 18 C11.84 17.75, 6.23 17.72, 0 18 M16 18 C10.52 17.96, 4.71 18.27, 0 18 M0 18 C-0.22 12.2, 0.56 5.73, 0 0 M0 18 C0.24 14.18, 0.02 10.01, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(158 52) rotate(0 8 9)">
+<path d="M0 0 C2.98 -0.55, 5.75 -0.28, 16 0 M0 0 C4.58 -0.03, 9.58 0.26, 16 0 M16 0 C15.5 7.73, 15.8 13.26, 16 18 M16 0 C15.8 5.43, 15.55 10.79, 16 18 M16 18 C12.22 18.21, 8 18.79, 0 18 M16 18 C9.56 17.88, 3.51 17.73, 0 18 M0 18 C0.8 13.26, 0.01 8.67, 0 0 M0 18 C-0.46 11.42, 0.3 4.44, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(174 52) rotate(0 8 9)">
+<path d="M0 0 C2.52 0.7, 6.42 -0.55, 16 0 M0 0 C6.21 0.17, 12.19 0.15, 16 0 M16 0 C15.26 3.94, 16.86 7.71, 16 18 M16 0 C16.37 4.88, 15.63 10.6, 16 18 M16 18 C12.59 18.68, 9.78 18.25, 0 18 M16 18 C12.6 17.95, 8.71 18.16, 0 18 M0 18 C0.19 14.32, -0.35 9.81, 0 0 M0 18 C-0.07 12.25, -0.14 6.08, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(190 52) rotate(0 8 9)">
+<path d="M0 0 C3.66 0.19, 7.09 0.62, 16 0 M0 0 C3.84 0.21, 7.6 -0.13, 16 0 M16 0 C15.21 3.75, 16.29 9.35, 16 18 M16 0 C16.03 4.33, 15.7 9.51, 16 18 M16 18 C9.76 17.55, 3.56 17.72, 0 18 M16 18 C11.65 18.02, 7.5 17.79, 0 18 M0 18 C-0.42 11.78, -0.72 5.55, 0 0 M0 18 C0.13 13.09, 0.13 7.72, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(206 52) rotate(0 8 9)">
+<path d="M0 0 C3.21 -0.17, 6.16 0.35, 16 0 M0 0 C4.67 0.24, 10.21 -0.41, 16 0 M16 0 C16.77 5.36, 15.54 10.99, 16 18 M16 0 C15.7 3.79, 15.77 8.41, 16 18 M16 18 C10.13 18.01, 5.34 18.79, 0 18 M16 18 C10.69 18.09, 5.5 18.21, 0 18 M0 18 C0.6 12.83, 0.53 6.69, 0 0 M0 18 C-0.39 13.93, -0.31 9.35, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(222 52) rotate(0 8 9)">
+<path d="M0 0 C2.75 -0.68, 6.84 -0.08, 16 0 M0 0 C6.3 0.28, 12.03 0.12, 16 0 M16 0 C16.54 5.17, 16.6 10.83, 16 18 M16 0 C16.27 4.14, 15.84 7.32, 16 18 M16 18 C12.1 18.48, 7.12 18.25, 0 18 M16 18 C10.53 18.16, 4.3 17.84, 0 18 M0 18 C-0.01 13.89, 0.16 9.63, 0 0 M0 18 C-0.19 11.16, -0.03 3.79, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(238 52) rotate(0 8 9)">
+<path d="M0 0 C3.89 0.57, 5.91 -0.36, 16 0 M0 0 C3.93 -0.32, 8.24 0, 16 0 M16 0 C16.49 6.78, 16.03 12.48, 16 18 M16 0 C15.94 7.19, 15.92 13.43, 16 18 M16 18 C12.48 17.35, 7.3 17.72, 0 18 M16 18 C12.77 18.24, 9.5 18.27, 0 18 M0 18 C-0.62 11.35, -0.21 5.37, 0 0 M0 18 C0.2 12, 0.43 5.43, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(254 52) rotate(0 8 9)">
+<path d="M0 0 C3.44 0.22, 6.58 -0.63, 16 0 M0 0 C5.56 -0.29, 10.85 -0.27, 16 0 M16 0 C16.25 6.59, 15.28 14.12, 16 18 M16 0 C15.61 6.64, 15.99 13.24, 16 18 M16 18 C12.85 17.81, 9.08 18.78, 0 18 M16 18 C11.81 18.31, 8.29 17.89, 0 18 M0 18 C0.4 12.41, -0.75 6.5, 0 0 M0 18 C0.4 12.83, -0.19 7.96, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(270 52) rotate(0 8 9)">
+<path d="M0 0 C2.98 -0.29, 7.25 0.54, 16 0 M0 0 C3.19 -0.25, 6.26 0.25, 16 0 M16 0 C16.02 4.6, 16.34 8.56, 16 18 M16 0 C16.18 6.09, 16.06 12.14, 16 18 M16 18 C10.02 18.12, 4.46 18.09, 0 18 M16 18 C11.66 18.38, 7.09 18.32, 0 18 M0 18 C-0.21 13.47, 0.68 9.44, 0 0 M0 18 C-0.12 13.67, 0.26 9.6, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(286 52) rotate(0 8 9)">
+<path d="M0 0 C2.52 -0.64, 6.33 0.27, 16 0 M0 0 C4.02 -0.05, 8.88 0.14, 16 0 M16 0 C15.97 4.41, 15.77 10.2, 16 18 M16 0 C15.84 5.54, 16.13 11.05, 16 18 M16 18 C10.39 18.59, 4.63 17.56, 0 18 M16 18 C10.7 18.45, 5.89 17.95, 0 18 M0 18 C-0.82 10.92, 0.31 3.38, 0 0 M0 18 C0.09 10.9, -0.36 4.04, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(302 52) rotate(0 8 9)">
+<path d="M0 0 C3.66 0.45, 7 -0.16, 16 0 M0 0 C5.65 -0.01, 10.69 -0.14, 16 0 M16 0 C15.73 6.02, 16.82 10.05, 16 18 M16 0 C16.41 4.99, 16.2 9.96, 16 18 M16 18 C10.76 17.45, 6.41 18.62, 0 18 M16 18 C10.54 17.72, 4.68 18.37, 0 18 M0 18 C0.2 11.98, -0.24 6.32, 0 0 M0 18 C0.29 11.74, -0.08 5.67, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(318 52) rotate(0 8 9)">
+<path d="M0 0 C3.21 0.1, 6.07 -0.43, 16 0 M0 0 C3.28 0.02, 6.9 -0.41, 16 0 M16 0 C15.5 5.83, 16.08 11.69, 16 18 M16 0 C16.08 4.44, 16.28 9.77, 16 18 M16 18 C11.14 17.92, 8.19 18.09, 0 18 M16 18 C12.78 17.64, 9.08 17.84, 0 18 M0 18 C-0.41 13.04, -0.61 7.46, 0 0 M0 18 C-0.23 12.58, 0.38 7.31, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(334 52) rotate(0 8 9)">
+<path d="M0 0 C2.75 -0.25, 6.74 -0.7, 16 0 M0 0 C4.91 0.22, 9.51 0.27, 16 0 M16 0 C15.44 7.44, 15.51 13.33, 16 18 M16 0 C15.57 3.89, 16.17 8.67, 16 18 M16 18 C13.11 18.39, 8.37 17.56, 0 18 M16 18 C11.83 17.71, 7.88 18.27, 0 18 M0 18 C0.78 14.1, 0.83 10.4, 0 0 M0 18 C-0.02 13.41, -0.24 8.95, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(350 52) rotate(0 8 9)">
+<path d="M0 0 C3.89 -0.76, 5.81 0.47, 16 0 M0 0 C5.75 0.26, 11.33 -0.01, 16 0 M16 0 C15.21 3.65, 16.56 7.77, 16 18 M16 0 C16.14 4.24, 16.24 7.58, 16 18 M16 18 C10.28 17.25, 3.75 18.62, 0 18 M16 18 C11.67 17.78, 6.68 17.9, 0 18 M0 18 C0 11.56, 0.28 4.34, 0 0 M0 18 C0.36 14.25, 0.21 10.59, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(366 52) rotate(0 8 9)">
+<path d="M0 0 C3.44 0.49, 6.49 0.2, 16 0 M0 0 C3.38 0.29, 7.54 -0.28, 16 0 M16 0 C16.96 3.46, 16 7.62, 16 18 M16 0 C15.81 7.29, 16.31 13.69, 16 18 M16 18 C10.65 17.72, 5.53 18.09, 0 18 M16 18 C10.71 17.85, 5.47 18.32, 0 18 M0 18 C-0.61 12.61, -0.09 7.28, 0 0 M0 18 C-0.34 11.48, -0.41 5.02, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(382 52) rotate(0 8 9)">
+<path d="M0 0 C2.98 -0.02, 7.16 -0.23, 16 0 M0 0 C5.01 -0.47, 10.15 0.24, 16 0 M16 0 C16.72 5.07, 15.25 9.26, 16 18 M16 0 C16.37 6.74, 16.38 13.5, 16 18 M16 18 C11.02 18.19, 5.71 17.55, 0 18 M16 18 C9.75 17.92, 4.27 17.95, 0 18 M0 18 C0.58 13.67, -0.46 8.42, 0 0 M0 18 C0.04 12.32, 0.05 6.66, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(398 52) rotate(0 8 9)">
+<path d="M0 0 C2.52 -0.37, 6.23 -0.5, 16 0 M0 0 C5.84 -0.27, 11.96 0.13, 16 0 M16 0 C16.49 4.88, 16.3 10.9, 16 18 M16 0 C16.04 6.2, 15.56 12.4, 16 18 M16 18 C11.4 18.65, 7.49 18.62, 0 18 M16 18 C12.79 18, 9.47 18.38, 0 18 M0 18 C-0.2 11.13, 0.79 4.16, 0 0 M0 18 C0.25 13.16, 0.33 9.2, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(414 52) rotate(0 8 9)">
+<path d="M0 0 C3.67 -0.72, 6.9 0.82, 16 0 M0 0 C4.27 -0.23, 8.18 -0.15, 16 0 M16 0 C16.43 6.49, 15.74 12.54, 16 18 M16 0 C15.71 5.65, 15.63 11.31, 16 18 M16 18 C11.77 17.52, 9.26 18.09, 0 18 M16 18 C11.84 18.07, 8.26 18, 0 18 M0 18 C-0.81 12.19, 0.43 7.1, 0 0 M0 18 C-0.27 13.99, -0.11 10.83, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(430 52) rotate(0 8 9)">
+<path d="M0 0 C3.21 0.37, 5.98 0.39, 16 0 M0 0 C5.1 -0.2, 9.99 -0.42, 16 0 M16 0 C16.2 6.3, 16.79 14.19, 16 18 M16 0 C16.28 5.1, 15.7 10.22, 16 18 M16 18 C10.54 17.99, 3.04 17.55, 0 18 M16 18 C11.68 18.14, 7.06 18.43, 0 18 M0 18 C0.38 13.25, 0.06 8.24, 0 0 M0 18 C-0.07 11.23, 0.16 5.27, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(446 52) rotate(0 8 9)">
+<path d="M0 0 C2.75 0.01, 6.65 0.12, 16 0 M0 0 C5.93 0, 12.6 0.26, 16 0 M16 0 C15.97 4.31, 16.04 6.83, 16 18 M16 0 C15.95 4.55, 15.77 9.13, 16 18 M16 18 C10.91 18.29, 4.82 18.46, 0 18 M16 18 C10.72 18.21, 5.06 18.06, 0 18 M0 18 C-0.22 14.3, -0.31 11.18, 0 0 M0 18 C0.32 12.06, -0.28 6.91, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(462 52) rotate(0 8 9)">
+<path d="M0 0 C3.89 -0.5, 7.32 -0.31, 16 0 M0 0 C4.36 0.04, 8.81 -0.01, 16 0 M16 0 C15.91 4.12, 15.48 8.47, 16 18 M16 0 C15.62 4, 15.84 8.93, 16 18 M16 18 C11.28 17.16, 6.6 17.92, 0 18 M16 18 C9.76 18.28, 3.86 17.68, 0 18 M0 18 C0.79 11.76, -0.86 5.11, 0 0 M0 18 C-0.38 12.9, 0 8.54, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(478 52) rotate(0 8 9)">
+<path d="M0 0 C3.44 0.75, 6.39 -0.58, 16 0 M0 0 C5.19 0.07, 10.63 -0.29, 16 0 M16 0 C15.68 5.73, 16.53 10.11, 16 18 M16 0 C16.19 3.45, 15.92 7.84, 16 18 M16 18 C11.66 17.63, 6.78 17.39, 0 18 M16 18 C12.81 18.2, 9.05 17.95, 0 18 M0 18 C0.18 12.82, 0.57 8.05, 0 0 M0 18 C-0.18 13.73, 0.28 10.18, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(494 52) rotate(0 8 9)">
+<path d="M0 0 C2.98 0.4, 7.07 0.75, 16 0 M0 0 C3.62 0.27, 6.84 0.39, 16 0 M16 0 C15.45 5.54, 15.78 11.76, 16 18 M16 0 C15.85 7.4, 15.99 13.95, 16 18 M16 18 C12.03 18.09, 8.56 18.46, 0 18 M16 18 C11.85 18.27, 7.85 17.58, 0 18 M0 18 C-0.42 13.88, 0.21 9.19, 0 0 M0 18 C0.2 11.87, -0.17 4.62, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(510 52) rotate(0 8 9)">
+<path d="M0 0 C2.52 -0.11, 6.14 0.32, 16 0 M0 0 C4.45 0.31, 8.65 0.12, 16 0 M16 0 C15.39 7.15, 15.22 13.4, 16 18 M16 0 C16.24 6.85, 15.88 12.86, 16 18 M16 18 C9.2 18.56, 3.94 17.92, 0 18 M16 18 C10.89 18.34, 6.65 18.01, 0 18 M0 18 C0.59 11.34, -0.34 4.93, 0 0 M0 18 C-0.49 12.71, 0.11 6.25, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(526 52) rotate(0 8 9)">
+<path d="M0 0 C3.67 -0.46, 6.81 0.05, 16 0 M0 0 C5.28 0.35, 11.26 -0.16, 16 0 M16 0 C15.16 6.96, 16.27 13.24, 16 18 M16 0 C15.91 6.3, 15.95 12.66, 16 18 M16 18 C9.57 17.43, 4.12 17.39, 0 18 M16 18 C10.73 17.61, 5.44 17.63, 0 18 M0 18 C-0.02 12.39, -0.71 6.07, 0 0 M0 18 C-0.11 13.54, -0.33 8.79, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(542 52) rotate(0 8 9)">
+<path d="M0 0 C3.21 0.63, 5.88 -0.38, 16 0 M0 0 C3.71 -0.42, 7.48 -0.43, 16 0 M16 0 C16.9 3.17, 15.7 7.68, 16 18 M16 0 C15.58 5.75, 16.03 11.57, 16 18 M16 18 C11.54 17.89, 5.89 18.46, 0 18 M16 18 C9.78 17.68, 4.24 18.06, 0 18 M0 18 C-0.62 13.45, 0.72 9.01, 0 0 M0 18 C0.09 14.38, -0.05 10.43, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(558 52) rotate(0 8 9)">
+<path d="M0 0 C2.75 0.28, 6.55 -0.65, 16 0 M0 0 C4.54 -0.22, 9.29 0.25, 16 0 M16 0 C16.67 4.78, 16.76 9.33, 16 18 M16 0 C16.15 5.2, 16.1 10.48, 16 18 M16 18 C11.92 18.36, 7.67 17.92, 0 18 M16 18 C12.82 17.76, 8.64 17.69, 0 18 M0 18 C0.39 10.91, 0.17 4.75, 0 0 M0 18 C0.48 11.61, 0.41 4.86, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(574 52) rotate(0 8 9)">
+<path d="M0 0 C3.9 -0.07, 7.23 0.67, 16 0 M0 0 C6.17 -0.18, 11.9 -0.02, 16 0 M16 0 C16.44 4.59, 16.01 10.97, 16 18 M16 0 C15.82 4.65, 16.17 9.38, 16 18 M16 18 C12.29 18.83, 7.85 17.39, 0 18 M16 18 C11.86 17.83, 7.44 18.11, 0 18 M0 18 C-0.22 11.97, -0.19 5.89, 0 0 M0 18 C-0.22 12.45, -0.22 6.5, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(590 52) rotate(0 8 9)">
+<path d="M0 0 C3.44 -0.58, 6.3 0.24, 16 0 M0 0 C3.8 -0.15, 8.11 -0.3, 16 0 M16 0 C16.38 6.2, 15.44 12.61, 16 18 M16 0 C16.38 4.11, 16.24 8.29, 16 18 M16 18 C12.66 17.69, 9.63 18.45, 0 18 M16 18 C10.9 17.9, 6.23 17.74, 0 18 M0 18 C-0.82 13.03, -0.56 8.83, 0 0 M0 18 C0.16 13.29, 0.24 8.14, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(94 70) rotate(0 8 9)">
+<path d="M0 0 C2.98 0.67, 6.97 -0.03, 16 0 M0 0 C4.63 0.05, 9.92 0.39, 16 0 M16 0 C16.15 6.01, 16.5 12.45, 16 18 M16 0 C16.05 3.56, 16.31 8.1, 16 18 M16 18 C9.83 18.16, 5.01 17.92, 0 18 M16 18 C10.74 17.97, 5.03 18.17, 0 18 M0 18 C0.19 14.08, 0.69 9.97, 0 0 M0 18 C0.37 14.12, -0.38 9.77, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(110 70) rotate(0 8 9)">
+<path d="M-0.61 -0.42 L15.61 0.09 L15.96 18.32 L-0.42 17.08" stroke="none" stroke-width="0" fill="var(--color-part4)">
+</path>
+<path d="M0 0 C2.52 0.16, 6.04 -0.46, 16 0 M0 0 C6.26 0.09, 12.54 0.11, 16 0 M16 0 C15.91 7.62, 15.75 14.1, 16 18 M16 0 C15.72 6.61, 16.39 14.21, 16 18 M16 18 C10.21 18.46, 5.19 17.23, 0 18 M16 18 C9.79 18.04, 3.83 17.79, 0 18 M0 18 C-0.42 11.54, 0.32 5.71, 0 0 M0 18 C-0.15 11.36, 0.08 4.21, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(126 70) rotate(0 8 9)">
+<path d="M0 0 C3.67 -0.19, 6.72 -0.73, 16 0 M0 0 C3.89 0.13, 7.95 -0.17, 16 0 M16 0 C15.86 3.83, 15.19 8.54, 16 18 M16 0 C16.29 6.96, 16.46 13.11, 16 18 M16 18 C12.18 17.33, 6.97 18.29, 0 18 M16 18 C12.83 17.96, 9.02 18.06, 0 18 M0 18 C0.78 12.6, -0.05 6.85, 0 0 M0 18 C0.05 12.19, 0.36 5.85, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(142 70) rotate(0 8 9)">
+<path d="M0 0 C3.21 -0.54, 5.79 0.6, 16 0 M0 0 C5.52 0.32, 10.56 -0.28, 16 0 M16 0 C15.63 5.44, 16.24 10.18, 16 18 M16 0 C15.96 6.41, 15.63 12.02, 16 18 M16 18 C12.55 17.8, 8.75 17.76, 0 18 M16 18 C11.87 18.03, 7.82 17.69, 0 18 M0 18 C-0.01 13.66, -0.59 9.78, 0 0 M0 18 C0.25 13.03, -0.27 8.39, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(158 70) rotate(0 8 9)">
+<path d="M0 0 C2.75 0.55, 6.46 0.17, 16 0 M0 0 C3.15 0.36, 6.77 0.24, 16 0 M16 0 C15.57 5.25, 15.67 11.82, 16 18 M16 0 C16.53 5.86, 15.7 11.83, 16 18 M16 18 C12.92 18.26, 8.92 17.23, 0 18 M16 18 C10.91 18.1, 6.62 18.12, 0 18 M0 18 C-0.62 11.12, 0.84 3.72, 0 0 M0 18 C-0.26 13.86, 0.19 10.02, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(174 70) rotate(0 8 9)">
+<path d="M0 0 C3.9 0.2, 7.13 -0.1, 16 0 M0 0 C3.98 -0.4, 8.59 -0.03, 16 0 M16 0 C15.34 6.86, 16.73 11.67, 16 18 M16 0 C16.01 5.31, 15.59 10.74, 16 18 M16 18 C10.09 18.73, 4.3 18.29, 0 18 M16 18 C10.76 18.17, 4.62 17.74, 0 18 M0 18 C0.58 12.17, 0.47 6.66, 0 0 M0 18 C-0.06 11.1, -0.43 4.46, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(190 70) rotate(0 8 9)">
+<path d="M0 0 C3.44 -0.32, 6.2 -0.53, 16 0 M0 0 C5.61 -0.37, 11.2 -0.31, 16 0 M16 0 C15.11 6.67, 15.98 13.31, 16 18 M16 0 C15.68 4.76, 15.67 9.64, 16 18 M16 18 C10.47 17.6, 6.08 17.76, 0 18 M16 18 C9.8 18.24, 3.41 18.17, 0 18 M0 18 C-0.21 13.23, -0.08 9.6, 0 0 M0 18 C0.32 11.94, 0.03 6.1, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(206 70) rotate(0 8 9)">
+<path d="M0 0 C2.98 -0.67, 6.88 -0.8, 16 0 M0 0 C3.24 -0.17, 6.61 0.38, 16 0 M16 0 C16.85 2.88, 15.41 7.75, 16 18 M16 0 C16.25 4.21, 15.74 8.55, 16 18 M16 18 C10.84 18.06, 6.26 17.22, 0 18 M16 18 C12.04 18.32, 8.61 17.8, 0 18 M0 18 C-0.82 10.69, -0.44 3.54, 0 0 M0 18 C-0.37 12.77, 0.31 7.73, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(222 70) rotate(0 8 9)">
+<path d="M0 0 C2.53 0.58, 5.95 0.53, 16 0 M0 0 C4.87 -0.13, 9.22 0.1, 16 0 M16 0 C16.62 4.49, 16.47 9.39, 16 18 M16 0 C15.92 3.66, 15.81 7.46, 16 18 M16 18 C11.21 18.53, 8.04 18.29, 0 18 M16 18 C11.88 18.39, 7.41 18.22, 0 18 M0 18 C0.38 11.75, -0.81 6.48, 0 0 M0 18 C0.01 13.61, -0.14 9.37, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(238 70) rotate(0 8 9)">
+<path d="M0 0 C3.67 0.07, 6.62 0.09, 16 0 M0 0 C5.7 -0.09, 11.84 -0.17, 16 0 M16 0 C16.38 4.3, 15.72 9.24, 16 18 M16 0 C15.59 6.71, 15.88 14.47, 16 18 M16 18 C13.18 17.4, 8.22 17.76, 0 18 M16 18 C10.92 17.66, 6.2 17.85, 0 18 M0 18 C-0.41 12.8, 0.44 7.62, 0 0 M0 18 C0.21 10.84, 0.14 3.81, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(254 70) rotate(0 8 9)">
+<path d="M0 0 C3.21 -0.28, 7.29 -0.18, 16 0 M0 0 C4.13 0.1, 7.25 -0.29, 16 0 M16 0 C16.33 5.91, 15.15 10.88, 16 18 M16 0 C16.16 7.06, 15.96 13.37, 16 18 M16 18 C10.35 17.86, 3.6 18.82, 0 18 M16 18 C10.77 17.73, 5 18.28, 0 18 M0 18 C0.78 13.86, 0.07 10.56, 0 0 M0 18 C-0.3 11.68, -0.3 5.44, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(270 70) rotate(0 8 9)">
+<path d="M0 0 C2.75 -0.79, 6.37 -0.61, 16 0 M0 0 C4.97 0.14, 9.86 0.23, 16 0 M16 0 C16.1 5.72, 16.21 12.52, 16 18 M16 0 C15.82 6.52, 16.03 12.28, 16 18 M16 18 C10.73 18.33, 5.38 18.29, 0 18 M16 18 C9.81 17.8, 3.8 17.9, 0 18 M0 18 C0.18 11.32, -0.3 4.5, 0 0 M0 18 C-0.1 12.51, -0.02 7.08, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(286 70) rotate(0 8 9)">
+<path d="M0 0 C3.9 0.46, 7.04 0.72, 16 0 M0 0 C5.8 0.18, 12.47 -0.04, 16 0 M16 0 C15.86 7.33, 15.46 14.16, 16 18 M16 0 C16.39 5.97, 16.1 11.19, 16 18 M16 18 C11.1 18.64, 5.55 17.59, 0 18 M16 18 C12.05 17.72, 8.2 18.17, 0 18 M0 18 C-0.61 12.38, -0.84 7.44, 0 0 M0 18 C0.1 13.35, 0.25 9.62, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(302 70) rotate(0 8 9)">
+<path d="M0 0 C3.44 0.11, 6.11 0.45, 16 0 M0 0 C4.23 0.37, 7.89 -0.16, 16 0 M16 0 C15.81 3.54, 16.69 8.61, 16 18 M16 0 C16.06 5.42, 16.17 11, 16 18 M16 18 C11.47 17.5, 7.33 18.66, 0 18 M16 18 C11.89 17.79, 6.99 17.8, 0 18 M0 18 C0.58 13.44, 0.59 8.58, 0 0 M0 18 C-0.42 10.59, -0.19 4.05, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(318 70) rotate(0 8 9)">
+<path d="M0 0 C2.98 -0.4, 6.78 0.02, 16 0 M0 0 C5.06 0.41, 10.5 0.37, 16 0 M16 0 C15.57 5.15, 15.95 8.45, 16 18 M16 0 C15.73 4.87, 16.24 9.9, 16 18 M16 18 C11.84 17.97, 9.11 18.13, 0 18 M16 18 C10.94 17.86, 5.79 18.23, 0 18 M0 18 C-0.02 10.89, 0.22 4.32, 0 0 M0 18 C-0.21 11.42, 0.09 5.69, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(334 70) rotate(0 8 9)">
+<path d="M0 0 C2.53 -0.75, 5.85 -0.25, 16 0 M0 0 C6.69 -0.35, 12.31 0.09, 16 0 M16 0 C15.52 4.96, 15.38 10.09, 16 18 M16 0 C16.3 4.32, 16.32 8.81, 16 18 M16 18 C9.01 18.44, 2.89 17.59, 0 18 M16 18 C9.98 17.93, 4.59 17.85, 0 18 M0 18 C-0.81 11.95, -0.33 7.26, 0 0 M0 18 C0.17 12.26, -0.35 7.33, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(350 70) rotate(0 8 9)">
+<path d="M0 0 C3.67 0.34, 6.53 -0.68, 16 0 M0 0 C4.32 -0.31, 8.52 -0.18, 16 0 M16 0 C15.29 6.57, 16.43 11.73, 16 18 M16 0 C15.97 3.77, 16.39 7.72, 16 18 M16 18 C10.99 17.3, 4.67 18.66, 0 18 M16 18 C9.82 18, 3.38 18.28, 0 18 M0 18 C0.38 13.01, -0.7 8.39, 0 0 M0 18 C0.37 13.09, -0.07 8.96, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(366 70) rotate(0 8 9)">
+<path d="M0 0 C3.21 -0.01, 7.2 0.65, 16 0 M0 0 C5.15 -0.12, 11.14 -0.3, 16 0 M16 0 C15.05 6.38, 15.69 13.38, 16 18 M16 0 C16.36 6.82, 16.28 13.83, 16 18 M16 18 C11.36 17.77, 6.45 18.13, 0 18 M16 18 C12.06 18.08, 8.58 17.91, 0 18 M0 18 C-0.22 14.07, 0.74 11.33, 0 0 M0 18 C-0.14 14.83, 0.38 10.6, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(382 70) rotate(0 8 9)">
+<path d="M0 0 C2.76 -0.36, 6.27 0.38, 16 0 M0 0 C3.58 -0.08, 6.55 0.22, 16 0 M16 0 C16.8 7.99, 16.92 15.02, 16 18 M16 0 C16.02 6.27, 16.35 13.63, 16 18 M16 18 C11.73 18.24, 6.63 17.59, 0 18 M16 18 C11.91 18.15, 7.38 18.33, 0 18 M0 18 C0.79 11.53, 0.19 5.27, 0 0 M0 18 C0.06 12.07, -0.24 5.04, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(398 70) rotate(0 8 9)">
+<path d="M0 0 C3.9 0.73, 6.94 -0.05, 16 0 M0 0 C4.41 -0.04, 9.16 -0.05, 16 0 M16 0 C16.57 4.2, 16.17 7.66, 16 18 M16 0 C15.69 6.62, 15.52 12.54, 16 18 M16 18 C12.1 18.7, 8.41 18.66, 0 18 M16 18 C10.95 18.22, 6.17 17.96, 0 18 M0 18 C0.18 12.58, -0.18 8.21, 0 0 M0 18 C0.44 12.9, 0.22 6.67, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(414 70) rotate(0 8 9)">
+<path d="M0 0 C3.44 0.38, 6.02 -0.33, 16 0 M0 0 C6.04 0.15, 10.97 -0.17, 16 0 M16 0 C16.33 4.01, 15.43 9.3, 16 18 M16 0 C16.26 6.07, 15.6 11.45, 16 18 M16 18 C9.27 17.57, 3.78 18.12, 0 18 M16 18 C9.99 18.29, 4.17 18.39, 0 18 M0 18 C-0.42 13.64, -0.55 9.35, 0 0 M0 18 C-0.26 13.74, -0.4 9.21, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(430 70) rotate(0 8 9)">
+<path d="M0 0 C2.98 0.02, 6.69 -0.6, 16 0 M0 0 C3.67 0.19, 7.19 0.36, 16 0 M16 0 C16.28 5.62, 16.66 10.95, 16 18 M16 0 C15.93 5.52, 15.67 10.35, 16 18 M16 18 C9.65 18.04, 3.96 17.59, 0 18 M16 18 C13.03 18.36, 9.37 18.01, 0 18 M0 18 C0.59 11.1, 0.7 5.09, 0 0 M0 18 C0.13 14.57, 0.06 10.85, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(446 70) rotate(0 8 9)">
+<path d="M0 0 C2.53 -0.49, 5.76 0.57, 16 0 M0 0 C4.5 0.23, 9.8 0.08, 16 0 M16 0 C16.04 5.43, 15.91 12.59, 16 18 M16 0 C15.6 4.97, 15.74 10.16, 16 18 M16 18 C11.62 18.5, 5.74 18.66, 0 18 M16 18 C12.07 18.28, 8.17 18.28, 0 18 M0 18 C-0.02 12.16, 0.34 6.23, 0 0 M0 18 C0.33 11.81, 0.33 5.29, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(462 70) rotate(0 8 9)">
+<path d="M0 0 C3.67 0.76, 6.43 0.3, 16 0 M0 0 C6.13 0.43, 11.61 -0.03, 16 0 M16 0 C15.99 7.04, 15.35 14.23, 16 18 M16 0 C16.17 4.42, 15.81 9.07, 16 18 M16 18 C11.99 17.21, 7.52 17.96, 0 18 M16 18 C11.12 18.35, 6.96 17.91, 0 18 M0 18 C-0.62 13.22, -0.03 9.17, 0 0 M0 18 C-0.37 12.64, -0.29 6.92, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(478 70) rotate(0 8 9)">
+<path d="M0 0 C3.21 0.25, 7.1 -0.13, 16 0 M0 0 C3.76 -0.34, 7.82 -0.31, 16 0 M16 0 C15.76 3.25, 16.4 6.87, 16 18 M16 0 C15.83 3.88, 15.89 7.98, 16 18 M16 18 C12.36 17.68, 7.7 17.43, 0 18 M16 18 C10.96 17.62, 5.76 18.34, 0 18 M0 18 C0.57 10.67, -0.4 4.91, 0 0 M0 18 C0.02 13.48, 0.17 8.56, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(494 70) rotate(0 8 9)">
+<path d="M0 0 C2.76 -0.1, 6.18 -0.4, 16 0 M0 0 C5.39 -0.3, 9.64 0.22, 16 0 M16 0 C15.52 4.86, 15.65 8.52, 16 18 M16 0 C16.4 6.93, 15.96 14.08, 16 18 M16 18 C12.73 18.14, 9.48 18.5, 0 18 M16 18 C10 17.69, 4.56 17.96, 0 18 M0 18 C-0.22 11.73, 0.85 6.05, 0 0 M0 18 C0.22 14.32, -0.45 10.2, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(510 70) rotate(0 8 9)">
+<path d="M0 0 C3.9 -0.45, 6.85 -0.67, 16 0 M0 0 C6.22 -0.26, 12.25 -0.06, 16 0 M16 0 C15.47 4.67, 16.89 10.16, 16 18 M16 0 C16.07 6.38, 16.03 13.89, 16 18 M16 18 C9.91 18.61, 4.86 17.96, 0 18 M16 18 C13.04 17.76, 9.75 18.39, 0 18 M0 18 C-0.82 12.79, 0.48 8.99, 0 0 M0 18 C-0.3 11.55, 0.01 4.63, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(526 70) rotate(0 8 9)">
+<path d="M0 0 C3.44 0.64, 5.92 0.5, 16 0 M0 0 C3.85 -0.07, 8.46 -0.18, 16 0 M16 0 C15.23 6.28, 16.14 11.8, 16 18 M16 0 C15.74 6.73, 16.1 12.8, 16 18 M16 18 C10.28 17.48, 5.04 17.43, 0 18 M16 18 C12.09 17.84, 7.75 18.02, 0 18 M0 18 C0.37 13.85, 0.12 10.13, 0 0 M0 18 C-0.09 12.39, 0.28 6.27, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(542 70) rotate(0 8 9)">
+<path d="M0 0 C2.98 0.29, 6.59 0.23, 16 0 M0 0 C5.48 -0.03, 10.27 0.35, 16 0 M16 0 C16.8 6.09, 15.39 11.64, 16 18 M16 0 C16.13 6.18, 15.99 11.71, 16 18 M16 18 C10.65 17.94, 6.81 18.49, 0 18 M16 18 C11.13 17.91, 6.55 17.64, 0 18 M0 18 C-0.42 11.31, -0.43 5.86, 0 0 M0 18 C0.29 13.22, -0.16 8.81, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(558 70) rotate(0 8 9)">
+<path d="M0 0 C2.53 -0.22, 7.27 -0.2, 16 0 M0 0 C3.11 0.01, 6.49 0.07, 16 0 M16 0 C16.75 7.71, 16.63 13.29, 16 18 M16 0 C15.8 5.63, 16.07 10.61, 16 18 M16 18 C12.62 18.41, 8.59 17.96, 0 18 M16 18 C10.97 17.98, 5.35 18.07, 0 18 M0 18 C0.78 12.36, -0.8 7, 0 0 M0 18 C-0.41 14.06, 0.12 10.44, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(574 70) rotate(0 8 9)">
+<path d="M0 0 C3.67 -0.57, 6.34 -0.48, 16 0 M0 0 C4.74 0.21, 9.1 -0.04, 16 0 M16 0 C16.51 3.92, 15.88 7.73, 16 18 M16 0 C16.36 5.08, 16.14 9.52, 16 18 M16 18 C12.99 17.28, 8.77 17.43, 0 18 M16 18 C10.01 18.05, 4.14 17.7, 0 18 M0 18 C0.17 13.42, 0.63 9.94, 0 0 M0 18 C-0.03 11.3, -0.32 4.88, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(590 70) rotate(0 8 9)">
+<path d="M0 0 C3.21 0.68, 7.01 0.85, 16 0 M0 0 C5.57 0.24, 10.91 -0.32, 16 0 M16 0 C16.28 3.73, 15.13 9.37, 16 18 M16 0 C16.03 4.53, 16.21 9.33, 16 18 M16 18 C10.17 17.74, 4.15 18.49, 0 18 M16 18 C12.25 18.12, 9.34 18.12, 0 18 M0 18 C-0.62 10.88, 0.08 3.88, 0 0 M0 18 C0.18 12.13, -0.05 6.52, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(94 88) rotate(0 8 9)">
+<path d="M0 0 C2.76 0.17, 6.08 0.42, 16 0 M0 0 C3.2 0.28, 7.12 0.21, 16 0 M16 0 C16.22 5.34, 16.37 11.01, 16 18 M16 0 C15.7 3.98, 16.28 8.24, 16 18 M16 18 C10.54 18.21, 5.93 17.96, 0 18 M16 18 C12.1 18.04, 8.14 17.59, 0 18 M0 18 C0.58 11.94, -0.28 6.82, 0 0 M0 18 C-0.34 12.97, 0.41 8.15, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(110 88) rotate(0 8 9)">
+<path d="M-0.2 -0.76 L15.42 -0.51 L15.15 18.76 L-0.95 18.83" stroke="none" stroke-width="0" fill="var(--color-part4)">
+</path>
+<path d="M0 0 C3.9 -0.18, 6.75 0.15, 16 0 M0 0 C4.83 -0.32, 8.94 0.09, 16 0 M16 0 C15.99 5.15, 15.62 10.85, 16 18 M16 0 C16.27 3.43, 16.35 7.14, 16 18 M16 18 C10.91 18.68, 6.11 17.43, 0 18 M16 18 C11.14 18.11, 6.93 18.02, 0 18 M0 18 C-0.03 13, -0.65 7.96, 0 0 M0 18 C-0.14 13.8, -0.21 9.79, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(126 88) rotate(0 8 9)">
+<path d="M0 0 C3.44 -0.69, 5.83 -0.28, 16 0 M0 0 C5.66 -0.29, 11.55 -0.18, 16 0 M16 0 C15.94 6.76, 16.86 12.5, 16 18 M16 0 C15.94 6.48, 16.43 13.25, 16 18 M16 18 C11.28 17.54, 7.89 18.49, 0 18 M16 18 C10.98 18.18, 5.73 17.64, 0 18 M0 18 C-0.82 10.45, 0.6 3.7, 0 0 M0 18 C0.07 11.04, 0.07 4.23, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(142 88) rotate(0 8 9)">
+<path d="M0 0 C2.99 0.56, 6.5 -0.55, 16 0 M0 0 C4.09 -0.25, 7.76 0.34, 16 0 M16 0 C15.7 6.57, 16.11 14.14, 16 18 M16 0 C15.61 5.93, 15.6 13.06, 16 18 M16 18 C13.25 17.85, 9.67 17.8, 0 18 M16 18 C10.02 18.25, 3.73 18.07, 0 18 M0 18 C0.38 11.51, 0.23 6.64, 0 0 M0 18 C0.45 11.87, -0.37 5.86, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(158 88) rotate(0 8 9)">
+<path d="M0 0 C2.53 0.2, 7.17 0.78, 16 0 M0 0 C4.92 -0.05, 9.57 0.22, 16 0 M16 0 C15.47 4.58, 15.36 8.58, 16 18 M16 0 C16.17 6.29, 15.67 11.97, 16 18 M16 18 C10.43 18.32, 3.44 17.26, 0 18 M16 18 C12.27 18.32, 8.93 17.7, 0 18 M0 18 C-0.23 12.57, -0.14 7.78, 0 0 M0 18 C-0.25 12.71, -0.1 7.5, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(174 88) rotate(0 8 9)">
+<path d="M0 0 C3.67 -0.31, 6.24 0.35, 16 0 M0 0 C5.75 -0.01, 12.19 -0.05, 16 0 M16 0 C15.42 4.39, 16.6 10.22, 16 18 M16 0 C15.84 5.74, 15.74 10.87, 16 18 M16 18 C10.8 17.18, 5.22 18.33, 0 18 M16 18 C12.11 18.4, 7.72 18.13, 0 18 M0 18 C0.78 13.63, -0.68 10.72, 0 0 M0 18 C0.14 13.55, 0.36 10.04, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(190 88) rotate(0 8 9)">
+<path d="M0 0 C3.21 -0.66, 6.92 0.08, 16 0 M0 0 C4.19 0.02, 7.6 -0.33, 16 0 M16 0 C15.18 6, 15.85 10.07, 16 18 M16 0 C16.41 5.19, 15.82 9.78, 16 18 M16 18 C11.17 17.65, 7 17.8, 0 18 M16 18 C11.15 17.67, 6.52 17.75, 0 18 M0 18 C0.18 11.09, 0.75 4.66, 0 0 M0 18 C0.34 10.78, -0.26 4.47, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(206 88) rotate(0 8 9)">
+<path d="M0 0 C2.76 0.43, 5.99 -0.35, 16 0 M0 0 C5.02 0.06, 10.21 0.2, 16 0 M16 0 C16.75 5.81, 15.1 11.71, 16 18 M16 0 C16.08 4.64, 15.89 8.69, 16 18 M16 18 C11.54 18.12, 7.18 17.26, 0 18 M16 18 C10.99 17.74, 5.32 18.18, 0 18 M0 18 C-0.43 12.14, 0.38 7.6, 0 0 M0 18 C-0.18 11.62, 0.2 6.11, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(222 88) rotate(0 8 9)">
+<path d="M0 0 C3.9 0.08, 6.66 -0.62, 16 0 M0 0 C6.65 0.26, 12.82 0.08, 16 0 M16 0 C16.69 7.42, 16.34 13.35, 16 18 M16 0 C15.57 4.09, 15.78 8.5, 16 18 M16 18 C11.91 18.58, 8.96 18.33, 0 18 M16 18 C10.04 17.81, 4.11 17.81, 0 18 M0 18 C0.58 13.2, -0.17 8.73, 0 0 M0 18 C0.02 12.45, -0.42 7.75, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(238 88) rotate(0 8 9)">
+<path d="M0 0 C3.44 -0.27, 7.33 0.7, 16 0 M0 0 C4.28 0.29, 8.24 -0.19, 16 0 M16 0 C16.46 3.63, 15.59 7.79, 16 18 M16 0 C16.14 3.54, 15.85 7.4, 16 18 M16 18 C9.09 17.45, 4.34 17.79, 0 18 M16 18 C12.28 17.88, 9.31 18.23, 0 18 M0 18 C-0.02 10.66, -0.53 4.47, 0 0 M0 18 C0.41 13.29, 0.03 9.39, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(254 88) rotate(0 8 9)">
+<path d="M0 0 C2.99 -0.78, 6.4 0.27, 16 0 M0 0 C5.11 0.33, 10.85 0.33, 16 0 M16 0 C16.41 3.44, 16.82 9.44, 16 18 M16 0 C15.81 6.59, 15.92 13.51, 16 18 M16 18 C11.06 17.92, 4.52 17.26, 0 18 M16 18 C12.12 17.8, 7.31 17.7, 0 18 M0 18 C-0.63 11.72, 0.9 5.61, 0 0 M0 18 C-0.29 11.43, 0.31 3.82, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(270 88) rotate(0 8 9)">
+<path d="M0 0 C2.53 0.47, 7.08 0, 16 0 M0 0 C3.54 -0.27, 7.06 0.22, 16 0 M16 0 C16.17 5.05, 16.08 9.28, 16 18 M16 0 C16.37 6.04, 16 12.42, 16 18 M16 18 C11.43 18.38, 6.3 18.33, 0 18 M16 18 C11.16 17.87, 6.11 18.13, 0 18 M0 18 C0.38 12.78, 0.35 8.55, 0 0 M0 18 C-0.09 12.26, -0.31 5.46, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(286 88) rotate(0 8 9)">
+<path d="M0 0 C3.67 -0.04, 6.15 -0.43, 16 0 M0 0 C4.37 -0.23, 8.87 -0.06, 16 0 M16 0 C15.94 4.86, 15.33 10.92, 16 18 M16 0 C16.04 5.49, 16.07 12.22, 16 18 M16 18 C11.8 18.85, 8.07 17.79, 0 18 M16 18 C10.2 17.94, 4.9 17.75, 0 18 M0 18 C-0.22 13.83, -0.02 11.49, 0 0 M0 18 C0.3 13.1, 0.15 7.1, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(302 88) rotate(0 8 9)">
+<path d="M0 0 C3.22 -0.39, 6.82 -0.7, 16 0 M0 0 C6 -0.2, 11.49 -0.34, 16 0 M16 0 C15.88 6.47, 16.56 12.56, 16 18 M16 0 C15.71 5.84, 16.14 11.13, 16 18 M16 18 C12.17 17.72, 8.25 18.86, 0 18 M16 18 C10.05 18.01, 3.7 18.18, 0 18 M0 18 C-0.83 11.29, -0.39 5.43, 0 0 M0 18 C-0.4 13.93, -0.48 9.63, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(318 88) rotate(0 8 9)">
+<path d="M0 0 C2.76 0.86, 5.89 0.63, 16 0 M0 0 C3.63 0, 6.9 0.35, 16 0 M16 0 C15.65 6.28, 15.82 14.21, 16 18 M16 0 C16.28 5.29, 16.21 10.04, 16 18 M16 18 C9.35 18.02, 3.63 18.17, 0 18 M16 18 C12.29 18.08, 8.9 17.81, 0 18 M0 18 C0.18 12.35, -0.93 8.37, 0 0 M0 18 C-0.02 11.17, -0.02 4.07, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(334 88) rotate(0 8 9)">
+<path d="M0 0 C3.9 0.35, 6.57 0.2, 16 0 M0 0 C4.46 0.04, 9.51 0.07, 16 0 M16 0 C15.42 4.29, 15.07 6.85, 16 18 M16 0 C15.95 4.74, 16.28 8.95, 16 18 M16 18 C9.72 18.49, 3.81 17.63, 0 18 M16 18 C12.13 18.16, 7.69 18.24, 0 18 M0 18 C-0.42 13.41, 0.5 9.51, 0 0 M0 18 C0.18 12, 0.26 5.71, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(350 88) rotate(0 8 9)">
+<path d="M0 0 C3.44 0, 7.24 -0.07, 16 0 M0 0 C6.09 0.07, 12.12 -0.2, 16 0 M16 0 C15.36 4.1, 16.3 8.49, 16 18 M16 0 C15.62 4.2, 16.36 7.85, 16 18 M16 18 C11.69 17.36, 5.59 18.7, 0 18 M16 18 C11.17 18.23, 6.49 17.86, 0 18 M0 18 C0.77 10.87, 0.13 5.25, 0 0 M0 18 C-0.33 12.84, -0.18 7.34, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(366 88) rotate(0 8 9)">
+<path d="M0 0 C2.99 -0.51, 6.31 -0.5, 16 0 M0 0 C3.72 0.11, 7.54 0.32, 16 0 M16 0 C15.13 5.71, 15.56 10.13, 16 18 M16 0 C16.18 3.65, 16.43 7.66, 16 18 M16 18 C12.06 17.82, 7.37 18.16, 0 18 M16 18 C10.22 18.3, 5.29 18.29, 0 18 M0 18 C-0.02 11.92, -0.42 6.39, 0 0 M0 18 C-0.13 13.68, 0.1 8.98, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(382 88) rotate(0 8 9)">
+<path d="M0 0 C2.53 0.74, 6.98 -0.77, 16 0 M0 0 C5.35 0.31, 10.15 0.21, 16 0 M16 0 C16.7 5.52, 16.61 11.78, 16 18 M16 0 C15.85 6.7, 16.5 13.77, 16 18 M16 18 C12.43 18.29, 7.55 17.63, 0 18 M16 18 C10.06 18.37, 3.29 17.92, 0 18 M0 18 C-0.62 12.98, -0.79 9.33, 0 0 M0 18 C0.25 14.51, -0.35 10.62, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(398 88) rotate(0 8 9)">
+<path d="M0 0 C3.67 0.38, 6.06 0.55, 16 0 M0 0 C6.18 0.35, 11.96 -0.07, 16 0 M16 0 C16.64 7.13, 16.04 13.42, 16 18 M16 0 C16.24 6.15, 15.49 12.68, 16 18 M16 18 C12.81 18.76, 9.33 18.7, 0 18 M16 18 C12.3 18.44, 8.48 18.34, 0 18 M0 18 C0.57 10.44, 0.65 3.27, 0 0 M0 18 C-0.44 11.75, -0.07 5.05, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(414 88) rotate(0 8 9)">
+<path d="M0 0 C3.22 -0.13, 6.73 0.12, 16 0 M0 0 C3.81 -0.42, 8.17 -0.34, 16 0 M16 0 C16.41 6.94, 15.3 13.26, 16 18 M16 0 C15.91 5.6, 15.56 11.58, 16 18 M16 18 C9.98 17.62, 4.7 18.16, 0 18 M16 18 C11.34 17.56, 7.28 17.81, 0 18 M0 18 C-0.22 11.5, 0.1 6.21, 0 0 M0 18 C-0.06 12.58, 0.39 6.69, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(430 88) rotate(0 8 9)">
+<path d="M0 0 C2.76 -0.48, 5.8 -0.15, 16 0 M0 0 C5.44 -0.22, 10.79 0.34, 16 0 M16 0 C16.35 4.95, 16.53 7.7, 16 18 M16 0 C15.58 5.95, 15.64 11.39, 16 18 M16 18 C10.35 18.09, 4.88 17.63, 0 18 M16 18 C11.18 17.63, 6.08 18.24, 0 18 M0 18 C-0.82 12.55, -0.27 9.14, 0 0 M0 18 C0.14 13.42, -0.23 9.23, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(446 88) rotate(0 8 9)">
+<path d="M0 0 C3.9 0.61, 6.47 -0.58, 16 0 M0 0 C3.07 -0.18, 6.2 0.06, 16 0 M16 0 C16.12 4.76, 15.78 9.35, 16 18 M16 0 C16.15 5.4, 15.71 10.3, 16 18 M16 18 C10.72 18.56, 6.66 18.7, 0 18 M16 18 C10.23 17.7, 4.87 17.86, 0 18 M0 18 C0.37 13.61, -0.64 10.28, 0 0 M0 18 C0.35 14.25, 0.05 10.86, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(462 88) rotate(0 8 9)">
+<path d="M0 0 C3.45 0.26, 7.14 0.75, 16 0 M0 0 C4.7 -0.15, 8.81 -0.21, 16 0 M16 0 C15.89 4.57, 16.84 10.99, 16 18 M16 0 C15.81 4.85, 15.78 9.21, 16 18 M16 18 C12.69 17.42, 8.44 18.16, 0 18 M16 18 C10.07 17.77, 3.67 18.29, 0 18 M0 18 C-0.42 11.07, 0.61 6.02, 0 0 M0 18 C-0.17 11.49, -0.4 5.3, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(478 88) rotate(0 8 9)">
+<path d="M0 0 C2.99 -0.09, 6.22 0.48, 16 0 M0 0 C5.53 0.05, 11.42 -0.33, 16 0 M16 0 C15.83 6.18, 16.27 12.63, 16 18 M16 0 C16.38 4.3, 15.85 8.11, 16 18 M16 18 C13.07 17.89, 8.62 17.63, 0 18 M16 18 C12.31 17.84, 8.87 17.92, 0 18 M0 18 C0.78 12.13, 0.25 7.16, 0 0 M0 18 C0.03 12.33, -0.12 6.94, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(494 88) rotate(0 8 9)">
+<path d="M0 0 C2.53 -0.6, 6.89 0.05, 16 0 M0 0 C3.16 0.09, 6.84 0.2, 16 0 M16 0 C15.6 5.99, 15.52 12.47, 16 18 M16 0 C16.05 3.75, 15.93 7.02, 16 18 M16 18 C10.24 18.2, 4 18.53, 0 18 M16 18 C11.35 17.92, 7.67 18.35, 0 18 M0 18 C0.17 13.19, -0.12 10.1, 0 0 M0 18 C0.41 13.16, 0.34 8.57, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(510 88) rotate(0 8 9)">
+<path d="M0 0 C3.67 0.65, 5.96 -0.22, 16 0 M0 0 C4.79 0.13, 9.45 -0.08, 16 0 M16 0 C15.36 4, 16.58 6.92, 16 18 M16 0 C15.72 6.8, 16 14.03, 16 18 M16 18 C10.61 18.66, 5.78 18, 0 18 M16 18 C11.2 17.99, 5.66 17.97, 0 18 M0 18 C-0.44 10.64, -0.49 4.04, 0 0 M0 18 C-0.28 14, -0.28 10.21, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(526 88) rotate(0 8 9)">
+<path d="M0 0 C3.22 0.14, 6.63 -0.65, 16 0 M0 0 C5.62 0.16, 11.26 -0.35, 16 0 M16 0 C15.31 3.81, 16.01 8.56, 16 18 M16 0 C16.29 6.25, 16.07 12.94, 16 18 M16 18 C10.98 17.53, 5.96 17.47, 0 18 M16 18 C10.24 18.06, 4.46 18.4, 0 18 M0 18 C0.58 11.7, 0.76 6.98, 0 0 M0 18 C0.1 11.23, 0.18 4.65, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(542 88) rotate(0 8 9)">
+<path d="M0 0 C2.76 -0.21, 7.31 0.68, 16 0 M0 0 C4.05 0.36, 7.47 0.33, 16 0 M16 0 C15.08 5.42, 15.26 10.2, 16 18 M16 0 C15.96 5.71, 16.14 11.84, 16 18 M16 18 C11.35 18, 7.73 18.53, 0 18 M16 18 C9.28 18.13, 3.26 18.03, 0 18 M0 18 C-0.03 12.76, 0.39 8.12, 0 0 M0 18 C0.3 12.07, -0.45 6.28, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(558 88) rotate(0 8 9)">
+<path d="M0 0 C3.9 -0.56, 6.38 0.41, 16 0 M0 0 C4.88 -0.4, 10.09 0.06, 16 0 M16 0 C16.64 5.23, 16.32 11.84, 16 18 M16 0 C15.62 5.16, 16.21 10.75, 16 18 M16 18 C11.73 18.46, 9.51 18, 0 18 M16 18 C12.32 18.2, 8.45 18.45, 0 18 M0 18 C-0.64 10.22, 0.03 3.86, 0 0 M0 18 C-0.21 12.91, 0.01 7.92, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(574 88) rotate(0 8 9)">
+<path d="M0 0 C3.45 0.53, 7.05 -0.03, 16 0 M0 0 C5.71 -0.36, 11.9 -0.22, 16 0 M16 0 C16.59 6.84, 15.75 11.69, 16 18 M16 0 C16.01 5.51, 16.11 10.56, 16 18 M16 18 C10.5 17.33, 3.29 17.47, 0 18 M16 18 C11.36 18.12, 7.25 17.92, 0 18 M0 18 C0.38 11.28, -0.52 6.8, 0 0 M0 18 C-0.01 13.74, 0.29 10.46, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(590 88) rotate(0 8 9)">
+<path d="M0 0 C2.99 0.18, 6.12 -0.3, 16 0 M0 0 C4.14 -0.17, 8.11 -0.34, 16 0 M16 0 C16.36 6.65, 16.8 13.33, 16 18 M16 0 C15.68 4.96, 16.18 9.46, 16 18 M16 18 C10.87 17.8, 5.07 18.53, 0 18 M16 18 C11.21 18.19, 6.05 18.35, 0 18 M0 18 C-0.23 12.33, 0.91 7.94, 0 0 M0 18 C0.37 10.98, -0.15 4.9, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(94 106) rotate(0 8 9)">
+<path d="M0 0 C2.53 -0.33, 6.79 -0.73, 16 0 M0 0 C4.97 -0.13, 9.92 0.19, 16 0 M16 0 C16.3 4.66, 16.24 7.77, 16 18 M16 0 C16.25 4.41, 16.25 8.37, 16 18 M16 18 C11.24 18.26, 6.85 18, 0 18 M16 18 C10.25 18.26, 4.85 17.97, 0 18 M0 18 C0.96 13.39, 0.54 10.88, 0 0 M0 18 C-0.32 11.81, 0.12 6.53, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(110 106) rotate(0 8 9)">
+<path d="M0.22 0.91 L15.23 0.89 L16.34 17.2 L0.52 18.59" stroke="none" stroke-width="0" fill="var(--color-part4)">
+</path>
+<path d="M0 0 C3.68 -0.68, 5.87 0.6, 16 0 M0 0 C6.6 -0.09, 12.54 -0.09, 16 0 M16 0 C16.07 4.47, 15.49 9.41, 16 18 M16 0 C15.92 3.86, 16.32 7.28, 16 18 M16 18 C11.61 18.73, 7.03 17.46, 0 18 M16 18 C12.49 18.33, 9.24 17.6, 0 18 M0 18 C0.18 10.85, -0.01 4.81, 0 0 M0 18 C-0.12 12.65, -0.5 8.17, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(126 106) rotate(0 8 9)">
+<path d="M0 0 C3.22 0.56, 6.54 0.33, 16 0 M0 0 C4.24 0.1, 8.75 -0.2, 16 0 M16 0 C15.83 4.28, 16.55 9.26, 16 18 M16 0 C15.59 6.91, 16.39 14.29, 16 18 M16 18 C11.99 17.6, 8.81 18.53, 0 18 M16 18 C12.33 17.6, 8.04 18.03, 0 18 M0 18 C-0.43 11.91, -0.37 7.75, 0 0 M0 18 C0.26 14.38, -0.04 9.81, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(142 106) rotate(0 8 9)">
+<path d="M0 0 C2.76 0.05, 7.21 -0.1, 16 0 M0 0 C5.07 0.14, 10.56 0.32, 16 0 M16 0 C15.78 5.89, 15.98 10.9, 16 18 M16 0 C16.16 6.36, 15.57 13.19, 16 18 M16 18 C9.16 18.06, 4.19 18, 0 18 M16 18 C11.38 17.68, 6.84 17.66, 0 18 M0 18 C0.76 12.97, -0.74 8.89, 0 0 M0 18 C-0.44 11.62, 0.24 4.24, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(158 106) rotate(0 8 9)">
+<path d="M0 0 C3.9 -0.3, 6.28 -0.37, 16 0 M0 0 C3.5 0.18, 6.77 0.05, 16 0 M16 0 C15.55 5.7, 15.23 12.54, 16 18 M16 0 C15.82 5.81, 15.64 12.1, 16 18 M16 18 C11.13 18.37, 4.36 17.3, 0 18 M16 18 C11.22 17.75, 5.63 18.08, 0 18 M0 18 C-0.02 10.42, 0.51 4.63, 0 0 M0 18 C-0.05 12.46, -0.2 5.88, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(174 106) rotate(0 8 9)">
+<path d="M0 0 C3.45 -0.81, 6.96 -0.8, 16 0 M0 0 C4.33 0.22, 9.39 -0.23, 16 0 M16 0 C15.31 7.31, 16.29 14.18, 16 18 M16 0 C16.39 5.26, 15.71 11.01, 16 18 M16 18 C11.5 17.24, 6.14 18.37, 0 18 M16 18 C10.26 17.82, 4.43 17.71, 0 18 M0 18 C-0.63 11.48, 0.14 5.77, 0 0 M0 18 C0.15 13.29, 0.07 7.52, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(190 106) rotate(0 8 9)">
+<path d="M0 0 C2.99 0.44, 6.03 0.53, 16 0 M0 0 C5.96 0.41, 11.2 -0.34, 16 0 M16 0 C15.26 3.52, 15.72 8.63, 16 18 M16 0 C16.06 4.71, 15.78 9.92, 16 18 M16 18 C11.87 17.7, 7.92 17.83, 0 18 M16 18 C12.5 17.89, 9.63 18.14, 0 18 M0 18 C0.56 12.54, -0.23 8.71, 0 0 M0 18 C-0.37 14.13, -0.37 10.05, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(206 106) rotate(0 8 9)">
+<path d="M0 0 C2.53 0.09, 6.7 0.26, 16 0 M0 0 C3.59 -0.35, 7.41 0.18, 16 0 M16 0 C16.82 5.13, 16.77 8.47, 16 18 M16 0 C15.73 5.06, 15.86 9.72, 16 18 M16 18 C12.25 18.17, 8.1 17.3, 0 18 M16 18 C12.35 17.8, 8.43 17.6, 0 18 M0 18 C-0.22 13.6, -0.77 11.65, 0 0 M0 18 C-0.16 11.36, -0.09 4.49, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(222 106) rotate(0 8 9)">
+<path d="M0 0 C3.68 -0.42, 5.77 -0.18, 16 0 M0 0 C4.42 -0.31, 9.22 -0.1, 16 0 M16 0 C16.77 4.94, 16.21 10.11, 16 18 M16 0 C16.3 4.52, 15.93 8.63, 16 18 M16 18 C9.42 18.64, 3.48 18.37, 0 18 M16 18 C11.39 17.88, 7.22 18.03, 0 18 M0 18 C-0.83 11.06, 0.66 5.59, 0 0 M0 18 C0.22 12.2, 0.37 6.13, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(238 106) rotate(0 8 9)">
+<path d="M0 0 C3.22 0.83, 6.44 -0.45, 16 0 M0 0 C6.05 -0.12, 11.84 -0.21, 16 0 M16 0 C16.54 6.55, 15.46 11.75, 16 18 M16 0 C15.97 3.97, 16 7.54, 16 18 M16 18 C9.79 17.5, 5.26 17.83, 0 18 M16 18 C10.43 17.95, 5.22 17.66, 0 18 M0 18 C0.36 12.11, 0.29 8.53, 0 0 M0 18 C0.42 13.04, -0.25 7.76, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(254 106) rotate(0 8 9)">
+<path d="M0 0 C2.76 0.32, 7.12 0.72, 16 0 M0 0 C3.68 -0.08, 8.05 0.31, 16 0 M16 0 C16.3 6.36, 16.51 13.4, 16 18 M16 0 C16.35 7.02, 15.89 13.65, 16 18 M16 18 C10.16 17.97, 5.44 17.3, 0 18 M16 18 C10.27 18.02, 4.02 18.08, 0 18 M0 18 C-0.42 13.17, -0.26 9.67, 0 0 M0 18 C-0.28 13.87, 0.02 9.4, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(270 106) rotate(0 8 9)">
+<path d="M0 0 C3.9 -0.03, 6.19 0.45, 16 0 M0 0 C5.31 -0.04, 9.86 0.04, 16 0 M16 0 C16.25 7.97, 15.95 15.04, 16 18 M16 0 C16.02 6.47, 15.96 13.45, 16 18 M16 18 C12.13 18.44, 7.22 18.37, 0 18 M16 18 C12.51 18.09, 9.21 17.71, 0 18 M0 18 C0.77 10.63, -0.62 5.41, 0 0 M0 18 C0.11 11.11, -0.42 3.84, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(286 106) rotate(0 8 9)">
+<path d="M0 0 C3.45 -0.38, 6.86 0.18, 16 0 M0 0 C6.14 0.16, 12.47 -0.08, 16 0 M16 0 C16.02 4.18, 15.2 7.68, 16 18 M16 0 C15.69 5.92, 16.04 12.36, 16 18 M16 18 C12.51 17.3, 8.99 17.83, 0 18 M16 18 C12.36 18.16, 8.01 18.14, 0 18 M0 18 C0.16 11.69, 0.81 6.55, 0 0 M0 18 C0.31 11.94, -0.14 5.47, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(302 106) rotate(0 8 9)">
+<path d="M0 0 C2.99 0.71, 5.93 -0.25, 16 0 M0 0 C3.77 0.19, 7.89 -0.35, 16 0 M16 0 C15.78 3.99, 16.25 9.32, 16 18 M16 0 C16.26 5.37, 16.11 11.27, 16 18 M16 18 C12.88 17.77, 9.17 17.3, 0 18 M16 18 C11.4 18.24, 6.81 17.77, 0 18 M0 18 C-0.62 12.75, 0.26 9.49, 0 0 M0 18 C-0.21 12.78, 0.32 7.11, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(318 106) rotate(0 8 9)">
+<path d="M0 0 C2.53 0.36, 6.61 -0.52, 16 0 M0 0 C5.4 0.23, 10.5 0.17, 16 0 M16 0 C15.73 5.6, 15.69 10.97, 16 18 M16 0 C15.93 4.82, 16.18 10.18, 16 18 M16 18 C10.05 18.24, 4.55 18.36, 0 18 M16 18 C10.44 18.31, 5.61 18.19, 0 18 M0 18 C0.57 10.2, -0.11 3.42, 0 0 M0 18 C0 13.61, -0.3 9.65, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(334 106) rotate(0 8 9)">
+<path d="M0 0 C3.68 -0.15, 7.28 0.65, 16 0 M0 0 C3.03 0.27, 6.71 -0.1, 16 0 M16 0 C15.49 5.41, 16.74 12.61, 16 18 M16 0 C15.6 5.17, 16.25 9.08, 16 18 M16 18 C10.42 18.54, 6.33 17.67, 0 18 M16 18 C10.28 18.38, 4.4 17.82, 0 18 M0 18 C-0.04 11.26, -0.48 6.36, 0 0 M0 18 C0.38 10.85, 0.15 4.08, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(350 106) rotate(0 8 9)">
+<path d="M0 0 C3.22 -0.5, 6.35 0.38, 16 0 M0 0 C4.66 -0.34, 8.52 -0.22, 16 0 M16 0 C15.26 7.02, 15.99 14.25, 16 18 M16 0 C16.16 4.62, 16.32 8.89, 16 18 M16 18 C10.79 17.41, 6.51 18.74, 0 18 M16 18 C12.53 18.45, 8.8 18.25, 0 18 M0 18 C-0.82 12.32, 0.78 7.5, 0 0 M0 18 C-0.32 11.69, -0.47 5.72, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(366 106) rotate(0 8 9)">
+<path d="M0 0 C2.76 0.74, 7.02 0.11, 16 0 M0 0 C5.49 -0.3, 11.14 0.3, 16 0 M16 0 C15.21 3.23, 15.43 6.89, 16 18 M16 0 C15.83 4.07, 16.4 7.8, 16 18 M16 18 C12.77 17.88, 8.29 18.2, 0 18 M16 18 C11.57 17.56, 7.6 17.71, 0 18 M0 18 C0.37 13.38, 0.41 10.44, 0 0 M0 18 C0.07 12.52, -0.01 7.36, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(382 106) rotate(0 8 9)">
+<path d="M0 0 C3.91 0.23, 6.09 -0.32, 16 0 M0 0 C3.12 -0.26, 6.55 0.03, 16 0 M16 0 C16.77 4.84, 16.48 8.54, 16 18 M16 0 C16.4 7.12, 16.47 13.91, 16 18 M16 18 C13.14 18.34, 10.07 17.67, 0 18 M16 18 C11.41 17.64, 6.39 18.14, 0 18 M0 18 C-0.24 10.84, 0.04 6.18, 0 0 M0 18 C0.27 13.36, 0.27 9, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(398 106) rotate(0 8 9)">
+<path d="M0 0 C3.45 -0.12, 6.77 -0.6, 16 0 M0 0 C4.75 -0.06, 9.16 -0.09, 16 0 M16 0 C16.72 4.65, 15.91 10.18, 16 18 M16 0 C16.07 6.57, 15.64 12.81, 16 18 M16 18 C10.31 17.21, 3.85 18.74, 0 18 M16 18 C10.45 17.71, 5.19 17.77, 0 18 M0 18 C0.78 13.69, -0.51 7.32, 0 0 M0 18 C-0.25 14.19, -0.18 10.63, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(414 106) rotate(0 8 9)">
+<path d="M0 0 C2.99 -0.63, 5.84 0.57, 16 0 M0 0 C5.58 -0.03, 11.77 -0.36, 16 0 M16 0 C16.48 6.26, 15.17 11.82, 16 18 M16 0 C15.74 6.03, 15.71 12.62, 16 18 M16 18 C10.68 17.67, 5.62 18.2, 0 18 M16 18 C10.29 17.78, 3.99 18.19, 0 18 M0 18 C0.17 14.75, -0.88 10.26, 0 0 M0 18 C-0.05 11.43, 0.1 5.07, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(430 106) rotate(0 8 9)">
+<path d="M0 0 C2.53 0.62, 6.51 0.3, 16 0 M0 0 C4.01 0.01, 7.19 0.16, 16 0 M16 0 C16.25 6.07, 16.22 13.46, 16 18 M16 0 C16.13 5.48, 15.61 11.53, 16 18 M16 18 C11.05 18.14, 5.8 17.67, 0 18 M16 18 C12.54 17.85, 9.19 17.82, 0 18 M0 18 C-0.44 12.21, 0.56 4.2, 0 0 M0 18 C0.16 12.27, -0.52 6.71, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(446 106) rotate(0 8 9)">
+<path d="M0 0 C3.68 0.27, 7.18 0.03, 16 0 M0 0 C4.84 0.21, 9.8 0.05, 16 0 M16 0 C16.2 7.68, 15.65 13.31, 16 18 M16 0 C15.79 4.93, 15.68 10.43, 16 18 M16 18 C11.43 18.61, 7.58 18.73, 0 18 M16 18 C11.58 17.92, 7.98 18.25, 0 18 M0 18 C0.58 13.27, 0.01 7.14, 0 0 M0 18 C-0.36 13.1, -0.06 9.24, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(462 106) rotate(0 8 9)">
+<path d="M0 0 C3.22 -0.24, 6.26 -0.4, 16 0 M0 0 C5.67 0.24, 12.41 -0.23, 16 0 M16 0 C15.96 3.89, 16.71 7.75, 16 18 M16 0 C16.36 4.38, 15.75 9.34, 16 18 M16 18 C11.8 17.47, 9.36 18.2, 0 18 M16 18 C11.42 18, 6.78 17.88, 0 18 M0 18 C-0.03 14.33, -0.36 8.28, 0 0 M0 18 C-0.16 13.94, 0.22 10.88, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(478 106) rotate(0 8 9)">
+<path d="M0 0 C2.76 -0.59, 6.93 -0.67, 16 0 M0 0 C4.1 0.28, 7.82 0.29, 16 0 M16 0 C15.73 3.7, 15.96 9.39, 16 18 M16 0 C16.03 4.73, 15.82 8.25, 16 18 M16 18 C10.57 17.94, 3.14 17.67, 0 18 M16 18 C10.46 18.07, 4.78 18.3, 0 18 M0 18 C-0.64 11.78, -0.73 4.02, 0 0 M0 18 C0.23 11.17, -0.23 5.32, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(494 106) rotate(0 8 9)">
+<path d="M0 0 C3.91 0.5, 6 0.5, 16 0 M0 0 C4.93 0.32, 10.44 0.02, 16 0 M16 0 C15.68 5.31, 15.39 11.03, 16 18 M16 0 C15.7 4.18, 15.89 8.06, 16 18 M16 18 C10.94 18.41, 4.92 18.73, 0 18 M16 18 C9.51 18.14, 3.57 17.93, 0 18 M0 18 C0.38 12.84, 0.52 5.16, 0 0 M0 18 C-0.47 12.01, 0.05 6.95, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(510 106) rotate(0 8 9)">
+<path d="M0 0 C3.45 0.15, 6.67 0.23, 16 0 M0 0 C6.56 -0.28, 12.25 -0.1, 16 0 M16 0 C15.44 5.12, 16.45 10.88, 16 18 M16 0 C16.27 7.23, 15.97 14.16, 16 18 M16 18 C11.31 18.71, 6.7 18.04, 0 18 M16 18 C12.55 18.21, 8.77 18.36, 0 18 M0 18 C-0.23 13.9, 0.16 8.09, 0 0 M0 18 C-0.09 12.84, -0.39 8.59, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(526 106) rotate(0 8 9)">
+<path d="M0 0 C2.99 -0.2, 7.34 -0.04, 16 0 M0 0 C4.19 -0.25, 8.46 -0.37, 16 0 M16 0 C15.39 6.73, 15.88 12.52, 16 18 M16 0 C15.94 6.68, 16.04 13.07, 16 18 M16 18 C11.69 17.58, 6.88 17.5, 0 18 M16 18 C11.59 18.12, 7.57 17.82, 0 18 M0 18 C-0.84 14.96, -0.21 11.03, 0 0 M0 18 C0.11 14.58, -0.11 10.23, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(542 106) rotate(0 8 9)">
+<path d="M0 0 C2.54 -0.71, 6.42 -0.47, 16 0 M0 0 C5.02 -0.21, 11.07 0.15, 16 0 M16 0 C15.15 6.54, 15.13 14.16, 16 18 M16 0 C15.61 6.13, 16.11 11.98, 16 18 M16 18 C12.06 18.05, 8.65 18.57, 0 18 M16 18 C11.43 18.2, 6.37 18.25, 0 18 M0 18 C0.18 12.42, -0.76 4.97, 0 0 M0 18 C0.5 11.82, 0.35 4.66, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(558 106) rotate(0 8 9)">
+<path d="M0 0 C3.68 0.54, 7.09 -0.74, 16 0 M0 0 C3.46 -0.01, 6.49 0.04, 16 0 M16 0 C16.72 4.55, 16.19 8.6, 16 18 M16 0 C16.17 5.58, 16.18 11.79, 16 18 M16 18 C9.23 18.51, 4.03 18.04, 0 18 M16 18 C10.48 18.27, 5.16 17.88, 0 18 M0 18 C-0.43 13.47, 0.67 7.91, 0 0 M0 18 C-0.2 12.65, -0.28 6.3, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(574 106) rotate(0 8 9)">
+<path d="M0 0 C3.22 0.03, 6.16 0.42, 16 0 M0 0 C4.29 0.02, 9.1 -0.24, 16 0 M16 0 C16.67 4.37, 15.62 10.25, 16 18 M16 0 C15.84 5.03, 16.25 10.69, 16 18 M16 18 C11.2 17.38, 4.21 17.5, 0 18 M16 18 C9.52 18.34, 3.96 18.3, 0 18 M0 18 C0.76 14.53, 0.3 9.05, 0 0 M0 18 C0.18 13.49, 0.18 7.94, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(590 106) rotate(0 8 9)">
+<path d="M0 0 C2.76 -0.32, 6.83 0.15, 16 0 M0 0 C5.92 0.06, 10.91 0.29, 16 0 M16 0 C16.43 5.98, 16.67 10.09, 16 18 M16 0 C16.41 4.48, 16.33 9.6, 16 18 M16 18 C11.57 17.85, 5.99 18.57, 0 18 M16 18 C12.56 17.61, 8.36 17.93, 0 18 M0 18 C0.16 11.99, -0.06 4.79, 0 0 M0 18 C0.39 14.32, -0.44 10.47, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g transform="translate(25.5 54.120000000000005) rotate(0 34.1 6.875)">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">words 0-31</text>
+</g>
+<g transform="translate(55.75 72.12) rotate(0 17.049999999999997 6.875)">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">32-63</text>
+</g>
+<g transform="translate(55.75 90.12) rotate(0 17.049999999999997 6.875)">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">64-95</text>
+</g>
+<g transform="translate(49.7 108.12) rotate(0 20.46 6.875)">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">96-127</text>
+</g>
+<g transform="translate(98.97 130) rotate(0 3.4099999999999966 6.875)">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">0</text>
+</g>
+<g transform="translate(114.97 130) rotate(0 3.4099999999999966 6.875)">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">1</text>
+</g>
+<g transform="translate(130.97 130) rotate(0 3.4099999999999966 6.875)">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">2</text>
+</g>
+<g transform="translate(591.95 130) rotate(0 6.819999999999993 6.875)">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">31</text>
+</g>
+<g transform="translate(94 156) rotate(0 189.72 7.5)">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">32 banks, and each one hands out one word per cycle</text>
+</g>
+<g transform="translate(94 178) rotate(0 163.68 7.5)">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">words 1, 33, 65 and 97 all sit behind bank 1</text>
+</g>
+</svg>
+  Shared memory is one line of four-byte words dealt to 32 banks in turn, so drawing it 32 words to
+  a line makes every column one bank. Yellow is bank 1, which holds words 1, 33, 65, 97 and every
+  32nd word after that. It can hand out one of them per cycle.
+</Figure>
+
+A warp issues one shared-memory instruction for all 32 of its lanes, and the banks decide what that
+instruction costs. If the 32 addresses land on 32 different banks, all 32 doors open together and
+the warp is served in one cycle. That is the case the 128 bytes per clock describes.
+
+If two lanes want two different words from one bank, the bank can hand out only one of them this
+cycle. The best practices guide says what happens then: the hardware splits a request that has bank
+conflicts into as many separate conflict-free requests as it needs, and the effective bandwidth
+falls by that factor. Two lanes on one bank cost two cycles. Thirty-two lanes wanting 32 different
+words from one bank cost 32 cycles, and that is not a rare accident. A warp reading down a column of
+a tile that is 32 floats wide asks for words 0, 32, 64 and so on, every one of them in bank 0.
+
+There is one exception, and it works in your favour. When several lanes ask for the same address,
+the bank reads that word once and broadcasts it to all of them, so a warp whose 32 lanes all want
+the same number costs one cycle, exactly like the perfectly spread case. An operand that every
+thread needs is free to share.
+
+<Figure n="6">
+  <svg slot="drawing" viewBox="0 0 574.96 471.75" width="575" role="img" aria-label="Three stacked panels, each with a bar for one warp of thirty two lanes above a row of thirty two banks. In the first, lines run straight down to thirty two different banks and one cycle cell follows. In the second, all thirty two lines converge on bank zero and thirty two cycle cells follow. In the third, all thirty two lines converge on one word in bank five and one cycle cell follows." style="max-width:100%;height:auto;min-width:520px">
+<defs>
+</defs>
+<g transform="translate(10 10) rotate(0 82.46 8.75)">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">lane t reads word t</text>
+</g>
+<g stroke-linecap="round" transform="translate(10 32) rotate(0 256 9)">
+<path d="M-0.55 -0.31 L511.69 0.98 L512.95 17.35 L0.51 17.34" stroke="none" stroke-width="0" fill="var(--color-part2)">
+</path>
+<path d="M0 0 C104.9 -0.1, 209.73 -0.16, 512 0 M0 0 C172.87 0.79, 345.96 0.52, 512 0 M512 0 C512.31 3.28, 511.57 6.85, 512 18 M512 0 C511.84 4.58, 512.27 8.16, 512 18 M512 18 C391.07 18.77, 270.54 19.16, 0 18 M512 18 C311.68 17.96, 111.38 18.2, 0 18 M0 18 C0.59 11.57, 0.41 4.77, 0 0 M0 18 C-0.03 13.54, 0.35 9.76, 0 0" stroke="currentColor" stroke-width="1.5" fill="none">
+</path>
+</g>
+<g transform="translate(211.55 34.5) rotate(0 61.379999999999995 6.875)">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="#141414" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">one warp, 32 lanes</text>
+</g>
+<g stroke-linecap="round">
+<g transform="translate(18 50) rotate(0 0 16)">
+<path d="M0 0 C-0.69 7.41, 0.44 14, 0 32 M0 0 C0.05 8.7, -0.03 18.26, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(34 50) rotate(0 0 16)">
+<path d="M0 0 C0.76 6.9, -0.69 13.58, 0 32 M0 0 C-0.33 11.11, 0.38 22.58, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(50 50) rotate(0 0 16)">
+<path d="M0 0 C0.22 6.38, 0.18 13.16, 0 32 M0 0 C0.29 7.12, -0.21 14.1, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(66 50) rotate(0 0 16)">
+<path d="M0 0 C-0.33 5.86, -0.96 12.75, 0 32 M0 0 C-0.09 9.54, 0.2 19.43, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(82 50) rotate(0 0 16)">
+<path d="M0 0 C-0.87 7.34, -0.09 12.33, 0 32 M0 0 C0.53 11.95, 0.6 23.75, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(98 50) rotate(0 0 16)">
+<path d="M0 0 C0.58 6.83, 0.78 13.91, 0 32 M0 0 C-0.17 7.96, -0.31 15.27, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(114 50) rotate(0 0 16)">
+<path d="M0 0 C0.04 6.31, -0.35 13.49, 0 32 M0 0 C-0.55 10.37, 0.1 19.6, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(130 50) rotate(0 0 16)">
+<path d="M0 0 C-0.5 5.79, 0.51 13.07, 0 32 M0 0 C0.07 12.78, -0.49 24.92, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(146 50) rotate(0 0 16)">
+<path d="M0 0 C0.63 7.27, -0.94 12.66, 0 32 M0 0 C-0.31 7.79, -0.09 16.44, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(162 50) rotate(0 0 16)">
+<path d="M0 0 C0.09 6.75, -0.07 12.24, 0 32 M0 0 C0.31 10.2, 0.32 20.77, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(178 50) rotate(0 0 16)">
+<path d="M0 0 C-0.46 6.24, 0.8 13.82, 0 32 M0 0 C-0.07 6.21, -0.27 13.29, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(194 50) rotate(0 0 16)">
+<path d="M0 0 C-1 5.72, -0.34 13.4, 0 32 M0 0 C-0.45 8.62, 0.14 17.61, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(210 50) rotate(0 0 16)">
+<path d="M0 0 C0.46 7.2, 0.53 12.98, 0 32 M0 0 C0.17 11.03, -0.46 21.94, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(226 50) rotate(0 0 16)">
+<path d="M0 0 C-0.09 6.68, -0.6 12.57, 0 32 M0 0 C-0.21 7.04, -0.05 13.46, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(242 50) rotate(0 0 16)">
+<path d="M0 0 C-0.63 6.16, 0.27 12.15, 0 32 M0 0 C0.4 9.45, 0.36 18.78, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(258 50) rotate(0 0 16)">
+<path d="M0 0 C0.82 5.65, -0.87 13.73, 0 32 M0 0 C0.02 11.86, -0.23 23.11, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(274 50) rotate(0 0 16)">
+<path d="M0 0 C0.28 7.13, 0 13.31, 0 32 M0 0 C-0.36 7.87, 0.17 14.63, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(290 50) rotate(0 0 16)">
+<path d="M0 0 C-0.27 6.61, 0.87 12.89, 0 32 M0 0 C0.26 9.28, 0.58 19.95, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(306 50) rotate(0 0 16)">
+<path d="M0 0 C-0.81 6.09, -0.27 12.47, 0 32 M0 0 C-0.12 11.69, -0.01 24.28, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(322 50) rotate(0 0 16)">
+<path d="M0 0 C0.65 5.57, 0.6 14.06, 0 32 M0 0 C0.18 7.7, 0.08 15.8, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(338 50) rotate(0 0 16)">
+<path d="M0 0 C-0.22 7.06, -0.85 13.64, 0 32 M0 0 C-0.2 10.12, -0.52 20.13, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(354 50) rotate(0 0 16)">
+<path d="M0 0 C-0.76 6.54, 0.02 13.22, 0 32 M0 0 C-0.58 12.53, -0.11 25.45, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(370 50) rotate(0 0 16)">
+<path d="M0 0 C0.69 6.02, 0.88 12.8, 0 32 M0 0 C0.04 8.54, 0.3 16.97, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(386 50) rotate(0 0 16)">
+<path d="M0 0 C0.15 7.5, -0.25 12.38, 0 32 M0 0 C-0.34 10.95, -0.29 21.3, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(402 50) rotate(0 0 16)">
+<path d="M0 0 C-0.39 6.98, 0.62 13.97, 0 32 M0 0 C0.28 6.96, 0.11 13.82, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(418 50) rotate(0 0 16)">
+<path d="M0 0 C-0.94 6.47, -0.51 13.55, 0 32 M0 0 C-0.1 9.37, -0.48 18.14, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(434 50) rotate(0 0 16)">
+<path d="M0 0 C0.52 5.95, 0.35 13.13, 0 32 M0 0 C-0.48 11.78, -0.07 22.47, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(450 50) rotate(0 0 16)">
+<path d="M0 0 C-0.03 7.43, -0.78 12.71, 0 32 M0 0 C0.14 6.79, 0.33 13.99, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(466 50) rotate(0 0 16)">
+<path d="M0 0 C-0.57 6.91, 0.09 12.29, 0 32 M0 0 C-0.24 9.2, -0.26 19.31, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(482 50) rotate(0 0 16)">
+<path d="M0 0 C0.88 6.4, 0.96 13.88, 0 32 M0 0 C0.38 11.61, 0.15 23.64, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(498 50) rotate(0 0 16)">
+<path d="M0 0 C0.34 5.88, -0.18 13.46, 0 32 M0 0 C0 7.62, 0.56 15.16, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(514 50) rotate(0 0 16)">
+<path d="M0 0 C-0.52 7.36, 0.37 13.04, 0 32 M0 0 C-0.38 10.03, -0.04 20.48, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round" transform="translate(10 82) rotate(0 8 8)">
+<path d="M-0.61 -0.42 L15.61 0.09 L15.96 16.32 L-0.42 15.08" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.52 0.16, 6.04 -0.46, 16 0 M0 0 C6.26 0.09, 12.54 0.11, 16 0 M16 0 C15.92 6.77, 15.78 12.53, 16 16 M16 0 C15.75 5.87, 16.34 12.63, 16 16 M16 16 C10.21 16.46, 5.19 15.23, 0 16 M16 16 C9.79 16.04, 3.83 15.79, 0 16 M0 16 C-0.37 10.26, 0.29 5.07, 0 0 M0 16 C-0.13 10.09, 0.07 3.74, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(26 82) rotate(0 8 8)">
+<path d="M0.15 0.69 L15.67 0.95 L16.88 15.58 L-0.63 16.07" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.67 -0.19, 6.72 -0.73, 16 0 M0 0 C3.89 0.13, 7.95 -0.17, 16 0 M16 0 C15.88 3.41, 15.28 7.59, 16 16 M16 0 C16.26 6.18, 16.41 11.66, 16 16 M16 16 C12.18 15.33, 6.97 16.29, 0 16 M16 16 C12.83 15.96, 9.02 16.06, 0 16 M0 16 C0.69 11.2, -0.04 6.08, 0 0 M0 16 C0.05 10.84, 0.32 5.2, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(42 82) rotate(0 8 8)">
+<path d="M0.92 -0.19 L15.72 -0.19 L15.79 16.84 L-0.83 15.06" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.21 -0.54, 5.79 0.6, 16 0 M0 0 C5.52 0.32, 10.56 -0.28, 16 0 M16 0 C15.67 4.84, 16.21 9.05, 16 16 M16 0 C15.96 5.7, 15.67 10.69, 16 16 M16 16 C12.55 15.8, 8.75 15.76, 0 16 M16 16 C11.87 16.03, 7.82 15.69, 0 16 M0 16 C-0.01 12.14, -0.53 8.7, 0 0 M0 16 C0.23 11.58, -0.24 7.45, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(58 82) rotate(0 8 8)">
+<path d="M-0.32 0.92 L15.78 0.66 L16.7 16.11 L0.96 16.06" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.75 0.55, 6.46 0.17, 16 0 M0 0 C3.15 0.36, 6.77 0.24, 16 0 M16 0 C15.62 4.67, 15.71 10.51, 16 16 M16 0 C16.47 5.21, 15.74 10.51, 16 16 M16 16 C12.92 16.26, 8.92 15.23, 0 16 M16 16 C10.91 16.1, 6.62 16.12, 0 16 M0 16 C-0.55 9.88, 0.75 3.31, 0 0 M0 16 C-0.23 12.32, 0.17 8.91, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(74 82) rotate(0 8 8)">
+<path d="M0.44 0.04 L15.84 -0.48 L15.61 15.37 L0.76 15.05" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.9 0.2, 7.13 -0.1, 16 0 M0 0 C3.98 -0.4, 8.59 -0.03, 16 0 M16 0 C15.41 6.1, 16.64 10.37, 16 16 M16 0 C16.01 4.72, 15.64 9.54, 16 16 M16 16 C10.09 16.73, 4.3 16.29, 0 16 M16 16 C10.76 16.17, 4.62 15.74, 0 16 M0 16 C0.51 10.82, 0.42 5.92, 0 0 M0 16 C-0.05 9.87, -0.38 3.96, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(90 82) rotate(0 8 8)">
+<path d="M-0.8 -0.85 L15.89 0.37 L16.52 16.64 L0.56 16.04" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.44 -0.32, 6.2 -0.53, 16 0 M0 0 C5.61 -0.37, 11.2 -0.31, 16 0 M16 0 C15.2 5.93, 15.98 11.83, 16 16 M16 0 C15.72 4.23, 15.7 8.57, 16 16 M16 16 C10.47 15.6, 6.08 15.76, 0 16 M16 16 C9.8 16.24, 3.41 16.17, 0 16 M0 16 C-0.19 11.76, -0.07 8.54, 0 0 M0 16 C0.29 10.61, 0.02 5.42, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(106 82) rotate(0 8 8)">
+<path d="M-0.03 0.27 L15.95 -0.77 L15.44 15.9 L0.35 15.03" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.98 -0.67, 6.88 -0.8, 16 0 M0 0 C3.24 -0.17, 6.61 0.38, 16 0 M16 0 C16.76 2.56, 15.48 6.89, 16 16 M16 0 C16.22 3.74, 15.77 7.6, 16 16 M16 16 C10.84 16.06, 6.26 15.22, 0 16 M16 16 C12.04 16.32, 8.61 15.8, 0 16 M0 16 C-0.73 9.5, -0.4 3.15, 0 0 M0 16 C-0.33 11.35, 0.27 6.87, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(122 82) rotate(0 8 8)">
+<path d="M0.73 -0.62 L16.01 0.09 L16.35 15.16 L0.15 16.03" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.53 0.58, 5.95 0.53, 16 0 M0 0 C4.87 -0.13, 9.22 0.1, 16 0 M16 0 C16.55 3.99, 16.41 8.35, 16 16 M16 0 C15.93 3.26, 15.83 6.63, 16 16 M16 16 C11.21 16.53, 8.04 16.29, 0 16 M16 16 C11.88 16.39, 7.41 16.22, 0 16 M0 16 C0.34 10.44, -0.72 5.76, 0 0 M0 16 C0.01 12.1, -0.12 8.33, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(138 82) rotate(0 8 8)">
+<path d="M-0.51 0.5 L16.06 0.94 L15.26 16.43 L-0.06 15.02" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.67 0.07, 6.62 0.09, 16 0 M0 0 C5.7 -0.09, 11.84 -0.17, 16 0 M16 0 C16.34 3.82, 15.75 8.21, 16 16 M16 0 C15.63 5.97, 15.9 12.86, 16 16 M16 16 C13.18 15.4, 8.22 15.76, 0 16 M16 16 C10.92 15.66, 6.2 15.85, 0 16 M0 16 C-0.36 11.38, 0.39 6.77, 0 0 M0 16 C0.19 9.64, 0.13 3.38, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(154 82) rotate(0 8 8)">
+<path d="M0.26 -0.39 L16.12 -0.2 L16.17 15.69 L-0.26 16.01" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.21 -0.28, 7.29 -0.18, 16 0 M0 0 C4.13 0.1, 7.25 -0.29, 16 0 M16 0 C16.29 5.26, 15.25 9.67, 16 16 M16 0 C16.14 6.28, 15.96 11.89, 16 16 M16 16 C10.35 15.86, 3.6 16.82, 0 16 M16 16 C10.77 15.73, 5 16.28, 0 16 M0 16 C0.7 12.32, 0.06 9.39, 0 0 M0 16 C-0.27 10.38, -0.27 4.84, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(170 82) rotate(0 8 8)">
+<path d="M-0.98 0.72 L16.18 0.66 L15.08 16.95 L-0.46 15" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.75 -0.79, 6.37 -0.61, 16 0 M0 0 C4.97 0.14, 9.86 0.23, 16 0 M16 0 C16.09 5.09, 16.18 11.13, 16 16 M16 0 C15.84 5.79, 16.02 10.92, 16 16 M16 16 C10.73 16.33, 5.38 16.29, 0 16 M16 16 C9.81 15.8, 3.8 15.9, 0 16 M0 16 C0.16 10.06, -0.26 4, 0 0 M0 16 C-0.09 11.12, -0.02 6.29, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(186 82) rotate(0 8 8)">
+<path d="M-0.22 -0.16 L16.23 -0.49 L16 16.22 L-0.67 16" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.9 0.46, 7.04 0.72, 16 0 M0 0 C5.8 0.18, 12.47 -0.04, 16 0 M16 0 C15.88 6.52, 15.52 12.59, 16 16 M16 0 C16.35 5.3, 16.09 9.94, 16 16 M16 16 C11.1 16.64, 5.55 15.59, 0 16 M16 16 C12.05 15.72, 8.2 16.17, 0 16 M0 16 C-0.54 11, -0.75 6.61, 0 0 M0 16 C0.09 11.87, 0.23 8.55, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(202 82) rotate(0 8 8)">
+<path d="M0.54 0.95 L16.29 0.37 L16.91 15.48 L-0.87 16.99" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.44 0.11, 6.11 0.45, 16 0 M0 0 C4.23 0.37, 7.89 -0.16, 16 0 M16 0 C15.83 3.15, 16.62 7.65, 16 16 M16 0 C16.05 4.81, 16.15 9.77, 16 16 M16 16 C11.47 15.5, 7.33 16.66, 0 16 M16 16 C11.89 15.79, 6.99 15.8, 0 16 M0 16 C0.52 11.94, 0.52 7.62, 0 0 M0 16 C-0.37 9.41, -0.17 3.6, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(218 82) rotate(0 8 8)">
+<path d="M-0.69 0.07 L16.35 -0.77 L15.82 16.75 L0.92 15.98" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.98 -0.4, 6.78 0.02, 16 0 M0 0 C5.06 0.41, 10.5 0.37, 16 0 M16 0 C15.62 4.58, 15.95 7.51, 16 16 M16 0 C15.76 4.33, 16.22 8.8, 16 16 M16 16 C11.84 15.97, 9.11 16.13, 0 16 M16 16 C10.94 15.86, 5.79 16.23, 0 16 M0 16 C-0.02 9.68, 0.2 3.84, 0 0 M0 16 C-0.19 10.15, 0.08 5.06, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(234 82) rotate(0 8 8)">
+<path d="M0.07 -0.82 L16.4 0.08 L16.73 16.01 L0.72 16.97" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.53 -0.75, 5.85 -0.25, 16 0 M0 0 C6.69 -0.35, 12.31 0.09, 16 0 M16 0 C15.57 4.41, 15.45 8.97, 16 16 M16 0 C16.27 3.84, 16.28 7.83, 16 16 M16 16 C9.01 16.44, 2.89 15.59, 0 16 M16 16 C9.98 15.93, 4.59 15.85, 0 16 M0 16 C-0.72 10.62, -0.29 6.45, 0 0 M0 16 C0.15 10.9, -0.31 6.51, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(250 82) rotate(0 8 8)">
+<path d="M0.83 0.3 L16.46 0.94 L15.65 15.27 L0.51 15.96" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.67 0.34, 6.53 -0.68, 16 0 M0 0 C4.32 -0.31, 8.52 -0.18, 16 0 M16 0 C15.37 5.84, 16.39 10.43, 16 16 M16 0 C15.97 3.35, 16.35 6.86, 16 16 M16 16 C10.99 15.3, 4.67 16.66, 0 16 M16 16 C9.82 16, 3.38 16.28, 0 16 M0 16 C0.34 11.56, -0.62 7.46, 0 0 M0 16 C0.33 11.64, -0.07 7.97, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(266 82) rotate(0 8 8)">
+<path d="M-0.4 -0.59 L16.52 -0.21 L16.56 16.54 L0.31 16.96" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.21 -0.01, 7.2 0.65, 16 0 M0 0 C5.15 -0.12, 11.14 -0.3, 16 0 M16 0 C15.16 5.67, 15.72 11.89, 16 16 M16 0 C16.32 6.06, 16.25 12.29, 16 16 M16 16 C11.36 15.77, 6.45 16.13, 0 16 M16 16 C12.06 16.08, 8.58 15.91, 0 16 M0 16 C-0.2 12.51, 0.65 10.07, 0 0 M0 16 C-0.13 13.18, 0.34 9.42, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(282 82) rotate(0 8 8)">
+<path d="M0.36 0.53 L16.57 0.65 L15.47 15.8 L0.11 15.95" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.76 -0.36, 6.27 0.38, 16 0 M0 0 C3.58 -0.08, 6.55 0.22, 16 0 M16 0 C16.71 7.11, 16.82 13.35, 16 16 M16 0 C16.02 5.57, 16.31 12.12, 16 16 M16 16 C11.73 16.24, 6.63 15.59, 0 16 M16 16 C11.91 16.15, 7.38 16.33, 0 16 M0 16 C0.7 10.25, 0.17 4.69, 0 0 M0 16 C0.05 10.72, -0.21 4.48, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(298 82) rotate(0 8 8)">
+<path d="M-0.88 -0.36 L16.63 -0.49 L16.38 15.06 L-0.1 16.94" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.9 0.73, 6.94 -0.05, 16 0 M0 0 C4.41 -0.04, 9.16 -0.05, 16 0 M16 0 C16.5 3.74, 16.15 6.81, 16 16 M16 0 C15.73 5.89, 15.58 11.15, 16 16 M16 16 C12.1 16.7, 8.41 16.66, 0 16 M16 16 C10.95 16.22, 6.17 15.96, 0 16 M0 16 C0.16 11.19, -0.16 7.3, 0 0 M0 16 C0.39 11.47, 0.2 5.93, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(314 82) rotate(0 8 8)">
+<path d="M-0.11 0.75 L16.68 0.36 L15.29 16.33 L-0.3 15.93" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.44 0.38, 6.02 -0.33, 16 0 M0 0 C6.04 0.15, 10.97 -0.17, 16 0 M16 0 C16.29 3.57, 15.49 8.27, 16 16 M16 0 C16.23 5.4, 15.64 10.18, 16 16 M16 16 C9.27 15.57, 3.78 16.12, 0 16 M16 16 C9.99 16.29, 4.17 16.39, 0 16 M0 16 C-0.38 12.13, -0.49 8.31, 0 0 M0 16 C-0.23 12.21, -0.36 8.19, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(330 82) rotate(0 8 8)">
+<path d="M0.65 -0.13 L16.74 -0.78 L16.21 15.59 L-0.51 16.93" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.98 0.02, 6.69 -0.6, 16 0 M0 0 C3.67 0.19, 7.19 0.36, 16 0 M16 0 C16.25 5, 16.59 9.73, 16 16 M16 0 C15.94 4.91, 15.71 9.2, 16 16 M16 16 C9.65 16.04, 3.96 15.59, 0 16 M16 16 C13.03 16.36, 9.37 16.01, 0 16 M0 16 C0.52 9.87, 0.63 4.52, 0 0 M0 16 C0.11 12.95, 0.05 9.64, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(346 82) rotate(0 8 8)">
+<path d="M-0.59 0.98 L16.8 0.08 L15.12 16.86 L-0.71 15.92" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.53 -0.49, 5.76 0.57, 16 0 M0 0 C4.5 0.23, 9.8 0.08, 16 0 M16 0 C16.04 4.83, 15.92 11.19, 16 16 M16 0 C15.64 4.42, 15.77 9.03, 16 16 M16 16 C11.62 16.5, 5.74 16.66, 0 16 M16 16 C12.07 16.28, 8.17 16.28, 0 16 M0 16 C-0.01 10.81, 0.3 5.54, 0 0 M0 16 C0.29 10.5, 0.3 4.7, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(362 82) rotate(0 8 8)">
+<path d="M0.17 0.1 L16.85 0.93 L16.03 16.12 L-0.91 16.91" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.67 0.76, 6.43 0.3, 16 0 M0 0 C6.13 0.43, 11.61 -0.03, 16 0 M16 0 C15.99 6.26, 15.42 12.65, 16 16 M16 0 C16.15 3.93, 15.83 8.06, 16 16 M16 16 C11.99 15.21, 7.52 15.96, 0 16 M16 16 C11.12 16.35, 6.96 15.91, 0 16 M0 16 C-0.55 11.75, -0.03 8.15, 0 0 M0 16 C-0.33 11.24, -0.26 6.15, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(378 82) rotate(0 8 8)">
+<path d="M0.94 -0.79 L16.91 -0.21 L16.94 15.38 L0.88 15.9" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.21 0.25, 7.1 -0.13, 16 0 M0 0 C3.76 -0.34, 7.82 -0.31, 16 0 M16 0 C15.78 2.89, 16.36 6.11, 16 16 M16 0 C15.85 3.45, 15.9 7.09, 16 16 M16 16 C12.36 15.68, 7.7 15.43, 0 16 M16 16 C10.96 15.62, 5.76 16.34, 0 16 M0 16 C0.51 9.49, -0.36 4.36, 0 0 M0 16 C0.01 11.98, 0.15 7.61, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(394 82) rotate(0 8 8)">
+<path d="M-0.3 0.33 L16.97 0.64 L15.85 16.65 L0.68 16.9" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.76 -0.1, 6.18 -0.4, 16 0 M0 0 C5.39 -0.3, 9.64 0.22, 16 0 M16 0 C15.58 4.32, 15.69 7.57, 16 16 M16 0 C16.36 6.16, 15.96 12.52, 16 16 M16 16 C12.73 16.14, 9.48 16.5, 0 16 M16 16 C10 15.69, 4.56 15.96, 0 16 M0 16 C-0.19 10.43, 0.76 5.38, 0 0 M0 16 C0.2 12.73, -0.4 9.06, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(410 82) rotate(0 8 8)">
+<path d="M0.46 -0.56 L15.02 -0.5 L16.77 15.91 L0.47 15.89" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.9 -0.45, 6.85 -0.67, 16 0 M0 0 C6.22 -0.26, 12.25 -0.06, 16 0 M16 0 C15.53 4.16, 16.79 9.03, 16 16 M16 0 C16.06 5.67, 16.03 12.35, 16 16 M16 16 C9.91 16.61, 4.86 15.96, 0 16 M16 16 C13.04 15.76, 9.75 16.39, 0 16 M0 16 C-0.73 11.37, 0.43 7.99, 0 0 M0 16 C-0.26 10.27, 0 4.12, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(426 82) rotate(0 8 8)">
+<path d="M-0.77 0.56 L15.08 0.36 L15.68 15.18 L0.27 16.88" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.44 0.64, 5.92 0.5, 16 0 M0 0 C3.85 -0.07, 8.46 -0.18, 16 0 M16 0 C15.32 5.59, 16.13 10.49, 16 16 M16 0 C15.77 5.98, 16.09 11.38, 16 16 M16 16 C10.28 15.48, 5.04 15.43, 0 16 M16 16 C12.09 15.84, 7.75 16.02, 0 16 M0 16 C0.33 12.31, 0.1 9, 0 0 M0 16 C-0.08 11.01, 0.25 5.57, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(442 82) rotate(0 8 8)">
+<path d="M-0.01 -0.33 L15.14 -0.79 L16.59 16.44 L0.07 15.87" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.98 0.29, 6.59 0.23, 16 0 M0 0 C5.48 -0.03, 10.27 0.35, 16 0 M16 0 C16.71 5.42, 15.46 10.35, 16 16 M16 0 C16.11 5.49, 15.99 10.41, 16 16 M16 16 C10.65 15.94, 6.81 16.49, 0 16 M16 16 C11.13 15.91, 6.55 15.64, 0 16 M0 16 C-0.37 10.05, -0.38 5.21, 0 0 M0 16 C0.26 11.75, -0.14 7.83, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(458 82) rotate(0 8 8)">
+<path d="M0.75 0.78 L15.19 0.07 L15.5 15.7 L-0.14 16.87" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.53 -0.22, 7.27 -0.2, 16 0 M0 0 C3.11 0.01, 6.49 0.07, 16 0 M16 0 C16.66 6.85, 16.56 11.81, 16 16 M16 0 C15.82 5, 16.06 9.43, 16 16 M16 16 C12.62 16.41, 8.59 15.96, 0 16 M16 16 C10.97 15.98, 5.35 16.07, 0 16 M0 16 C0.69 10.99, -0.71 6.23, 0 0 M0 16 C-0.36 12.5, 0.11 9.28, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(474 82) rotate(0 8 8)">
+<path d="M-0.49 -0.1 L15.25 0.93 L16.41 16.97 L-0.34 15.86" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.67 -0.57, 6.34 -0.48, 16 0 M0 0 C4.74 0.21, 9.1 -0.04, 16 0 M16 0 C16.46 3.48, 15.89 6.87, 16 16 M16 0 C16.32 4.52, 16.12 8.46, 16 16 M16 16 C12.99 15.28, 8.77 15.43, 0 16 M16 16 C10.01 16.05, 4.14 15.7, 0 16 M0 16 C0.15 11.93, 0.56 8.84, 0 0 M0 16 C-0.02 10.04, -0.29 4.34, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(490 82) rotate(0 8 8)">
+<path d="M0.28 -0.99 L15.31 -0.22 L15.33 16.23 L-0.55 16.85" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.21 0.68, 7.01 0.85, 16 0 M0 0 C5.57 0.24, 10.91 -0.32, 16 0 M16 0 C16.25 3.31, 15.23 8.33, 16 16 M16 0 C16.03 4.03, 16.19 8.29, 16 16 M16 16 C10.17 15.74, 4.15 16.49, 0 16 M16 16 C12.25 16.12, 9.34 16.12, 0 16 M0 16 C-0.55 9.67, 0.08 3.45, 0 0 M0 16 C0.16 10.78, -0.04 5.79, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(506 82) rotate(0 8 8)">
+<path d="M-0.96 0.13 L15.36 0.64 L16.24 15.49 L-0.75 15.84" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.76 0.17, 6.08 0.42, 16 0 M0 0 C3.2 0.28, 7.12 0.21, 16 0 M16 0 C16.2 4.74, 16.33 9.79, 16 16 M16 0 C15.73 3.54, 16.25 7.32, 16 16 M16 16 C10.54 16.21, 5.93 15.96, 0 16 M16 16 C12.1 16.04, 8.14 15.59, 0 16 M0 16 C0.51 10.61, -0.25 6.06, 0 0 M0 16 C-0.3 11.53, 0.37 7.25, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g transform="translate(10 106) rotate(0 182.28 7.5)">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">32 lanes, 32 different banks, all served together</text>
+</g>
+<g transform="translate(10 128) rotate(0 22.32 7.5)">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">cycles</text>
+</g>
+<g stroke-linecap="round" transform="translate(72 126) rotate(0 6.5 6)">
+<path d="M-0.67 -0.53 L12.53 -0.79 L13.98 11.29 L0.64 12.82" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.43 0.45, 5.28 -0.45, 13 0 M0 0 C3.33 -0.2, 6.31 0.28, 13 0 M13 0 C12.8 4.38, 13.07 9.43, 13 12 M13 0 C12.74 3.96, 12.73 8.71, 13 12 M13 12 C10.77 11.88, 7.85 11.84, 0 12 M13 12 C8.14 12.2, 3.03 12.06, 0 12 M0 12 C0.25 7.67, 0.16 4.43, 0 0 M0 12 C0.3 7.92, -0.25 3.91, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g transform="translate(95 127) rotate(0 26.039999999999992 7.5)">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">1 cycle</text>
+</g>
+<g transform="translate(10 156) rotate(0 91.14 8.75)">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">lane t reads word 32t</text>
+</g>
+<g stroke-linecap="round" transform="translate(10 178) rotate(0 256 9)">
+<path d="M-0.38 0.81 L511.7 -0.22 L511.71 17.08 L0.03 17.8" stroke="none" stroke-width="0" fill="var(--color-part2)">
+</path>
+<path d="M0 0 C104.84 0.21, 209.92 0.58, 512 0 M0 0 C127.77 -0.22, 255.16 -0.4, 512 0 M512 0 C511.18 6, 511.85 10.07, 512 18 M512 0 C512.41 5.19, 511.82 9.78, 512 18 M512 18 C356.7 17.55, 201.73 17.62, 0 18 M512 18 C360.59 18.21, 209.28 18.25, 0 18 M0 18 C0.18 11.09, 0.75 4.66, 0 0 M0 18 C0.34 10.78, -0.26 4.47, 0 0" stroke="currentColor" stroke-width="1.5" fill="none">
+</path>
+</g>
+<g transform="translate(211.55 180.5) rotate(0 61.379999999999995 6.875)">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="#141414" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">one warp, 32 lanes</text>
+</g>
+<g stroke-linecap="round">
+<g transform="translate(18 196) rotate(0 0 16)">
+<path d="M0 0 C0.75 6.64, 0.1 12.31, 0 32 M0 0 C0.45 12.85, 0.3 25.22, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(34 196) rotate(0 -8 16)">
+<path d="M0 0 C-3.07 6.05, -5.58 13.82, -16 32 M0 0 C-4.18 8.87, -8.78 16.75, -16 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(50 196) rotate(0 -16 16)">
+<path d="M0 0 C-6.89 5.65, -13.27 13.52, -32 32 M0 0 C-11.11 11.38, -21.47 22.17, -32 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(66 196) rotate(0 -24 16)">
+<path d="M0 0 C-10.71 6.96, -18.96 12.93, -48 32 M0 0 C-9.74 6.11, -19.57 13.41, -48 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(82 196) rotate(0 -32 16)">
+<path d="M0 0 C-11.96 7.01, -27.08 12.6, -64 32 M0 0 C-18.16 8.3, -36.15 17.73, -64 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(98 196) rotate(0 -40 16)">
+<path d="M0 0 C-16.33 5.45, -31.9 11.23, -80 32 M0 0 C-27.18 11.27, -55.85 22.23, -80 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(114 196) rotate(0 -48 16)">
+<path d="M0 0 C-20.7 7.62, -40.72 13.61, -96 32 M0 0 C-21.3 6.12, -43.77 14.2, -96 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(130 196) rotate(0 -56 16)">
+<path d="M0 0 C-21.7 7.79, -46.18 13.97, -112 32 M0 0 C-33.73 9.17, -66.29 18.77, -112 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(146 196) rotate(0 -64 16)">
+<path d="M0 0 C-26.07 5.77, -51 12.16, -128 32 M0 0 C-47.1 12.4, -94.06 23.53, -128 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(162 196) rotate(0 -72 16)">
+<path d="M0 0 C-30.44 6.39, -59.82 12.97, -144 32 M0 0 C-35.34 9.43, -70.19 17.68, -144 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(178 196) rotate(0 -80 16)">
+<path d="M0 0 C-34.8 8.18, -64.65 10.96, -160 32 M0 0 C-49.48 9.85, -100.14 19.62, -160 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(194 196) rotate(0 -88 16)">
+<path d="M0 0 C-35.17 5.72, -73.47 12.71, -176 32 M0 0 C-67.93 13.35, -136.69 24.64, -176 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(210 196) rotate(0 -96 16)">
+<path d="M0 0 C-39.54 6.85, -78.29 14.03, -192 32 M0 0 C-50.27 8.64, -99.05 17.05, -192 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(226 196) rotate(0 -104 16)">
+<path d="M0 0 C-43.75 4.48, -86.9 11.76, -208 32 M0 0 C-68.17 8.61, -136.48 20.38, -208 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(242 196) rotate(0 -112 16)">
+<path d="M0 0 C-44.51 9.32, -91.92 13.32, -224 32 M0 0 C-45.42 5.82, -90.7 12.78, -224 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(258 196) rotate(0 -120 16)">
+<path d="M0 0 C-48.73 6.88, -97.04 14.45, -240 32 M0 0 C-64.88 9.5, -131.01 18.11, -240 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(274 196) rotate(0 -128 16)">
+<path d="M0 0 C-52.9 4.38, -105.46 12.08, -256 32 M0 0 C-88.32 9.14, -175.96 19.43, -256 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(290 196) rotate(0 -136 16)">
+<path d="M0 0 C-57.01 6.08, -110.65 13.89, -272 32 M0 0 C-59.62 6.44, -118.32 13.6, -272 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(306 196) rotate(0 -144 16)">
+<path d="M0 0 C-58.06 6.63, -118.94 11.55, -288 32 M0 0 C-82.88 10.19, -166.13 19.06, -288 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(322 196) rotate(0 -152 16)">
+<path d="M0 0 C-62.63 8.47, -124.67 13.59, -304 32 M0 0 C-109.96 13.97, -220.03 24.6, -304 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(338 196) rotate(0 -160 16)">
+<path d="M0 0 C-66.65 5.97, -130.02 14.08, -320 32 M0 0 C-73.91 6.92, -149.08 14.33, -320 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(354 196) rotate(0 -168 16)">
+<path d="M0 0 C-67.94 3.49, -138.14 11.67, -336 32 M0 0 C-102.37 9.36, -204.39 19.89, -336 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(370 196) rotate(0 -176 16)">
+<path d="M0 0 C-71.96 8.16, -143.57 13.83, -352 32 M0 0 C-133.5 13.19, -266.04 25.5, -352 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(386 196) rotate(0 -184 16)">
+<path d="M0 0 C-75.92 5.67, -151.56 11.5, -368 32 M0 0 C-91.64 6.08, -183.38 13.79, -368 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(402 196) rotate(0 -192 16)">
+<path d="M0 0 C-79.82 7.78, -157.06 13.76, -384 32 M0 0 C-123.72 9.89, -247.35 20.64, -384 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(418 196) rotate(0 -200 16)">
+<path d="M0 0 C-81.41 5.41, -164.92 13.78, -400 32 M0 0 C-156.94 13.69, -314.73 26.28, -400 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(434 196) rotate(0 -208 16)">
+<path d="M0 0 C-85.3 5.27, -170.5 11.51, -416 32 M0 0 C-110.41 6.58, -220.36 14.65, -416 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(450 196) rotate(0 -216 16)">
+<path d="M0 0 C-89.14 7.38, -176.18 13.75, -432 32 M0 0 C-146.14 10.34, -291.67 21.37, -432 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(466 196) rotate(0 -224 16)">
+<path d="M0 0 C-90.97 5.13, -183.89 11.6, -448 32 M0 0 C-93.56 7.66, -187.36 14.2, -448 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(482 196) rotate(0 -232 16)">
+<path d="M0 0 C-94.8 7.26, -189.64 13.82, -464 32 M0 0 C-130.67 11.32, -260.49 19.81, -464 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(498 196) rotate(0 -240 16)">
+<path d="M0 0 C-98.57 6.9, -197.21 13.55, -480 32 M0 0 C-169.18 10.75, -339.14 21.24, -480 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(514 196) rotate(0 -248 16)">
+<path d="M0 0 C-102.54 4.85, -203.31 11.58, -496 32 M0 0 C-111.67 7.15, -223.12 14.89, -496 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round" transform="translate(10 228) rotate(0 8 8)">
+<path d="M-0.44 0.71 L15.63 0.89 L16.72 16.05 L-0.91 15.54" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C3.68 -0.42, 5.77 -0.18, 16 0 M0 0 C4.42 -0.31, 9.22 -0.1, 16 0 M16 0 C16.69 4.39, 16.18 8.99, 16 16 M16 0 C16.26 4.01, 15.94 7.67, 16 16 M16 16 C9.42 16.64, 3.48 16.37, 0 16 M16 16 C11.39 15.88, 7.22 16.03, 0 16 M0 16 C-0.74 9.83, 0.59 4.97, 0 0 M0 16 C0.19 10.84, 0.33 5.45, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(26 228) rotate(0 8 8)">
+<path d="M0 0 C3.22 0.83, 6.44 -0.45, 16 0 M0 0 C6.05 -0.12, 11.84 -0.21, 16 0 M16 0 C16.48 5.82, 15.52 10.45, 16 16 M16 0 C15.97 3.53, 16 6.7, 16 16 M16 16 C9.79 15.5, 5.26 15.83, 0 16 M16 16 C10.43 15.95, 5.22 15.66, 0 16 M0 16 C0.32 10.77, 0.26 7.58, 0 0 M0 16 C0.37 11.59, -0.23 6.9, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(42 228) rotate(0 8 8)">
+<path d="M0 0 C2.76 0.32, 7.12 0.72, 16 0 M0 0 C3.68 -0.08, 8.05 0.31, 16 0 M16 0 C16.27 5.66, 16.46 11.91, 16 16 M16 0 C16.31 6.24, 15.9 12.13, 16 16 M16 16 C10.16 15.97, 5.44 15.3, 0 16 M16 16 C10.27 16.02, 4.02 16.08, 0 16 M0 16 C-0.38 11.71, -0.23 8.59, 0 0 M0 16 C-0.24 12.33, 0.02 8.36, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(58 228) rotate(0 8 8)">
+<path d="M0 0 C3.9 -0.03, 6.19 0.45, 16 0 M0 0 C5.31 -0.04, 9.86 0.04, 16 0 M16 0 C16.22 7.09, 15.95 13.37, 16 16 M16 0 C16.02 5.75, 15.97 11.96, 16 16 M16 16 C12.13 16.44, 7.22 16.37, 0 16 M16 16 C12.51 16.09, 9.21 15.71, 0 16 M0 16 C0.68 9.45, -0.56 4.81, 0 0 M0 16 C0.1 9.87, -0.37 3.41, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(74 228) rotate(0 8 8)">
+<path d="M0 0 C3.45 -0.38, 6.86 0.18, 16 0 M0 0 C6.14 0.16, 12.47 -0.08, 16 0 M16 0 C16.01 3.72, 15.29 6.83, 16 16 M16 0 C15.73 5.26, 16.03 10.99, 16 16 M16 16 C12.51 15.3, 8.99 15.83, 0 16 M16 16 C12.36 16.16, 8.01 16.14, 0 16 M0 16 C0.14 10.39, 0.72 5.82, 0 0 M0 16 C0.28 10.62, -0.12 4.87, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(90 228) rotate(0 8 8)">
+<path d="M0 0 C2.99 0.71, 5.93 -0.25, 16 0 M0 0 C3.77 0.19, 7.89 -0.35, 16 0 M16 0 C15.81 3.55, 16.22 8.29, 16 16 M16 0 C16.23 4.77, 16.1 10.02, 16 16 M16 16 C12.88 15.77, 9.17 15.3, 0 16 M16 16 C11.4 16.24, 6.81 15.77, 0 16 M0 16 C-0.55 11.33, 0.23 8.43, 0 0 M0 16 C-0.18 11.36, 0.28 6.32, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(106 228) rotate(0 8 8)">
+<path d="M0 0 C2.53 0.36, 6.61 -0.52, 16 0 M0 0 C5.4 0.23, 10.5 0.17, 16 0 M16 0 C15.76 4.98, 15.72 9.75, 16 16 M16 0 C15.94 4.28, 16.16 9.05, 16 16 M16 16 C10.05 16.24, 4.55 16.36, 0 16 M16 16 C10.44 16.31, 5.61 16.19, 0 16 M0 16 C0.51 9.07, -0.1 3.04, 0 0 M0 16 C0 12.1, -0.27 8.58, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(122 228) rotate(0 8 8)">
+<path d="M0 0 C3.68 -0.15, 7.28 0.65, 16 0 M0 0 C3.03 0.27, 6.71 -0.1, 16 0 M16 0 C15.55 4.81, 16.66 11.21, 16 16 M16 0 C15.64 4.6, 16.22 8.07, 16 16 M16 16 C10.42 16.54, 6.33 15.67, 0 16 M16 16 C10.28 16.38, 4.4 15.82, 0 16 M0 16 C-0.03 10.01, -0.42 5.66, 0 0 M0 16 C0.34 9.64, 0.14 3.63, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(138 228) rotate(0 8 8)">
+<path d="M0 0 C3.22 -0.5, 6.35 0.38, 16 0 M0 0 C4.66 -0.34, 8.52 -0.22, 16 0 M16 0 C15.34 6.24, 15.99 12.67, 16 16 M16 0 C16.15 4.11, 16.29 7.9, 16 16 M16 16 C10.79 15.41, 6.51 16.74, 0 16 M16 16 C12.53 16.45, 8.8 16.25, 0 16 M0 16 C-0.73 10.95, 0.69 6.67, 0 0 M0 16 C-0.28 10.39, -0.42 5.09, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(154 228) rotate(0 8 8)">
+<path d="M0 0 C2.76 0.74, 7.02 0.11, 16 0 M0 0 C5.49 -0.3, 11.14 0.3, 16 0 M16 0 C15.29 2.87, 15.49 6.13, 16 16 M16 0 C15.85 3.62, 16.35 6.93, 16 16 M16 16 C12.77 15.88, 8.29 16.2, 0 16 M16 16 C11.57 15.56, 7.6 15.71, 0 16 M0 16 C0.33 11.89, 0.36 9.28, 0 0 M0 16 C0.06 11.13, -0.01 6.54, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(170 228) rotate(0 8 8)">
+<path d="M0 0 C3.91 0.23, 6.09 -0.32, 16 0 M0 0 C3.12 -0.26, 6.55 0.03, 16 0 M16 0 C16.69 4.31, 16.43 7.59, 16 16 M16 0 C16.36 6.33, 16.42 12.36, 16 16 M16 16 C13.14 16.34, 10.07 15.67, 0 16 M16 16 C11.41 15.64, 6.39 16.14, 0 16 M0 16 C-0.21 9.63, 0.04 5.49, 0 0 M0 16 C0.24 11.87, 0.24 8, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(186 228) rotate(0 8 8)">
+<path d="M0 0 C3.45 -0.12, 6.77 -0.6, 16 0 M0 0 C4.75 -0.06, 9.16 -0.09, 16 0 M16 0 C16.64 4.14, 15.92 9.05, 16 16 M16 0 C16.06 5.84, 15.68 11.39, 16 16 M16 16 C10.31 15.21, 3.85 16.74, 0 16 M16 16 C10.45 15.71, 5.19 15.77, 0 16 M0 16 C0.69 12.17, -0.45 6.51, 0 0 M0 16 C-0.22 12.62, -0.16 9.45, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(202 228) rotate(0 8 8)">
+<path d="M0 0 C2.99 -0.63, 5.84 0.57, 16 0 M0 0 C5.58 -0.03, 11.77 -0.36, 16 0 M16 0 C16.43 5.57, 15.26 10.51, 16 16 M16 0 C15.77 5.36, 15.74 11.22, 16 16 M16 16 C10.68 15.67, 5.62 16.2, 0 16 M16 16 C10.29 15.78, 3.99 16.19, 0 16 M0 16 C0.15 13.11, -0.78 9.12, 0 0 M0 16 C-0.04 10.16, 0.09 4.51, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(218 228) rotate(0 8 8)">
+<path d="M0 0 C2.53 0.62, 6.51 0.3, 16 0 M0 0 C4.01 0.01, 7.19 0.16, 16 0 M16 0 C16.22 5.4, 16.2 11.97, 16 16 M16 0 C16.11 4.87, 15.65 10.25, 16 16 M16 16 C11.05 16.14, 5.8 15.67, 0 16 M16 16 C12.54 15.85, 9.19 15.82, 0 16 M0 16 C-0.39 10.85, 0.49 3.73, 0 0 M0 16 C0.14 10.9, -0.46 5.96, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(234 228) rotate(0 8 8)">
+<path d="M0 0 C3.68 0.27, 7.18 0.03, 16 0 M0 0 C4.84 0.21, 9.8 0.05, 16 0 M16 0 C16.17 6.83, 15.69 11.83, 16 16 M16 0 C15.82 4.38, 15.71 9.28, 16 16 M16 16 C11.43 16.61, 7.58 16.73, 0 16 M16 16 C11.58 15.92, 7.98 16.25, 0 16 M0 16 C0.51 11.79, 0.01 6.34, 0 0 M0 16 C-0.32 11.65, -0.05 8.22, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(250 228) rotate(0 8 8)">
+<path d="M0 0 C3.22 -0.24, 6.26 -0.4, 16 0 M0 0 C5.67 0.24, 12.41 -0.23, 16 0 M16 0 C15.97 3.46, 16.63 6.89, 16 16 M16 0 C16.32 3.89, 15.78 8.3, 16 16 M16 16 C11.8 15.47, 9.36 16.2, 0 16 M16 16 C11.42 16, 6.78 15.88, 0 16 M0 16 C-0.03 12.73, -0.32 7.36, 0 0 M0 16 C-0.14 12.39, 0.19 9.67, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(266 228) rotate(0 8 8)">
+<path d="M0 0 C2.76 -0.59, 6.93 -0.67, 16 0 M0 0 C4.1 0.28, 7.82 0.29, 16 0 M16 0 C15.76 3.29, 15.97 8.35, 16 16 M16 0 C16.03 4.2, 15.84 7.33, 16 16 M16 16 C10.57 15.94, 3.14 15.67, 0 16 M16 16 C10.46 16.07, 4.78 16.3, 0 16 M0 16 C-0.57 10.47, -0.65 3.57, 0 0 M0 16 C0.2 9.93, -0.2 4.73, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(282 228) rotate(0 8 8)">
+<path d="M0 0 C3.91 0.5, 6 0.5, 16 0 M0 0 C4.93 0.32, 10.44 0.02, 16 0 M16 0 C15.71 4.72, 15.46 9.81, 16 16 M16 0 C15.73 3.72, 15.91 7.16, 16 16 M16 16 C10.94 16.41, 4.92 16.73, 0 16 M16 16 C9.51 16.14, 3.57 15.93, 0 16 M0 16 C0.33 11.41, 0.47 4.58, 0 0 M0 16 C-0.42 10.67, 0.05 6.18, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(298 228) rotate(0 8 8)">
+<path d="M0 0 C3.45 0.15, 6.67 0.23, 16 0 M0 0 C6.56 -0.28, 12.25 -0.1, 16 0 M16 0 C15.5 4.56, 16.4 9.67, 16 16 M16 0 C16.24 6.43, 15.97 12.59, 16 16 M16 16 C11.31 16.71, 6.7 16.04, 0 16 M16 16 C12.55 16.21, 8.77 16.36, 0 16 M0 16 C-0.21 12.35, 0.14 7.2, 0 0 M0 16 C-0.08 11.42, -0.35 7.64, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(314 228) rotate(0 8 8)">
+<path d="M0 0 C2.99 -0.2, 7.34 -0.04, 16 0 M0 0 C4.19 -0.25, 8.46 -0.37, 16 0 M16 0 C15.46 5.99, 15.89 11.13, 16 16 M16 0 C15.94 5.94, 16.03 11.62, 16 16 M16 16 C11.69 15.58, 6.88 15.5, 0 16 M16 16 C11.59 16.12, 7.57 15.82, 0 16 M0 16 C-0.74 13.3, -0.19 9.81, 0 0 M0 16 C0.1 12.96, -0.1 9.09, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(330 228) rotate(0 8 8)">
+<path d="M0 0 C2.54 -0.71, 6.42 -0.47, 16 0 M0 0 C5.02 -0.21, 11.07 0.15, 16 0 M16 0 C15.25 5.82, 15.23 12.59, 16 16 M16 0 C15.65 5.45, 16.1 10.65, 16 16 M16 16 C12.06 16.05, 8.65 16.57, 0 16 M16 16 C11.43 16.2, 6.37 16.25, 0 16 M0 16 C0.16 11.04, -0.68 4.42, 0 0 M0 16 C0.44 10.5, 0.31 4.15, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(346 228) rotate(0 8 8)">
+<path d="M0 0 C3.68 0.54, 7.09 -0.74, 16 0 M0 0 C3.46 -0.01, 6.49 0.04, 16 0 M16 0 C16.64 4.05, 16.17 7.65, 16 16 M16 0 C16.15 4.96, 16.16 10.48, 16 16 M16 16 C9.23 16.51, 4.03 16.04, 0 16 M16 16 C10.48 16.27, 5.16 15.88, 0 16 M0 16 C-0.38 11.98, 0.6 7.03, 0 0 M0 16 C-0.18 11.25, -0.25 5.6, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(362 228) rotate(0 8 8)">
+<path d="M0 0 C3.22 0.03, 6.16 0.42, 16 0 M0 0 C4.29 0.02, 9.1 -0.24, 16 0 M16 0 C16.59 3.88, 15.66 9.11, 16 16 M16 0 C15.86 4.47, 16.23 9.51, 16 16 M16 16 C11.2 15.38, 4.21 15.5, 0 16 M16 16 C9.52 16.34, 3.96 16.3, 0 16 M0 16 C0.68 12.92, 0.27 8.05, 0 0 M0 16 C0.16 11.99, 0.16 7.06, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(378 228) rotate(0 8 8)">
+<path d="M0 0 C2.76 -0.32, 6.83 0.15, 16 0 M0 0 C5.92 0.06, 10.91 0.29, 16 0 M16 0 C16.38 5.31, 16.6 8.97, 16 16 M16 0 C16.36 3.99, 16.29 8.53, 16 16 M16 16 C11.57 15.85, 5.99 16.57, 0 16 M16 16 C12.56 15.61, 8.36 15.93, 0 16 M0 16 C0.14 10.66, -0.06 4.26, 0 0 M0 16 C0.34 12.73, -0.39 9.31, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(394 228) rotate(0 8 8)">
+<path d="M0 0 C3.91 -0.67, 5.91 -0.12, 16 0 M0 0 C3.55 0.26, 7.12 0.17, 16 0 M16 0 C16.18 5.14, 15.94 10.43, 16 16 M16 0 C16.07 3.5, 16.35 7.56, 16 16 M16 16 C11.95 16.31, 7.77 16.04, 0 16 M16 16 C11.6 15.68, 7.15 16.36, 0 16 M0 16 C-0.56 11.6, -0.54 5.27, 0 0 M0 16 C-0.28 10.27, -0.14 4.37, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(410 228) rotate(0 8 8)">
+<path d="M0 0 C3.45 0.41, 6.58 -0.55, 16 0 M0 0 C4.38 0.3, 9.74 -0.11, 16 0 M16 0 C16.13 6.57, 15.43 11.89, 16 16 M16 0 C15.62 3.81, 16.26 7.39, 16 16 M16 16 C12.32 16.78, 7.95 15.5, 0 16 M16 16 C11.44 15.76, 5.95 15.98, 0 16 M0 16 C0.5 12.54, 0.73 7.88, 0 0 M0 16 C0.06 11.02, 0.26 5.82, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(426 228) rotate(0 8 8)">
+<path d="M0 0 C2.99 0.06, 7.25 0.78, 16 0 M0 0 C6.01 0.33, 11.55 -0.38, 16 0 M16 0 C15.92 3.21, 16.37 6.95, 16 16 M16 0 C16.12 6.52, 16.32 12.82, 16 16 M16 16 C9.49 15.65, 3.33 16.57, 0 16 M16 16 C10.49 15.83, 4.75 16.41, 0 16 M0 16 C-0.04 10.28, 0.4 2.5, 0 0 M0 16 C0.25 11.76, -0.29 7.28, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(442 228) rotate(0 8 8)">
+<path d="M0 0 C2.54 -0.45, 6.32 0.35, 16 0 M0 0 C3.64 -0.27, 7.76 0.3, 16 0 M16 0 C15.71 4.64, 15.71 8.41, 16 16 M16 0 C15.83 6.03, 15.59 11.85, 16 16 M16 16 C9.86 16.11, 5.11 16.03, 0 16 M16 16 C9.53 15.9, 3.55 16.04, 0 16 M0 16 C-0.74 11.22, -0.08 5.11, 0 0 M0 16 C-0.21 12.5, 0.12 8.73, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(458 228) rotate(0 8 8)">
+<path d="M0 0 C3.68 -0.8, 7 0.08, 16 0 M0 0 C5.27 -0.23, 10.37 0.03, 16 0 M16 0 C15.66 4.47, 16.8 8.27, 16 16 M16 0 C16.33 5.55, 15.65 10.88, 16 16 M16 16 C10.23 16.58, 5.28 15.5, 0 16 M16 16 C12.57 15.97, 8.74 16.47, 0 16 M0 16 C0.32 12.16, -0.41 7.72, 0 0 M0 16 C-0.03 10.05, -0.44 3.79, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(474 228) rotate(0 8 8)">
+<path d="M0 0 C3.22 0.45, 6.07 -0.19, 16 0 M0 0 C6.1 -0.2, 12.19 -0.25, 16 0 M16 0 C15.46 4.3, 16.14 9.73, 16 16 M16 0 C16.04 5.06, 15.71 9.91, 16 16 M16 16 C12.21 15.29, 7.06 16.41, 0 16 M16 16 C11.61 15.88, 7.54 15.93, 0 16 M0 16 C-0.22 13.1, 0.86 8.73, 0 0 M0 16 C0.31 10.79, -0.03 5.24, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(490 228) rotate(0 8 8)">
+<path d="M0 0 C2.77 -0.06, 6.74 -0.62, 16 0 M0 0 C3.73 -0.16, 8.4 0.28, 16 0 M16 0 C15.41 5.73, 15.63 11.19, 16 16 M16 0 C15.74 4.57, 15.78 9.74, 16 16 M16 16 C12.58 15.75, 8.84 15.87, 0 16 M16 16 C10.66 15.96, 6.34 15.56, 0 16 M0 16 C0.68 10.84, 0.37 4.95, 0 0 M0 16 C-0.31 11.53, 0.22 6.7, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(506 228) rotate(0 8 8)">
+<path d="M0 0 C3.91 -0.41, 5.81 0.71, 16 0 M0 0 C5.36 0.04, 10.21 0.16, 16 0 M16 0 C16.8 5.56, 16.57 12.65, 16 16 M16 0 C16.25 4.08, 15.84 8.77, 16 16 M16 16 C12.95 16.22, 9.02 15.34, 0 16 M16 16 C10.5 16.03, 4.33 15.99, 0 16 M0 16 C0.14 11.78, 0.05 5.96, 0 0 M0 16 C0.03 12.28, -0.18 8.95, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g transform="translate(10 252) rotate(0 178.56 7.5)">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">32 different words, all in bank 0, one at a time</text>
+</g>
+<g transform="translate(10 274) rotate(0 22.32 7.5)">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">cycles</text>
+</g>
+<g stroke-linecap="round" transform="translate(72 272) rotate(0 6.5 6)">
+<path d="M-0.5 0.6 L12.55 0 L12.74 11.02 L0.15 11.28" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.06 -0.02, 5.06 -0.22, 13 0 M0 0 C4.43 0.25, 8.81 0.24, 13 0 M13 0 C13.25 3.79, 13.26 6.77, 13 12 M13 0 C13.12 4.96, 13.03 9.79, 13 12 M13 12 C8.83 12.02, 5.17 11.46, 0 12 M13 12 C9.44 12.2, 5.79 11.73, 0 12 M0 12 C-0.03 8.55, 0.38 4.35, 0 0 M0 12 C-0.05 8.48, -0.06 5.19, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(85 272) rotate(0 6.5 6)">
+<path d="M0.26 -0.29 L12.61 0.86 L13.65 12.28 L-0.06 12.27" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.99 -0.43, 5.61 -0.57, 13 0 M0 0 C2.5 0.28, 5.74 0.02, 13 0 M13 0 C13.1 3.66, 12.76 7.86, 13 12 M13 0 C12.9 4.6, 13.07 9.06, 13 12 M13 12 C9.13 12.4, 6.61 12.33, 0 12 M13 12 C8.67 12.26, 4.81 12.08, 0 12 M0 12 C-0.43 9.26, 0.13 5.11, 0 0 M0 12 C0.08 9.04, 0.13 6.28, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(98 272) rotate(0 6.5 6)">
+<path d="M-0.98 0.83 L12.66 -0.29 L12.56 11.54 L-0.26 11.26" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.62 0.58, 4.85 0.51, 13 0 M0 0 C3.83 -0.34, 7.21 -0.21, 13 0 M13 0 C13.06 4.74, 13.58 8.96, 13 12 M13 0 C13.16 4.23, 13 8.33, 13 12 M13 12 C10.73 11.48, 8.06 11.89, 0 12 M13 12 C8.54 12.32, 3.83 11.77, 0 12 M0 12 C0.25 9.96, -0.23 7.07, 0 0 M0 12 C-0.26 7.19, -0.17 2.57, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(111 272) rotate(0 6.5 6)">
+<path d="M-0.21 -0.06 L12.72 0.57 L13.47 12.81 L-0.46 12.25" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.25 0.17, 5.4 0.16, 13 0 M0 0 C4.5 -0.18, 9.33 0.35, 13 0 M13 0 C12.91 4.61, 13.08 8.85, 13 12 M13 0 C12.94 3.86, 13.05 7.6, 13 12 M13 12 C8.44 11.85, 3 11.46, 0 12 M13 12 C10.36 11.72, 8.06 12.12, 0 12 M0 12 C-0.16 8.27, -0.48 4.23, 0 0 M0 12 C-0.13 7.75, 0.02 3.66, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(124 272) rotate(0 6.5 6)">
+<path d="M0.55 -0.94 L12.78 -0.57 L12.38 12.07 L-0.67 11.25" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C3.18 -0.12, 5.95 -0.06, 13 0 M0 0 C3.23 -0.15, 6.26 0.12, 13 0 M13 0 C12.87 3.29, 12.7 5.15, 13 12 M13 0 C12.72 3.5, 13.1 6.87, 13 12 M13 12 C8.74 12.23, 4.45 12.33, 0 12 M13 12 C9.58 11.78, 6.43 11.82, 0 12 M0 12 C0.64 8.97, 0.48 4.99, 0 0 M0 12 C0.13 8.31, 0.33 4.75, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(137 272) rotate(0 6.5 6)">
+<path d="M-0.69 0.17 L12.83 0.28 L13.3 11.34 L-0.87 12.24" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.8 -0.4, 5.19 -0.28, 13 0 M0 0 C3.9 -0.12, 7.73 -0.1, 13 0 M13 0 C12.71 3.16, 13.41 6.24, 13 12 M13 0 C13.1 3.13, 13.15 6.75, 13 12 M13 12 C9.04 12.61, 5.89 11.89, 0 12 M13 12 C9.45 11.71, 5.45 12.03, 0 12 M0 12 C0.11 9.68, 0.11 6.95, 0 0 M0 12 C0.26 8.86, -0.09 6.44, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(150 272) rotate(0 6.5 6)">
+<path d="M0.07 -0.72 L12.89 -0.86 L12.21 12.6 L0.92 11.23" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.43 0.48, 5.74 -0.63, 13 0 M0 0 C4.58 -0.09, 9.85 -0.32, 13 0 M13 0 C12.56 3.03, 12.91 7.34, 13 12 M13 0 C12.88 2.77, 13.2 6.02, 13 12 M13 12 C9.34 11.56, 6.04 11.33, 0 12 M13 12 C8.68 11.77, 4.48 11.73, 0 12 M0 12 C-0.29 7.98, -0.13 2.9, 0 0 M0 12 C-0.08 7.02, 0.22 2.73, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(163 272) rotate(0 6.5 6)">
+<path d="M0.84 0.4 L12.95 0 L13.12 11.86 L0.72 12.22" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.06 0.2, 4.98 0.45, 13 0 M0 0 C3.3 0.07, 6.77 0.23, 13 0 M13 0 C12.52 4.11, 12.53 8.43, 13 12 M13 0 C13.25 2.4, 13.24 5.29, 13 12 M13 12 C9.64 11.94, 7.48 12.2, 0 12 M13 12 C8.55 11.83, 3.5 12.08, 0 12 M0 12 C0.5 8.69, -0.38 4.86, 0 0 M0 12 C0.05 7.58, -0.2 3.82, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(176 272) rotate(0 6.5 6)">
+<path d="M-0.4 -0.49 L13 0.85 L12.03 11.13 L0.52 11.22" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.99 -0.22, 5.53 0.1, 13 0 M0 0 C3.98 0.1, 8.25 0.01, 13 0 M13 0 C13.57 3.98, 13.23 8.33, 13 12 M13 0 C13.03 5.03, 13.29 9.36, 13 12 M13 12 C8.65 12.32, 3.73 11.76, 0 12 M13 12 C10.37 11.89, 7.72 11.78, 0 12 M0 12 C-0.02 9.39, 0.46 5.62, 0 0 M0 12 C0.31 8.14, 0.11 4.92, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(189 272) rotate(0 6.5 6)">
+<path d="M0.36 0.63 L13.06 -0.29 L12.95 12.39 L0.31 12.21" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.62 -0.5, 4.78 -0.12, 13 0 M0 0 C5.3 0.13, 10.37 -0.22, 13 0 M13 0 C13.41 2.65, 12.74 4.62, 13 12 M13 0 C12.81 4.67, 12.74 9.23, 13 12 M13 12 C8.95 11.4, 3.87 11.33, 0 12 M13 12 C9.59 11.95, 6.74 12.12, 0 12 M0 12 C-0.43 7.7, 0.21 2.78, 0 0 M0 12 C-0.16 9.29, 0.29 6.01, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(202 272) rotate(0 6.5 6)">
+<path d="M-0.87 -0.26 L13.12 0.56 L13.86 11.66 L0.11 11.2" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.25 0.51, 5.32 -0.34, 13 0 M0 0 C3.37 0.29, 6.64 0.34, 13 0 M13 0 C13.37 2.53, 13.56 5.72, 13 12 M13 0 C13.19 4.3, 12.79 8.5, 13 12 M13 12 C9.25 11.78, 5.32 12.2, 0 12 M13 12 C9.46 12, 5.77 11.82, 0 12 M0 12 C0.37 8.4, -0.03 3.54, 0 0 M0 12 C-0.02 9.85, -0.12 7.1, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(215 272) rotate(0 6.5 6)">
+<path d="M-0.11 0.86 L13.17 -0.58 L12.77 12.92 L-0.1 12.19" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C3.18 0.1, 5.87 0.61, 13 0 M0 0 C4.7 0.32, 8.76 0.12, 13 0 M13 0 C13.22 3.6, 13.06 6.81, 13 12 M13 0 C12.97 3.94, 12.84 7.78, 13 12 M13 12 C9.55 12.16, 6.76 11.76, 0 12 M13 12 C8.69 12.06, 4.79 12.17, 0 12 M0 12 C-0.15 9.11, -0.4 5.5, 0 0 M0 12 C0.23 8.01, 0.18 3.39, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(228 272) rotate(0 6.5 6)">
+<path d="M0.65 -0.03 L13.23 0.28 L13.68 12.18 L-0.3 11.18" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.81 -0.19, 5.12 0.39, 13 0 M0 0 C2.77 -0.3, 5.69 -0.11, 13 0 M13 0 C13.06 3.47, 12.56 7.91, 13 12 M13 0 C12.75 3.57, 12.88 7.05, 13 12 M13 12 C9.86 12.54, 6.91 12.63, 0 12 M13 12 C7.91 12.12, 3.16 11.86, 0 12 M0 12 C-0.56 9.81, 0.56 7.46, 0 0 M0 12 C-0.23 8.56, -0.23 4.48, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(241 272) rotate(0 6.5 6)">
+<path d="M-0.59 -0.91 L13.29 -0.87 L12.59 11.45 L-0.51 12.18" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.43 -0.6, 5.66 0.04, 13 0 M0 0 C3.45 -0.14, 7.16 -0.2, 13 0 M13 0 C13.03 4.55, 13.38 7.8, 13 12 M13 0 C13.13 3.2, 12.93 6.32, 13 12 M13 12 C7.56 11.62, 3.15 12.19, 0 12 M13 12 C10.38 12.18, 7.38 12.21, 0 12 M0 12 C0.24 8.12, 0.31 3.42, 0 0 M0 12 C0.03 9.12, 0.07 5.57, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(254 272) rotate(0 6.5 6)">
+<path d="M0.18 0.2 L13.34 -0.01 L13.51 12.71 L-0.71 11.17" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.06 0.41, 4.91 -0.18, 13 0 M0 0 C4.77 -0.11, 9.28 0.22, 13 0 M13 0 C12.87 4.42, 12.89 8.9, 13 12 M13 0 C12.79 2.84, 12.86 6.19, 13 12 M13 12 C7.86 11.99, 4.6 11.76, 0 12 M13 12 C9.6 12.24, 6.41 11.91, 0 12 M0 12 C-0.29 8.83, -0.05 5.38, 0 0 M0 12 C0.16 9.68, 0.26 7.26, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(267 272) rotate(0 6.5 6)">
+<path d="M0.94 -0.69 L13.4 0.85 L12.42 11.97 L-0.91 12.16" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.99 0.13, 5.45 -0.4, 13 0 M0 0 C2.85 -0.08, 5.55 0, 13 0 M13 0 C12.83 3.09, 12.51 5.19, 13 12 M13 0 C13.17 2.47, 12.91 5.46, 13 12 M13 12 C9.46 12.37, 4.74 12.63, 0 12 M13 12 C9.47 12.17, 5.43 12.12, 0 12 M0 12 C0.51 9.53, -0.3 6.14, 0 0 M0 12 C-0.18 7.84, -0.04 3.55, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(280 272) rotate(0 6.5 6)">
+<path d="M-0.3 0.43 L13.46 -0.3 L13.33 11.24 L0.88 11.15" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.62 -0.29, 4.7 0.55, 13 0 M0 0 C4.17 -0.05, 7.68 -0.22, 13 0 M13 0 C12.68 2.97, 13.21 6.29, 13 12 M13 0 C12.94 2.7, 12.96 4.73, 13 12 M13 12 C9.77 11.45, 6.19 12.19, 0 12 M13 12 C8.69 12.22, 4.45 11.82, 0 12 M0 12 C0.1 7.84, -0.55 3.3, 0 0 M0 12 C-0.05 8.39, 0.15 4.65, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(293 272) rotate(0 6.5 6)">
+<path d="M0.47 -0.46 L13.51 0.56 L12.24 12.5 L0.68 12.15" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.25 -0.57, 5.25 0.33, 13 0 M0 0 C4.85 0.11, 9.8 0.33, 13 0 M13 0 C12.52 2.84, 12.71 7.38, 13 12 M13 0 C12.72 4.74, 13 8.81, 13 12 M13 12 C10.07 11.83, 6.33 11.76, 0 12 M13 12 C7.92 12.28, 3.47 12.17, 0 12 M0 12 C-0.42 8.54, 0.29 4.06, 0 0 M0 12 C0.21 8.95, -0.15 5.74, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(306 272) rotate(0 6.5 6)">
+<path d="M-0.77 0.66 L13.57 -0.59 L13.15 11.77 L0.47 11.14" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C3.18 0.31, 5.79 -0.02, 13 0 M0 0 C2.92 0.14, 6.07 0.11, 13 0 M13 0 C12.49 3.91, 13.54 7.28, 13 12 M13 0 C13.1 4.37, 13.05 8.68, 13 12 M13 12 C7.77 12.08, 2.58 12.5, 0 12 M13 12 C10.39 11.69, 7.7 11.86, 0 12 M0 12 C0.37 9.25, 0.04 6.02, 0 0 M0 12 C-0.26 9.51, 0.04 6.83, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(319 272) rotate(0 6.5 6)">
+<path d="M-0.01 -0.23 L13.63 0.27 L12.07 11.03 L0.27 12.13" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.81 0.03, 5.04 -0.24, 13 0 M0 0 C4.25 0.18, 8.19 -0.11, 13 0 M13 0 C13.53 3.79, 13.04 8.37, 13 12 M13 0 C12.88 4.01, 13.1 7.95, 13 12 M13 12 C8.07 12.46, 4.02 12.06, 0 12 M13 12 C9.61 11.75, 6.07 12.21, 0 12 M0 12 C-0.03 7.55, -0.2 1.98, 0 0 M0 12 C0 7.67, 0.34 3.12, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(332 272) rotate(0 6.5 6)">
+<path d="M0.76 0.89 L13.68 -0.87 L12.98 12.29 L0.07 11.12" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.43 -0.26, 5.58 -0.46, 13 0 M0 0 C4.92 0.34, 10.32 -0.21, 13 0 M13 0 C13.37 4.86, 12.54 9.47, 13 12 M13 0 C13.26 3.64, 13.15 7.22, 13 12 M13 12 C8.37 11.54, 4.17 11.63, 0 12 M13 12 C9.48 11.81, 5.09 11.91, 0 12 M0 12 C-0.55 8.26, -0.57 3.94, 0 0 M0 12 C0.13 8.22, -0.07 4.21, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(345 272) rotate(0 6.5 6)">
+<path d="M-0.48 0 L13.74 -0.02 L13.89 11.56 L-0.14 12.12" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.06 -0.67, 4.83 0.49, 13 0 M0 0 C3.65 -0.28, 6.59 0.22, 13 0 M13 0 C13.34 2.33, 13.36 5.76, 13 12 M13 0 C13.04 3.27, 13.2 6.49, 13 12 M13 12 C9.98 11.92, 5.62 12.49, 0 12 M13 12 C8.7 11.87, 4.12 12.26, 0 12 M0 12 C0.24 8.96, 0.39 5.9, 0 0 M0 12 C-0.33 8.78, 0.11 5.3, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(358 272) rotate(0 6.5 6)">
+<path d="M0.28 -0.88 L13.79 0.84 L12.8 12.82 L-0.34 11.11" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.99 0.34, 5.38 0.27, 13 0 M0 0 C4.32 -0.25, 8.71 -0.01, 13 0 M13 0 C13.18 3.41, 12.87 5.66, 13 12 M13 0 C12.82 2.91, 13.24 5.76, 13 12 M13 12 C10.28 12.3, 7.06 12.06, 0 12 M13 12 C7.93 11.93, 3.14 11.95, 0 12 M0 12 C-0.16 9.67, 0.14 6.66, 0 0 M0 12 C-0.08 9.34, -0.18 6.99, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(371 272) rotate(0 6.5 6)">
+<path d="M-0.96 0.23 L13.85 -0.3 L13.72 12.09 L-0.55 12.1" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.62 -0.07, 5.92 -0.08, 13 0 M0 0 C2.4 -0.09, 4.99 -0.1, 13 0 M13 0 C13.15 3.28, 12.49 6.75, 13 12 M13 0 C13.2 2.54, 13.29 5.64, 13 12 M13 12 C10.58 11.38, 7.21 11.63, 0 12 M13 12 C10.4 11.98, 7.36 12.3, 0 12 M0 12 C0.63 7.97, -0.1 3.82, 0 0 M0 12 C0.06 7.49, 0.01 3.28, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(384 272) rotate(0 6.5 6)">
+<path d="M-0.19 -0.66 L13.91 0.55 L12.63 11.35 L-0.75 11.09" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.25 -0.36, 5.17 -0.3, 13 0 M0 0 C3.72 -0.06, 7.11 0.33, 13 0 M13 0 C12.99 4.35, 13.19 7.85, 13 12 M13 0 C12.98 2.18, 13.34 4.91, 13 12 M13 12 C8.28 11.76, 3.45 12.49, 0 12 M13 12 C9.62 12.04, 6.38 12, 0 12 M0 12 C0.11 8.68, -0.47 4.58, 0 0 M0 12 C0.31 8.05, 0.31 4.38, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(397 272) rotate(0 6.5 6)">
+<path d="M0.57 0.46 L13.96 -0.59 L13.54 12.61 L-0.95 12.09" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C3.18 0.66, 5.72 -0.52, 13 0 M0 0 C4.4 -0.03, 9.23 0.1, 13 0 M13 0 C12.84 4.23, 12.69 8.94, 13 12 M13 0 C13.24 4.81, 12.67 8.98, 13 12 M13 12 C8.59 12.14, 4.9 12.06, 0 12 M13 12 C8.84 11.97, 5.41 12.21, 0 12 M0 12 C-0.3 9.38, 0.49 6.53, 0 0 M0 12 C-0.15 8.61, -0.1 5.47, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(410 272) rotate(0 6.5 6)">
+<path d="M-0.67 -0.43 L12.02 0.26 L12.45 11.88 L0.84 11.08" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.81 0.24, 4.96 0.43, 13 0 M0 0 C3.12 0, 5.5 -0.12, 13 0 M13 0 C12.8 2.9, 13.51 5.24, 13 12 M13 0 C13.01 4.44, 12.72 8.25, 13 12 M13 12 C8.89 12.51, 5.04 11.63, 0 12 M13 12 C8.71 12.03, 4.43 11.91, 0 12 M0 12 C0.5 7.69, 0.24 2.49, 0 0 M0 12 C0.1 9.17, 0.2 6.56, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(423 272) rotate(0 6.5 6)">
+<path d="M0.1 0.69 L12.08 -0.88 L13.36 11.14 L0.64 12.07" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.44 -0.04, 5.51 0.21, 13 0 M0 0 C3.79 0.16, 7.63 -0.22, 13 0 M13 0 C12.64 2.77, 13.02 5.13, 13 12 M13 0 C12.79 4.08, 12.76 8.12, 13 12 M13 12 C9.19 11.59, 6.49 12.49, 0 12 M13 12 C7.93 12.09, 2.8 12.26, 0 12 M0 12 C-0.03 8.39, -0.12 4.45, 0 0 M0 12 C0.24 7.32, -0.21 2.85, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(436 272) rotate(0 6.5 6)">
+<path d="M0.86 -0.2 L12.13 -0.02 L12.28 12.4 L0.43 11.06" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.06 -0.45, 4.75 -0.14, 13 0 M0 0 C4.47 0.19, 9.1 0.21, 13 0 M13 0 C12.49 3.85, 12.52 6.23, 13 12 M13 0 C13.17 3.71, 12.81 7.39, 13 12 M13 12 C10.79 11.97, 7.93 12.06, 0 12 M13 12 C10.41 12.15, 7.02 11.95, 0 12 M0 12 C-0.43 9.1, -0.37 5.21, 0 0 M0 12 C-0.11 7.88, 0.09 3.94, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(449 272) rotate(0 6.5 6)">
+<path d="M-0.38 0.92 L12.19 0.83 L13.19 11.67 L0.23 12.05" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.99 0.56, 5.3 -0.36, 13 0 M0 0 C3.19 0.22, 6.02 -0.01, 13 0 M13 0 C12.45 3.72, 13.34 7.32, 13 12 M13 0 C12.95 3.35, 12.86 6.66, 13 12 M13 12 C8.49 12.22, 2.88 11.49, 0 12 M13 12 C9.63 12.21, 6.05 12.3, 0 12 M0 12 C0.37 9.8, 0.59 7.17, 0 0 M0 12 C0.03 8.44, 0.28 5.03, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(462 272) rotate(0 6.5 6)">
+<path d="M0.38 0.03 L12.25 -0.31 L12.1 12.93 L0.03 11.05" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.62 0.28, 5.85 -0.58, 13 0 M0 0 C3.87 -0.27, 8.14 -0.11, 13 0 M13 0 C13.5 3.59, 12.84 8.42, 13 12 M13 0 C12.73 2.98, 12.91 5.94, 13 12 M13 12 C8.8 12.6, 4.32 12.36, 0 12 M13 12 C8.85 12.26, 5.07 12, 0 12 M0 12 C-0.16 8.11, 0.22 3.13, 0 0 M0 12 C0.17 8.99, -0.14 6.72, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(475 272) rotate(0 6.5 6)">
+<path d="M-0.85 -0.85 L12.3 0.55 L13.01 12.2 L-0.18 12.04" stroke="none" stroke-width="0" fill="var(--color-part3)">
+</path>
+<path d="M0 0 C2.25 -0.14, 5.09 0.37, 13 0 M0 0 C5.19 -0.24, 9.62 0.32, 13 0 M13 0 C13.34 4.67, 13.55 9.51, 13 12 M13 0 C13.11 2.61, 12.96 5.81, 13 12 M13 12 C9.1 11.68, 5.77 11.93, 0 12 M13 12 C8.72 12.32, 4.09 11.69, 0 12 M0 12 C-0.56 8.82, -0.02 5.09, 0 0 M0 12 C-0.18 7.15, 0.17 3.01, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g transform="translate(498 273) rotate(0 33.48000000000002 7.5)">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">32 cycles</text>
+</g>
+<g transform="translate(10 302) rotate(0 99.82 8.75)">
+<text x="0" y="12.334" font-family="Virgil, Segoe UI Emoji" font-size="14px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">every lane reads word 5</text>
+</g>
+<g stroke-linecap="round" transform="translate(10 324) rotate(0 256 9)">
+<path d="M-0.56 0.49 L511.47 -0.89 L512.75 17.99 L-0.79 17.02" stroke="none" stroke-width="0" fill="var(--color-part2)">
+</path>
+<path d="M0 0 C104.96 -0.01, 210.27 -0.38, 512 0 M0 0 C201.18 0.22, 402.11 0.1, 512 0 M512 0 C512.17 4.63, 512.74 10.2, 512 18 M512 0 C512.07 6.77, 512.15 12.63, 512 18 M512 18 C319.01 17.74, 125.53 17.99, 0 18 M512 18 C374.68 18.75, 237.01 18.89, 0 18 M0 18 C0.75 12.8, 0.48 7.45, 0 0 M0 18 C-0.38 14.14, 0.36 9.43, 0 0" stroke="currentColor" stroke-width="1.5" fill="none">
+</path>
+</g>
+<g transform="translate(211.55 326.5) rotate(0 61.379999999999995 6.875)">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="#141414" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">one warp, 32 lanes</text>
+</g>
+<g stroke-linecap="round">
+<g transform="translate(18 342) rotate(0 40 16)">
+<path d="M0 0 C17.16 4.64, 32.23 13.77, 80 32 M0 0 C27.76 10.31, 53.12 20.9, 80 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(34 342) rotate(0 32 16)">
+<path d="M0 0 C12.78 8.2, 27.4 13.53, 64 32 M0 0 C13.42 7.48, 26.77 13.19, 64 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(50 342) rotate(0 24 16)">
+<path d="M0 0 C9.13 6.56, 19.13 12.61, 48 32 M0 0 C13.13 9.31, 27.38 18.42, 48 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(66 342) rotate(0 16 16)">
+<path d="M0 0 C7.3 6.24, 13.43 12.39, 32 32 M0 0 C11.56 11.64, 22.42 22.66, 32 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(82 342) rotate(0 8 16)">
+<path d="M0 0 C3.47 5.8, 5.73 14.05, 16 32 M0 0 C3.49 6.82, 7.44 14.36, 16 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(98 342) rotate(0 0 16)">
+<path d="M0 0 C-0.35 7.23, 0.03 13.57, 0 32 M0 0 C0.51 9.18, -0.34 18.63, 0 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(114 342) rotate(0 -8 16)">
+<path d="M0 0 C-4.18 6.69, -5.67 13.14, -16 32 M0 0 C-5.77 11.64, -11.73 24, -16 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(130 342) rotate(0 -16 16)">
+<path d="M0 0 C-6.01 6.34, -13.38 12.89, -32 32 M0 0 C-7.95 7.48, -14.93 15.35, -32 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(146 342) rotate(0 -24 16)">
+<path d="M0 0 C-9.84 5.71, -19.08 12.36, -48 32 M0 0 C-14.64 9.97, -30.14 19.75, -48 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(162 342) rotate(0 -32 16)">
+<path d="M0 0 C-14.2 7.32, -27.29 14.25, -64 32 M0 0 C-25.28 12.8, -49.3 23.89, -64 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(178 342) rotate(0 -40 16)">
+<path d="M0 0 C-14.58 7.14, -32.12 14.27, -80 32 M0 0 C-19.95 7.86, -42.31 16.07, -80 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(194 342) rotate(0 -48 16)">
+<path d="M0 0 C-19.59 5.43, -41.6 12.75, -96 32 M0 0 C-31.73 10.8, -63.53 20.53, -96 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(210 342) rotate(0 -56 16)">
+<path d="M0 0 C-23.97 5.7, -46.44 13.23, -112 32 M0 0 C-23.42 7.53, -44.56 12.38, -112 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(226 342) rotate(0 -64 16)">
+<path d="M0 0 C-28.34 7.8, -51.28 11.52, -128 32 M0 0 C-34.6 8.85, -70.6 19.23, -128 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(242 342) rotate(0 -72 16)">
+<path d="M0 0 C-28.72 5.64, -60.11 13.56, -144 32 M0 0 C-50.09 9.49, -99.24 21.39, -144 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(258 342) rotate(0 -80 16)">
+<path d="M0 0 C-33.09 6.43, -64.95 14.55, -160 32 M0 0 C-33.89 6.47, -68.49 13.5, -160 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(274 342) rotate(0 -88 16)">
+<path d="M0 0 C-37.46 8.08, -73.79 12.4, -176 32 M0 0 C-50.78 10.06, -101.95 18.6, -176 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(290 342) rotate(0 -96 16)">
+<path d="M0 0 C-37.84 9.32, -78.63 13.84, -192 32 M0 0 C-69.98 9.99, -138.02 22.06, -192 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(306 342) rotate(0 -104 16)">
+<path d="M0 0 C-42.27 6.75, -83.7 15.22, -208 32 M0 0 C-47.95 7.26, -97.41 14.48, -208 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(322 342) rotate(0 -112 16)">
+<path d="M0 0 C-46.51 4.36, -92.26 12.94, -224 32 M0 0 C-68.46 10.89, -136.39 19.75, -224 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(338 342) rotate(0 -120 16)">
+<path d="M0 0 C-50.68 9.2, -97.39 14.56, -240 32 M0 0 C-89.58 10.61, -180.02 22.81, -240 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(354 342) rotate(0 -128 16)">
+<path d="M0 0 C-51.58 6.71, -105.82 12.28, -256 32 M0 0 C-63.47 7.85, -127.51 15.32, -256 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(370 342) rotate(0 -136 16)">
+<path d="M0 0 C-55.75 8.42, -111.03 14.17, -272 32 M0 0 C-87.63 10, -173.99 20.73, -272 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(386 342) rotate(0 -144 16)">
+<path d="M0 0 C-60.34 5.97, -119.81 14.91, -288 32 M0 0 C-112.55 13.8, -226.62 26.24, -288 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(402 342) rotate(0 -152 16)">
+<path d="M0 0 C-61.48 6.41, -125.07 12.51, -304 32 M0 0 C-80.94 6.84, -161.21 16.07, -304 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(418 342) rotate(0 -160 16)">
+<path d="M0 0 C-65.56 8.31, -130.43 14.56, -320 32 M0 0 C-107.33 10.64, -215.17 21.6, -320 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(434 342) rotate(0 -168 16)">
+<path d="M0 0 C-69.58 5.81, -138.57 12.21, -336 32 M0 0 C-70.23 8.05, -140.72 14.39, -336 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(450 342) rotate(0 -176 16)">
+<path d="M0 0 C-73.55 7.88, -144.01 14.42, -352 32 M0 0 C-99.39 7.34, -197.53 16.77, -352 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(466 342) rotate(0 -184 16)">
+<path d="M0 0 C-74.99 7.94, -152.01 14.6, -368 32 M0 0 C-129.59 11.14, -258.99 22.38, -368 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(482 342) rotate(0 -192 16)">
+<path d="M0 0 C-78.95 5.48, -157.52 12.26, -384 32 M0 0 C-86.53 8.53, -172.69 15.21, -384 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(498 342) rotate(0 -200 16)">
+<path d="M0 0 C-82.85 7.61, -165.39 14.49, -400 32 M0 0 C-118.21 7.78, -237 16.35, -400 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round">
+<g transform="translate(514 342) rotate(0 -208 16)">
+<path d="M0 0 C-84.54 5.27, -170.98 12.24, -416 32 M0 0 C-153.33 11.55, -307.03 23.12, -416 32" stroke="var(--color-accent)" stroke-width="1" fill="none">
+</path>
+</g>
+</g>
+<mask>
+</mask>
+<g stroke-linecap="round" transform="translate(10 374) rotate(0 8 8)">
+<path d="M0 0 C3.46 0.61, 7.14 -0.61, 16 0 M0 0 C3.52 -0.36, 7.7 -0.04, 16 0 M16 0 C15.8 4.78, 15.21 9.1, 16 16 M16 0 C15.96 5.42, 16.24 10.21, 16 16 M16 16 C12.16 16.39, 7.31 16.48, 0 16 M16 16 C12.1 16.02, 7.73 15.58, 0 16 M0 16 C-0.22 11.35, 0.35 7.46, 0 0 M0 16 C0.36 9.82, 0.08 3.45, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(26 374) rotate(0 8 8)">
+<path d="M0 0 C3 0.1, 6.21 0.56, 16 0 M0 0 C5.15 -0.33, 10.31 -0.32, 16 0 M16 0 C15.59 4.61, 16.15 10.56, 16 16 M16 0 C15.66 4.93, 16.3 9.24, 16 16 M16 16 C12.54 15.26, 9.09 15.95, 0 16 M16 16 C11.14 16.09, 6.53 16.01, 0 16 M0 16 C0.84 12.29, 0.02 8.47, 0 0 M0 16 C-0.26 10.57, 0.33 4.91, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(42 374) rotate(0 8 8)">
+<path d="M0 0 C2.55 -0.25, 6.89 0.29, 16 0 M0 0 C5.98 -0.13, 12.12 0.36, 16 0 M16 0 C15.55 6.04, 15.65 10.42, 16 16 M16 0 C16.17 4.45, 16.36 8.27, 16 16 M16 16 C9.71 15.72, 2.87 15.41, 0 16 M16 16 C10.18 16.17, 5.32 15.64, 0 16 M0 16 C0.14 10.03, -0.47 4.68, 0 0 M0 16 C0.08 11.31, -0.06 6.36, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(58 374) rotate(0 8 8)">
+<path d="M0 0 C3.69 -0.76, 5.96 -0.14, 16 0 M0 0 C4.41 -0.09, 8.34 0.09, 16 0 M16 0 C15.34 5.87, 16.58 11.88, 16 16 M16 0 C15.71 3.96, 16.27 8.1, 16 16 M16 16 C10.08 16.19, 4.65 16.48, 0 16 M16 16 C10.03 16.24, 4.12 16.06, 0 16 M0 16 C-0.4 10.97, 0.8 5.69, 0 0 M0 16 C0.26 12.05, 0.18 7.82, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(74 374) rotate(0 8 8)">
+<path d="M0 0 C3.23 0.49, 6.63 -0.42, 16 0 M0 0 C5.24 -0.06, 10.15 -0.19, 16 0 M16 0 C15.29 4.1, 16.08 6.94, 16 16 M16 0 C16.22 3.47, 16.33 7.12, 16 16 M16 16 C10.45 16.66, 6.43 15.94, 0 16 M16 16 C12.27 16.31, 8.52 15.69, 0 16 M0 16 C0.66 11.91, 0.48 8.31, 0 0 M0 16 C-0.36 9.6, -0.37 3.67, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(90 374) rotate(0 8 8)">
+<path d="M-0.81 -0.05 L15.68 0.51 L16.32 15.28 L-0.75 15.72" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C2.77 0.14, 7.3 -0.69, 16 0 M0 0 C2.87 0.14, 6.36 -0.3, 16 0 M16 0 C16.68 3.94, 15.42 8.4, 16 16 M16 0 C15.93 6.18, 15.6 12.55, 16 16 M16 16 C10.82 15.36, 6.61 15.25, 0 16 M16 16 C12.11 16.38, 7.32 16.12, 0 16 M0 16 C-0.04 9.65, -0.01 2.92, 0 0 M0 16 C-0.02 10.34, 0.04 5.13, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(106 374) rotate(0 8 8)">
+<path d="M0 0 C3.92 -0.37, 6.37 0.48, 16 0 M0 0 C4.5 0.18, 8.97 0.22, 16 0 M16 0 C16.47 5.37, 16.35 9.86, 16 16 M16 0 C15.63 5.69, 15.66 11.58, 16 16 M16 16 C12.8 15.83, 8.38 16.32, 0 16 M16 16 C11.15 16.45, 6.11 15.74, 0 16 M0 16 C-0.58 10.59, -0.34 5.53, 0 0 M0 16 C0.16 11.08, 0.28 6.58, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(122 374) rotate(0 8 8)">
+<path d="M0 0 C3.46 -0.72, 7.05 0.21, 16 0 M0 0 C5.33 0.22, 10.79 -0.05, 16 0 M16 0 C16.43 5.2, 15.85 9.72, 16 16 M16 0 C16.14 5.21, 15.72 10.61, 16 16 M16 16 C9.97 16.3, 3.76 15.78, 0 16 M16 16 C10.19 15.57, 4.91 16.01, 0 16 M0 16 C0.48 11.53, -0.66 6.54, 0 0 M0 16 C-0.3 11.83, -0.11 8.04, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(138 374) rotate(0 8 8)">
+<path d="M0 0 C3 0.37, 6.12 -0.22, 16 0 M0 0 C3.76 0.41, 7 -0.17, 16 0 M16 0 C16.22 5.03, 16.79 11.18, 16 16 M16 0 C15.84 4.72, 15.79 10.44, 16 16 M16 16 C10.34 16.76, 3.94 15.25, 0 16 M16 16 C10.04 15.64, 3.71 15.64, 0 16 M0 16 C-0.22 12.47, 0.45 9.16, 0 0 M0 16 C-0.12 12.57, 0.14 9.49, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(154 374) rotate(0 8 8)">
+<path d="M0 0 C2.55 0.02, 6.79 -0.49, 16 0 M0 0 C4.59 -0.35, 9.61 0.36, 16 0 M16 0 C16.01 6.46, 16.12 12.64, 16 16 M16 0 C16.35 5.03, 15.85 9.47, 16 16 M16 16 C10.71 15.63, 5.72 16.32, 0 16 M16 16 C12.28 15.71, 8.9 16.07, 0 16 M0 16 C-0.76 10.21, 0.12 3.77, 0 0 M0 16 C0.22 10.11, -0.25 4.55, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(170 374) rotate(0 8 8)">
+<path d="M0 0 C3.69 -0.33, 5.86 0.84, 16 0 M0 0 C5.42 -0.31, 11.42 0.08, 16 0 M16 0 C15.96 3.09, 15.62 7.7, 16 16 M16 0 C16.05 4.54, 15.92 8.5, 16 16 M16 16 C11.08 16.1, 7.5 15.78, 0 16 M16 16 C11.32 15.78, 7.7 15.69, 0 16 M0 16 C0.3 11.15, -0.2 6.38, 0 0 M0 16 C-0.4 10.85, -0.01 6, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(186 374) rotate(0 8 8)">
+<path d="M0 0 C3.23 0.76, 6.54 0.41, 16 0 M0 0 C3.85 -0.28, 7.64 -0.2, 16 0 M16 0 C15.76 4.52, 16.56 9.16, 16 16 M16 0 C15.76 4.05, 15.98 7.53, 16 16 M16 16 C11.46 16.56, 7.68 15.25, 0 16 M16 16 C11.16 15.85, 6.5 16.12, 0 16 M0 16 C-0.4 12.09, -0.69 8.99, 0 0 M0 16 C-0.06 11.6, 0.4 7.46, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(202 374) rotate(0 8 8)">
+<path d="M0 0 C2.78 0.41, 7.21 0.14, 16 0 M0 0 C4.68 -0.08, 9.45 -0.31, 16 0 M16 0 C15.55 4.35, 15.89 9.02, 16 16 M16 0 C16.26 3.56, 16.04 7.35, 16 16 M16 16 C13.43 15.43, 9.46 16.31, 0 16 M16 16 C10.21 15.93, 4.5 15.75, 0 16 M0 16 C0.66 9.83, 0.58 3.61, 0 0 M0 16 C0.12 12.34, -0.15 9.71, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(218 374) rotate(0 8 8)">
+<path d="M0 0 C3.92 -0.1, 6.28 -0.29, 16 0 M0 0 C6.31 -0.04, 12.06 0.21, 16 0 M16 0 C15.5 5.79, 15.39 10.48, 16 16 M16 0 C15.97 6.28, 16.11 12.78, 16 16 M16 16 C10.6 15.9, 4.84 15.78, 0 16 M16 16 C10.05 16, 3.29 16.17, 0 16 M0 16 C0.12 10.77, 0.25 6.22, 0 0 M0 16 C0.46 9.88, 0.25 4.77, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(234 374) rotate(0 8 8)">
+<path d="M0 0 C3.46 -0.46, 6.95 -0.56, 16 0 M0 0 C3.94 0, 8.27 -0.06, 16 0 M16 0 C15.29 5.62, 16.32 11.94, 16 16 M16 0 C16.31 5.79, 16.01 11.81, 16 16 M16 16 C10.97 16.36, 5.01 16.85, 0 16 M16 16 C12.29 16.07, 8.49 15.8, 0 16 M0 16 C-0.57 11.71, -0.23 7.23, 0 0 M0 16 C-0.16 11.43, -0.3 6.22, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(250 374) rotate(0 8 8)">
+<path d="M0 0 C3 0.79, 6.02 0.76, 16 0 M0 0 C4.77 0.19, 10.09 -0.18, 16 0 M16 0 C16.84 3.85, 15.82 7, 16 16 M16 0 C16.02 5.3, 16.08 10.84, 16 16 M16 16 C11.34 16.83, 6.79 16.31, 0 16 M16 16 C11.33 16.14, 7.29 16.23, 0 16 M0 16 C0.49 12.65, -0.56 9.84, 0 0 M0 16 C0.02 12.17, -0.05 7.68, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(266 374) rotate(0 8 8)">
+<path d="M0 0 C2.55 0.28, 6.7 0.33, 16 0 M0 0 C6.4 0.23, 12.7 0.35, 16 0 M16 0 C16.64 3.68, 16.76 6.86, 16 16 M16 0 C15.72 4.81, 16.14 9.87, 16 16 M16 16 C11.72 15.54, 8.57 15.62, 0 16 M16 16 C11.17 16.21, 6.08 15.85, 0 16 M0 16 C-0.05 10.4, 0.71 4.46, 0 0 M0 16 C0.36 12.91, 0.36 9.13, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(282 374) rotate(0 8 8)">
+<path d="M0 0 C3.69 -0.07, 7.37 0.06, 16 0 M0 0 C4.03 0.27, 8.11 0.07, 16 0 M16 0 C16.43 5.11, 16.09 8.32, 16 16 M16 0 C16.23 5.12, 16.21 9.7, 16 16 M16 16 C12.09 16, 8.75 16.69, 0 16 M16 16 C10.22 16.13, 4.88 16.12, 0 16 M0 16 C-0.75 11.34, 0.23 7.07, 0 0 M0 16 C-0.26 10.46, -0.2 4.19, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(298 374) rotate(0 8 8)">
+<path d="M0 0 C3.23 -0.58, 6.44 -0.37, 16 0 M0 0 C5.66 0.46, 10.72 -0.04, 16 0 M16 0 C16.38 4.94, 15.59 9.78, 16 16 M16 0 C15.93 4.64, 16.27 8.73, 16 16 M16 16 C9.26 16.47, 4.13 16.15, 0 16 M16 16 C10.06 16.2, 3.68 15.75, 0 16 M0 16 C0.31 12.28, -0.1 8.08, 0 0 M0 16 C0.08 11.2, 0.21 5.64, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(314 374) rotate(0 8 8)">
+<path d="M0 0 C2.78 0.67, 7.11 -0.64, 16 0 M0 0 C3.29 -0.3, 6.94 -0.32, 16 0 M16 0 C16.17 4.77, 16.53 11.24, 16 16 M16 0 C15.64 4.15, 16.33 7.76, 16 16 M16 16 C11.23 15.34, 5.91 15.62, 0 16 M16 16 C12.3 16.27, 8.08 16.18, 0 16 M0 16 C-0.23 10.02, -0.43 4.29, 0 0 M0 16 C0.26 11.94, -0.34 7.1, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(330 374) rotate(0 8 8)">
+<path d="M0 0 C3.92 0.32, 6.19 0.69, 16 0 M0 0 C4.12 -0.26, 8.75 0.2, 16 0 M16 0 C15.96 6.2, 15.86 12.7, 16 16 M16 0 C16.14 3.66, 16.4 6.79, 16 16 M16 16 C11.6 15.8, 6.09 16.68, 0 16 M16 16 C11.34 16.34, 6.87 15.8, 0 16 M0 16 C0.67 10.96, 0.68 6.91, 0 0 M0 16 C-0.2 12.68, 0.06 9.35, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(346 374) rotate(0 8 8)">
+<path d="M0 0 C3.46 -0.19, 6.86 0.26, 16 0 M0 0 C5.75 -0.22, 11.36 -0.07, 16 0 M16 0 C15.92 2.84, 15.36 6.16, 16 16 M16 0 C15.85 6.37, 15.66 13.01, 16 16 M16 16 C11.98 16.27, 7.87 16.15, 0 16 M16 16 C11.19 15.61, 5.67 16.23, 0 16 M0 16 C0.13 11.9, 0.36 7.92, 0 0 M0 16 C-0.02 10.23, 0.31 4.41, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(362 374) rotate(0 8 8)">
+<path d="M0 0 C3.01 -0.54, 5.93 -0.01, 16 0 M0 0 C3.38 -0.03, 7.57 -0.19, 16 0 M16 0 C15.71 4.27, 16.3 7.62, 16 16 M16 0 C16.35 5.88, 15.73 12.04, 16 16 M16 16 C12.35 16.74, 9.64 15.62, 0 16 M16 16 C10.23 15.69, 4.47 15.86, 0 16 M0 16 C-0.41 9.64, 0.03 4.13, 0 0 M0 16 C0.33 10.97, -0.08 5.86, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(378 374) rotate(0 8 8)">
+<path d="M0 0 C2.55 0.55, 6.6 -0.44, 16 0 M0 0 C5.01 0.01, 9.39 0.34, 16 0 M16 0 C15.66 4.1, 15.79 9.08, 16 16 M16 0 C16.06 5.39, 15.79 11.07, 16 16 M16 16 C9.52 15.6, 3.42 16.68, 0 16 M16 16 C12.47 15.76, 9.66 16.28, 0 16 M0 16 C0.49 10.58, -0.46 5.15, 0 0 M0 16 C-0.29 11.71, 0.16 7.32, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(394 374) rotate(0 8 8)">
+<path d="M0 0 C3.69 0.2, 7.27 -0.71, 16 0 M0 0 C5.84 0.05, 12 0.06, 16 0 M16 0 C15.45 5.53, 16.73 10.54, 16 16 M16 0 C15.76 4.91, 15.85 10.1, 16 16 M16 16 C9.89 16.07, 5.2 16.15, 0 16 M16 16 C12.31 15.83, 8.46 15.91, 0 16 M0 16 C-0.05 11.52, -0.78 7.76, 0 0 M0 16 C-0.11 12.46, -0.39 8.77, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(410 374) rotate(0 8 8)">
+<path d="M0 0 C3.23 -0.15, 6.35 0.62, 16 0 M0 0 C3.47 0.24, 7.41 -0.05, 16 0 M16 0 C15.25 5.36, 16.06 12, 16 16 M16 0 C16.27 4.42, 15.92 9.13, 16 16 M16 16 C11.86 16.54, 5.38 15.61, 0 16 M16 16 C11.36 15.9, 7.26 16.34, 0 16 M0 16 C-0.59 12.46, 0.49 8.77, 0 0 M0 16 C0.23 10, 0.02 3.83, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(426 374) rotate(0 8 8)">
+<path d="M0 0 C2.78 -0.66, 7.02 0.18, 16 0 M0 0 C5.1 0.28, 10.02 -0.33, 16 0 M16 0 C16.8 6.79, 15.56 11.86, 16 16 M16 0 C15.82 4.73, 15.82 8.96, 16 16 M16 16 C12.24 15.4, 7.16 16.68, 0 16 M16 16 C11.2 15.97, 6.06 15.96, 0 16 M0 16 C0.47 10.2, 0.16 4.98, 0 0 M0 16 C-0.39 10.74, 0.27 5.28, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(442 374) rotate(0 8 8)">
+<path d="M0 0 C3.92 0.59, 6.09 -0.09, 16 0 M0 0 C5.94 0.32, 12.64 0.2, 16 0 M16 0 C16.59 3.42, 16.5 6.92, 16 16 M16 0 C16.32 4.24, 15.89 7.99, 16 16 M16 16 C12.61 15.87, 8.94 16.15, 0 16 M16 16 C10.24 15.89, 4.05 16.23, 0 16 M0 16 C-0.22 11.14, -0.32 6, 0 0 M0 16 C-0.05 11.48, -0.13 6.74, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(458 374) rotate(0 8 8)">
+<path d="M0 0 C3.46 0.08, 6.76 -0.52, 16 0 M0 0 C4.37 -0.28, 8.05 0.08, 16 0 M16 0 C16.38 4.85, 15.83 8.38, 16 16 M16 0 C16.03 3.75, 15.95 7.02, 16 16 M16 16 C9.78 16.18, 2.72 15.45, 0 16 M16 16 C12.48 15.96, 9.25 15.86, 0 16 M0 16 C-0.76 12.08, -0.65 8.61, 0 0 M0 16 C0.13 12.23, 0.12 8.19, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(474 374) rotate(0 8 8)">
+<path d="M0 0 C3.01 -0.28, 5.84 -0.79, 16 0 M0 0 C5.2 -0.25, 10.66 -0.2, 16 0 M16 0 C16.33 4.69, 15.33 9.84, 16 16 M16 0 C15.73 6.47, 16.01 12.44, 16 16 M16 16 C10.15 16.64, 4.5 16.52, 0 16 M16 16 C12.32 16.03, 8.05 16.29, 0 16 M0 16 C0.3 9.82, 0.62 4.82, 0 0 M0 16 C-0.33 9.77, -0.27 4.05, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(490 374) rotate(0 8 8)">
+<path d="M0 0 C2.55 -0.63, 6.51 0.54, 16 0 M0 0 C2.83 -0.21, 6.07 0.33, 16 0 M16 0 C16.13 4.52, 16.27 11.3, 16 16 M16 0 C16.24 5.98, 16.08 12.27, 16 16 M16 16 C10.52 15.51, 6.27 15.99, 0 16 M16 16 C11.37 16.1, 6.84 15.91, 0 16 M0 16 C-0.4 10.76, 0.13 5.83, 0 0 M0 16 C-0.15 10.51, -0.03 5.5, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g stroke-linecap="round" transform="translate(506 374) rotate(0 8 8)">
+<path d="M0 0 C3.69 0.46, 7.18 0.11, 16 0 M0 0 C4.46 -0.17, 8.69 0.05, 16 0 M16 0 C15.92 5.95, 15.6 11.16, 16 16 M16 0 C15.94 5.49, 16.14 11.3, 16 16 M16 16 C10.9 15.98, 6.45 15.45, 0 16 M16 16 C10.41 16.17, 5.64 16.34, 0 16 M0 16 C0.66 11.7, -0.19 8.45, 0 0 M0 16 C0.19 11.26, 0.38 6.96, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g transform="translate(10 398) rotate(0 200.88 7.5)">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">one address in bank 5: read once, sent to all 32 lanes</text>
+</g>
+<g transform="translate(10 420) rotate(0 22.32 7.5)">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">cycles</text>
+</g>
+<g stroke-linecap="round" transform="translate(72 418) rotate(0 6.5 6)">
+<path d="M-0.69 0.27 L12.32 -0.66 L13.77 11.93 L-0.67 12.5" stroke="none" stroke-width="0" fill="var(--color-part1)">
+</path>
+<path d="M0 0 C3.19 -0.61, 4.87 0.6, 13 0 M0 0 C3.69 0.08, 7.57 0.15, 13 0 M13 0 C12.71 2.88, 12.65 6.86, 13 12 M13 0 C12.89 3.02, 13.25 6.89, 13 12 M13 12 C8.46 11.82, 3.08 11.55, 0 12 M13 12 C10.02 12.32, 6.2 12.02, 0 12 M0 12 C0.36 8.49, 0.2 5.01, 0 0 M0 12 C0.07 7.71, -0.24 3.69, 0 0" stroke="currentColor" stroke-width="1" fill="none">
+</path>
+</g>
+<g transform="translate(95 419) rotate(0 26.039999999999992 7.5)">
+<text x="0" y="10.572" font-family="Virgil, Segoe UI Emoji" font-size="12px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">1 cycle</text>
+</g>
+<g transform="translate(10 448) rotate(0 208.01 6.875)">
+<text x="0" y="9.690999999999999" font-family="Virgil, Segoe UI Emoji" font-size="11px" fill="currentColor" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">in every panel the banks run 0 on the left to 31 on the right</text>
+</g>
+</svg>
+  The three outcomes of one shared-memory instruction. Green is served in a single cycle, pink is
+  serialised. The middle panel is the warp walking down a column of a 32-wide tile, and it pays 32
+  cycles for the same 32 numbers the top panel gets in one.
+</Figure>
+
+Nothing in the instruction says which of the three you got, and no compiler warning appears. The
+fix is to move the numbers. Padding a 32-wide tile to 33 floats a row shifts every row along by one
+bank, so a column walks the doors instead of hammering one, at the price of one wasted float per
+row. Lecture 26 pads. Lecture 26.5 does it without the waste, with a permutation of the addresses
+called swizzling that clears the rows and the columns at once.
+
 ## Thirty-two threads, one transaction
 
 One more rule, and it is the one the chapter's single sentence is about.
@@ -1457,7 +3554,7 @@ Thirty-two lanes reading 32 floats that are far apart touch 32 separate pieces, 
 moves $32 \times 32 = 1024$ bytes to deliver the 128 that were asked for. Same instruction, same
 count of useful numbers, eight times the traffic.
 
-<Figure n="5">
+<Figure n="7">
   <svg slot="drawing" viewBox="0 0 666.59 275" width="667" role="img" aria-label="Two panels. On the left thirty two lanes point into four green thirty two byte segments. On the right thirty two lanes point into separate pink segments spread apart, with one of them enlarged below to show that only its first eighth held a wanted number." style="max-width:100%;height:auto;min-width:560px">
 <defs>
 </defs>
@@ -2225,7 +4322,7 @@ Every cycle a scheduler looks at the warps living on its partition and issues an
 one whose operands are ready. A warp stalled on memory is not chosen that cycle. If some
 other warp is ready, the arithmetic units never notice that anybody was waiting.
 
-<Figure n="6">
+<Figure n="8">
   <svg slot="drawing" viewBox="0 0 570.93 269" width="571" role="img" aria-label="Four warp timelines over one time axis. Each is mostly hollow waiting with a short green computing bar, offset so that at every moment some warp is computing, and a cyan strip below records the arithmetic units busy throughout." style="max-width:100%;height:auto;min-width:540px">
 <defs>
 </defs>
@@ -2377,7 +4474,7 @@ that ceiling a kernel reaches is called its occupancy. A block asks the multipro
 slots, for registers and for shared memory, and the multiprocessor keeps accepting blocks until
 one of those three runs out.
 
-<Figure n="7">
+<Figure n="9">
   <svg slot="drawing" viewBox="0 0 519.73 295" width="520" role="img" aria-label="Three vertical budget bars for one multiprocessor: warp slots, registers and shared memory. A yellow block fills 32 of the 48 warp slots and 37888 of the 65536 registers, and a hatched pink block reaching above the register bar shows that a second block would overflow it." style="max-width:100%;height:auto;min-width:500px">
 <defs>
 </defs>
@@ -2521,7 +4618,7 @@ are written in, and the GPU MODE reference kernels for problems people compete o
      the 48 warp slots?
   4. Rewrite the guard `if (i < n)` as a loop so that one launch of a fixed 1024 blocks handles any
      $n$. What stride does the loop step by, and why is that stride the coalesced one?
-  5. Figure 5 shows a factor of eight. Redo the count for a warp reading `double` values. Does the
+  5. Figure 7 shows a factor of eight. Redo the count for a warp reading `double` values. Does the
      coalesced case still need four transactions, and is the scattered case still eight times
      worse?
   6. Redraw Figure 1 from memory, labels included. The drawing is the test.

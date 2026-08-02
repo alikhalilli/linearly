@@ -3377,7 +3377,7 @@ Volta gave the matrix multiply its own instruction, executed by a whole warp. Am
 added the Tensor Memory Accelerator and warpgroup MMA: Colfax Research's TMA tutorial states
 that "for a TMA copy, only one thread will be responsible for issuing the TMA operation", and
 their WGMMA tutorial gives the warpgroup as 128 contiguous threads with operand $B$ always in
-shared memory.
+shared memory. Lecture 26.5 takes those two apart and builds the pipeline they make possible.
 
 Blackwell continues it. In Colfax Research's tutorial on writing GEMM kernels with Tensor
 Memory, Tensor Memory is 256KB per SM organised as 512 columns by 128 lanes of 32-bit cells, the
