@@ -43,7 +43,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":0}
   },
   {
    "id": "e1118",
@@ -85,7 +86,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":3}
   },
   {
    "id": "e1119",
@@ -127,7 +129,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":3}
   },
   {
    "id": "e1120",
@@ -154,7 +157,8 @@
    "boundElements": null,
    "updated": 1753990000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":5}
   },
   {
    "id": "e1121",
@@ -220,7 +224,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":1}
   },
   {
    "id": "e1122",
@@ -286,7 +291,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":4}
   },
   {
    "id": "e1123",
@@ -321,7 +327,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "b = (1, 1, \u22122)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e1124",
@@ -356,7 +363,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "b = (1, 2, 3)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3,"note":"same ring, climbs that do not cancel"}
   },
   {
    "id": "e1125",
@@ -391,7 +399,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "+1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e1126",
@@ -426,7 +435,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "+1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e1127",
@@ -461,7 +471,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u22122",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e1128",
@@ -496,7 +507,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "+1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   },
   {
    "id": "e1129",
@@ -531,7 +543,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "+2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   },
   {
    "id": "e1130",
@@ -566,7 +579,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "+3",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   },
   {
    "id": "e1131",
@@ -601,7 +615,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "city 3",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e1132",
@@ -636,7 +651,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "city 1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e1133",
@@ -671,7 +687,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "city 2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e1134",
@@ -706,7 +723,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "city 3",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e1135",
@@ -741,7 +759,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "city 3",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e1136",
@@ -776,7 +795,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "city 1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e1137",
@@ -811,7 +831,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "city 2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e1138",
@@ -846,7 +867,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "city 3",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e1139",
@@ -881,7 +903,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the climbs cancel: altitudes (1, 2, 0)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "e1140",
@@ -916,7 +939,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the walk ends 6 meters too high",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":5}
   },
   {
    "id": "e1141",
@@ -951,7 +975,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "6 m",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":5}
   }
  ],
  "appState": {

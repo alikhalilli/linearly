@@ -231,7 +231,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":0}
   },
   {
    "id": "e465",
@@ -273,7 +274,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":0}
   },
   {
    "id": "e466",
@@ -315,7 +317,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":2}
   },
   {
    "id": "e467",
@@ -357,7 +360,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":4}
   },
   {
    "id": "e468",
@@ -399,7 +403,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":1}
   },
   {
    "id": "e469",
@@ -441,7 +446,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":3}
   },
   {
    "id": "e470",
@@ -483,7 +489,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":5}
   },
   {
    "id": "e471",
@@ -510,7 +517,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e472",
@@ -537,7 +545,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e473",
@@ -564,7 +573,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":5}
   },
   {
    "id": "e474",
@@ -599,7 +609,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "x\u2080 = \u22124",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e475",
@@ -634,7 +645,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "x\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e476",
@@ -669,7 +681,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "x\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":5}
   },
   {
    "id": "e477",
@@ -704,7 +717,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the root, \u22123.1517194",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":5}
   },
   {
    "id": "e478",
@@ -739,7 +753,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "tangent at x\u2080",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2,"note":"the tangent stands in for the curve"}
   },
   {
    "id": "e479",
@@ -774,7 +789,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "f(x) = 5x\u00b3 \u2212 7x\u00b2 \u2212 40x + 100",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   }
  ],
  "appState": {

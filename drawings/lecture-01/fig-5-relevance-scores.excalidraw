@@ -43,7 +43,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":0}
   },
   {
    "id": "r502",
@@ -85,7 +86,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":2}
   },
   {
    "id": "r503",
@@ -127,7 +129,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":2}
   },
   {
    "id": "r504",
@@ -169,7 +172,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":3}
   },
   {
    "id": "r505",
@@ -211,7 +215,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":4}
   },
   {
    "id": "r506",
@@ -257,7 +262,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":2}
   },
   {
    "id": "r507",
@@ -299,7 +305,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":3}
   },
   {
    "id": "r508",
@@ -341,7 +348,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":4}
   },
   {
    "id": "r509",
@@ -383,7 +391,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":1}
   },
   {
    "id": "r510",
@@ -425,7 +434,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":3}
   },
   {
    "id": "r511",
@@ -467,7 +477,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":4}
   },
   {
    "id": "r512",
@@ -502,7 +513,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "query",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "r513",
@@ -537,7 +549,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u2016q\u2016 = 4",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "r514",
@@ -572,7 +585,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "doc A",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "r515",
@@ -607,7 +621,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "score 12",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "r516",
@@ -642,7 +657,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "doc B",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "r517",
@@ -677,7 +693,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "score 8",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "r518",
@@ -712,7 +729,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "doc C",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   },
   {
    "id": "r519",
@@ -747,7 +765,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "score 4",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   },
   {
    "id": "r520",
@@ -782,7 +801,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "shadow of doc A = 3",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "r521",
@@ -817,7 +837,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "longer than doc A",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":5}
   },
   {
    "id": "r522",
@@ -852,7 +873,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "and still loses",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":5}
   }
  ],
  "appState": {

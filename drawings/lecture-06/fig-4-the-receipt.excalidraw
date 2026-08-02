@@ -28,7 +28,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e2067",
@@ -55,7 +56,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e2068",
@@ -82,7 +84,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":2}
   },
   {
    "id": "e2069",
@@ -132,7 +135,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":3}
   },
   {
    "id": "e2070",
@@ -182,7 +186,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":3}
   },
   {
    "id": "e2071",
@@ -217,7 +222,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e2072",
@@ -252,7 +258,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e2073",
@@ -287,7 +294,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e2074",
@@ -322,7 +330,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e2075",
@@ -357,7 +366,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e2076",
@@ -392,7 +402,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e2077",
@@ -427,7 +438,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u22121",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e2078",
@@ -462,7 +474,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e2079",
@@ -497,7 +510,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e2080",
@@ -524,7 +538,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":4}
   },
   {
    "id": "e2081",
@@ -551,7 +566,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":4}
   },
   {
    "id": "e2082",
@@ -578,7 +594,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":4}
   },
   {
    "id": "e2083",
@@ -613,7 +630,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "row 2 \u2190 row 2 \u2212",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e2084",
@@ -648,7 +666,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "row 3 \u2190 row 3 \u2212",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e2085",
@@ -683,7 +702,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "row 3 \u2190 row 3 \u2212",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "e2086",
@@ -718,7 +738,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e2087",
@@ -753,7 +774,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u22121",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e2088",
@@ -788,7 +810,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "e2089",
@@ -823,7 +846,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u00d7 row 1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e2090",
@@ -858,7 +882,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u00d7 row 1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e2091",
@@ -893,7 +918,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u00d7 row 2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "e2092",
@@ -928,7 +954,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "L",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e2093",
@@ -963,7 +990,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "same three numbers, same three places",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   }
  ],
  "appState": {

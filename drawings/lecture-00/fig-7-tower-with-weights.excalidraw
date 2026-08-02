@@ -28,7 +28,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e564",
@@ -63,7 +64,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the line you write",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e565",
@@ -90,7 +92,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":2}
   },
   {
    "id": "e566",
@@ -117,7 +120,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":2}
   },
   {
    "id": "e567",
@@ -152,7 +156,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the weights",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "e568",
@@ -179,7 +184,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e569",
@@ -214,7 +220,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "Python",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e570",
@@ -241,7 +248,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e571",
@@ -276,7 +284,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "machine code",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e572",
@@ -303,7 +312,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e573",
@@ -338,7 +348,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the instruction set",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e574",
@@ -365,7 +376,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e575",
@@ -400,7 +412,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "logic gates",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e576",
@@ -427,7 +440,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e577",
@@ -462,7 +476,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "transistors",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e578",
@@ -489,7 +504,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e579",
@@ -524,7 +540,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "electrons in silicon",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e580",
@@ -566,7 +583,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":2}
   },
   {
    "id": "e581",
@@ -616,7 +634,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":1}
   },
   {
    "id": "e582",
@@ -666,7 +685,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":1}
   },
   {
    "id": "e583",
@@ -701,7 +721,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "nobody wrote",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "e584",
@@ -736,7 +757,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "these numbers",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2,"note":"this floor arrived by search"}
   },
   {
    "id": "e585",
@@ -771,7 +793,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "software",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e586",
@@ -806,7 +829,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "hardware",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   }
  ],
  "appState": {

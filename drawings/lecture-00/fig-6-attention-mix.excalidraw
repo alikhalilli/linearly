@@ -29,7 +29,8 @@
    "updated": 1785573256251,
    "link": null,
    "locked": false,
-   "index": "c1XN"
+   "index": "c1XN",
+   "customData": {"seq":0}
   },
   {
    "id": "e541",
@@ -57,7 +58,8 @@
    "updated": 1785573256251,
    "link": null,
    "locked": false,
-   "index": "c1XO"
+   "index": "c1XO",
+   "customData": {"seq":0}
   },
   {
    "id": "e542",
@@ -85,7 +87,8 @@
    "updated": 1785573256251,
    "link": null,
    "locked": false,
-   "index": "c1XP"
+   "index": "c1XP",
+   "customData": {"seq":0}
   },
   {
    "id": "e543",
@@ -129,7 +132,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1XQ",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e544",
@@ -173,7 +177,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1XR",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e545",
@@ -217,7 +222,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1XS",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e546",
@@ -260,7 +266,8 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c1XT"
+   "index": "c1XT",
+   "customData": {"seq":2}
   },
   {
    "id": "e547",
@@ -303,7 +310,8 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c1XU"
+   "index": "c1XU",
+   "customData": {"seq":2}
   },
   {
    "id": "e548",
@@ -346,7 +354,8 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c1XV"
+   "index": "c1XV",
+   "customData": {"seq":2}
   },
   {
    "id": "e549",
@@ -398,7 +407,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1XW",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3,"note":"every blend lands inside this triangle"}
   },
   {
    "id": "e550",
@@ -442,7 +452,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1XX",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":4}
   },
   {
    "id": "e551",
@@ -470,7 +481,8 @@
    "updated": 1785573250444,
    "link": null,
    "locked": false,
-   "index": "c1XY"
+   "index": "c1XY",
+   "customData": {"seq":4}
   },
   {
    "id": "e552",
@@ -507,7 +519,8 @@
    "originalText": "score 3",
    "lineHeight": 1.25,
    "index": "c1XZ",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "e553",
@@ -544,7 +557,8 @@
    "originalText": "score 1",
    "lineHeight": 1.25,
    "index": "c1Xa",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "e554",
@@ -581,7 +595,8 @@
    "originalText": "score 0",
    "lineHeight": 1.25,
    "index": "c1Xb",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "e555",
@@ -618,7 +633,8 @@
    "originalText": "0.8438",
    "lineHeight": 1.25,
    "index": "c1Xc",
-   "autoResize": false
+   "autoResize": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e556",
@@ -655,7 +671,8 @@
    "originalText": "0.1142",
    "lineHeight": 1.25,
    "index": "c1Xd",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "e557",
@@ -692,7 +709,8 @@
    "originalText": "0.0420",
    "lineHeight": 1.25,
    "index": "c1Xe",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "e558",
@@ -729,7 +747,8 @@
    "originalText": "softmax turns scores into weights",
    "lineHeight": 1.25,
    "index": "c1Xf",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "e559",
@@ -766,7 +785,8 @@
    "originalText": "v\u2081",
    "lineHeight": 1.25,
    "index": "c1Xg",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "e560",
@@ -803,7 +823,8 @@
    "originalText": "v\u2082",
    "lineHeight": 1.25,
    "index": "c1Xh",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "e561",
@@ -840,7 +861,8 @@
    "originalText": "v\u2083",
    "lineHeight": 1.25,
    "index": "c1Xi",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "e562",
@@ -877,7 +899,8 @@
    "originalText": "the output",
    "lineHeight": 1.25,
    "index": "c1Xj",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":4}
   }
  ],
  "appState": {

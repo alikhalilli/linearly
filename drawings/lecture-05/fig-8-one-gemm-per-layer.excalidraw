@@ -28,7 +28,8 @@
    "boundElements": null,
    "updated": 1754060000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":2}
   },
   {
    "id": "e1053",
@@ -55,7 +56,8 @@
    "boundElements": null,
    "updated": 1754060000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":2,"note":"the shared 784 is the yellow edge"}
   },
   {
    "id": "e1054",
@@ -82,7 +84,8 @@
    "boundElements": null,
    "updated": 1754060000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e1055",
@@ -109,7 +112,8 @@
    "boundElements": null,
    "updated": 1754060000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e1056",
@@ -136,7 +140,8 @@
    "boundElements": null,
    "updated": 1754060000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e1057",
@@ -178,7 +183,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":3}
   },
   {
    "id": "e1058",
@@ -220,7 +226,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":3}
   },
   {
    "id": "e1059",
@@ -255,7 +262,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "X, a batch of 32 images",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e1060",
@@ -290,7 +298,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "W, one layer",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e1061",
@@ -325,7 +334,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "Y, what the layer answers",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e1062",
@@ -360,7 +370,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "32",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e1063",
@@ -395,7 +406,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "784",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e1064",
@@ -430,7 +442,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "784",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e1065",
@@ -465,7 +478,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "128",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e1066",
@@ -500,7 +514,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "128",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e1067",
@@ -535,7 +550,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "32 \u00d7 784 \u00d7 128",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   },
   {
    "id": "e1068",
@@ -570,7 +586,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "= 3 211 264 multiply-adds",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   },
   {
    "id": "e1069",
@@ -605,7 +622,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "in one call",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   }
  ],
  "appState": {

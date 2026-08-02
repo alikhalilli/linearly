@@ -43,7 +43,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":0}
   },
   {
    "id": "e918",
@@ -85,7 +86,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":0}
   },
   {
    "id": "e919",
@@ -127,7 +129,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":2}
   },
   {
    "id": "e920",
@@ -169,7 +172,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":2}
   },
   {
    "id": "e921",
@@ -211,7 +215,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":3}
   },
   {
    "id": "e922",
@@ -253,7 +258,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":3}
   },
   {
    "id": "e923",
@@ -280,7 +286,8 @@
    "boundElements": null,
    "updated": 1754000000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":0}
   },
   {
    "id": "t924",
@@ -315,7 +322,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "x",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "t925",
@@ -350,7 +358,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "x + v",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "t926",
@@ -385,7 +394,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "Ax",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "t927",
@@ -420,7 +430,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "x\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "t928",
@@ -455,7 +466,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "x\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "t929",
@@ -490,7 +502,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "Ax\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "t930",
@@ -525,7 +538,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "Ax\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "t931",
@@ -560,7 +574,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "singular",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "t932",
@@ -595,7 +610,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "invertible",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "t933",
@@ -630,7 +646,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "two inputs, one output",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "t934",
@@ -665,7 +682,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "every arrow reverses",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   }
  ],
  "appState": {

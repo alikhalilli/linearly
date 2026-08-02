@@ -29,7 +29,8 @@
       "updated": 1785573219896,
       "link": null,
       "locked": false,
-      "index": "c1Wt"
+      "index": "c1Wt",
+      "customData": {"seq":0}
     },
     {
       "id": "e511",
@@ -73,7 +74,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1Wu",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":0}
     },
     {
       "id": "e512",
@@ -117,7 +119,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1Wv",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":0}
     },
     {
       "id": "e513",
@@ -161,7 +164,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1Ww",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":0}
     },
     {
       "id": "e514",
@@ -204,7 +208,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1Wx"
+      "index": "c1Wx",
+      "customData": {"seq":0}
     },
     {
       "id": "e515",
@@ -232,7 +237,8 @@
       "updated": 1785573219896,
       "link": null,
       "locked": false,
-      "index": "c1Wy"
+      "index": "c1Wy",
+      "customData": {"seq":1}
     },
     {
       "id": "e516",
@@ -275,7 +281,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1Wz"
+      "index": "c1Wz",
+      "customData": {"seq":1}
     },
     {
       "id": "e517",
@@ -318,7 +325,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1X0"
+      "index": "c1X0",
+      "customData": {"seq":1}
     },
     {
       "id": "e518",
@@ -369,7 +377,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1X1"
+      "index": "c1X1",
+      "customData": {"seq":1}
     },
     {
       "id": "e519",
@@ -397,7 +406,8 @@
       "updated": 1785573219896,
       "link": null,
       "locked": false,
-      "index": "c1X2"
+      "index": "c1X2",
+      "customData": {"seq":2}
     },
     {
       "id": "e520",
@@ -440,7 +450,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1X3"
+      "index": "c1X3",
+      "customData": {"seq":2}
     },
     {
       "id": "e521",
@@ -483,7 +494,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1X4"
+      "index": "c1X4",
+      "customData": {"seq":2}
     },
     {
       "id": "e522",
@@ -534,7 +546,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1X5"
+      "index": "c1X5",
+      "customData": {"seq":2}
     },
     {
       "id": "e523",
@@ -562,7 +575,8 @@
       "updated": 1785573241589,
       "link": null,
       "locked": false,
-      "index": "c1X6"
+      "index": "c1X6",
+      "customData": {"seq":2}
     },
     {
       "id": "e524",
@@ -606,7 +620,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1X7",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":2}
     },
     {
       "id": "e525",
@@ -650,7 +665,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1X8",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":3}
     },
     {
       "id": "e526",
@@ -694,7 +710,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1X9",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":3}
     },
     {
       "id": "e527",
@@ -738,7 +755,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1XA",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":3}
     },
     {
       "id": "e528",
@@ -766,7 +784,8 @@
       "updated": 1785573232588,
       "link": null,
       "locked": false,
-      "index": "c1XB"
+      "index": "c1XB",
+      "customData": {"seq":3}
     },
     {
       "id": "e529",
@@ -794,7 +813,8 @@
       "updated": 1785573232588,
       "link": null,
       "locked": false,
-      "index": "c1XC"
+      "index": "c1XC",
+      "customData": {"seq":3}
     },
     {
       "id": "e530",
@@ -822,7 +842,8 @@
       "updated": 1785573232588,
       "link": null,
       "locked": false,
-      "index": "c1XD"
+      "index": "c1XD",
+      "customData": {"seq":3}
     },
     {
       "id": "e531",
@@ -850,7 +871,8 @@
       "updated": 1785573232588,
       "link": null,
       "locked": false,
-      "index": "c1XE"
+      "index": "c1XE",
+      "customData": {"seq":3}
     },
     {
       "id": "e532",
@@ -887,7 +909,8 @@
       "originalText": "a layer",
       "lineHeight": 1.25,
       "index": "c1XF",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":0}
     },
     {
       "id": "e533",
@@ -924,7 +947,8 @@
       "originalText": "no past at all",
       "lineHeight": 1.25,
       "index": "c1XG",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":0}
     },
     {
       "id": "e534",
@@ -961,7 +985,8 @@
       "originalText": "a loop",
       "lineHeight": 1.25,
       "index": "c1XH",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":1}
     },
     {
       "id": "e535",
@@ -998,7 +1023,8 @@
       "originalText": "one vector of past",
       "lineHeight": 1.25,
       "index": "c1XI",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":1}
     },
     {
       "id": "e536",
@@ -1035,7 +1061,8 @@
       "originalText": "a gate",
       "lineHeight": 1.25,
       "index": "c1XJ",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":2}
     },
     {
       "id": "e537",
@@ -1072,7 +1099,8 @@
       "originalText": "choose what to keep",
       "lineHeight": 1.25,
       "index": "c1XK",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":2}
     },
     {
       "id": "e538",
@@ -1109,7 +1137,8 @@
       "originalText": "attention",
       "lineHeight": 1.25,
       "index": "c1XL",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e539",
@@ -1146,7 +1175,8 @@
       "originalText": "read all of it, weighted",
       "lineHeight": 1.25,
       "index": "c1XM",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     }
   ],
   "appState": {

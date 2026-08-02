@@ -43,7 +43,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":0}
   },
   {
    "id": "w7002",
@@ -85,7 +86,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":0}
   },
   {
    "id": "w7003",
@@ -127,7 +129,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":6,"note":"the same step, taken from king"}
   },
   {
    "id": "w7004",
@@ -169,7 +172,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":2}
   },
   {
    "id": "w7005",
@@ -211,7 +215,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":7}
   },
   {
    "id": "w7006",
@@ -253,7 +258,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":4}
   },
   {
    "id": "w7007",
@@ -295,7 +301,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":5}
   },
   {
    "id": "w7008",
@@ -322,7 +329,8 @@
    "boundElements": null,
    "updated": 1753990000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":1}
   },
   {
    "id": "w7009",
@@ -349,7 +357,8 @@
    "boundElements": null,
    "updated": 1753990000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":1}
   },
   {
    "id": "w7010",
@@ -376,7 +385,8 @@
    "boundElements": null,
    "updated": 1753990000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":3}
   },
   {
    "id": "w7011",
@@ -403,7 +413,8 @@
    "boundElements": null,
    "updated": 1753990000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":7}
   },
   {
    "id": "w7012",
@@ -430,7 +441,8 @@
    "boundElements": null,
    "updated": 1753990000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":4}
   },
   {
    "id": "w7013",
@@ -457,7 +469,8 @@
    "boundElements": null,
    "updated": 1753990000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":5}
   },
   {
    "id": "w7014",
@@ -492,7 +505,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "man",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "w7015",
@@ -527,7 +541,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "woman",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "w7016",
@@ -562,7 +577,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "king",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "w7017",
@@ -597,7 +613,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "queen",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":7}
   },
   {
    "id": "w7018",
@@ -632,7 +649,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "king \u2212 man + woman",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":5}
   },
   {
    "id": "w7019",
@@ -667,7 +685,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the miss",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":7}
   },
   {
    "id": "w7020",
@@ -702,7 +721,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u2212 man",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   },
   {
    "id": "w7021",
@@ -737,7 +757,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "+ woman",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":5}
   },
   {
    "id": "w7022",
@@ -772,7 +793,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "woman \u2212 man",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "w7023",
@@ -807,7 +829,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the same step",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "w7024",
@@ -842,7 +865,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "royal",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "w7025",
@@ -877,7 +901,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "female",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   }
  ],
  "appState": {

@@ -30,7 +30,8 @@
    "x": 60,
    "y": 152,
    "width": 500,
-   "height": 80
+   "height": 80,
+   "customData": {"seq":4}
   },
   {
    "id": "bA",
@@ -59,7 +60,8 @@
    "x": 60,
    "y": 40,
    "width": 100,
-   "height": 50
+   "height": 50,
+   "customData": {"seq":0}
   },
   {
    "id": "bU",
@@ -88,7 +90,8 @@
    "x": 260,
    "y": 40,
    "width": 100,
-   "height": 50
+   "height": 50,
+   "customData": {"seq":1}
   },
   {
    "id": "bR",
@@ -117,7 +120,8 @@
    "x": 460,
    "y": 40,
    "width": 100,
-   "height": 50
+   "height": 50,
+   "customData": {"seq":2}
   },
   {
    "id": "ar1",
@@ -159,7 +163,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": "arrow",
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":1}
   },
   {
    "id": "ar2",
@@ -201,7 +206,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": "arrow",
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":2}
   },
   {
    "id": "dA",
@@ -243,7 +249,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":3}
   },
   {
    "id": "dU",
@@ -285,7 +292,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":3}
   },
   {
    "id": "dR",
@@ -327,7 +335,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":3}
   },
   {
    "id": "shared",
@@ -356,7 +365,8 @@
    "x": 60,
    "y": 152,
    "width": 500,
-   "height": 80
+   "height": 80,
+   "customData": {"seq":4}
   },
   {
    "id": "tA",
@@ -391,7 +401,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "A",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "tU",
@@ -426,7 +437,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "U",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "tR",
@@ -461,7 +473,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "R",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "rv1",
@@ -496,7 +509,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "reversible",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "rv2",
@@ -531,7 +545,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "reversible",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "eq",
@@ -566,7 +581,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "N(A) = N(U) = N(R)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   },
   {
    "id": "sub",
@@ -601,7 +617,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the same sheet, spanned by s\u2081 and s\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   }
  ],
  "appState": {

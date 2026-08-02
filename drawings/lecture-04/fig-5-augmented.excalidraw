@@ -29,7 +29,8 @@
    "updated": 1785571378808,
    "link": null,
    "locked": false,
-   "index": "c0Eq"
+   "index": "c0Eq",
+   "customData": {"seq":1}
   },
   {
    "id": "e826",
@@ -57,7 +58,8 @@
    "updated": 1785571378808,
    "link": null,
    "locked": false,
-   "index": "c0Er"
+   "index": "c0Er",
+   "customData": {"seq":4}
   },
   {
    "id": "e827",
@@ -101,7 +103,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Es",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e828",
@@ -145,7 +148,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Et",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e829",
@@ -189,7 +193,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Eu",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e830",
@@ -233,7 +238,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Ev",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e831",
@@ -277,7 +283,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Ew",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e832",
@@ -321,7 +328,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Ex",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e833",
@@ -365,7 +373,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Ey",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":0}
   },
   {
    "id": "t834",
@@ -402,7 +411,8 @@
    "originalText": "2",
    "lineHeight": 1.25,
    "index": "c0Ez",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t835",
@@ -439,7 +449,8 @@
    "originalText": "4",
    "lineHeight": 1.25,
    "index": "c0F0",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t836",
@@ -476,7 +487,8 @@
    "originalText": "\u22122",
    "lineHeight": 1.25,
    "index": "c0F1",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t837",
@@ -513,7 +525,8 @@
    "originalText": "2",
    "lineHeight": 1.25,
    "index": "c0F2",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "t838",
@@ -550,7 +563,8 @@
    "originalText": "4",
    "lineHeight": 1.25,
    "index": "c0F3",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t839",
@@ -587,7 +601,8 @@
    "originalText": "9",
    "lineHeight": 1.25,
    "index": "c0F4",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t840",
@@ -624,7 +639,8 @@
    "originalText": "\u22123",
    "lineHeight": 1.25,
    "index": "c0F5",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t841",
@@ -661,7 +677,8 @@
    "originalText": "8",
    "lineHeight": 1.25,
    "index": "c0F6",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "t842",
@@ -698,7 +715,8 @@
    "originalText": "\u22122",
    "lineHeight": 1.25,
    "index": "c0F7",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t843",
@@ -735,7 +753,8 @@
    "originalText": "\u22123",
    "lineHeight": 1.25,
    "index": "c0F8",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t844",
@@ -772,7 +791,8 @@
    "originalText": "7",
    "lineHeight": 1.25,
    "index": "c0F9",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t845",
@@ -809,7 +829,8 @@
    "originalText": "10",
    "lineHeight": 1.25,
    "index": "c0FA",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "e846",
@@ -853,7 +874,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0FB",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e847",
@@ -897,7 +919,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0FC",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e848",
@@ -941,7 +964,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0FD",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e849",
@@ -985,7 +1009,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0FE",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e850",
@@ -1029,7 +1054,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0FF",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e851",
@@ -1073,7 +1099,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0FG",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e852",
@@ -1117,7 +1144,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0FH",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3}
   },
   {
    "id": "t853",
@@ -1154,7 +1182,8 @@
    "originalText": "2",
    "lineHeight": 1.25,
    "index": "c0FI",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t854",
@@ -1191,7 +1220,8 @@
    "originalText": "4",
    "lineHeight": 1.25,
    "index": "c0FJ",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t855",
@@ -1228,7 +1258,8 @@
    "originalText": "\u22122",
    "lineHeight": 1.25,
    "index": "c0FK",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t856",
@@ -1265,7 +1296,8 @@
    "originalText": "2",
    "lineHeight": 1.25,
    "index": "c0FL",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":4}
   },
   {
    "id": "t857",
@@ -1302,7 +1334,8 @@
    "originalText": "0",
    "lineHeight": 1.25,
    "index": "c0FM",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t858",
@@ -1339,7 +1372,8 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c0FN",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t859",
@@ -1376,7 +1410,8 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c0FO",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t860",
@@ -1413,7 +1448,8 @@
    "originalText": "4",
    "lineHeight": 1.25,
    "index": "c0FP",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":4}
   },
   {
    "id": "t861",
@@ -1450,7 +1486,8 @@
    "originalText": "\u22122",
    "lineHeight": 1.25,
    "index": "c0FQ",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t862",
@@ -1487,7 +1524,8 @@
    "originalText": "\u22123",
    "lineHeight": 1.25,
    "index": "c0FR",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t863",
@@ -1524,7 +1562,8 @@
    "originalText": "7",
    "lineHeight": 1.25,
    "index": "c0FS",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t864",
@@ -1561,7 +1600,8 @@
    "originalText": "10",
    "lineHeight": 1.25,
    "index": "c0FT",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":4}
   },
   {
    "id": "e865",
@@ -1604,7 +1644,8 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c0FU"
+   "index": "c0FU",
+   "customData": {"seq":2}
   },
   {
    "id": "t866",
@@ -1641,7 +1682,8 @@
    "originalText": "A",
    "lineHeight": 1.25,
    "index": "c0FV",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t867",
@@ -1678,7 +1720,8 @@
    "originalText": "b",
    "lineHeight": 1.25,
    "index": "c0FW",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1,"note":"b rides along with the coefficients"}
   },
   {
    "id": "t868",
@@ -1715,7 +1758,8 @@
    "originalText": "E\u2082\u2081A",
    "lineHeight": 1.25,
    "index": "c0FX",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t869",
@@ -1752,7 +1796,8 @@
    "originalText": "E\u2082\u2081b",
    "lineHeight": 1.25,
    "index": "c0FY",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":4}
   },
   {
    "id": "t870",
@@ -1789,7 +1834,8 @@
    "originalText": "E\u2082\u2081",
    "lineHeight": 1.25,
    "index": "c0FZ",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   }
  ],
  "appState": {

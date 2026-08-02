@@ -28,7 +28,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e2243",
@@ -82,7 +83,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":1}
   },
   {
    "id": "e2244",
@@ -124,7 +126,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":2}
   },
   {
    "id": "e2245",
@@ -166,7 +169,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":2}
   },
   {
    "id": "e2246",
@@ -208,7 +212,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":2}
   },
   {
    "id": "e2247",
@@ -250,7 +255,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":4}
   },
   {
    "id": "e2248",
@@ -277,7 +283,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e2249",
@@ -304,7 +311,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":4}
   },
   {
    "id": "e2250",
@@ -331,7 +339,8 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e2251",
@@ -366,7 +375,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "R\u2075",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "e2252",
@@ -401,7 +411,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "m\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "e2253",
@@ -436,7 +447,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "m\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "e2254",
@@ -471,7 +483,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "m\u2083",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "e2255",
@@ -506,7 +519,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "b",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "e2256",
@@ -541,7 +555,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "b\u2032",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   },
   {
    "id": "e2257",
@@ -576,7 +591,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the miss",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   },
   {
    "id": "e2258",
@@ -611,7 +627,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "C(A): every blend of the three films",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e2259",
@@ -646,7 +663,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "everything else in R\u2075 is out of reach",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   }
  ],
  "appState": {

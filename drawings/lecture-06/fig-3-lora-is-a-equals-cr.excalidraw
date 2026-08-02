@@ -28,7 +28,8 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {"seq":0}
     },
     {
       "id": "wlab",
@@ -63,7 +64,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "W",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":0}
     },
     {
       "id": "wdim",
@@ -98,7 +100,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "4096 × 4096",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":0}
     },
     {
       "id": "wfroz",
@@ -133,7 +136,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "frozen",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":0}
     },
     {
       "id": "wcount",
@@ -168,7 +172,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "16,777,216 numbers",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":0}
     },
     {
       "id": "plus",
@@ -203,7 +208,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "+",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":1}
     },
     {
       "id": "c",
@@ -230,7 +236,8 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {"seq":1}
     },
     {
       "id": "clab",
@@ -265,7 +272,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "C",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":1}
     },
     {
       "id": "cdim",
@@ -300,7 +308,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "4096 × 8",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":1}
     },
     {
       "id": "times",
@@ -335,7 +344,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "×",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":2}
     },
     {
       "id": "r",
@@ -362,7 +372,8 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {"seq":2}
     },
     {
       "id": "rlab",
@@ -397,7 +408,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "R",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":2}
     },
     {
       "id": "rdim",
@@ -432,7 +444,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "8 × 4096",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":2}
     },
     {
       "id": "p1",
@@ -467,7 +480,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "C R is 4096 × 4096, but its rank is 8",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":3}
     },
     {
       "id": "p2",
@@ -502,7 +516,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "65,536 numbers to train",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":3}
     },
     {
       "id": "p3",
@@ -537,7 +552,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "0.39% of W, 256× fewer",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":3}
     },
     {
       "id": "tick",
@@ -579,7 +595,8 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {"seq":4}
     },
     {
       "id": "chip",
@@ -606,7 +623,8 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {"seq":4}
     },
     {
       "id": "chiplab",
@@ -641,7 +659,8 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "r = 8, the waist",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {"seq":4}
     }
   ],
   "appState": {

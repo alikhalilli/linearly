@@ -29,7 +29,8 @@
       "updated": 1785573187585,
       "link": null,
       "locked": false,
-      "index": "c1Um"
+      "index": "c1Um",
+      "customData": {"seq":0}
     },
     {
       "id": "e402",
@@ -66,7 +67,8 @@
       "originalText": "the line you write",
       "lineHeight": 1.25,
       "index": "c1Un",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":0}
     },
     {
       "id": "e403",
@@ -94,7 +96,8 @@
       "updated": 1785573187585,
       "link": null,
       "locked": false,
-      "index": "c1Uo"
+      "index": "c1Uo",
+      "customData": {"seq":1}
     },
     {
       "id": "e404",
@@ -131,7 +134,8 @@
       "originalText": "Python",
       "lineHeight": 1.25,
       "index": "c1Up",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":1}
     },
     {
       "id": "e405",
@@ -159,7 +163,8 @@
       "updated": 1785573187585,
       "link": null,
       "locked": false,
-      "index": "c1Uq"
+      "index": "c1Uq",
+      "customData": {"seq":2}
     },
     {
       "id": "e406",
@@ -196,7 +201,8 @@
       "originalText": "machine code",
       "lineHeight": 1.25,
       "index": "c1Ur",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":2}
     },
     {
       "id": "e407",
@@ -224,7 +230,8 @@
       "updated": 1785573187585,
       "link": null,
       "locked": false,
-      "index": "c1Us"
+      "index": "c1Us",
+      "customData": {"seq":3}
     },
     {
       "id": "e408",
@@ -261,7 +268,8 @@
       "originalText": "the instruction set",
       "lineHeight": 1.25,
       "index": "c1Ut",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e409",
@@ -289,7 +297,8 @@
       "updated": 1785573187585,
       "link": null,
       "locked": false,
-      "index": "c1Uu"
+      "index": "c1Uu",
+      "customData": {"seq":4}
     },
     {
       "id": "e410",
@@ -326,7 +335,8 @@
       "originalText": "logic gates",
       "lineHeight": 1.25,
       "index": "c1Uv",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":4}
     },
     {
       "id": "e411",
@@ -354,7 +364,8 @@
       "updated": 1785573187585,
       "link": null,
       "locked": false,
-      "index": "c1Uw"
+      "index": "c1Uw",
+      "customData": {"seq":5}
     },
     {
       "id": "e412",
@@ -391,7 +402,8 @@
       "originalText": "transistors",
       "lineHeight": 1.25,
       "index": "c1Ux",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":5}
     },
     {
       "id": "e413",
@@ -419,7 +431,8 @@
       "updated": 1785573187585,
       "link": null,
       "locked": false,
-      "index": "c1Uy"
+      "index": "c1Uy",
+      "customData": {"seq":6}
     },
     {
       "id": "e414",
@@ -456,7 +469,8 @@
       "originalText": "electrons in silicon",
       "lineHeight": 1.25,
       "index": "c1Uz",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":6}
     },
     {
       "id": "e415",
@@ -499,7 +513,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1V0"
+      "index": "c1V0",
+      "customData": {"seq":7}
     },
     {
       "id": "e416",
@@ -551,7 +566,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1V1",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":8}
     },
     {
       "id": "e417",
@@ -603,7 +619,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1V2",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":8}
     },
     {
       "id": "e418",
@@ -640,7 +657,8 @@
       "originalText": "every floor keeps",
       "lineHeight": 1.25,
       "index": "c1V3",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     },
     {
       "id": "e419",
@@ -677,7 +695,8 @@
       "originalText": "a promise for",
       "lineHeight": 1.25,
       "index": "c1V4",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     },
     {
       "id": "e420",
@@ -714,7 +733,8 @@
       "originalText": "the floor above",
       "lineHeight": 1.25,
       "index": "c1V5",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     },
     {
       "id": "e421",
@@ -751,7 +771,8 @@
       "originalText": "software",
       "lineHeight": 1.25,
       "index": "c1V6",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":8}
     },
     {
       "id": "e422",
@@ -788,7 +809,8 @@
       "originalText": "hardware",
       "lineHeight": 1.25,
       "index": "c1V7",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":8}
     }
   ],
   "appState": {

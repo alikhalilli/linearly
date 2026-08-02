@@ -28,7 +28,8 @@
    "x": 130,
    "y": 80,
    "width": 80,
-   "height": 68
+   "height": 68,
+   "customData": {"seq":1}
   },
   {
    "id": "m-bl",
@@ -78,7 +79,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":0}
   },
   {
    "id": "m-br",
@@ -128,7 +130,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":0}
   },
   {
    "id": "m-t00",
@@ -163,7 +166,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "m-t01",
@@ -198,7 +202,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "m-t02",
@@ -233,7 +238,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "m-t03",
@@ -268,7 +274,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "4",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "m-t10",
@@ -303,7 +310,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "3",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "m-t11",
@@ -338,7 +346,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "8",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "m-t12",
@@ -373,7 +382,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "6",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "m-t13",
@@ -408,7 +418,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "16",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   },
   {
    "id": "arcTop",
@@ -454,7 +465,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":3}
   },
   {
    "id": "arcBot",
@@ -500,7 +512,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {"seq":2}
   },
   {
    "id": "lt",
@@ -535,7 +548,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "column 4 is twice column 2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":3}
   },
   {
    "id": "lb",
@@ -570,7 +584,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "column 3 is twice column 1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "r1",
@@ -605,7 +620,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "c\u2083 \u2212 2c\u2081 = 0, so s\u2081 = (\u22122, 0, 1, 0)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4}
   },
   {
    "id": "r2",
@@ -640,7 +656,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "c\u2084 \u2212 2c\u2082 = 0, so s\u2082 = (0, \u22122, 0, 1)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":4,"note":"two repeats, two null vectors"}
   }
  ],
  "appState": {

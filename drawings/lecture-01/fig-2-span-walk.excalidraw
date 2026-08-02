@@ -44,7 +44,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1YO"
+      "index": "c1YO",
+      "customData": {"seq":0}
     },
     {
       "id": "e1018",
@@ -87,7 +88,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1YP"
+      "index": "c1YP",
+      "customData": {"seq":0}
     },
     {
       "id": "e1019",
@@ -131,7 +133,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1YQ",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":4}
     },
     {
       "id": "e1020",
@@ -175,7 +178,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1YR",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":4}
     },
     {
       "id": "e1021",
@@ -219,7 +223,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1YS",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":4}
     },
     {
       "id": "e1022",
@@ -262,7 +267,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1YT"
+      "index": "c1YT",
+      "customData": {"seq":1}
     },
     {
       "id": "e1023",
@@ -305,7 +311,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1YU"
+      "index": "c1YU",
+      "customData": {"seq":2}
     },
     {
       "id": "e1024",
@@ -353,7 +360,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1YV",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":3}
     },
     {
       "id": "e1025",
@@ -381,7 +389,8 @@
       "updated": 1785573288567,
       "link": null,
       "locked": false,
-      "index": "c1YW"
+      "index": "c1YW",
+      "customData": {"seq":3}
     },
     {
       "id": "e1026",
@@ -418,7 +427,8 @@
       "originalText": "v",
       "lineHeight": 1.25,
       "index": "c1YX",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":1}
     },
     {
       "id": "e1027",
@@ -455,7 +465,8 @@
       "originalText": "w",
       "lineHeight": 1.25,
       "index": "c1YY",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":2}
     },
     {
       "id": "e1028",
@@ -492,7 +503,8 @@
       "originalText": "2v + w",
       "lineHeight": 1.25,
       "index": "c1YZ",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e1029",
@@ -529,7 +541,8 @@
       "originalText": "span{v, w}:",
       "lineHeight": 1.25,
       "index": "c1Ya",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":4}
     },
     {
       "id": "e1030",
@@ -566,7 +579,8 @@
       "originalText": "everything you can reach",
       "lineHeight": 1.25,
       "index": "c1Yb",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":4}
     }
   ],
   "appState": {

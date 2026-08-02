@@ -55,7 +55,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":0}
   },
   {
    "id": "e1032",
@@ -97,7 +98,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":2}
   },
   {
    "id": "e1033",
@@ -143,7 +145,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":2}
   },
   {
    "id": "e1034",
@@ -185,7 +188,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":2}
   },
   {
    "id": "e1035",
@@ -212,7 +216,8 @@
    "boundElements": null,
    "updated": 1753990000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e1036",
@@ -254,7 +259,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":3}
   },
   {
    "id": "e1037",
@@ -296,7 +302,8 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {"seq":3,"note":"any other point is farther from b"}
   },
   {
    "id": "e1038",
@@ -323,7 +330,8 @@
    "boundElements": null,
    "updated": 1753990000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e1039",
@@ -350,7 +358,8 @@
    "boundElements": null,
    "updated": 1753990000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {"seq":2}
   },
   {
    "id": "e1040",
@@ -385,7 +394,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "b = (1, 0, 0)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":1}
   },
   {
    "id": "e1041",
@@ -420,7 +430,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "gap\u00b2 = 1/6",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "e1042",
@@ -455,7 +466,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "closest point",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":2}
   },
   {
    "id": "e1043",
@@ -490,7 +502,8 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the plane of all c(1, 1, 1) + d(2, 3, 4)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {"seq":0}
   }
  ],
  "appState": {

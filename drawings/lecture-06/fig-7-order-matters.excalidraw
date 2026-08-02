@@ -29,7 +29,8 @@
       "updated": 1785575414439,
       "link": null,
       "locked": false,
-      "index": "c2Se"
+      "index": "c2Se",
+      "customData": {"seq":0}
     },
     {
       "id": "e2178",
@@ -57,7 +58,8 @@
       "updated": 1785575414439,
       "link": null,
       "locked": false,
-      "index": "c2Sf"
+      "index": "c2Sf",
+      "customData": {"seq":0}
     },
     {
       "id": "e2179",
@@ -85,7 +87,8 @@
       "updated": 1785575414439,
       "link": null,
       "locked": false,
-      "index": "c2Sg"
+      "index": "c2Sg",
+      "customData": {"seq":0}
     },
     {
       "id": "e2180",
@@ -113,7 +116,8 @@
       "updated": 1785575414439,
       "link": null,
       "locked": false,
-      "index": "c2Sh"
+      "index": "c2Sh",
+      "customData": {"seq":4}
     },
     {
       "id": "e2181",
@@ -141,7 +145,8 @@
       "updated": 1785575414439,
       "link": null,
       "locked": false,
-      "index": "c2Si"
+      "index": "c2Si",
+      "customData": {"seq":4}
     },
     {
       "id": "e2182",
@@ -169,7 +174,8 @@
       "updated": 1785575414439,
       "link": null,
       "locked": false,
-      "index": "c2Sj"
+      "index": "c2Sj",
+      "customData": {"seq":4}
     },
     {
       "id": "e2183",
@@ -216,7 +222,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c2Sk"
+      "index": "c2Sk",
+      "customData": {"seq":1}
     },
     {
       "id": "e2184",
@@ -263,7 +270,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c2Sl"
+      "index": "c2Sl",
+      "customData": {"seq":1}
     },
     {
       "id": "e2185",
@@ -310,7 +318,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c2Sm"
+      "index": "c2Sm",
+      "customData": {"seq":2}
     },
     {
       "id": "e2186",
@@ -357,7 +366,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c2Sn"
+      "index": "c2Sn",
+      "customData": {"seq":5}
     },
     {
       "id": "e2187",
@@ -404,7 +414,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c2So"
+      "index": "c2So",
+      "customData": {"seq":5}
     },
     {
       "id": "e2188",
@@ -452,7 +463,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Sp",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":6}
     },
     {
       "id": "e2189",
@@ -496,7 +508,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Sq",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":6}
     },
     {
       "id": "e2190",
@@ -540,7 +553,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Sr",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":6}
     },
     {
       "id": "e2191",
@@ -592,7 +606,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Ss",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":3}
     },
     {
       "id": "e2192",
@@ -644,7 +659,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2St",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":3}
     },
     {
       "id": "e2193",
@@ -681,7 +697,8 @@
       "originalText": "1",
       "lineHeight": 1.25,
       "index": "c2Su",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e2194",
@@ -718,7 +735,8 @@
       "originalText": "0",
       "lineHeight": 1.25,
       "index": "c2Sv",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e2195",
@@ -755,7 +773,8 @@
       "originalText": "0",
       "lineHeight": 1.25,
       "index": "c2Sw",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e2196",
@@ -792,7 +811,8 @@
       "originalText": "−5",
       "lineHeight": 1.25,
       "index": "c2Sx",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e2197",
@@ -829,7 +849,8 @@
       "originalText": "1",
       "lineHeight": 1.25,
       "index": "c2Sy",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e2198",
@@ -866,7 +887,8 @@
       "originalText": "0",
       "lineHeight": 1.25,
       "index": "c2Sz",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e2199",
@@ -903,7 +925,8 @@
       "originalText": "20",
       "lineHeight": 1.25,
       "index": "c2T0",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e2200",
@@ -940,7 +963,8 @@
       "originalText": "−4",
       "lineHeight": 1.25,
       "index": "c2T1",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e2201",
@@ -977,7 +1001,8 @@
       "originalText": "1",
       "lineHeight": 1.25,
       "index": "c2T2",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e2202",
@@ -1029,7 +1054,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2T3",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":7}
     },
     {
       "id": "e2203",
@@ -1081,7 +1107,8 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2T4",
-      "polygon": false
+      "polygon": false,
+      "customData": {"seq":7}
     },
     {
       "id": "e2204",
@@ -1118,7 +1145,8 @@
       "originalText": "1",
       "lineHeight": 1.25,
       "index": "c2T5",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     },
     {
       "id": "e2205",
@@ -1155,7 +1183,8 @@
       "originalText": "0",
       "lineHeight": 1.25,
       "index": "c2T6",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     },
     {
       "id": "e2206",
@@ -1192,7 +1221,8 @@
       "originalText": "0",
       "lineHeight": 1.25,
       "index": "c2T7",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     },
     {
       "id": "e2207",
@@ -1229,7 +1259,8 @@
       "originalText": "5",
       "lineHeight": 1.25,
       "index": "c2T8",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     },
     {
       "id": "e2208",
@@ -1266,7 +1297,8 @@
       "originalText": "1",
       "lineHeight": 1.25,
       "index": "c2T9",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     },
     {
       "id": "e2209",
@@ -1303,7 +1335,8 @@
       "originalText": "0",
       "lineHeight": 1.25,
       "index": "c2TA",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     },
     {
       "id": "e2210",
@@ -1340,7 +1373,8 @@
       "originalText": "0",
       "lineHeight": 1.25,
       "index": "c2TB",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     },
     {
       "id": "e2211",
@@ -1377,7 +1411,8 @@
       "originalText": "4",
       "lineHeight": 1.25,
       "index": "c2TC",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     },
     {
       "id": "e2212",
@@ -1414,7 +1449,8 @@
       "originalText": "1",
       "lineHeight": 1.25,
       "index": "c2TD",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     },
     {
       "id": "e2213",
@@ -1442,7 +1478,8 @@
       "updated": 1785575414439,
       "link": null,
       "locked": false,
-      "index": "c2TE"
+      "index": "c2TE",
+      "customData": {"seq":3}
     },
     {
       "id": "e2214",
@@ -1470,7 +1507,8 @@
       "updated": 1785575414439,
       "link": null,
       "locked": false,
-      "index": "c2TF"
+      "index": "c2TF",
+      "customData": {"seq":7}
     },
     {
       "id": "e2215",
@@ -1507,7 +1545,8 @@
       "originalText": "eliminating: F after E",
       "lineHeight": 1.25,
       "index": "c2TG",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":0}
     },
     {
       "id": "e2216",
@@ -1544,7 +1583,8 @@
       "originalText": "undoing: E⁻¹ after F⁻¹",
       "lineHeight": 1.25,
       "index": "c2TH",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":4}
     },
     {
       "id": "e2217",
@@ -1581,7 +1621,8 @@
       "originalText": "row 1",
       "lineHeight": 1.25,
       "index": "c2TI",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":0}
     },
     {
       "id": "e2218",
@@ -1618,7 +1659,8 @@
       "originalText": "row 2",
       "lineHeight": 1.25,
       "index": "c2TJ",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":0}
     },
     {
       "id": "e2219",
@@ -1655,7 +1697,8 @@
       "originalText": "row 3",
       "lineHeight": 1.25,
       "index": "c2TK",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":0}
     },
     {
       "id": "e2220",
@@ -1692,7 +1735,8 @@
       "originalText": "row 1",
       "lineHeight": 1.25,
       "index": "c2TL",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":4}
     },
     {
       "id": "e2221",
@@ -1729,7 +1773,8 @@
       "originalText": "row 2",
       "lineHeight": 1.25,
       "index": "c2TM",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":4}
     },
     {
       "id": "e2222",
@@ -1766,7 +1811,8 @@
       "originalText": "row 3",
       "lineHeight": 1.25,
       "index": "c2TN",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":4}
     },
     {
       "id": "e2223",
@@ -1803,7 +1849,8 @@
       "originalText": "−5 first",
       "lineHeight": 1.25,
       "index": "c2TO",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":1}
     },
     {
       "id": "e2224",
@@ -1840,7 +1887,8 @@
       "originalText": "−4 second",
       "lineHeight": 1.25,
       "index": "c2TP",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":1}
     },
     {
       "id": "e2225",
@@ -1877,7 +1925,8 @@
       "originalText": "+5 second",
       "lineHeight": 1.25,
       "index": "c2TQ",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":5}
     },
     {
       "id": "e2226",
@@ -1914,7 +1963,8 @@
       "originalText": "+4 first",
       "lineHeight": 1.25,
       "index": "c2TR",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":5}
     },
     {
       "id": "e2227",
@@ -1951,7 +2001,8 @@
       "originalText": "+20",
       "lineHeight": 1.25,
       "index": "c2TS",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":2,"note":"row 1 reaches row 3 anyway"}
     },
     {
       "id": "e2228",
@@ -1988,7 +2039,8 @@
       "originalText": "nothing",
       "lineHeight": 1.25,
       "index": "c2TT",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":6}
     },
     {
       "id": "e2229",
@@ -2025,7 +2077,8 @@
       "originalText": "F E",
       "lineHeight": 1.25,
       "index": "c2TU",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e2230",
@@ -2062,7 +2115,8 @@
       "originalText": "E⁻¹ F⁻¹",
       "lineHeight": 1.25,
       "index": "c2TV",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     },
     {
       "id": "e2231",
@@ -2099,7 +2153,8 @@
       "originalText": "row 3 picked up row 1",
       "lineHeight": 1.25,
       "index": "c2TW",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e2232",
@@ -2136,7 +2191,8 @@
       "originalText": "row 3 stayed clean",
       "lineHeight": 1.25,
       "index": "c2TX",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":7}
     }
   ],
   "appState": {

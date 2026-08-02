@@ -29,7 +29,8 @@
       "updated": 1785573371280,
       "link": null,
       "locked": false,
-      "index": "c1aC"
+      "index": "c1aC",
+      "customData": {"seq":0}
     },
     {
       "id": "e1105",
@@ -57,7 +58,8 @@
       "updated": 1785573371280,
       "link": null,
       "locked": false,
-      "index": "c1aD"
+      "index": "c1aD",
+      "customData": {"seq":0}
     },
     {
       "id": "e1106",
@@ -85,7 +87,8 @@
       "updated": 1785573371280,
       "link": null,
       "locked": false,
-      "index": "c1aE"
+      "index": "c1aE",
+      "customData": {"seq":0}
     },
     {
       "id": "e1107",
@@ -132,7 +135,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1aF"
+      "index": "c1aF",
+      "customData": {"seq":1}
     },
     {
       "id": "e1108",
@@ -179,7 +183,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1aG"
+      "index": "c1aG",
+      "customData": {"seq":2}
     },
     {
       "id": "e1109",
@@ -226,7 +231,8 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c1aH"
+      "index": "c1aH",
+      "customData": {"seq":3}
     },
     {
       "id": "e1110",
@@ -263,7 +269,8 @@
       "originalText": "x₁",
       "lineHeight": 1.25,
       "index": "c1aI",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":0}
     },
     {
       "id": "e1111",
@@ -300,7 +307,8 @@
       "originalText": "x₂",
       "lineHeight": 1.25,
       "index": "c1aJ",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":0}
     },
     {
       "id": "e1112",
@@ -337,7 +345,8 @@
       "originalText": "x₃",
       "lineHeight": 1.25,
       "index": "c1aK",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":0}
     },
     {
       "id": "e1113",
@@ -374,7 +383,8 @@
       "originalText": "b₁ = x₁ − x₃",
       "lineHeight": 1.25,
       "index": "c1aL",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":1}
     },
     {
       "id": "e1114",
@@ -411,7 +421,8 @@
       "originalText": "b₂ = x₂ − x₁",
       "lineHeight": 1.25,
       "index": "c1aM",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":2}
     },
     {
       "id": "e1115",
@@ -448,7 +459,8 @@
       "originalText": "b₃ = x₃ − x₂",
       "lineHeight": 1.25,
       "index": "c1aN",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":3}
     },
     {
       "id": "e1116",
@@ -485,7 +497,8 @@
       "originalText": "b₁ + b₂ + b₃ = 0",
       "lineHeight": 1.25,
       "index": "c1aO",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {"seq":4}
     }
   ],
   "appState": {

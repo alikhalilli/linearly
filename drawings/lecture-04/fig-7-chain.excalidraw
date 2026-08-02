@@ -29,7 +29,8 @@
    "updated": 1785571335484,
    "link": null,
    "locked": false,
-   "index": "c0B3"
+   "index": "c0B3",
+   "customData": {"seq":1}
   },
   {
    "id": "e909",
@@ -57,7 +58,8 @@
    "updated": 1785571335484,
    "link": null,
    "locked": false,
-   "index": "c0B4"
+   "index": "c0B4",
+   "customData": {"seq":2}
   },
   {
    "id": "e910",
@@ -85,7 +87,8 @@
    "updated": 1785571335484,
    "link": null,
    "locked": false,
-   "index": "c0B5"
+   "index": "c0B5",
+   "customData": {"seq":3}
   },
   {
    "id": "e911",
@@ -129,7 +132,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0B6",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e912",
@@ -173,7 +177,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0B7",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e913",
@@ -217,7 +222,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0B8",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e914",
@@ -261,7 +267,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0B9",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e915",
@@ -305,7 +312,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0BA",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":0}
   },
   {
    "id": "e916",
@@ -349,7 +357,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0BB",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":0}
   },
   {
    "id": "t917",
@@ -386,7 +395,8 @@
    "originalText": "2",
    "lineHeight": 1.25,
    "index": "c0BC",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t918",
@@ -423,7 +433,8 @@
    "originalText": "4",
    "lineHeight": 1.25,
    "index": "c0BD",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t919",
@@ -460,7 +471,8 @@
    "originalText": "\u22122",
    "lineHeight": 1.25,
    "index": "c0BE",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t920",
@@ -497,7 +509,8 @@
    "originalText": "4",
    "lineHeight": 1.25,
    "index": "c0BF",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t921",
@@ -534,7 +547,8 @@
    "originalText": "9",
    "lineHeight": 1.25,
    "index": "c0BG",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t922",
@@ -571,7 +585,8 @@
    "originalText": "\u22123",
    "lineHeight": 1.25,
    "index": "c0BH",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t923",
@@ -608,7 +623,8 @@
    "originalText": "\u22122",
    "lineHeight": 1.25,
    "index": "c0BI",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t924",
@@ -645,7 +661,8 @@
    "originalText": "\u22123",
    "lineHeight": 1.25,
    "index": "c0BJ",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t925",
@@ -682,7 +699,8 @@
    "originalText": "7",
    "lineHeight": 1.25,
    "index": "c0BK",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "e926",
@@ -726,7 +744,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0BL",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e927",
@@ -770,7 +789,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0BM",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e928",
@@ -814,7 +834,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0BN",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e929",
@@ -858,7 +879,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0BO",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e930",
@@ -902,7 +924,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0BP",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":1}
   },
   {
    "id": "e931",
@@ -946,7 +969,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0BQ",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":1}
   },
   {
    "id": "t932",
@@ -983,7 +1007,8 @@
    "originalText": "2",
    "lineHeight": 1.25,
    "index": "c0BR",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "t933",
@@ -1020,7 +1045,8 @@
    "originalText": "4",
    "lineHeight": 1.25,
    "index": "c0BS",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "t934",
@@ -1057,7 +1083,8 @@
    "originalText": "\u22122",
    "lineHeight": 1.25,
    "index": "c0BT",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "t935",
@@ -1094,7 +1121,8 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c0BU",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "t936",
@@ -1131,7 +1159,8 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c0BV",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "t937",
@@ -1168,7 +1197,8 @@
    "originalText": "\u22122",
    "lineHeight": 1.25,
    "index": "c0BW",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "t938",
@@ -1205,7 +1235,8 @@
    "originalText": "\u22123",
    "lineHeight": 1.25,
    "index": "c0BX",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "t939",
@@ -1242,7 +1273,8 @@
    "originalText": "7",
    "lineHeight": 1.25,
    "index": "c0BY",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "t940",
@@ -1279,7 +1311,8 @@
    "originalText": "0",
    "lineHeight": 1.25,
    "index": "c0BZ",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "e941",
@@ -1323,7 +1356,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Ba",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":2}
   },
   {
    "id": "e942",
@@ -1367,7 +1401,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Bb",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":2}
   },
   {
    "id": "e943",
@@ -1411,7 +1446,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Bc",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":2}
   },
   {
    "id": "e944",
@@ -1455,7 +1491,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Bd",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":2}
   },
   {
    "id": "e945",
@@ -1499,7 +1536,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Be",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":2}
   },
   {
    "id": "e946",
@@ -1543,7 +1581,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Bf",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":2}
   },
   {
    "id": "t947",
@@ -1580,7 +1619,8 @@
    "originalText": "2",
    "lineHeight": 1.25,
    "index": "c0Bg",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "t948",
@@ -1617,7 +1657,8 @@
    "originalText": "4",
    "lineHeight": 1.25,
    "index": "c0Bh",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "t949",
@@ -1654,7 +1695,8 @@
    "originalText": "\u22122",
    "lineHeight": 1.25,
    "index": "c0Bi",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "t950",
@@ -1691,7 +1733,8 @@
    "originalText": "0",
    "lineHeight": 1.25,
    "index": "c0Bj",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "t951",
@@ -1728,7 +1771,8 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c0Bk",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "t952",
@@ -1765,7 +1809,8 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c0Bl",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "t953",
@@ -1802,7 +1847,8 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c0Bm",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "t954",
@@ -1839,7 +1885,8 @@
    "originalText": "5",
    "lineHeight": 1.25,
    "index": "c0Bn",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "t955",
@@ -1876,7 +1923,8 @@
    "originalText": "0",
    "lineHeight": 1.25,
    "index": "c0Bo",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "e956",
@@ -1920,7 +1968,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Bp",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e957",
@@ -1964,7 +2013,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Bq",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e958",
@@ -2008,7 +2058,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Br",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e959",
@@ -2052,7 +2103,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Bs",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e960",
@@ -2096,7 +2148,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Bt",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3}
   },
   {
    "id": "e961",
@@ -2140,7 +2193,8 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c0Bu",
-   "polygon": false
+   "polygon": false,
+   "customData": {"seq":3}
   },
   {
    "id": "t962",
@@ -2177,7 +2231,8 @@
    "originalText": "2",
    "lineHeight": 1.25,
    "index": "c0Bv",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t963",
@@ -2214,7 +2269,8 @@
    "originalText": "4",
    "lineHeight": 1.25,
    "index": "c0Bw",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t964",
@@ -2251,7 +2307,8 @@
    "originalText": "\u22122",
    "lineHeight": 1.25,
    "index": "c0Bx",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t965",
@@ -2288,7 +2345,8 @@
    "originalText": "0",
    "lineHeight": 1.25,
    "index": "c0By",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t966",
@@ -2325,7 +2383,8 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c0Bz",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t967",
@@ -2362,7 +2421,8 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c0C0",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t968",
@@ -2399,7 +2459,8 @@
    "originalText": "0",
    "lineHeight": 1.25,
    "index": "c0C1",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t969",
@@ -2436,7 +2497,8 @@
    "originalText": "4",
    "lineHeight": 1.25,
    "index": "c0C2",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t970",
@@ -2473,7 +2535,8 @@
    "originalText": "0",
    "lineHeight": 1.25,
    "index": "c0C3",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "e971",
@@ -2516,7 +2579,8 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c0C4"
+   "index": "c0C4",
+   "customData": {"seq":1}
   },
   {
    "id": "t972",
@@ -2553,7 +2617,8 @@
    "originalText": "E\u2082\u2081",
    "lineHeight": 1.25,
    "index": "c0C5",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "e973",
@@ -2596,7 +2661,8 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c0C6"
+   "index": "c0C6",
+   "customData": {"seq":2}
   },
   {
    "id": "t974",
@@ -2633,7 +2699,8 @@
    "originalText": "E\u2083\u2081",
    "lineHeight": 1.25,
    "index": "c0C7",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "e975",
@@ -2676,7 +2743,8 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c0C8"
+   "index": "c0C8",
+   "customData": {"seq":3}
   },
   {
    "id": "t976",
@@ -2713,7 +2781,8 @@
    "originalText": "E\u2083\u2082",
    "lineHeight": 1.25,
    "index": "c0C9",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   },
   {
    "id": "t977",
@@ -2750,7 +2819,8 @@
    "originalText": "A",
    "lineHeight": 1.25,
    "index": "c0CA",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":0}
   },
   {
    "id": "t978",
@@ -2787,7 +2857,8 @@
    "originalText": "one zero",
    "lineHeight": 1.25,
    "index": "c0CB",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":1}
   },
   {
    "id": "t979",
@@ -2824,7 +2895,8 @@
    "originalText": "column 1 clear",
    "lineHeight": 1.25,
    "index": "c0CC",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":2}
   },
   {
    "id": "t980",
@@ -2861,7 +2933,8 @@
    "originalText": "U, pivots 2, 1, 4",
    "lineHeight": 1.25,
    "index": "c0CD",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {"seq":3}
   }
  ],
  "appState": {
