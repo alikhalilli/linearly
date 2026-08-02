@@ -154,6 +154,27 @@ for (const mdx of mdxFiles) {
         appState: { exportBackground: false, exportPadding: 8 },
         files: {},
       });
+      // Animation annotations. Excalidraw emits one top-level <g> per element,
+      // in element order, which is the order the figure was authored: the
+      // teaching order. Stamp each group with its sequence number (an element
+      // can override via customData.seq in the source) and normalize stroked
+      // paths with pathLength=1 so CSS can draw them on without measuring.
+      // Paths that already carry a dash pattern are left alone: pathLength
+      // rescales dash units and would render dashed strokes as solid.
+      const live = elements.filter((el) => !el.isDeleted);
+      const groups = [...svg.children].filter((c) => c.tagName === 'g');
+      const paired = groups.length === live.length;
+      groups.forEach((g, i) => {
+        const seq = paired ? (live[i].customData?.seq ?? i) : i;
+        g.setAttribute('data-s', String(seq));
+        for (const p of g.querySelectorAll('path')) {
+          const stroke = p.getAttribute('stroke');
+          const dashed =
+            p.hasAttribute('stroke-dasharray') ||
+            (p.getAttribute('style') || '').includes('dash');
+          if (stroke && stroke !== 'none' && !dashed) p.setAttribute('pathLength', '1');
+        }
+      });
       return svg.outerHTML;
     }, scene.elements);
     const processed = postProcess(exported, { ariaLabel, minWidth });

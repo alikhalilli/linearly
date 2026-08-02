@@ -576,3 +576,59 @@ pre.astro-code:not(.code-figure pre) {
 .prose h2 {
   scroll-margin-top: 1.5rem;
 }
+
+/* Figure animation. The play chip beside a figure's label replays the
+   drawing in its authored order: each element group fades in on its beat,
+   and solid strokes draw themselves on (pathLength=1 lets the dash trick
+   run without measuring; dashed strokes are excluded upstream and only
+   fade). Without the fig-anim class none of this applies, so the static
+   render is untouched. */
+.fig-anim-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-right: 0.55rem;
+  vertical-align: -0.32em;
+  border: 1.5px solid var(--color-rule);
+  border-radius: 6px;
+  background: var(--color-paper);
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  transition:
+    color 0.12s ease,
+    background-color 0.12s ease;
+}
+.fig-anim-btn:hover {
+  color: var(--color-ink);
+  background: color-mix(in oklab, var(--color-ink) 6%, var(--color-paper));
+}
+svg.fig-anim > g[data-s] {
+  opacity: 0;
+  animation: fig-in 0.28s ease forwards;
+  animation-delay: var(--fad, 0ms);
+}
+svg.fig-anim > g[data-s] path[pathLength] {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: fig-draw 0.55s ease forwards;
+  animation-delay: var(--fad, 0ms);
+}
+@keyframes fig-in {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fig-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  svg.fig-anim > g[data-s],
+  svg.fig-anim > g[data-s] path[pathLength] {
+    animation-duration: 0.01ms;
+    animation-delay: 0ms;
+  }
+}

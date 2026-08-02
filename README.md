@@ -76,7 +76,10 @@ drawings/               ← Excalidraw sources for every diagram
 
 The visual language is neobrutalist, adapted from
 [Brutal](https://github.com/eliancodes/brutal) by Elian Van Cutsem (MIT). Diagrams are drawn in
-[Excalidraw](https://excalidraw.com); sources live in `drawings/`.
+[Excalidraw](https://excalidraw.com); sources live in `drawings/`, and every figure can replay
+itself in its authored order via the play chip beside its label, an idea owed to
+[excalidraw-animate](https://github.com/dai-shi/excalidraw-animate) and
+[Excalimate](https://github.com/excalimate/excalimate).
 
 ## Citing this course
 
