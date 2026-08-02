@@ -1930,6 +1930,11 @@ projection. A good program computes it another way, because forming $A\T A$ squa
 conditioned the problem is. Lecture 13 replaces the inverse with orthonormal columns and turns
 the whole calculation into back substitution.
 
+And one payoff to look forward to. Projection ends this course as a working tool for editing
+trained models: [Lecture 30](/lectures/lecture-30) catalogs fine-tuning methods that use
+exactly this algebra to erase a chosen subspace of a weight matrix and write new behavior in
+its place. The scalpel is the $P$ you just built.
+
 <Callout type="check">
   1. Project $b = (1, 2, 3)$ onto the line through $a = (1, 1, 1)$ by hand. Find $\hat{x}$, $p$,
      and $e$, then check that $a\T e = 0$ and that $\norm{p}^2 + \norm{e}^2 = \norm{b}^2$.

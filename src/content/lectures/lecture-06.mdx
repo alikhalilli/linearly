@@ -421,7 +421,7 @@ print(tf.linalg.matrix_rank(A))  # 3  the width of C
   </Fragment>
 </CodeTabs>
 
-This factorization pays for itself in a place you may already have used. When people fine-tune a large model they freeze the weight matrix $W$ and learn a thin $C$ and a wide $R$ beside it. The trick is called LoRA, and the thing they train is $CR$, whose waist is the whole point.
+This factorization pays for itself in a place you may already have used. When people fine-tune a large model they freeze the weight matrix $W$ and learn a thin $C$ and a wide $R$ beside it. The trick is called LoRA, and the thing they train is $CR$, whose waist is the whole point. Much later, [Lecture 29](/lectures/lecture-29) turns this paragraph into a whole chapter, trains one for real, and sorts LoRA's forty descendants by the shape of their change.
 
 <Figure n="3">
   <svg slot="drawing" viewBox="0 0 548.9 262" width="549" role="img" aria-label="A large square labelled W, frozen, holding 16,777,216 numbers, plus a thin green C times a wide orange R. The shared dimension r equals 8 is marked in yellow as the waist, and the update C R holds 65,536 numbers." style="max-width:100%;height:auto">

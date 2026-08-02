@@ -499,6 +499,35 @@ const thumbs = {
     s += txt(140, 140, '0.2% of the weights train', C.green, 11);
     return s;
   },
+
+  // 30 · The field guide — six family glyphs in a specimen grid.
+  'lecture-30': () => {
+    let s = '';
+    const cell = (cx, cy) => `<rect x="${cx - 36}" y="${cy - 26}" width="72" height="52" rx="4" fill="none" stroke="${ink}" stroke-width="1.6" opacity="0.4"/>`;
+    const cols = [58, 132, 206];
+    const rows = [44, 108];
+    for (const cy of rows) for (const cx of cols) s += cell(cx, cy);
+    // waist
+    s += `<rect x="${cols[0] - 20}" y="${rows[0] - 16}" width="6" height="32" rx="2" fill="${C.green}"/>`;
+    s += `<rect x="${cols[0] - 8}" y="${rows[0] - 3}" width="30" height="6" rx="2" fill="${C.green}"/>`;
+    // kron tiles
+    for (let r = 0; r < 2; r++) for (let c = 0; c < 2; c++)
+      s += `<rect x="${cols[1] - 18 + c * 20}" y="${rows[0] - 18 + r * 20}" width="16" height="16" rx="2" fill="${C.green}" opacity="${r === c ? 0.9 : 0.35}"/>`;
+    // rotation
+    s += `<circle cx="${cols[2]}" cy="${rows[0]}" r="16" fill="none" stroke="${C.blue}" stroke-width="2.2"/>`;
+    s += `<line x1="${cols[2]}" y1="${rows[0]}" x2="${cols[2] + 11}" y2="${rows[0] - 11}" stroke="${C.blue}" stroke-width="2.2" stroke-linecap="round"/>`;
+    // spectrum cells
+    s += `<rect x="${cols[0] - 16}" y="${rows[1] - 14}" width="12" height="12" rx="2" fill="${C.yellow}"/>`;
+    s += `<rect x="${cols[0] + 4}" y="${rows[1] + 2}" width="12" height="12" rx="2" fill="${C.yellow}"/>`;
+    // dial strip
+    for (let i = 0; i < 3; i++)
+      s += `<rect x="${cols[1] - 20 + i * 16}" y="${rows[1] - 6}" width="12" height="12" rx="2" fill="${C.green}"/>`;
+    // prompt strips
+    for (let i = 0; i < 3; i++)
+      s += `<rect x="${cols[2] - 20 + i * 15}" y="${rows[1] - 16}" width="10" height="32" rx="2" fill="${C.purple}" opacity="0.85"/>`;
+    s += txt(26, 148, '46 adapters, one drawing each', ink, 11);
+    return s;
+  },
 };
 
 const dir = join(import.meta.dirname, '..', 'src', 'assets', 'thumbs');

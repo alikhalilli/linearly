@@ -616,7 +616,8 @@ by a comfortable margin.
 
 The PEFT library's tuner folder holds about forty named methods, and the names churn every
 few months. The shapes do not. Sorted by the shape of $\Delta W$, the whole zoo collapses
-into six families.
+into six families. This section draws the map; [Lecture 30](/lectures/lecture-30) is the
+full field guide behind it, every method in the library with its own drawing.
 
 <Figure n="5">
   <svg slot="drawing" viewBox="0 0 912.44 552" width="912" role="img" aria-label="Six cards, one per family, each with a small drawing, method names, and its measured trained percentage. Add a thin product: LoRA, AdaLoRA, HiRA, DoRA, 0.22 percent. Rotate, do not add: OFT, BOFT, HRA, 0.27 percent. A few coefficients, a fixed basis: FourierFT, WaveFT, 0.0097 percent. A structured product: LoKr and LoHa, 0.012 percent. Rescale the channels: IA3, VeRA, RandLoRA, 0.0056 percent. Leave W alone, tune the input: prompt, prefix, p-tuning, 0.0029 percent." style="max-width:100%;height:auto;min-width:560px">
@@ -1332,8 +1333,9 @@ Two families are missing from this walk, because each earns its own section.
 
 <Callout type="note">
   The names in the table are the stable ones. The library's 2025 and 2026 arrivals, FRoD,
-  PEANuT, Lily, MiSS, RoAD and a dozen more, are variations inside the same six shapes.
+  PEANuT, Lily, MiSS, RoAd and a dozen more, are variations inside the same six shapes.
   Learn the families and the next reading of the release notes costs minutes.
+  {' '}[Lecture 30](/lectures/lecture-30) draws every one of them, method by method.
 </Callout>
 
 ## Rotate, do not add

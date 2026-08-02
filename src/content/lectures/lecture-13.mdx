@@ -2380,6 +2380,12 @@ columns coincide exactly, $r_{22}$ comes out zero and you divide by it. The tool
 honestly, and handles nearly-dependent columns better than anything here, is the singular value
 decomposition, which Part VI reaches by combining this lecture with the next two.
 
+The third is far away and worth a bookmark. The promise $Q$ makes, lengths kept exactly, becomes
+an engineering guarantee in [Lecture 29](/lectures/lecture-29): a whole family of fine-tuning
+methods updates a trained network by rotating its weights, chosen precisely because an orthogonal
+matrix cannot blow up or crush anything it touches. The mirrors $I - 2uu^{\T}$ from this
+lecture's engine room reappear there with their normals in training.
+
 <Callout type="check">
   1. The vectors $(1, 1, 0)$ and $(1, -1, 0)$ are perpendicular. Normalize them and add a third
      to make a square $Q$. Verify $Q\T Q = I$ by hand.
