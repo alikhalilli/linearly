@@ -45,7 +45,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1Ft",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1086",
@@ -97,7 +100,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1Fx",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1087",
@@ -141,7 +147,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1Fy",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1088",
@@ -185,7 +194,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1Fz",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1090",
@@ -213,7 +225,10 @@
       "updated": 1785572750464,
       "link": null,
       "locked": false,
-      "index": "c1G1"
+      "index": "c1G1",
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e1091",
@@ -250,7 +265,10 @@
       "originalText": "b",
       "lineHeight": 1.25,
       "index": "c1G2",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1092",
@@ -287,7 +305,10 @@
       "originalText": "p = Pb",
       "lineHeight": 1.25,
       "index": "c1G3",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e1093",
@@ -324,7 +345,10 @@
       "originalText": "P",
       "lineHeight": 1.25,
       "index": "c1G4",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1094",
@@ -361,7 +385,10 @@
       "originalText": "P again, and p does not move:",
       "lineHeight": 1.25,
       "index": "c1G5",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1095",
@@ -398,7 +425,10 @@
       "originalText": "P(Pb) = Pb",
       "lineHeight": 1.25,
       "index": "c1G6",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1083",
@@ -442,7 +472,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1G7",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1084",
@@ -486,7 +519,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1G8",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1085",
@@ -530,7 +566,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1G9",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1089",
@@ -558,7 +597,10 @@
       "updated": 1785572795164,
       "link": null,
       "locked": false,
-      "index": "c1GA"
+      "index": "c1GA",
+      "customData": {
+        "seq": 0
+      }
     }
   ],
   "appState": {

@@ -43,7 +43,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2002",
@@ -85,7 +88,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2003",
@@ -127,7 +133,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2004",
@@ -169,7 +178,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2005",
@@ -224,7 +236,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": null,
-   "polygon": true
+   "polygon": true,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2006",
@@ -279,7 +294,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": null,
-   "polygon": true
+   "polygon": true,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2007",
@@ -334,7 +352,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": null,
-   "polygon": true
+   "polygon": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2008",
@@ -389,7 +410,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": null,
-   "polygon": true
+   "polygon": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2009",
@@ -443,7 +467,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2010",
@@ -497,7 +524,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2011",
@@ -551,7 +581,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2012",
@@ -605,7 +638,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2013",
@@ -647,7 +683,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2014",
@@ -689,7 +728,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2015",
@@ -731,7 +773,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2016",
@@ -773,7 +818,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2017",
@@ -819,7 +867,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2018",
@@ -865,7 +916,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2019",
@@ -900,7 +954,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "column 1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2020",
@@ -935,7 +992,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "column 2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2021",
@@ -970,7 +1030,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "column 2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2022",
@@ -1005,7 +1068,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "column 1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2023",
@@ -1040,7 +1106,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "area 2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2024",
@@ -1075,7 +1144,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "area 2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2025",
@@ -1110,7 +1182,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "det = +2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2026",
@@ -1145,7 +1220,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "det = −2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   }
  ],
  "appState": {

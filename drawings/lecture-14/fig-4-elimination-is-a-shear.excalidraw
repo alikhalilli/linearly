@@ -56,7 +56,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": null,
-   "polygon": true
+   "polygon": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2086",
@@ -110,7 +113,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2087",
@@ -164,7 +170,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2088",
@@ -206,7 +215,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2089",
@@ -248,7 +260,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2090",
@@ -290,7 +305,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2091",
@@ -332,7 +350,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2092",
@@ -374,7 +395,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2093",
@@ -409,7 +433,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "row 1 = (3, 1)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2094",
@@ -444,7 +471,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "row 2 = (1, 2)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2095",
@@ -479,7 +509,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "row 2 − ⅓ row 1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2096",
@@ -514,7 +547,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "row 2 slides along the dotted line, parallel to row 1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2097",
@@ -549,7 +585,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "both parallelograms have area 5",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   }
  ],
  "appState": {

@@ -45,7 +45,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GB",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1097",
@@ -89,7 +92,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GC",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1098",
@@ -133,7 +139,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GD",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1099",
@@ -177,7 +186,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GE",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1100",
@@ -221,7 +233,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GF",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1101",
@@ -265,7 +280,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GG",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1102",
@@ -309,7 +327,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GH",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1103",
@@ -353,7 +374,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GI",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1104",
@@ -397,7 +421,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GJ",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1105",
@@ -441,7 +468,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GK",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1106",
@@ -485,7 +515,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GL",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1107",
@@ -529,7 +562,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GM",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1108",
@@ -573,7 +609,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GN",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1109",
@@ -617,7 +656,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GO",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1110",
@@ -661,7 +703,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GP",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1111",
@@ -705,7 +750,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1GQ",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1112",
@@ -733,7 +781,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1GR"
+      "index": "c1GR",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1113",
@@ -761,7 +812,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1GS"
+      "index": "c1GS",
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1114",
@@ -789,7 +843,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1GT"
+      "index": "c1GT",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1115",
@@ -817,7 +874,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1GU"
+      "index": "c1GU",
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1116",
@@ -845,7 +905,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1GV"
+      "index": "c1GV",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1117",
@@ -873,7 +936,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1GW"
+      "index": "c1GW",
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1118",
@@ -901,7 +967,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1GX"
+      "index": "c1GX",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1119",
@@ -929,7 +998,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1GY"
+      "index": "c1GY",
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1120",
@@ -957,7 +1029,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1GZ"
+      "index": "c1GZ",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1121",
@@ -985,7 +1060,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1Ga"
+      "index": "c1Ga",
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1122",
@@ -1013,7 +1091,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1Gb"
+      "index": "c1Gb",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1123",
@@ -1041,7 +1122,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1Gc"
+      "index": "c1Gc",
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1124",
@@ -1069,7 +1153,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1Gd"
+      "index": "c1Gd",
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1125",
@@ -1097,7 +1184,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1Ge"
+      "index": "c1Ge",
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e1126",
@@ -1125,7 +1215,10 @@
       "updated": 1785572799345,
       "link": null,
       "locked": false,
-      "index": "c1Gf"
+      "index": "c1Gf",
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e1127",
@@ -1162,7 +1255,10 @@
       "originalText": "7",
       "lineHeight": 1.25,
       "index": "c1Gg",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1128",
@@ -1199,7 +1295,10 @@
       "originalText": "7",
       "lineHeight": 1.25,
       "index": "c1Gh",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1129",
@@ -1236,7 +1335,10 @@
       "originalText": "1",
       "lineHeight": 1.25,
       "index": "c1Gi",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1130",
@@ -1273,7 +1375,10 @@
       "originalText": "2",
       "lineHeight": 1.25,
       "index": "c1Gj",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1131",
@@ -1310,7 +1415,10 @@
       "originalText": "0",
       "lineHeight": 1.25,
       "index": "c1Gk",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1132",
@@ -1347,7 +1455,10 @@
       "originalText": "2",
       "lineHeight": 1.25,
       "index": "c1Gl",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1133",
@@ -1384,7 +1495,10 @@
       "originalText": "9",
       "lineHeight": 1.25,
       "index": "c1Gm",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1134",
@@ -1421,7 +1535,10 @@
       "originalText": "9",
       "lineHeight": 1.25,
       "index": "c1Gn",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1135",
@@ -1458,7 +1575,10 @@
       "originalText": "3",
       "lineHeight": 1.25,
       "index": "c1Go",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1136",
@@ -1495,7 +1615,10 @@
       "originalText": "4",
       "lineHeight": 1.25,
       "index": "c1Gp",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1137",
@@ -1532,7 +1655,10 @@
       "originalText": "4",
       "lineHeight": 1.25,
       "index": "c1Gq",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1138",
@@ -1569,7 +1695,10 @@
       "originalText": "4",
       "lineHeight": 1.25,
       "index": "c1Gr",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1139",
@@ -1606,7 +1735,10 @@
       "originalText": "8",
       "lineHeight": 1.25,
       "index": "c1Gs",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1140",
@@ -1643,7 +1775,10 @@
       "originalText": "0",
       "lineHeight": 1.25,
       "index": "c1Gt",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1141",
@@ -1680,7 +1815,10 @@
       "originalText": "5",
       "lineHeight": 1.25,
       "index": "c1Gu",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1142",
@@ -1717,7 +1855,10 @@
       "originalText": "3",
       "lineHeight": 1.25,
       "index": "c1Gv",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1143",
@@ -1754,7 +1895,10 @@
       "originalText": "3",
       "lineHeight": 1.25,
       "index": "c1Gw",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1144",
@@ -1791,7 +1935,10 @@
       "originalText": "6",
       "lineHeight": 1.25,
       "index": "c1Gx",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1145",
@@ -1828,7 +1975,10 @@
       "originalText": "1",
       "lineHeight": 1.25,
       "index": "c1Gy",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e1146",
@@ -1865,7 +2015,10 @@
       "originalText": "0",
       "lineHeight": 1.25,
       "index": "c1Gz",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e1147",
@@ -1902,7 +2055,10 @@
       "originalText": "1",
       "lineHeight": 1.25,
       "index": "c1H0",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e1148",
@@ -1939,7 +2095,10 @@
       "originalText": "1",
       "lineHeight": 1.25,
       "index": "c1H1",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e1149",
@@ -1976,7 +2135,10 @@
       "originalText": "0",
       "lineHeight": 1.25,
       "index": "c1H2",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e1150",
@@ -2013,7 +2175,10 @@
       "originalText": "1",
       "lineHeight": 1.25,
       "index": "c1H3",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e1151",
@@ -2050,7 +2215,10 @@
       "originalText": "the picture",
       "lineHeight": 1.25,
       "index": "c1H4",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1152",
@@ -2087,7 +2255,10 @@
       "originalText": "P",
       "lineHeight": 1.25,
       "index": "c1H5",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1153",
@@ -2124,7 +2295,10 @@
       "originalText": "what is left",
       "lineHeight": 1.25,
       "index": "c1H6",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1154",
@@ -2161,7 +2335,10 @@
       "originalText": "every entry off the diagonal is 0",
       "lineHeight": 1.25,
       "index": "c1H7",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e1155",
@@ -2198,7 +2375,10 @@
       "originalText": "redact the redacted picture and nothing more happens",
       "lineHeight": 1.25,
       "index": "c1H8",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     }
   ],
   "appState": {

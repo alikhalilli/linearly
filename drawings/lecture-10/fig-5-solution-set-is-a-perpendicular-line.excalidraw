@@ -43,7 +43,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "sol",
@@ -85,7 +88,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "leg",
@@ -127,7 +133,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "h1",
@@ -169,7 +178,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "h2",
@@ -211,7 +223,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "ra",
@@ -257,7 +272,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "d0",
@@ -284,7 +302,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "d1",
@@ -311,7 +332,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "d2",
@@ -338,7 +362,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "d3",
@@ -365,7 +392,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "sw5",
@@ -392,7 +422,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "t0",
@@ -427,7 +460,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "the row space C(Aᵀ)",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "t1",
@@ -462,7 +498,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "0",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "t2",
@@ -497,7 +536,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "xᵣ",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "t3",
@@ -532,7 +574,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "x",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "t4",
@@ -567,7 +612,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "x′",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "t5",
@@ -602,7 +650,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "xᵣ + N(A)",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "t6",
@@ -637,7 +688,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "1.897",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "t7",
@@ -672,7 +726,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "2",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "t8",
@@ -707,7 +764,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Every solution sits on the dashed line. Only its foot lies in the row",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "t9",
@@ -742,7 +802,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "space, and the foot is the closest point of that line to the origin.",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 5
+      }
     }
   ],
   "appState": {

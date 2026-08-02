@@ -56,7 +56,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": null,
-   "polygon": true
+   "polygon": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2099",
@@ -111,7 +114,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": null,
-   "polygon": true
+   "polygon": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2100",
@@ -166,7 +172,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": null,
-   "polygon": true
+   "polygon": true,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2101",
@@ -220,7 +229,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2102",
@@ -274,7 +286,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2103",
@@ -328,7 +343,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2104",
@@ -370,7 +388,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2105",
@@ -412,7 +433,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2106",
@@ -454,7 +478,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2107",
@@ -489,7 +516,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "area 1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2108",
@@ -524,7 +554,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "area 5",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2109",
@@ -559,7 +592,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "area 10",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2110",
@@ -594,7 +630,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "A",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2111",
@@ -629,7 +668,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "B",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2112",
@@ -664,7 +706,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "det B times det A = 2 × 5 = 10 = det BA",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   }
  ],
  "appState": {

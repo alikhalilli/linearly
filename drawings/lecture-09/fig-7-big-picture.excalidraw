@@ -51,7 +51,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "br",
@@ -101,7 +104,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "row",
@@ -155,7 +161,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "col",
@@ -209,7 +218,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "nul",
@@ -263,7 +275,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "lnul",
@@ -317,7 +332,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "a1",
@@ -359,7 +377,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "customData": {
+        "seq": 6
+      }
     },
     {
       "id": "a2",
@@ -401,7 +422,11 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "customData": {
+        "seq": 7,
+        "note": "the null piece dies on the way"
+      }
     },
     {
       "id": "c0",
@@ -443,7 +468,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "c1",
@@ -485,7 +513,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "c2",
@@ -527,7 +558,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "c3",
@@ -569,7 +603,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "d0",
@@ -596,7 +633,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "d1",
@@ -623,7 +663,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "d2",
@@ -650,7 +693,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "d3",
@@ -677,7 +723,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 6
+      }
     },
     {
       "id": "d4",
@@ -704,7 +753,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "d5",
@@ -731,7 +783,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "t0",
@@ -766,7 +821,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "row space C(Aᵀ)",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "t1",
@@ -801,7 +859,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "dim r = 2",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "t2",
@@ -836,7 +897,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "pivot rows of R",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "t3",
@@ -871,7 +935,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "null space N(A)",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "t4",
@@ -906,7 +973,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "dim n − r = 2",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "t5",
@@ -941,7 +1011,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "special solutions",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "t6",
@@ -976,7 +1049,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "column space C(A)",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "t7",
@@ -1011,7 +1087,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "dim r = 2",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "t8",
@@ -1046,7 +1125,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "pivot columns of A",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "t9",
@@ -1081,7 +1163,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "left null space N(Aᵀ)",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "t10",
@@ -1116,7 +1201,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "dim m − r = 1",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "t11",
@@ -1151,7 +1239,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "last rows of E",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "t12",
@@ -1186,7 +1277,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "A xᵣ = A x = b",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 6
+      }
     },
     {
       "id": "t13",
@@ -1221,7 +1315,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "A xₙ = 0",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 7
+      }
     },
     {
       "id": "t14",
@@ -1256,7 +1353,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "xᵣ",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "t15",
@@ -1291,7 +1391,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "xₙ",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "t16",
@@ -1326,7 +1429,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "x = xᵣ + xₙ",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "t17",
@@ -1361,7 +1467,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "b",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 6
+      }
     },
     {
       "id": "t18",
@@ -1396,7 +1505,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "0",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "t19",
@@ -1431,7 +1543,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "0",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "t20",
@@ -1466,7 +1581,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "R⁴",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "t21",
@@ -1501,7 +1619,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "R³",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     }
   ],
   "appState": {

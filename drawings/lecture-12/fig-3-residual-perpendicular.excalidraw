@@ -45,7 +45,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22s",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1271",
@@ -89,7 +92,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22t",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1272",
@@ -133,7 +139,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22u",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1273",
@@ -177,7 +186,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22v",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1274",
@@ -221,7 +233,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22w",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1275",
@@ -265,7 +280,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22x",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1276",
@@ -309,7 +327,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22y",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1277",
@@ -353,7 +374,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22z",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1278",
@@ -397,7 +421,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c230",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1279",
@@ -441,7 +468,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c231",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1280",
@@ -469,7 +499,10 @@
    "updated": 1785574047342,
    "link": null,
    "locked": false,
-   "index": "c232"
+   "index": "c232",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1281",
@@ -497,7 +530,10 @@
    "updated": 1785574047342,
    "link": null,
    "locked": false,
-   "index": "c233"
+   "index": "c233",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1282",
@@ -525,7 +561,10 @@
    "updated": 1785574047342,
    "link": null,
    "locked": false,
-   "index": "c234"
+   "index": "c234",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1283",
@@ -562,7 +601,10 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c235",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1284",
@@ -599,7 +641,10 @@
    "originalText": "5",
    "lineHeight": 1.25,
    "index": "c236",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1285",
@@ -636,7 +681,10 @@
    "originalText": "0.6",
    "lineHeight": 1.25,
    "index": "c237",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1286",
@@ -673,7 +721,10 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c238",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1287",
@@ -710,7 +761,10 @@
    "originalText": "3",
    "lineHeight": 1.25,
    "index": "c239",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1288",
@@ -747,7 +801,10 @@
    "originalText": "2.2",
    "lineHeight": 1.25,
    "index": "c23A",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1289",
@@ -784,7 +841,10 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c23B",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1290",
@@ -821,7 +881,10 @@
    "originalText": "2",
    "lineHeight": 1.25,
    "index": "c23C",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1291",
@@ -858,7 +921,10 @@
    "originalText": "\u22120.5",
    "lineHeight": 1.25,
    "index": "c23D",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1292",
@@ -895,7 +961,10 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c23E",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1293",
@@ -932,7 +1001,10 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c23F",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1294",
@@ -969,7 +1041,10 @@
    "originalText": "\u22120.2",
    "lineHeight": 1.25,
    "index": "c23G",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1295",
@@ -1006,7 +1081,10 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c23H",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1296",
@@ -1043,7 +1121,10 @@
    "originalText": "4",
    "lineHeight": 1.25,
    "index": "c23I",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1297",
@@ -1080,7 +1161,10 @@
    "originalText": "\u22122.1",
    "lineHeight": 1.25,
    "index": "c23J",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1298",
@@ -1117,7 +1201,10 @@
    "originalText": "0",
    "lineHeight": 1.25,
    "index": "c23K",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1299",
@@ -1154,7 +1241,10 @@
    "originalText": "0",
    "lineHeight": 1.25,
    "index": "c23L",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1300",
@@ -1191,7 +1281,10 @@
    "originalText": "=",
    "lineHeight": 1.25,
    "index": "c23M",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1301",
@@ -1228,7 +1321,10 @@
    "originalText": "ones",
    "lineHeight": 1.25,
    "index": "c23N",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1302",
@@ -1265,7 +1361,10 @@
    "originalText": "w",
    "lineHeight": 1.25,
    "index": "c23O",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1303",
@@ -1302,7 +1401,10 @@
    "originalText": "A\u1d40",
    "lineHeight": 1.25,
    "index": "c23P",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1304",
@@ -1339,7 +1441,10 @@
    "originalText": "e",
    "lineHeight": 1.25,
    "index": "c23Q",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1305",
@@ -1376,7 +1481,10 @@
    "originalText": "0.6 + 2.2 \u2212 0.5 \u2212 0.2 \u2212 2.1 = 0",
    "lineHeight": 1.25,
    "index": "c23R",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1306",
@@ -1413,7 +1521,10 @@
    "originalText": "3 + 6.6 \u2212 1 \u2212 0.2 \u2212 8.4 = 0",
    "lineHeight": 1.25,
    "index": "c23S",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1307",
@@ -1450,7 +1561,10 @@
    "originalText": "the residual leans on neither column,",
    "lineHeight": 1.25,
    "index": "c23T",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e1308",
@@ -1487,7 +1601,10 @@
    "originalText": "so no line can use it to improve",
    "lineHeight": 1.25,
    "index": "c23U",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 5
+   }
   }
  ],
  "appState": {

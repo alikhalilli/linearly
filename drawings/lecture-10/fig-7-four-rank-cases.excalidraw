@@ -29,7 +29,10 @@
       "updated": 1785572666483,
       "link": null,
       "locked": false,
-      "index": "c1DV"
+      "index": "c1DV",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "pt0",
@@ -66,7 +69,10 @@
       "originalText": "1. square and invertible, r = m = n",
       "lineHeight": 1.25,
       "index": "c1DW",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "pv0",
@@ -103,7 +109,11 @@
       "originalText": "Ax = b: exactly one solution",
       "lineHeight": 1.25,
       "index": "c1DX",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1,
+        "note": "no null space either side, invertible"
+      }
     },
     {
       "id": "tp0L",
@@ -159,7 +169,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1DY",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "o0L",
@@ -187,7 +200,10 @@
       "updated": 1785572666483,
       "link": null,
       "locked": false,
-      "index": "c1DZ"
+      "index": "c1DZ",
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "tp0R",
@@ -243,7 +259,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1Da",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "o0R",
@@ -271,7 +290,10 @@
       "updated": 1785572666483,
       "link": null,
       "locked": false,
-      "index": "c1Db"
+      "index": "c1Db",
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "nl0",
@@ -308,7 +330,10 @@
       "originalText": "C(Aᵀ)",
       "lineHeight": 1.25,
       "index": "c1Dc",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "nl0d",
@@ -345,7 +370,10 @@
       "originalText": "dim r",
       "lineHeight": 1.25,
       "index": "c1Dc",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "nr0",
@@ -382,7 +410,10 @@
       "originalText": "C(A)",
       "lineHeight": 1.25,
       "index": "c1Dd",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "nr0d",
@@ -419,7 +450,10 @@
       "originalText": "dim r",
       "lineHeight": 1.25,
       "index": "c1Dd",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "tL0",
@@ -456,7 +490,10 @@
       "originalText": "N(A) = 0",
       "lineHeight": 1.25,
       "index": "c1De",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "tR0",
@@ -493,7 +530,10 @@
       "originalText": "N(Aᵀ) = 0",
       "lineHeight": 1.25,
       "index": "c1Df",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "pn1",
@@ -521,7 +561,10 @@
       "updated": 1785572666483,
       "link": null,
       "locked": false,
-      "index": "c1Dg"
+      "index": "c1Dg",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "pt1",
@@ -558,7 +601,10 @@
       "originalText": "2. short and wide, r = m < n",
       "lineHeight": 1.25,
       "index": "c1Dh",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "pv1",
@@ -595,7 +641,10 @@
       "originalText": "Ax = b: always solvable, infinitely many",
       "lineHeight": 1.25,
       "index": "c1Di",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "tp1L",
@@ -651,7 +700,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1Dj",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "o1L",
@@ -679,7 +731,10 @@
       "updated": 1785572666483,
       "link": null,
       "locked": false,
-      "index": "c1Dk"
+      "index": "c1Dk",
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "tp1R",
@@ -735,7 +790,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1Dl",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "o1R",
@@ -763,7 +821,10 @@
       "updated": 1785572666483,
       "link": null,
       "locked": false,
-      "index": "c1Dm"
+      "index": "c1Dm",
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "nl1",
@@ -800,7 +861,10 @@
       "originalText": "C(Aᵀ)",
       "lineHeight": 1.25,
       "index": "c1Dn",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "nl1d",
@@ -837,7 +901,10 @@
       "originalText": "dim r",
       "lineHeight": 1.25,
       "index": "c1Dn",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "nr1",
@@ -874,7 +941,10 @@
       "originalText": "C(A)",
       "lineHeight": 1.25,
       "index": "c1Do",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "nr1d",
@@ -911,7 +981,10 @@
       "originalText": "dim r",
       "lineHeight": 1.25,
       "index": "c1Do",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "nL1",
@@ -967,7 +1040,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1Dp",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "tL1",
@@ -1004,7 +1080,10 @@
       "originalText": "N(A)",
       "lineHeight": 1.25,
       "index": "c1Dq",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "tL1d",
@@ -1041,7 +1120,10 @@
       "originalText": "dim n − r",
       "lineHeight": 1.25,
       "index": "c1Dq",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "tR1",
@@ -1078,7 +1160,10 @@
       "originalText": "N(Aᵀ) = 0",
       "lineHeight": 1.25,
       "index": "c1Dr",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "pn2",
@@ -1106,7 +1191,10 @@
       "updated": 1785572666483,
       "link": null,
       "locked": false,
-      "index": "c1Ds"
+      "index": "c1Ds",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "pt2",
@@ -1143,7 +1231,10 @@
       "originalText": "3. tall and thin, r = n < m",
       "lineHeight": 1.25,
       "index": "c1Dt",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "pv2",
@@ -1180,7 +1271,10 @@
       "originalText": "Ax = b: zero or one solution",
       "lineHeight": 1.25,
       "index": "c1Du",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "tp2L",
@@ -1236,7 +1330,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1Dv",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "o2L",
@@ -1264,7 +1361,10 @@
       "updated": 1785572666483,
       "link": null,
       "locked": false,
-      "index": "c1Dw"
+      "index": "c1Dw",
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "tp2R",
@@ -1320,7 +1420,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1Dx",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "o2R",
@@ -1348,7 +1451,10 @@
       "updated": 1785572666483,
       "link": null,
       "locked": false,
-      "index": "c1Dy"
+      "index": "c1Dy",
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "nl2",
@@ -1385,7 +1491,10 @@
       "originalText": "C(Aᵀ)",
       "lineHeight": 1.25,
       "index": "c1Dz",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "nl2d",
@@ -1422,7 +1531,10 @@
       "originalText": "dim r",
       "lineHeight": 1.25,
       "index": "c1Dz",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "nr2",
@@ -1459,7 +1571,10 @@
       "originalText": "C(A)",
       "lineHeight": 1.25,
       "index": "c1E0",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "nr2d",
@@ -1496,7 +1611,10 @@
       "originalText": "dim r",
       "lineHeight": 1.25,
       "index": "c1E0",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "tL2",
@@ -1533,7 +1651,10 @@
       "originalText": "N(A) = 0",
       "lineHeight": 1.25,
       "index": "c1E1",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "nR2",
@@ -1589,7 +1710,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1E2",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "tR2",
@@ -1626,7 +1750,10 @@
       "originalText": "N(Aᵀ)",
       "lineHeight": 1.25,
       "index": "c1E3",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "tR2d",
@@ -1663,7 +1790,10 @@
       "originalText": "dim m − r",
       "lineHeight": 1.25,
       "index": "c1E3",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "pn3",
@@ -1691,7 +1821,10 @@
       "updated": 1785572666483,
       "link": null,
       "locked": false,
-      "index": "c1E4"
+      "index": "c1E4",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "pt3",
@@ -1728,7 +1861,10 @@
       "originalText": "4. not full rank, r < m and r < n",
       "lineHeight": 1.25,
       "index": "c1E5",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "pv3",
@@ -1765,7 +1901,10 @@
       "originalText": "Ax = b: zero or infinitely many",
       "lineHeight": 1.25,
       "index": "c1E6",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "tp3L",
@@ -1821,7 +1960,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1E7",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "o3L",
@@ -1849,7 +1991,10 @@
       "updated": 1785572666483,
       "link": null,
       "locked": false,
-      "index": "c1E8"
+      "index": "c1E8",
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "tp3R",
@@ -1905,7 +2050,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1E9",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "o3R",
@@ -1933,7 +2081,10 @@
       "updated": 1785572666483,
       "link": null,
       "locked": false,
-      "index": "c1EA"
+      "index": "c1EA",
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "nl3",
@@ -1970,7 +2121,10 @@
       "originalText": "C(Aᵀ)",
       "lineHeight": 1.25,
       "index": "c1EB",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "nl3d",
@@ -2007,7 +2161,10 @@
       "originalText": "dim r",
       "lineHeight": 1.25,
       "index": "c1EB",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "nr3",
@@ -2044,7 +2201,10 @@
       "originalText": "C(A)",
       "lineHeight": 1.25,
       "index": "c1EC",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "nr3d",
@@ -2081,7 +2241,10 @@
       "originalText": "dim r",
       "lineHeight": 1.25,
       "index": "c1EC",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "nL3",
@@ -2137,7 +2300,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1ED",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "tL3",
@@ -2174,7 +2340,10 @@
       "originalText": "N(A)",
       "lineHeight": 1.25,
       "index": "c1EE",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "tL3d",
@@ -2211,7 +2380,10 @@
       "originalText": "dim n − r",
       "lineHeight": 1.25,
       "index": "c1EE",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "nR3",
@@ -2267,7 +2439,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c1EF",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "tR3",
@@ -2304,7 +2479,10 @@
       "originalText": "N(Aᵀ)",
       "lineHeight": 1.25,
       "index": "c1EG",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "tR3d",
@@ -2341,7 +2519,10 @@
       "originalText": "dim m − r",
       "lineHeight": 1.25,
       "index": "c1EG",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     }
   ],
   "appState": {

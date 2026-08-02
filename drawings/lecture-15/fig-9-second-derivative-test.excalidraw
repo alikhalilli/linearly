@@ -45,7 +45,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2BU",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e7002",
@@ -89,7 +92,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2BV",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e7003",
@@ -132,7 +138,10 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c2BW"
+      "index": "c2BW",
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e7004",
@@ -572,7 +581,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2BX",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7005",
@@ -660,7 +672,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2BY",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7006",
@@ -748,7 +763,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2BZ",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7007",
@@ -836,7 +854,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Ba",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7008",
@@ -924,7 +945,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Bb",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7009",
@@ -1012,7 +1036,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Bc",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7010",
@@ -1100,7 +1127,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Bd",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7011",
@@ -1188,7 +1218,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Be",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7012",
@@ -1276,7 +1309,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Bf",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7013",
@@ -1364,7 +1400,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Bg",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7014",
@@ -1452,7 +1491,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Bh",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7015",
@@ -1540,7 +1582,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Bi",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7016",
@@ -1628,7 +1673,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Bj",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7017",
@@ -1764,7 +1812,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2Bk",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e7018",
@@ -1792,7 +1843,10 @@
       "updated": 1785574217756,
       "link": null,
       "locked": false,
-      "index": "c2Bl"
+      "index": "c2Bl",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e7019",
@@ -1829,7 +1883,10 @@
       "originalText": "more directions",
       "lineHeight": 1.25,
       "index": "c2Bm",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e7020",
@@ -1866,7 +1923,10 @@
       "originalText": "f(x) = x², f″ = 2 > 0",
       "lineHeight": 1.25,
       "index": "c2Bn",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e7021",
@@ -1903,7 +1963,10 @@
       "originalText": "λ₁ = 1, λ₂ = 9, both > 0",
       "lineHeight": 1.25,
       "index": "c2Bo",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7022",
@@ -1940,7 +2003,10 @@
       "originalText": "one variable: one number decides",
       "lineHeight": 1.25,
       "index": "c2Bp",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e7023",
@@ -1977,7 +2043,10 @@
       "originalText": "two variables: the eigenvalues decide",
       "lineHeight": 1.25,
       "index": "c2Bq",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e7024",
@@ -2014,7 +2083,10 @@
       "originalText": "λ₁ > 0, λ₂ > 0",
       "lineHeight": 1.25,
       "index": "c2Br",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e7025",
@@ -2051,7 +2123,10 @@
       "originalText": "λ₁ > 0, λ₂ < 0",
       "lineHeight": 1.25,
       "index": "c2Bs",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "e7026",
@@ -2088,7 +2163,10 @@
       "originalText": "λ₁ > 0, λ₂ = 0",
       "lineHeight": 1.25,
       "index": "c2Bt",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "e7027",
@@ -2118,7 +2196,10 @@
       "updated": 1785574217756,
       "link": null,
       "locked": false,
-      "index": "c2Bu"
+      "index": "c2Bu",
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e7028",
@@ -2155,7 +2236,10 @@
       "originalText": "a bowl",
       "lineHeight": 1.25,
       "index": "c2Bv",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e7029",
@@ -2185,7 +2269,10 @@
       "updated": 1785574222935,
       "link": null,
       "locked": false,
-      "index": "c2Bw"
+      "index": "c2Bw",
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "e7030",
@@ -2222,7 +2309,10 @@
       "originalText": "a saddle",
       "lineHeight": 1.25,
       "index": "c2Bx",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "e7031",
@@ -2252,7 +2342,10 @@
       "updated": 1785574217756,
       "link": null,
       "locked": false,
-      "index": "c2By"
+      "index": "c2By",
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "e7032",
@@ -2289,7 +2382,10 @@
       "originalText": "a valley",
       "lineHeight": 1.25,
       "index": "c2Bz",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 5
+      }
     }
   ],
   "appState": {

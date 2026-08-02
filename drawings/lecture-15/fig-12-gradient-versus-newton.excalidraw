@@ -28,7 +28,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "n9002",
@@ -55,7 +58,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "n9003",
@@ -82,7 +88,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "n9004",
@@ -124,7 +133,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "n9005",
@@ -166,7 +178,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "n9006",
@@ -193,7 +208,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "n9007",
@@ -220,7 +238,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "n9008",
@@ -247,7 +268,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "n9009",
@@ -282,7 +306,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "start",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "n9010",
@@ -309,7 +336,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "n9011",
@@ -344,7 +374,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "gradient step",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "n9012",
@@ -379,7 +412,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "lands across the valley",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "n9013",
@@ -406,7 +442,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "n9014",
@@ -441,7 +480,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "Newton step",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "n9015",
@@ -476,7 +518,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "lands on the minimum",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   }
  ],
  "appState": {

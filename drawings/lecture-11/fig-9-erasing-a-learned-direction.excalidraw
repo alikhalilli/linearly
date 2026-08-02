@@ -43,7 +43,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e7002",
@@ -78,7 +81,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e7003",
@@ -120,7 +126,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e7004",
@@ -155,7 +164,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e7005",
@@ -197,7 +209,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e7006",
@@ -232,7 +247,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "4",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e7007",
@@ -274,7 +292,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e7008",
@@ -309,7 +330,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "6",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e7009",
@@ -351,7 +375,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e7010",
@@ -386,7 +413,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the line that survives",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e7011",
@@ -428,7 +458,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e7012",
@@ -470,7 +503,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e7013",
@@ -512,7 +548,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e7014",
@@ -554,7 +593,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e7015",
@@ -581,7 +623,11 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 4,
+    "note": "not shrunk, exactly zero"
+   }
   },
   {
    "id": "e7016",
@@ -608,7 +654,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e7017",
@@ -643,7 +692,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "receptionist 6.26",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e7018",
@@ -670,7 +722,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e7019",
@@ -697,7 +752,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e7020",
@@ -732,7 +790,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "nurse 4.92",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e7021",
@@ -759,7 +820,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e7022",
@@ -786,7 +850,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e7023",
@@ -821,7 +888,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "plumber 3.13",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e7024",
@@ -848,7 +918,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e7025",
@@ -875,7 +948,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e7026",
@@ -910,7 +986,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "engineer 1.79",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e7027",
@@ -945,7 +1024,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the number is how far the word reaches along a",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e7028",
@@ -980,7 +1062,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "after the projection every one of them is exactly 0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   }
  ],
  "appState": {

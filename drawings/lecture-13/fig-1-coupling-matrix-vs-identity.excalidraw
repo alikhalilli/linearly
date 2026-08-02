@@ -43,7 +43,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2002",
@@ -85,7 +88,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2003",
@@ -127,7 +133,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2004",
@@ -154,7 +163,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2005",
@@ -181,7 +193,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2006",
@@ -223,7 +238,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2007",
@@ -265,7 +283,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2008",
@@ -311,7 +332,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2009",
@@ -365,7 +389,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2010",
@@ -407,7 +434,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2011",
@@ -449,7 +479,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2012",
@@ -491,7 +524,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2013",
@@ -533,7 +569,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2014",
@@ -575,7 +614,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2015",
@@ -617,7 +659,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2016",
@@ -663,7 +708,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2017",
@@ -717,7 +765,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2018",
@@ -759,7 +810,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2019",
@@ -801,7 +855,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2020",
@@ -836,7 +893,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2021",
@@ -871,7 +931,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2022",
@@ -906,7 +969,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "q\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2023",
@@ -941,7 +1007,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "q\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2024",
@@ -976,7 +1045,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "not a right angle",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2025",
@@ -1011,7 +1083,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2026",
@@ -1046,7 +1121,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2027",
@@ -1081,7 +1159,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2028",
@@ -1116,7 +1197,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2029",
@@ -1151,7 +1235,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "10",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2030",
@@ -1186,7 +1273,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "5",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2031",
@@ -1221,7 +1311,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "5",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2032",
@@ -1256,7 +1349,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "5",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2033",
@@ -1291,7 +1387,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "A\u1d40A",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2034",
@@ -1326,7 +1425,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the columns overlap",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2035",
@@ -1361,7 +1463,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "q\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2036",
@@ -1396,7 +1501,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "q\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2037",
@@ -1431,7 +1539,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2038",
@@ -1466,7 +1577,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2039",
@@ -1501,7 +1615,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2040",
@@ -1536,7 +1653,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2041",
@@ -1571,7 +1691,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "Q\u1d40Q = I",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2042",
@@ -1606,7 +1729,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "no overlap at all",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   }
  ],
  "appState": {

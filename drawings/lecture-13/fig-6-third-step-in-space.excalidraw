@@ -56,7 +56,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": null,
-   "polygon": true
+   "polygon": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2115",
@@ -110,7 +113,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2116",
@@ -152,7 +158,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2117",
@@ -194,7 +203,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2118",
@@ -236,7 +248,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2119",
@@ -278,7 +293,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2120",
@@ -320,7 +338,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2121",
@@ -362,7 +383,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2122",
@@ -408,7 +432,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2123",
@@ -443,7 +470,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "q₁",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2124",
@@ -478,7 +508,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "q₂",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2125",
@@ -513,7 +546,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "q₃",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2126",
@@ -548,7 +584,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "c",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2127",
@@ -583,7 +622,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "C",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2128",
@@ -618,7 +660,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the plane q₁ and q₂ span",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   }
  ],
  "appState": {

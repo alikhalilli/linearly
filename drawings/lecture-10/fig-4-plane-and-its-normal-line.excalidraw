@@ -55,7 +55,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "f0",
@@ -97,7 +100,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "f1",
@@ -139,7 +145,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "f2",
@@ -181,7 +190,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "f3",
@@ -223,7 +235,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "f4",
@@ -265,7 +280,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "f5",
@@ -307,7 +325,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "n",
@@ -349,7 +370,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "nd",
@@ -391,7 +415,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "ra",
@@ -437,7 +464,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "o",
@@ -464,7 +494,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "sw6",
@@ -491,7 +524,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "sw1",
@@ -518,7 +554,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "t0",
@@ -553,7 +592,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "N(A\u1d40) = span{(\u22121, \u22121, 1)}",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "t1",
@@ -588,7 +630,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a line, dim m \u2212 r = 1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "t2",
@@ -623,7 +668,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "C(A)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "t3",
@@ -658,7 +706,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a plane, dim r = 2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "t4",
@@ -693,7 +744,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "t5",
@@ -728,7 +782,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "every b that A can",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "t6",
@@ -763,7 +820,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "produce lies here",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   }
  ],
  "appState": {

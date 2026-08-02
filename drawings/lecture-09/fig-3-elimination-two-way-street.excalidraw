@@ -29,7 +29,10 @@
    "updated": 1785572594700,
    "link": null,
    "locked": false,
-   "index": "c18A"
+   "index": "c18A",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "lr0",
@@ -57,7 +60,10 @@
    "updated": 1785572594700,
    "link": null,
    "locked": false,
-   "index": "c18B"
+   "index": "c18B",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "ta0",
@@ -94,7 +100,10 @@
    "originalText": "row\u2081 = (1, 2, 2, 4)",
    "lineHeight": 1.25,
    "index": "c18C",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "tr0",
@@ -131,7 +140,10 @@
    "originalText": "(1, 0, 2, 0)",
    "lineHeight": 1.25,
    "index": "c18D",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "la1",
@@ -159,7 +171,10 @@
    "updated": 1785572594700,
    "link": null,
    "locked": false,
-   "index": "c18E"
+   "index": "c18E",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "lr1",
@@ -187,7 +202,10 @@
    "updated": 1785572594700,
    "link": null,
    "locked": false,
-   "index": "c18F"
+   "index": "c18F",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "ta1",
@@ -224,7 +242,10 @@
    "originalText": "row\u2082 = (3, 8, 6, 16)",
    "lineHeight": 1.25,
    "index": "c18G",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "tr1",
@@ -261,7 +282,10 @@
    "originalText": "(0, 1, 0, 2)",
    "lineHeight": 1.25,
    "index": "c18H",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "la2",
@@ -289,7 +313,10 @@
    "updated": 1785572594700,
    "link": null,
    "locked": false,
-   "index": "c18I"
+   "index": "c18I",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "lr2",
@@ -317,7 +344,10 @@
    "updated": 1785572594700,
    "link": null,
    "locked": false,
-   "index": "c18J"
+   "index": "c18J",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "ta2",
@@ -354,7 +384,10 @@
    "originalText": "row\u2083 = (4, 10, 8, 20)",
    "lineHeight": 1.25,
    "index": "c18K",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "tr2",
@@ -391,7 +424,10 @@
    "originalText": "(0, 0, 0, 0)",
    "lineHeight": 1.25,
    "index": "c18L",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "a1",
@@ -438,7 +474,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c18M"
+   "index": "c18M",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "a2",
@@ -485,7 +524,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c18N"
+   "index": "c18N",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "h1",
@@ -522,7 +564,10 @@
    "originalText": "rows of A",
    "lineHeight": 1.25,
    "index": "c18O",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "h2",
@@ -559,7 +604,10 @@
    "originalText": "rows of R",
    "lineHeight": 1.25,
    "index": "c18P",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "l1",
@@ -596,7 +644,10 @@
    "originalText": "E:  4 row\u2081 \u2212 row\u2082 = (1, 0, 2, 0)",
    "lineHeight": 1.25,
    "index": "c18Q",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "l2",
@@ -633,7 +684,10 @@
    "originalText": "E\u207b\u00b9:  1 (1, 0, 2, 0) + 2 (0, 1, 0, 2) = row\u2081",
    "lineHeight": 1.25,
    "index": "c18R",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "c1",
@@ -670,7 +724,10 @@
    "originalText": "Each side is a mix of the other, so the two row spaces are one space.",
    "lineHeight": 1.25,
    "index": "c18S",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "c2",
@@ -707,7 +764,10 @@
    "originalText": "The dashed row is the one that died: \u2212row\u2081 \u2212 row\u2082 + row\u2083 = 0.",
    "lineHeight": 1.25,
    "index": "c18T",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 5
+   }
   }
  ],
  "appState": {

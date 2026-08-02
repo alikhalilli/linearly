@@ -44,7 +44,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c1RW"
+   "index": "c1RW",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1092",
@@ -87,7 +90,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c1RX"
+   "index": "c1RX",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1093",
@@ -131,7 +137,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1RY",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1094",
@@ -175,7 +184,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1RZ",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1095",
@@ -218,7 +230,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c1Ra"
+   "index": "c1Ra",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1096",
@@ -261,7 +276,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c1Rb"
+   "index": "c1Rb",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1097",
@@ -305,7 +323,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1Rc",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1098",
@@ -348,7 +369,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c1Rd"
+   "index": "c1Rd",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1099",
@@ -391,7 +415,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c1Re"
+   "index": "c1Re",
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1100",
@@ -434,7 +461,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c1Rf"
+   "index": "c1Rf",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1101",
@@ -477,7 +507,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": "arrow",
-   "index": "c1Rg"
+   "index": "c1Rg",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1102",
@@ -521,7 +554,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1Rh",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1103",
@@ -558,7 +594,10 @@
    "originalText": "u = (3, 0)",
    "lineHeight": 1.25,
    "index": "c1Ri",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1104",
@@ -595,7 +634,10 @@
    "originalText": "Au = (12, 6)",
    "lineHeight": 1.25,
    "index": "c1Rj",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1105",
@@ -632,7 +674,10 @@
    "originalText": "2x\u2081",
    "lineHeight": 1.25,
    "index": "c1Rk",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1106",
@@ -669,7 +714,10 @@
    "originalText": "10x\u2081 (\u00d75)",
    "lineHeight": 1.25,
    "index": "c1Rl",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1107",
@@ -706,7 +754,10 @@
    "originalText": "x\u2082",
    "lineHeight": 1.25,
    "index": "c1Rm",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1108",
@@ -743,7 +794,10 @@
    "originalText": "2x\u2082 (\u00d72)",
    "lineHeight": 1.25,
    "index": "c1Rn",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1109",
@@ -780,7 +834,10 @@
    "originalText": "eigenline 1",
    "lineHeight": 1.25,
    "index": "c1Ro",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1110",
@@ -817,7 +874,10 @@
    "originalText": "eigenline 2",
    "lineHeight": 1.25,
    "index": "c1Rp",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   }
  ],
  "appState": {

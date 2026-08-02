@@ -45,7 +45,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c217",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1201",
@@ -89,7 +92,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c218",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1202",
@@ -133,7 +139,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c219",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1203",
@@ -177,7 +186,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c21A",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1204",
@@ -221,7 +233,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c21B",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1205",
@@ -265,7 +280,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c21C",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1206",
@@ -309,7 +327,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c21D",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1207",
@@ -353,7 +374,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c21E",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1208",
@@ -381,7 +405,10 @@
    "updated": 1785574011676,
    "link": null,
    "locked": false,
-   "index": "c21F"
+   "index": "c21F",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1209",
@@ -409,7 +436,10 @@
    "updated": 1785574011676,
    "link": null,
    "locked": false,
-   "index": "c21G"
+   "index": "c21G",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1210",
@@ -437,7 +467,10 @@
    "updated": 1785574011676,
    "link": null,
    "locked": false,
-   "index": "c21H"
+   "index": "c21H",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1211",
@@ -465,7 +498,10 @@
    "updated": 1785574011676,
    "link": null,
    "locked": false,
-   "index": "c21I"
+   "index": "c21I",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1212",
@@ -493,7 +529,10 @@
    "updated": 1785574011676,
    "link": null,
    "locked": false,
-   "index": "c21J"
+   "index": "c21J",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1213",
@@ -521,7 +560,10 @@
    "updated": 1785574011676,
    "link": null,
    "locked": false,
-   "index": "c21K"
+   "index": "c21K",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1214",
@@ -549,7 +591,10 @@
    "updated": 1785574011676,
    "link": null,
    "locked": false,
-   "index": "c21L"
+   "index": "c21L",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1215",
@@ -577,7 +622,10 @@
    "updated": 1785574011676,
    "link": null,
    "locked": false,
-   "index": "c21M"
+   "index": "c21M",
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e1216",
@@ -605,7 +653,10 @@
    "updated": 1785574011676,
    "link": null,
    "locked": false,
-   "index": "c21N"
+   "index": "c21N",
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e1217",
@@ -633,7 +684,10 @@
    "updated": 1785574011676,
    "link": null,
    "locked": false,
-   "index": "c21O"
+   "index": "c21O",
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e1218",
@@ -670,7 +724,10 @@
    "originalText": "2",
    "lineHeight": 1.25,
    "index": "c21P",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1219",
@@ -707,7 +764,10 @@
    "originalText": "4",
    "lineHeight": 1.25,
    "index": "c21Q",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1220",
@@ -744,7 +804,10 @@
    "originalText": "6",
    "lineHeight": 1.25,
    "index": "c21R",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1221",
@@ -781,7 +844,10 @@
    "originalText": "5",
    "lineHeight": 1.25,
    "index": "c21S",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1222",
@@ -818,7 +884,10 @@
    "originalText": "10",
    "lineHeight": 1.25,
    "index": "c21T",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1223",
@@ -855,7 +924,10 @@
    "originalText": "8",
    "lineHeight": 1.25,
    "index": "c21U",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1224",
@@ -892,7 +964,10 @@
    "originalText": "10",
    "lineHeight": 1.25,
    "index": "c21V",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1225",
@@ -929,7 +1004,10 @@
    "originalText": "12",
    "lineHeight": 1.25,
    "index": "c21W",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1226",
@@ -966,7 +1044,10 @@
    "originalText": "14",
    "lineHeight": 1.25,
    "index": "c21X",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1227",
@@ -1003,7 +1084,10 @@
    "originalText": "0",
    "lineHeight": 1.25,
    "index": "c21Y",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1228",
@@ -1040,7 +1124,10 @@
    "originalText": "\u22121",
    "lineHeight": 1.25,
    "index": "c21Z",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1229",
@@ -1077,7 +1164,10 @@
    "originalText": "\u22122",
    "lineHeight": 1.25,
    "index": "c21a",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1230",
@@ -1114,7 +1204,10 @@
    "originalText": "\u22123",
    "lineHeight": 1.25,
    "index": "c21b",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1231",
@@ -1151,7 +1244,10 @@
    "originalText": "data space: a line among points",
    "lineHeight": 1.25,
    "index": "c21c",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1232",
@@ -1188,7 +1284,10 @@
    "originalText": "weight space: a point among lines",
    "lineHeight": 1.25,
    "index": "c21d",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1233",
@@ -1225,7 +1324,10 @@
    "originalText": "w",
    "lineHeight": 1.25,
    "index": "c21e",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1234",
@@ -1262,7 +1364,10 @@
    "originalText": "target",
    "lineHeight": 1.25,
    "index": "c21f",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1235",
@@ -1299,7 +1404,10 @@
    "originalText": "C",
    "lineHeight": 1.25,
    "index": "c21g",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1236",
@@ -1336,7 +1444,10 @@
    "originalText": "D",
    "lineHeight": 1.25,
    "index": "c21h",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1237",
@@ -1373,7 +1484,10 @@
    "originalText": "target = 11 \u2212 2w",
    "lineHeight": 1.25,
    "index": "c21i",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1238",
@@ -1410,7 +1524,10 @@
    "originalText": "(11, \u22122)",
    "lineHeight": 1.25,
    "index": "c21j",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 5
+   }
   }
  ],
  "appState": {

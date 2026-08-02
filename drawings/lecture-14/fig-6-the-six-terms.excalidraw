@@ -55,7 +55,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2114",
@@ -97,7 +100,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2115",
@@ -139,7 +145,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2116",
@@ -181,7 +190,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2117",
@@ -223,7 +235,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2118",
@@ -269,7 +284,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2119",
@@ -296,7 +314,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2120",
@@ -323,7 +344,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2121",
@@ -350,7 +374,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2122",
@@ -385,7 +412,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "+",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2123",
@@ -420,7 +450,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2081\u2081a\u2082\u2082a\u2083\u2083",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2124",
@@ -455,7 +488,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "= +126",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2125",
@@ -509,7 +545,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2126",
@@ -551,7 +590,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2127",
@@ -593,7 +635,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2128",
@@ -635,7 +680,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2129",
@@ -677,7 +725,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2130",
@@ -723,7 +774,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2131",
@@ -750,7 +804,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2132",
@@ -777,7 +834,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2133",
@@ -804,7 +864,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2134",
@@ -839,7 +902,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "+",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2135",
@@ -874,7 +940,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2081\u2082a\u2082\u2083a\u2083\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2136",
@@ -909,7 +978,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "= +24",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2137",
@@ -963,7 +1035,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2138",
@@ -1005,7 +1080,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2139",
@@ -1047,7 +1125,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2140",
@@ -1089,7 +1170,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2141",
@@ -1131,7 +1215,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2142",
@@ -1177,7 +1264,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2143",
@@ -1204,7 +1294,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2144",
@@ -1231,7 +1324,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2145",
@@ -1258,7 +1354,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2146",
@@ -1293,7 +1392,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "+",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2147",
@@ -1328,7 +1430,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2081\u2083a\u2082\u2081a\u2083\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2148",
@@ -1363,7 +1468,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "= +24",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2149",
@@ -1417,7 +1525,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2150",
@@ -1459,7 +1570,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2151",
@@ -1501,7 +1615,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2152",
@@ -1543,7 +1660,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2153",
@@ -1585,7 +1705,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2154",
@@ -1631,7 +1754,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2155",
@@ -1658,7 +1784,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2156",
@@ -1685,7 +1814,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2157",
@@ -1712,7 +1844,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2158",
@@ -1747,7 +1882,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u2212",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2159",
@@ -1782,7 +1920,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2081\u2081a\u2082\u2083a\u2083\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2160",
@@ -1817,7 +1958,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "= \u221218",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2161",
@@ -1871,7 +2015,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2162",
@@ -1913,7 +2060,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2163",
@@ -1955,7 +2105,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2164",
@@ -1997,7 +2150,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2165",
@@ -2039,7 +2195,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2166",
@@ -2085,7 +2244,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2167",
@@ -2112,7 +2274,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2168",
@@ -2139,7 +2304,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2169",
@@ -2166,7 +2334,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2170",
@@ -2201,7 +2372,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u2212",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2171",
@@ -2236,7 +2410,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2081\u2082a\u2082\u2081a\u2083\u2083",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2172",
@@ -2271,7 +2448,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "= \u2212112",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2173",
@@ -2325,7 +2505,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e2174",
@@ -2367,7 +2550,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e2175",
@@ -2409,7 +2595,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e2176",
@@ -2451,7 +2640,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e2177",
@@ -2493,7 +2685,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e2178",
@@ -2539,7 +2734,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e2179",
@@ -2566,7 +2764,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e2180",
@@ -2593,7 +2794,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e2181",
@@ -2620,7 +2824,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e2182",
@@ -2655,7 +2862,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u2212",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e2183",
@@ -2690,7 +2900,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2081\u2083a\u2082\u2082a\u2083\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e2184",
@@ -2725,7 +2938,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "= \u221236",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 5
+   }
   },
   {
    "id": "e2185",
@@ -2760,7 +2976,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "126 + 24 + 24 \u2212 18 \u2212 112 \u2212 36 = 8",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 6
+   }
   }
  ],
  "appState": {

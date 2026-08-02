@@ -43,7 +43,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "v2",
@@ -85,7 +88,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "w",
@@ -127,7 +133,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "s2",
@@ -169,7 +178,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "s3",
@@ -211,7 +223,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "o",
@@ -238,7 +253,10 @@
    "x": 106.5,
    "y": 236.5,
    "width": 7.0,
-   "height": 7.0
+   "height": 7.0,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "lv1",
@@ -273,7 +291,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "v\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "lv2",
@@ -308,7 +329,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "v\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "lag",
@@ -343,7 +367,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "v\u2081 again",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "lv2b",
@@ -378,7 +405,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "v\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "lw",
@@ -413,7 +443,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "w",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "cap",
@@ -448,7 +481,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "w = 2v\u2081 + v\u2082, and nothing else works",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   }
  ],
  "appState": {

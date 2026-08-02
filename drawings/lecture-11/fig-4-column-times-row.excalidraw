@@ -43,7 +43,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1061",
@@ -85,7 +88,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1062",
@@ -127,7 +133,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1063",
@@ -169,7 +178,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1064",
@@ -196,7 +208,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1065",
@@ -223,7 +238,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1066",
@@ -250,7 +268,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1067",
@@ -285,7 +306,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "5",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1068",
@@ -320,7 +344,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1069",
@@ -355,7 +382,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "5",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1070",
@@ -390,7 +420,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1071",
@@ -425,7 +458,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "=",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1072",
@@ -460,7 +496,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "25",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1073",
@@ -495,7 +534,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "5",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1074",
@@ -530,7 +572,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "5",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1075",
@@ -565,7 +610,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "1",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1076",
@@ -600,7 +648,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1077",
@@ -635,7 +686,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "aᵀ",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1078",
@@ -670,7 +724,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "aaᵀ",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1079",
@@ -705,7 +762,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "row 1 = 5 × (5  1)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1080",
@@ -740,7 +800,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "row 2 = 1 × (5  1)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1081",
@@ -775,7 +838,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "every row is a multiple of the same row, so the rank is one",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   }
  ],
  "appState": {

@@ -43,7 +43,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2060",
@@ -85,7 +88,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2061",
@@ -127,7 +133,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2062",
@@ -169,7 +178,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2063",
@@ -211,7 +223,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2064",
@@ -253,7 +268,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2065",
@@ -299,7 +317,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2066",
@@ -334,7 +355,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "v",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2067",
@@ -369,7 +393,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "u",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2068",
@@ -404,7 +431,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "(u\u1d40v) u",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2069",
@@ -439,7 +469,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "Hv",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2070",
@@ -474,7 +507,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "mirror line",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2071",
@@ -509,7 +545,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u2212 2 (u\u1d40v) u",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   }
  ],
  "appState": {

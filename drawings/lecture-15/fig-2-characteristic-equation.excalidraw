@@ -43,7 +43,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1038",
@@ -85,7 +88,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1039",
@@ -127,7 +133,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1040",
@@ -169,7 +178,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1041",
@@ -211,7 +223,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1042",
@@ -253,7 +268,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1043",
@@ -307,7 +325,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1044",
@@ -361,7 +382,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1045",
@@ -415,7 +439,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1046",
@@ -469,7 +496,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1047",
@@ -523,7 +553,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1048",
@@ -565,7 +598,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1049",
@@ -607,7 +643,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1050",
@@ -634,7 +673,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1051",
@@ -661,7 +703,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1052",
@@ -688,7 +733,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1053",
@@ -715,7 +763,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1054",
@@ -742,7 +793,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1055",
@@ -769,7 +823,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1056",
@@ -804,7 +861,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u03bb = 3",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1057",
@@ -839,7 +899,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "det(A \u2212 3I) = \u22122",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1058",
@@ -874,7 +937,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "still has area",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1059",
@@ -909,7 +975,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u03bb = 5",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1060",
@@ -944,7 +1013,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "det(A \u2212 5I) = 0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1061",
@@ -979,7 +1051,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "squashed onto a line",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1062",
@@ -1014,7 +1089,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "\u03bb = 2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1063",
@@ -1049,7 +1127,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "det(A \u2212 2I) = 0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1064",
@@ -1084,7 +1165,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "squashed onto a line",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   }
  ],
  "appState": {

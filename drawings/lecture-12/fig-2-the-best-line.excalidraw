@@ -45,7 +45,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22N",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1240",
@@ -89,7 +92,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22O",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1241",
@@ -133,7 +139,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22P",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1242",
@@ -177,7 +186,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22Q",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1243",
@@ -221,7 +233,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22R",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1244",
@@ -265,7 +280,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c22S",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1245",
@@ -293,7 +311,10 @@
    "updated": 1785574036543,
    "link": null,
    "locked": false,
-   "index": "c22T"
+   "index": "c22T",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1246",
@@ -321,7 +342,10 @@
    "updated": 1785574036543,
    "link": null,
    "locked": false,
-   "index": "c22U"
+   "index": "c22U",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1247",
@@ -349,7 +373,10 @@
    "updated": 1785574036543,
    "link": null,
    "locked": false,
-   "index": "c22V"
+   "index": "c22V",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1248",
@@ -377,7 +404,10 @@
    "updated": 1785574036543,
    "link": null,
    "locked": false,
-   "index": "c22W"
+   "index": "c22W",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1249",
@@ -405,7 +435,10 @@
    "updated": 1785574036543,
    "link": null,
    "locked": false,
-   "index": "c22X"
+   "index": "c22X",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1250",
@@ -433,7 +466,10 @@
    "updated": 1785574036543,
    "link": null,
    "locked": false,
-   "index": "c22Y"
+   "index": "c22Y",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1251",
@@ -461,7 +497,10 @@
    "updated": 1785574036543,
    "link": null,
    "locked": false,
-   "index": "c22Z"
+   "index": "c22Z",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1252",
@@ -489,7 +528,10 @@
    "updated": 1785574036543,
    "link": null,
    "locked": false,
-   "index": "c22a"
+   "index": "c22a",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1253",
@@ -517,7 +559,10 @@
    "updated": 1785574036543,
    "link": null,
    "locked": false,
-   "index": "c22b"
+   "index": "c22b",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1254",
@@ -545,7 +590,10 @@
    "updated": 1785574036543,
    "link": null,
    "locked": false,
-   "index": "c22c"
+   "index": "c22c",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1255",
@@ -573,7 +621,10 @@
    "updated": 1785574036543,
    "link": null,
    "locked": false,
-   "index": "c22d"
+   "index": "c22d",
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1256",
@@ -610,7 +661,10 @@
    "originalText": "+2.2",
    "lineHeight": 1.25,
    "index": "c22e",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1257",
@@ -647,7 +701,10 @@
    "originalText": "\u22122.1",
    "lineHeight": 1.25,
    "index": "c22f",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e1258",
@@ -684,7 +741,10 @@
    "originalText": "1",
    "lineHeight": 1.25,
    "index": "c22g",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1259",
@@ -721,7 +781,10 @@
    "originalText": "2",
    "lineHeight": 1.25,
    "index": "c22h",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1260",
@@ -758,7 +821,10 @@
    "originalText": "3",
    "lineHeight": 1.25,
    "index": "c22i",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1261",
@@ -795,7 +861,10 @@
    "originalText": "4",
    "lineHeight": 1.25,
    "index": "c22j",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1262",
@@ -832,7 +901,10 @@
    "originalText": "5",
    "lineHeight": 1.25,
    "index": "c22k",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1263",
@@ -869,7 +941,10 @@
    "originalText": "6",
    "lineHeight": 1.25,
    "index": "c22l",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1264",
@@ -906,7 +981,10 @@
    "originalText": "5",
    "lineHeight": 1.25,
    "index": "c22m",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1265",
@@ -943,7 +1021,10 @@
    "originalText": "10",
    "lineHeight": 1.25,
    "index": "c22n",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1266",
@@ -980,7 +1061,10 @@
    "originalText": "w",
    "lineHeight": 1.25,
    "index": "c22o",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1267",
@@ -1017,7 +1101,10 @@
    "originalText": "target",
    "lineHeight": 1.25,
    "index": "c22p",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1268",
@@ -1054,7 +1141,10 @@
    "originalText": "target \u2248 10.9 \u2212 1.7w",
    "lineHeight": 1.25,
    "index": "c22q",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1269",
@@ -1091,7 +1181,10 @@
    "originalText": "dashed = residual, and 9.9 is their total",
    "lineHeight": 1.25,
    "index": "c22r",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 4
+   }
   }
  ],
  "appState": {

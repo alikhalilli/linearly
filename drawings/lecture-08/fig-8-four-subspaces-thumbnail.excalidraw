@@ -30,7 +30,10 @@
       "x": 34,
       "y": 54,
       "width": 242,
-      "height": 92
+      "height": 92,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "nullsp",
@@ -59,7 +62,10 @@
       "x": 34,
       "y": 154,
       "width": 242,
-      "height": 92
+      "height": 92,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "colsp",
@@ -88,7 +94,10 @@
       "x": 394,
       "y": 54,
       "width": 192,
-      "height": 92
+      "height": 92,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "lnull",
@@ -117,7 +126,10 @@
       "x": 394,
       "y": 154,
       "width": 192,
-      "height": 92
+      "height": 92,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "dom",
@@ -146,7 +158,10 @@
       "x": 30,
       "y": 50,
       "width": 250,
-      "height": 200
+      "height": 200,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "cod",
@@ -175,7 +190,10 @@
       "x": 390,
       "y": 50,
       "width": 200,
-      "height": 200
+      "height": 200,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "ds",
@@ -217,7 +235,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "cs",
@@ -259,7 +280,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "mapA",
@@ -301,7 +325,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "lRn",
@@ -336,7 +363,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Rⁿ",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "lRm",
@@ -371,7 +401,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "Rᵐ",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "lA",
@@ -406,7 +439,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "A",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "row",
@@ -441,7 +477,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "C(Aᵀ), the row space",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "rowd",
@@ -476,7 +515,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "dimension r",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "nul",
@@ -511,7 +553,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "N(A), the null space",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "nuld",
@@ -546,7 +591,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "dimension n − r",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "col",
@@ -581,7 +629,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "C(A), the columns",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "cold",
@@ -616,7 +667,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "dimension r",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "lnl",
@@ -651,7 +705,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "N(Aᵀ), the left null space",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "lnld",
@@ -686,7 +743,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "dimension m − r",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "cnt",
@@ -721,7 +781,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "r + (n − r) = n on the left, r + (m − r) = m on the right",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 5
+      }
     }
   ],
   "appState": {

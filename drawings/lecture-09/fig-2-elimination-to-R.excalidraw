@@ -51,7 +51,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "a-rb",
@@ -101,7 +104,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "a-0-0",
@@ -136,7 +142,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "1",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "a-0-1",
@@ -171,7 +180,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "2",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "a-0-2",
@@ -206,7 +218,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "2",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "a-0-3",
@@ -241,7 +256,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "4",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "a-1-0",
@@ -276,7 +294,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "3",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "a-1-1",
@@ -311,7 +332,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "8",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "a-1-2",
@@ -346,7 +370,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "6",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "a-1-3",
@@ -381,7 +408,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "16",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "a-2-0",
@@ -416,7 +446,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "4",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "a-2-1",
@@ -451,7 +484,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "10",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "a-2-2",
@@ -486,7 +522,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "8",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "a-2-3",
@@ -521,7 +560,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "20",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "ar",
@@ -563,7 +605,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "te",
@@ -598,7 +643,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "EA = R",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "r-lb",
@@ -648,7 +696,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "r-rb",
@@ -698,7 +749,10 @@
       "startBinding": null,
       "endBinding": null,
       "startArrowhead": null,
-      "endArrowhead": null
+      "endArrowhead": null,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "r-0-0",
@@ -733,7 +787,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "1",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "r-0-1",
@@ -768,7 +825,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "0",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "r-0-2",
@@ -803,7 +863,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "2",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "r-0-3",
@@ -838,7 +901,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "0",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "r-1-0",
@@ -873,7 +939,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "0",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "r-1-1",
@@ -908,7 +977,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "1",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "r-1-2",
@@ -943,7 +1015,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "0",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "r-1-3",
@@ -978,7 +1053,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "2",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "r-2-0",
@@ -1013,7 +1091,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "0",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "r-2-1",
@@ -1048,7 +1129,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "0",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "r-2-2",
@@ -1083,7 +1167,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "0",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "r-2-3",
@@ -1118,7 +1205,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "0",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "p1",
@@ -1145,7 +1235,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "p2",
@@ -1172,7 +1265,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "f3",
@@ -1199,7 +1295,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "f4",
@@ -1226,7 +1325,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "dead",
@@ -1253,7 +1355,10 @@
       "boundElements": null,
       "updated": 1753980000000,
       "link": null,
-      "locked": false
+      "locked": false,
+      "customData": {
+        "seq": 5
+      }
     },
     {
       "id": "ta",
@@ -1288,7 +1393,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "A",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "tr",
@@ -1323,7 +1431,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "R",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "t1",
@@ -1358,7 +1469,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "the matrix you were given",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "t2",
@@ -1393,7 +1507,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "two pivots, two free columns",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "t3",
@@ -1428,7 +1545,10 @@
       "verticalAlign": "top",
       "containerId": null,
       "originalText": "the dead row records N(Aᵀ)",
-      "lineHeight": 1.25
+      "lineHeight": 1.25,
+      "customData": {
+        "seq": 5
+      }
     }
   ],
   "appState": {

@@ -55,7 +55,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "pa",
@@ -109,7 +112,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "ax0",
@@ -151,7 +157,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "ax1",
@@ -193,7 +202,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "ax2",
@@ -235,7 +247,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "gap",
@@ -277,7 +292,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "d1",
@@ -304,7 +322,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "d2",
@@ -331,7 +352,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "o",
@@ -358,7 +382,10 @@
    "boundElements": null,
    "updated": 1753980000000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "t0",
@@ -393,7 +420,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "C(R)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "t1",
@@ -428,7 +458,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "pivot columns of R",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "t2",
@@ -463,7 +496,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "C(A)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "t3",
@@ -498,7 +534,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "pivot columns of A",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "t4",
@@ -533,7 +572,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "(1, 0, 0)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "t5",
@@ -568,7 +610,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "(1, 0, 1)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "t6",
@@ -603,7 +648,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "t7",
@@ -638,7 +686,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "v\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "t8",
@@ -673,7 +724,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "v\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "t9",
@@ -708,7 +762,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "v\u2083",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   }
  ],
  "appState": {

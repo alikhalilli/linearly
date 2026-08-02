@@ -29,7 +29,10 @@
       "updated": 1785572473387,
       "link": null,
       "locked": false,
-      "index": "c120"
+      "index": "c120",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "bt0",
@@ -66,7 +69,10 @@
       "originalText": "A",
       "lineHeight": 1.25,
       "index": "c121",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "bs0",
@@ -103,7 +109,10 @@
       "originalText": "the matrix you were given",
       "lineHeight": 1.25,
       "index": "c122",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "b1",
@@ -131,7 +140,10 @@
       "updated": 1785572468363,
       "link": null,
       "locked": false,
-      "index": "c123"
+      "index": "c123",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "bt1",
@@ -168,7 +180,10 @@
       "originalText": "R",
       "lineHeight": 1.25,
       "index": "c124",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "bs1",
@@ -205,7 +220,10 @@
       "originalText": "row reduced form",
       "lineHeight": 1.25,
       "index": "c125",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "b2",
@@ -233,7 +251,10 @@
       "updated": 1785572468363,
       "link": null,
       "locked": false,
-      "index": "c126"
+      "index": "c126",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "bt2",
@@ -270,7 +291,10 @@
       "originalText": "E",
       "lineHeight": 1.25,
       "index": "c127",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "bs2",
@@ -307,7 +331,10 @@
       "originalText": "the record, EA = R",
       "lineHeight": 1.25,
       "index": "c128",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "s0",
@@ -335,7 +362,10 @@
       "updated": 1785572468363,
       "link": null,
       "locked": false,
-      "index": "c129"
+      "index": "c129",
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "sn0",
@@ -372,7 +402,10 @@
       "originalText": "column space C(A)",
       "lineHeight": 1.25,
       "index": "c12A",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "sb0",
@@ -409,7 +442,10 @@
       "originalText": "(1, 3, 4)   (2, 8, 10)",
       "lineHeight": 1.25,
       "index": "c12B",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "sd0",
@@ -446,7 +482,10 @@
       "originalText": "dim 2, in R³",
       "lineHeight": 1.25,
       "index": "c12C",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "s1",
@@ -474,7 +513,10 @@
       "updated": 1785572468363,
       "link": null,
       "locked": false,
-      "index": "c12D"
+      "index": "c12D",
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "sn1",
@@ -511,7 +553,10 @@
       "originalText": "row space C(Aᵀ)",
       "lineHeight": 1.25,
       "index": "c12E",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "sb1",
@@ -548,7 +593,10 @@
       "originalText": "(1, 0, 2, 0)   (0, 1, 0, 2)",
       "lineHeight": 1.25,
       "index": "c12F",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "sd1",
@@ -585,7 +633,10 @@
       "originalText": "dim 2, in R⁴",
       "lineHeight": 1.25,
       "index": "c12G",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "s2",
@@ -613,7 +664,10 @@
       "updated": 1785572468363,
       "link": null,
       "locked": false,
-      "index": "c12H"
+      "index": "c12H",
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "sn2",
@@ -650,7 +704,10 @@
       "originalText": "null space N(A)",
       "lineHeight": 1.25,
       "index": "c12I",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "sb2",
@@ -687,7 +744,10 @@
       "originalText": "(−2, 0, 1, 0)   (0, −2, 0, 1)",
       "lineHeight": 1.25,
       "index": "c12J",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "sd2",
@@ -724,7 +784,10 @@
       "originalText": "dim 2, in R⁴",
       "lineHeight": 1.25,
       "index": "c12K",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "s3",
@@ -752,7 +815,10 @@
       "updated": 1785572468363,
       "link": null,
       "locked": false,
-      "index": "c12L"
+      "index": "c12L",
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "sn3",
@@ -789,7 +855,10 @@
       "originalText": "left null space N(Aᵀ)",
       "lineHeight": 1.25,
       "index": "c12M",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "sb3",
@@ -826,7 +895,10 @@
       "originalText": "(−1, −1, 1)",
       "lineHeight": 1.25,
       "index": "c12N",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "sd3",
@@ -863,7 +935,10 @@
       "originalText": "dim 1, in R³",
       "lineHeight": 1.25,
       "index": "c12O",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "chip1",
@@ -891,7 +966,10 @@
       "updated": 1785572468363,
       "link": null,
       "locked": false,
-      "index": "c12P"
+      "index": "c12P",
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "chip2",
@@ -919,7 +997,10 @@
       "updated": 1785572468363,
       "link": null,
       "locked": false,
-      "index": "c12Q"
+      "index": "c12Q",
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "ar0",
@@ -962,7 +1043,10 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c12R"
+      "index": "c12R",
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "ar1",
@@ -1005,7 +1089,10 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c12S"
+      "index": "c12S",
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "ar2",
@@ -1048,7 +1135,10 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c12T"
+      "index": "c12T",
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "ar3",
@@ -1091,7 +1181,10 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c12U"
+      "index": "c12U",
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "al0",
@@ -1128,7 +1221,10 @@
       "originalText": "pivot columns",
       "lineHeight": 1.25,
       "index": "c12V",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "al1",
@@ -1165,7 +1261,10 @@
       "originalText": "pivot rows",
       "lineHeight": 1.25,
       "index": "c12W",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "al2",
@@ -1202,7 +1301,10 @@
       "originalText": "special solutions",
       "lineHeight": 1.25,
       "index": "c12X",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "al3",
@@ -1239,7 +1341,10 @@
       "originalText": "last m − r rows",
       "lineHeight": 1.25,
       "index": "c12Y",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     }
   ],
   "appState": {

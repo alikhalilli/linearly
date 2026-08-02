@@ -64,7 +64,10 @@
    "endBinding": null,
    "startArrowhead": null,
    "endArrowhead": null,
-   "polygon": true
+   "polygon": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2130",
@@ -91,7 +94,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2131",
@@ -118,7 +124,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2132",
@@ -145,7 +154,10 @@
    "boundElements": null,
    "updated": 1754006400000,
    "link": null,
-   "locked": false
+   "locked": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e2133",
@@ -199,7 +211,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2134",
@@ -241,7 +256,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2135",
@@ -283,7 +301,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2136",
@@ -325,7 +346,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2137",
@@ -367,7 +391,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2138",
@@ -421,7 +448,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2139",
@@ -463,7 +493,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2140",
@@ -498,7 +531,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2141",
@@ -533,7 +569,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "b",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2142",
@@ -568,7 +607,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "c",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2143",
@@ -603,7 +645,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "q₁",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2144",
@@ -638,7 +683,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "q₂",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2145",
@@ -673,7 +721,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "q₃",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e2146",
@@ -708,7 +759,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "3",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2147",
@@ -743,7 +797,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2148",
@@ -778,7 +835,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "5/3",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2149",
@@ -813,7 +873,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2150",
@@ -848,7 +911,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "2",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2151",
@@ -883,7 +949,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "1/3",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2152",
@@ -918,7 +987,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2153",
@@ -953,7 +1025,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2154",
@@ -988,7 +1063,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "1/3",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e2155",
@@ -1023,7 +1101,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "b = 2q₁ + 2q₂",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2156",
@@ -1058,7 +1139,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "read straight down the column",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "e2157",
@@ -1093,7 +1177,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the shaded corner is forced to zero: q₂ and q₃ are built after a and b",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e2158",
@@ -1128,7 +1215,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "the diagonal holds the lengths that were divided out",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   }
  ],
  "appState": {

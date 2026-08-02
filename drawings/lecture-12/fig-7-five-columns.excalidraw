@@ -45,7 +45,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c24X",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1374",
@@ -457,7 +460,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c24Y",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1375",
@@ -501,7 +507,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c24Z",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "e1376",
@@ -529,7 +538,10 @@
       "updated": 1785574118893,
       "link": null,
       "locked": false,
-      "index": "c24a"
+      "index": "c24a",
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1377",
@@ -557,7 +569,10 @@
       "updated": 1785574118893,
       "link": null,
       "locked": false,
-      "index": "c24b"
+      "index": "c24b",
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1378",
@@ -585,7 +600,10 @@
       "updated": 1785574118893,
       "link": null,
       "locked": false,
-      "index": "c24c"
+      "index": "c24c",
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1379",
@@ -613,7 +631,10 @@
       "updated": 1785574118893,
       "link": null,
       "locked": false,
-      "index": "c24d"
+      "index": "c24d",
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1380",
@@ -641,7 +662,10 @@
       "updated": 1785574118893,
       "link": null,
       "locked": false,
-      "index": "c24e"
+      "index": "c24e",
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1381",
@@ -669,7 +693,10 @@
       "updated": 1785574118893,
       "link": null,
       "locked": false,
-      "index": "c24f"
+      "index": "c24f",
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "e1382",
@@ -706,7 +733,10 @@
       "originalText": "1",
       "lineHeight": 1.25,
       "index": "c24g",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1383",
@@ -743,7 +773,10 @@
       "originalText": "2",
       "lineHeight": 1.25,
       "index": "c24h",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1384",
@@ -780,7 +813,10 @@
       "originalText": "3",
       "lineHeight": 1.25,
       "index": "c24i",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1385",
@@ -817,7 +853,10 @@
       "originalText": "4",
       "lineHeight": 1.25,
       "index": "c24j",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1386",
@@ -854,7 +893,10 @@
       "originalText": "5",
       "lineHeight": 1.25,
       "index": "c24k",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1387",
@@ -891,7 +933,10 @@
       "originalText": "0",
       "lineHeight": 1.25,
       "index": "c24l",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1388",
@@ -928,7 +973,10 @@
       "originalText": "5",
       "lineHeight": 1.25,
       "index": "c24m",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1389",
@@ -965,7 +1013,10 @@
       "originalText": "10",
       "lineHeight": 1.25,
       "index": "c24n",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1390",
@@ -1002,7 +1053,10 @@
       "originalText": "15",
       "lineHeight": 1.25,
       "index": "c24o",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1391",
@@ -1039,7 +1093,10 @@
       "originalText": "w",
       "lineHeight": 1.25,
       "index": "c24p",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1392",
@@ -1076,7 +1133,10 @@
       "originalText": "target",
       "lineHeight": 1.25,
       "index": "c24q",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "e1393",
@@ -1113,7 +1173,10 @@
       "originalText": "solid curve, five columns: error exactly 0",
       "lineHeight": 1.25,
       "index": "c24r",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "e1394",
@@ -1150,7 +1213,10 @@
       "originalText": "dashed line, two columns: error 9.9",
       "lineHeight": 1.25,
       "index": "c24s",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     }
   ],
   "appState": {

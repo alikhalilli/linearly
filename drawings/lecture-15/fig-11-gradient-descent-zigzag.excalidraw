@@ -297,7 +297,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1US",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1195",
@@ -593,7 +596,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1UT",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1196",
@@ -889,7 +895,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1UU",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1197",
@@ -1185,7 +1194,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1UV",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1198",
@@ -1481,7 +1493,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1UW",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1199",
@@ -1777,7 +1792,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1UX",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1200",
@@ -2073,7 +2091,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1UY",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1201",
@@ -2369,7 +2390,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1UZ",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1202",
@@ -2425,7 +2449,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1Ua",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1203",
@@ -2521,7 +2548,10 @@
    "startArrowhead": null,
    "endArrowhead": null,
    "index": "c1Ub",
-   "polygon": false
+   "polygon": false,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1204",
@@ -2549,7 +2579,10 @@
    "updated": 1785573122287,
    "link": null,
    "locked": false,
-   "index": "c1Uc"
+   "index": "c1Uc",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1205",
@@ -2577,7 +2610,10 @@
    "updated": 1785573132933,
    "link": null,
    "locked": false,
-   "index": "c1Ud"
+   "index": "c1Ud",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1206",
@@ -2605,7 +2641,10 @@
    "updated": 1785573122287,
    "link": null,
    "locked": false,
-   "index": "c1Ue"
+   "index": "c1Ue",
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1207",
@@ -2633,7 +2672,10 @@
    "updated": 1785573132933,
    "link": null,
    "locked": false,
-   "index": "c1Uf"
+   "index": "c1Uf",
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "e1208",
@@ -2670,7 +2712,10 @@
    "originalText": "nearly round: \u03bb = 4 and 6, \u03ba = 1.5",
    "lineHeight": 1.25,
    "index": "c1Ug",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1209",
@@ -2707,7 +2752,10 @@
    "originalText": "9 steps",
    "lineHeight": 1.25,
    "index": "c1Uh",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "e1210",
@@ -2744,7 +2792,10 @@
    "originalText": "stretched: \u03bb = 1 and 9, \u03ba = 9",
    "lineHeight": 1.25,
    "index": "c1Ui",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1211",
@@ -2781,7 +2832,10 @@
    "originalText": "65 steps",
    "lineHeight": 1.25,
    "index": "c1Uj",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "e1212",
@@ -2818,7 +2872,10 @@
    "originalText": "start",
    "lineHeight": 1.25,
    "index": "c1Uk",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "e1213",
@@ -2855,7 +2912,10 @@
    "originalText": "start",
    "lineHeight": 1.25,
    "index": "c1Ul",
-   "autoResize": true
+   "autoResize": true,
+   "customData": {
+    "seq": 2
+   }
   }
  ],
  "appState": {

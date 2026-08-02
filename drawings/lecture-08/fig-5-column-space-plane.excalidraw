@@ -55,7 +55,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "plane",
@@ -109,7 +112,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "a1",
@@ -151,7 +157,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "a2",
@@ -193,7 +202,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": "arrow"
+   "endArrowhead": "arrow",
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "drop",
@@ -235,7 +247,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "bg",
@@ -262,7 +277,10 @@
    "x": 272,
    "y": 106,
    "width": 10,
-   "height": 10
+   "height": 10,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "bb",
@@ -289,7 +307,10 @@
    "x": 272,
    "y": 54,
    "width": 10,
-   "height": 10
+   "height": 10,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "o",
@@ -316,7 +337,10 @@
    "x": 282,
    "y": 152,
    "width": 6,
-   "height": 6
+   "height": 6,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "chk",
@@ -362,7 +386,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "cr1",
@@ -404,7 +431,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "cr2",
@@ -446,7 +476,10 @@
    "startBinding": null,
    "endBinding": null,
    "startArrowhead": null,
-   "endArrowhead": null
+   "endArrowhead": null,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "la1",
@@ -481,7 +514,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2081",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "la2",
@@ -516,7 +552,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "a\u2082",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 1
+   }
   },
   {
    "id": "lbg",
@@ -551,7 +590,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "b = (2, 3, 5)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 2
+   }
   },
   {
    "id": "lbb",
@@ -586,7 +628,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "b = (2, 3, 6)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 3
+   }
   },
   {
    "id": "l0",
@@ -621,7 +666,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "0",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   },
   {
    "id": "loff",
@@ -656,7 +704,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "off the plane by (0, 0, 1)",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 4
+   }
   },
   {
    "id": "lca",
@@ -691,7 +742,10 @@
    "verticalAlign": "top",
    "containerId": null,
    "originalText": "C(A): every mix of the two columns",
-   "lineHeight": 1.25
+   "lineHeight": 1.25,
+   "customData": {
+    "seq": 0
+   }
   }
  ],
  "appState": {

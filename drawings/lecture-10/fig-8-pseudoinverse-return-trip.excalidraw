@@ -57,7 +57,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2JO",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "col",
@@ -113,7 +116,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2JP",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "nul",
@@ -169,7 +175,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2JQ",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "lnul",
@@ -225,7 +234,10 @@
       "startArrowhead": null,
       "endArrowhead": null,
       "index": "c2JR",
-      "polygon": false
+      "polygon": false,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "f",
@@ -268,7 +280,10 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c2JS"
+      "index": "c2JS",
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "b",
@@ -311,7 +326,10 @@
       "endBinding": null,
       "startArrowhead": null,
       "endArrowhead": "arrow",
-      "index": "c2JT"
+      "index": "c2JT",
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "dx",
@@ -339,7 +357,10 @@
       "updated": 1785574424687,
       "link": null,
       "locked": false,
-      "index": "c2JU"
+      "index": "c2JU",
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "db",
@@ -367,7 +388,10 @@
       "updated": 1785574424687,
       "link": null,
       "locked": false,
-      "index": "c2JV"
+      "index": "c2JV",
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "t0",
@@ -404,7 +428,10 @@
       "originalText": "row space C(Aᵀ)",
       "lineHeight": 1.25,
       "index": "c2JW",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "t1",
@@ -441,7 +468,10 @@
       "originalText": "column space C(A)",
       "lineHeight": 1.25,
       "index": "c2JX",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 0
+      }
     },
     {
       "id": "t2",
@@ -478,7 +508,10 @@
       "originalText": "null space N(A)",
       "lineHeight": 1.25,
       "index": "c2JY",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "t3",
@@ -515,7 +548,10 @@
       "originalText": "left null space N(Aᵀ)",
       "lineHeight": 1.25,
       "index": "c2JZ",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 1
+      }
     },
     {
       "id": "t4",
@@ -552,7 +588,10 @@
       "originalText": "A",
       "lineHeight": 1.25,
       "index": "c2Ja",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "t5",
@@ -589,7 +628,10 @@
       "originalText": "A⁺",
       "lineHeight": 1.25,
       "index": "c2Jb",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "t6",
@@ -626,7 +668,10 @@
       "originalText": "A⁺ never lands here",
       "lineHeight": 1.25,
       "index": "c2Jc",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "t7",
@@ -663,7 +708,10 @@
       "originalText": "A⁺ throws this part away",
       "lineHeight": 1.25,
       "index": "c2Jd",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 4
+      }
     },
     {
       "id": "t8",
@@ -700,7 +748,10 @@
       "originalText": "xᵣ = A⁺b",
       "lineHeight": 1.25,
       "index": "c2Je",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 3
+      }
     },
     {
       "id": "t9",
@@ -737,7 +788,10 @@
       "originalText": "b",
       "lineHeight": 1.25,
       "index": "c2Jf",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 2
+      }
     },
     {
       "id": "t10",
@@ -774,7 +828,10 @@
       "originalText": "A⁺(9, 33, 42) = (3/5, 3/5, 6/5, 6/5)",
       "lineHeight": 1.25,
       "index": "c2Jg",
-      "autoResize": true
+      "autoResize": true,
+      "customData": {
+        "seq": 5
+      }
     }
   ],
   "appState": {
