@@ -47,6 +47,31 @@ by hand.
 - One folder per lecture, one file per figure, named for what it shows:
   `drawings/lecture-01/fig-1-dimension-ladder.excalidraw`.
 
+## The quality bar
+
+Every figure is measured against six tests before it ships. A figure that
+fails one gets redrawn, not excused.
+
+1. **It survives alone.** A reader who has never seen the article can
+   reconstruct the method from the drawing. If the caption carries the
+   mechanism, the drawing has not done its job.
+2. **At least one quantity is drawn to scale or computed.** A bar with a
+   real length, an area with a real ratio, a grid whose shading is the
+   actual product of the numbers in the figure. The strongest figures in
+   the course all share this property; a figure with nothing measured in
+   it is decoration.
+3. **Worked micro-examples.** Wherever the mechanism multiplies or adds,
+   small real integers do it on the canvas: a highlighted cell with its
+   own arithmetic beats any amount of abstract shading.
+4. **Room to breathe.** Canvas in the 900-unit class, minimum 13px type,
+   margins like Part VII's figures. Cramped labels are a redraw, not a
+   nudge.
+5. **Beats are a script.** The stepper plays question, then mechanism,
+   then receipt. Default element order is a draft; curate it.
+6. **No box-with-a-name.** A shape earns its place only if its size,
+   position, or shading carries meaning. If a rectangle could be replaced
+   by its label alone, draw the mechanism instead or cut it.
+
 ## Animation beats
 
 Every exported figure can replay itself through the play chip beside its
