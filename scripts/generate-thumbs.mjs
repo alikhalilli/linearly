@@ -447,6 +447,24 @@ const thumbs = {
     return s;
   },
 
+  // 26.5 · The async kernel — TMA fills a queue, tensor cores drain it.
+  'lecture-26-5': () => {
+    let s = `<rect x="22" y="56" width="52" height="40" rx="4" fill="none" stroke="${C.cyan}" stroke-width="2.4"/>`;
+    s += txt(32, 80, 'TMA', C.cyan, 13);
+    s += arrow(78, 76, 100, 76, ink, 2.2);
+    for (let i = 0; i < 4; i++) {
+      const full = i < 2;
+      s += `<rect x="${104 + i * 26}" y="62" width="22" height="28" rx="3" fill="${full ? C.green : 'none'}" fill-opacity="${full ? 0.9 : 0}" stroke="${full ? C.green : ink}" stroke-width="2" opacity="${full ? 1 : 0.45}"/>`;
+    }
+    s += arrow(212, 76, 234, 76, ink, 2.2);
+    s += `<rect x="238" y="52" width="4" height="48" rx="2" fill="${C.orange}"/>`;
+    s += txt(104, 116, 'the queue', ink, 11);
+    s += txt(22, 36, 'load', C.cyan, 11);
+    s += txt(196, 36, 'multiply', C.orange, 11);
+    s += txt(22, 138, 'threads manage, hardware works', ink, 11);
+    return s;
+  },
+
   // 28 · Sparse — a mostly empty grid becomes three short CSR arrays.
   'lecture-28': () => {
     let s = '';
